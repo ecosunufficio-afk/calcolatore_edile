@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calcolatore Edile</title>
 <style>
@@ -165,6 +165,108 @@
   input[type=range]{width:100%;height:4px;cursor:pointer}
   .range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
 
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE — MOBILE (max 768px)
+  ═══════════════════════════════════════ */
+  @media (max-width: 768px) {
+
+    /* Nascondi sidebar laterale, mostra bottom nav */
+    #sidebar { display: none !important; }
+    #bottom-nav { display: flex !important; }
+
+    /* Main occupa tutto */
+    #app { flex-direction: column; padding-bottom: 62px; }
+    #main { min-width: 0; width: 100%; }
+
+    /* Topbar compatta */
+    #topbar { padding: 10px 14px; gap: 8px; }
+    #proj-name { font-size: 14px; }
+    #proj-name-input { font-size: 14px; }
+    .topbar-right { gap: 8px; }
+    .topbar-count { display: none; }
+    .topbar-total { font-size: 16px; }
+    .btn-ghost { padding: 5px 8px; font-size: 11px; }
+
+    /* Content */
+    #content { padding: 14px; padding-bottom: 20px; }
+
+    /* Macro grid: 2 colonne su mobile */
+    .macro-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .macro-card { padding: 16px 12px; gap: 6px; }
+    .macro-card-icon { font-size: 26px; }
+    .macro-card-title { font-size: 12px; }
+    .macro-card-sub { font-size: 11px; }
+
+    /* Header categoria */
+    .page-title { font-size: 16px; }
+    .page-sub { font-size: 12px; margin-bottom: 14px; }
+
+    /* Voce card */
+    .voce-card { flex-direction: column; gap: 8px; }
+    .voce-costo { font-size: 16px; }
+    .voce-nome { font-size: 13px; }
+
+    /* Bottone aggiungi materiale */
+    .btn-primary { font-size: 13px; padding: 9px 16px; }
+
+    /* Riepilogo */
+    .riepilogo-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .totale-box span:last-child { font-size: 22px; }
+    .export-row { gap: 6px; }
+    .btn-export { padding: 8px 12px; font-size: 12px; }
+
+    /* Storico */
+    .proj-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+    /* Modal fullscreen su mobile */
+    .overlay { padding: 0; align-items: flex-end; }
+    .modal {
+      border-radius: 20px 20px 0 0;
+      max-width: 100%;
+      max-height: 95vh;
+      width: 100%;
+    }
+    #edit-modal { border-radius: 20px 20px 0 0; max-height: 95vh; }
+
+    /* Footer copyright */
+    #footer-copy { display: none; }
+
+    /* Toast */
+    #toast { bottom: 72px; right: 12px; left: 12px; text-align: center; font-size: 13px; }
+
+    /* Tasto aggiungi in macro view */
+    .macro-header-row { flex-direction: column; align-items: flex-start !important; }
+  }
+
+  @media (max-width: 400px) {
+    .macro-grid { grid-template-columns: 1fr; }
+    .result-grid { grid-template-columns: 1fr; }
+  }
+
+
+  /* BOTTOM NAV (solo mobile) */
+  #bottom-nav {
+    display: none;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+    background: var(--sidebar); border-top: 1px solid rgba(255,255,255,.12);
+    height: 62px; padding-bottom: env(safe-area-inset-bottom,0px);
+  }
+  .bn-btn {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 3px; background: transparent; border: none;
+    color: rgba(255,255,255,.5); cursor: pointer; font-family: Arial,sans-serif;
+    font-size: 9px; font-weight: 700; letter-spacing: .3px; padding: 8px 4px;
+    border-top: 3px solid transparent; transition: all .15s;
+  }
+  .bn-btn.active { color: var(--ocra); border-top-color: var(--ocra); }
+  .bn-btn span:first-child { font-size: 20px; line-height: 1; }
+  .bn-badge {
+    position: absolute; top: 6px; right: calc(50% - 18px);
+    background: var(--ocra); color: #fff; border-radius: 8px;
+    font-size: 9px; font-weight: 900; padding: 1px 5px; min-width: 16px; text-align: center;
+  }
+
   /* NOTIFICA */
   #toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:700;z-index:999;display:none;box-shadow:0 8px 24px rgba(13,27,62,.3)}
 </style>
@@ -264,8 +366,8 @@
 </div>
 
 <div id="toast"></div>
-<div style="position:fixed;bottom:0;left:0;right:0;background:#0D1B3E;color:rgba(255,255,255,.45);font-size:11px;text-align:center;padding:6px 16px;z-index:10;letter-spacing:.3px;border-top:1px solid rgba(255,255,255,.08)">
-  Ideata e sviluppata da <span style="color:#C89A3A;font-weight:700">Geom. Daniel Meccanici</span>
+<div id="footer-copy" style="position:fixed;bottom:0;left:0;right:0;background:#0D1B3E;color:rgba(255,255,255,.45);font-size:11px;text-align:center;padding:6px 16px;z-index:10;letter-spacing:.3px;border-top:1px solid rgba(255,255,255,.08)">
+  id="footer-copy" Ideata e sviluppata da <span style="color:#C89A3A;font-weight:700">Geom. Daniel Meccanici</span>
 </div>
 
 <script>
@@ -550,7 +652,7 @@ function renderHome() {
 function renderMacro(mk) {
   const cat=DB[mk]; const vm=stato.voci.filter(v=>v.macro===mk);
   const tot=vm.reduce((s,v)=>s+v.ris.costo,0);
-  let html=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+  let html=`<div class="macro-header-row" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
     <div style="display:flex;align-items:center;gap:12px">
       <span style="font-size:34px">${cat.icon}</span>
       <div>
@@ -955,7 +1057,39 @@ function exportPDF() {
       <b>TOTALE PREVENTIVO</b><b style="font-size:20px;color:#E8C46A">${eur(tot)}</b>
     </div>
     <div style="font-size:10px;color:#999;margin-top:20px;text-align:center">I prezzi sono indicativi. Verificare sempre le schede tecniche dei prodotti e i prezzi aggiornati del fornitore.</div>
-    <script>window.onload=()=>window.print()<\/script></body></html>`;
+    <script>window.onload=()=>window.print()<\/script>
+<!-- BOTTOM NAV MOBILE -->
+<div id="bottom-nav">
+  <button class="bn-btn active" id="bn-home" onclick="bnClick('home',this)">
+    <span>🏠</span>HOME
+  </button>
+  <div style="position:relative;flex:1;display:flex">
+    <button class="bn-btn" id="bn-macro" onclick="bnShowMacro()" style="width:100%">
+      <span>🧱</span>CATEGORIE
+    </button>
+  </div>
+  <button class="bn-btn" id="bn-riepilogo" onclick="bnClick('riepilogo',this)">
+    <span>📊</span>RIEPILOGO
+  </button>
+  <button class="bn-btn" id="bn-storico" onclick="bnClick('storico',this)">
+    <span>🗂️</span>STORICO
+  </button>
+  <button class="bn-btn" onclick="salvaProgetto()">
+    <span>💾</span>SALVA
+  </button>
+</div>
+
+<!-- DRAWER CATEGORIE MOBILE -->
+<div id="macro-drawer" style="display:none;position:fixed;inset:0;z-index:250;background:rgba(13,27,62,.6)" onclick="if(event.target===this)closeMacroDrawer()">
+  <div style="position:absolute;bottom:62px;left:0;right:0;background:var(--sidebar);border-radius:20px 20px 0 0;padding:16px 0 8px;max-height:70vh;overflow-y:auto">
+    <div style="text-align:center;margin-bottom:10px">
+      <div style="width:36px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;display:inline-block"></div>
+    </div>
+    <div id="macro-drawer-list"></div>
+  </div>
+</div>
+
+</body></html>`;
   const w=window.open("","_blank","width=900,height=700");
   if(w){w.document.write(html);w.document.close();}
   else toast("❌ Abilita i popup per la stampa PDF");
@@ -1016,6 +1150,54 @@ function toast(msg) {
   setTimeout(()=>el.style.display="none",2500);
 }
 
+
+// ── BOTTOM NAV MOBILE ──────────────────────────────────────────────────
+function bnClick(v, el) {
+  document.querySelectorAll(".bn-btn").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+  setVista(v, null);
+  closeMacroDrawer();
+}
+function bnShowMacro() {
+  const list = document.getElementById("macro-drawer-list");
+  list.innerHTML = MACRO_KEYS.map(mk => {
+    const cat = DB[mk]; const cnt = stato.voci.filter(v=>v.macro===mk).length;
+    return `<button onclick="bnPickMacro('${mk}')" style="
+      display:flex;align-items:center;gap:12px;width:100%;background:transparent;
+      border:none;border-left:3px solid transparent;color:rgba(255,255,255,.8);
+      padding:13px 20px;font-family:Arial,sans-serif;font-size:14px;font-weight:600;cursor:pointer;
+      border-bottom:1px solid rgba(255,255,255,.06)">
+      <span style="font-size:22px">${cat.icon}</span>
+      <span style="flex:1;text-align:left">${mk.slice(3)}</span>
+      ${cnt>0?`<span style="background:${cat.colore};color:#fff;border-radius:8px;font-size:11px;font-weight:900;padding:2px 8px">${cnt}</span>`:""}
+    </button>`;
+  }).join("");
+  document.getElementById("macro-drawer").style.display = "block";
+  document.querySelectorAll(".bn-btn").forEach(b=>b.classList.remove("active"));
+  document.getElementById("bn-macro").classList.add("active");
+}
+function bnPickMacro(mk) {
+  closeMacroDrawer();
+  setVista("macro:"+mk, null);
+}
+function closeMacroDrawer() {
+  document.getElementById("macro-drawer").style.display = "none";
+}
+// Sync bottom nav active state on vista change
+const _origSetVista = setVista;
+// patch renderContent to also sync bn
+const _origRender = renderContent;
+renderContent = function() {
+  _origRender();
+  // sync bn buttons
+  const v = stato.vista;
+  document.querySelectorAll(".bn-btn").forEach(b=>b.classList.remove("active"));
+  if(v==="home") { const el=document.getElementById("bn-home"); if(el) el.classList.add("active"); }
+  else if(v==="riepilogo") { const el=document.getElementById("bn-riepilogo"); if(el) el.classList.add("active"); }
+  else if(v==="storico") { const el=document.getElementById("bn-storico"); if(el) el.classList.add("active"); }
+  else if(v.startsWith("macro:")) { const el=document.getElementById("bn-macro"); if(el) el.classList.add("active"); }
+};
+
 // ═══════════════════════════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1024,5 +1206,37 @@ buildSidebar();
 renderContent();
 document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.add("active"));
 </script>
+
+<!-- BOTTOM NAV MOBILE -->
+<div id="bottom-nav">
+  <button class="bn-btn active" id="bn-home" onclick="bnClick('home',this)">
+    <span>🏠</span>HOME
+  </button>
+  <div style="position:relative;flex:1;display:flex">
+    <button class="bn-btn" id="bn-macro" onclick="bnShowMacro()" style="width:100%">
+      <span>🧱</span>CATEGORIE
+    </button>
+  </div>
+  <button class="bn-btn" id="bn-riepilogo" onclick="bnClick('riepilogo',this)">
+    <span>📊</span>RIEPILOGO
+  </button>
+  <button class="bn-btn" id="bn-storico" onclick="bnClick('storico',this)">
+    <span>🗂️</span>STORICO
+  </button>
+  <button class="bn-btn" onclick="salvaProgetto()">
+    <span>💾</span>SALVA
+  </button>
+</div>
+
+<!-- DRAWER CATEGORIE MOBILE -->
+<div id="macro-drawer" style="display:none;position:fixed;inset:0;z-index:250;background:rgba(13,27,62,.6)" onclick="if(event.target===this)closeMacroDrawer()">
+  <div style="position:absolute;bottom:62px;left:0;right:0;background:var(--sidebar);border-radius:20px 20px 0 0;padding:16px 0 8px;max-height:70vh;overflow-y:auto">
+    <div style="text-align:center;margin-bottom:10px">
+      <div style="width:36px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;display:inline-block"></div>
+    </div>
+    <div id="macro-drawer-list"></div>
+  </div>
+</div>
+
 </body>
 </html>
