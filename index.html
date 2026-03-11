@@ -267,6 +267,63 @@
     font-size: 9px; font-weight: 900; padding: 1px 5px; min-width: 16px; text-align: center;
   }
 
+
+  /* MINI EDITOR PREZZI INLINE */
+  .price-editor{background:#fff;border:2px solid var(--ocra);border-radius:12px;padding:12px 14px;margin-top:8px;display:none}
+  .price-editor.open{display:block}
+  .price-editor-title{font-size:11px;font-weight:700;color:var(--ocra);letter-spacing:.5px;margin-bottom:10px}
+  .price-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .price-row-label{font-size:12px;color:var(--navy);font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .price-row-input{width:80px;border:2px solid var(--border);border-radius:7px;padding:6px 8px;font-size:14px;font-weight:700;color:var(--navy);font-family:Arial,sans-serif;outline:none;text-align:right;background:var(--gray)}
+  .price-row-input:focus{border-color:var(--ocra)}
+  .price-row-euro{font-size:13px;color:var(--muted);font-weight:600}
+  .btn-price-save{background:var(--ocra);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;width:100%;margin-top:4px}
+  .btn-price-edit{background:var(--ocra-faint);border:1.5px solid var(--ocra);color:var(--ocra);border-radius:7px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;flex-shrink:0;white-space:nowrap}
+  .select-item-wrap{display:flex;flex-direction:column;width:100%}
+
+
+  /* ── WELCOME SCREEN ── */
+  #welcome{
+    position:fixed;inset:0;z-index:9999;
+    background:var(--navy);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:32px 24px;text-align:center;
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  #welcome.hiding{opacity:0;transform:scale(1.04);pointer-events:none}
+  .wl-logo{background:var(--ocra);border-radius:20px;width:72px;height:72px;
+    display:flex;align-items:center;justify-content:center;font-size:36px;
+    margin:0 auto 22px;box-shadow:0 8px 32px rgba(200,154,58,.35)}
+  .wl-title{font-size:28px;font-weight:900;color:#fff;margin-bottom:6px;line-height:1.2}
+  .wl-subtitle{font-size:14px;color:var(--ocra-light);font-weight:700;letter-spacing:1.5px;
+    margin-bottom:28px;text-transform:uppercase}
+  .wl-divider{width:48px;height:3px;background:var(--ocra);border-radius:2px;
+    margin:0 auto 28px}
+  .wl-steps{display:flex;flex-direction:column;gap:14px;max-width:360px;
+    width:100%;margin-bottom:36px}
+  .wl-step{display:flex;align-items:flex-start;gap:14px;text-align:left;
+    background:rgba(255,255,255,.06);border-radius:14px;padding:14px 16px}
+  .wl-step-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+  .wl-step-text{color:rgba(255,255,255,.85);font-size:13px;line-height:1.5}
+  .wl-step-title{font-weight:800;color:#fff;font-size:14px;margin-bottom:3px}
+  .wl-btn{
+    background:var(--ocra);border:none;color:#fff;border-radius:14px;
+    padding:16px 48px;font-size:16px;font-weight:900;cursor:pointer;
+    font-family:Arial,sans-serif;
+    box-shadow:0 6px 24px rgba(200,154,58,.45);
+    transition:transform .1s,box-shadow .1s;
+    letter-spacing:.3px;
+  }
+  .wl-btn:active{transform:scale(.97);box-shadow:0 2px 10px rgba(200,154,58,.3)}
+  .wl-credit{margin-top:20px;font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.3px}
+  .wl-credit b{color:rgba(255,255,255,.5)}
+  @media(max-width:480px){
+    .wl-title{font-size:22px}
+    .wl-steps{gap:10px}
+    .wl-step{padding:12px 13px}
+    .wl-btn{padding:14px 36px;font-size:15px}
+  }
+
   /* NOTIFICA */
   #toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:700;z-index:999;display:none;box-shadow:0 8px 24px rgba(13,27,62,.3)}
 </style>
@@ -319,6 +376,40 @@
     </div>
     <div id="content"></div>
   </div>
+</div>
+
+
+<!-- WELCOME SCREEN -->
+<div id="welcome">
+  <div class="wl-logo">🏗️</div>
+  <div class="wl-title">Calcolatore Edile</div>
+  <div class="wl-subtitle">Preventivi professionali</div>
+  <div class="wl-divider"></div>
+  <div class="wl-steps">
+    <div class="wl-step">
+      <span class="wl-step-icon">📐</span>
+      <div>
+        <div class="wl-step-title">Scegli il materiale</div>
+        <div class="wl-step-text">Seleziona la categoria, la lavorazione e il prodotto dalla lista completa.</div>
+      </div>
+    </div>
+    <div class="wl-step">
+      <span class="wl-step-icon">🔢</span>
+      <div>
+        <div class="wl-step-title">Inserisci la superficie</div>
+        <div class="wl-step-text">Digita i metri quadri (o il volume). L'app calcola automaticamente i pezzi e il costo, margine incluso.</div>
+      </div>
+    </div>
+    <div class="wl-step">
+      <span class="wl-step-icon">📊</span>
+      <div>
+        <div class="wl-step-title">Esporta il preventivo</div>
+        <div class="wl-step-text">Genera il riepilogo in PDF, Excel o CSV con un solo tap.</div>
+      </div>
+    </div>
+  </div>
+  <button class="wl-btn" onclick="closeWelcome()">Inizia →</button>
+  <div class="wl-credit">Ideata e sviluppata da <b>Geom. Daniel Meccanici</b></div>
 </div>
 
 <!-- MODAL -->
@@ -965,17 +1056,102 @@ function renderModalP1(cat) {
 function pickSotto(k) { mState.sotto=k; mState.passo=2; renderModal(); }
 
 function renderModalP2(cat) {
-  return `<div style="font-size:13px;color:var(--muted);margin-bottom:10px">Scegli il prodotto da <b style="color:var(--navy)">${mState.sotto}</b>:</div>
-    <div class="select-list">${cat.sottocategorie[mState.sotto].map(m=>`
-      <button class="select-item" onclick="pickMat('${m.id}')">
-        <div style="text-align:left">
-          <div class="select-item-main">${m.nome}</div>
-          <div class="select-item-sub">Resa: ${m.resa} ${m.unitaResa} · ${m.note}</div>
-          <div class="select-item-price" style="color:${cat.colore}">${m.confezioni.map(c=>`${c.label} → ${eur(c.prezzo)}`).join(" · ")}</div>
-        </div>
-        <span class="select-arrow" style="color:${cat.colore}">›</span>
-      </button>`).join("")}
+  const items = cat.sottocategorie[mState.sotto].map(m => {
+    const prezzi = m.confezioni.map(c=>`${c.label} → ${eur(c.prezzo)}`).join(" · ");
+    const editorId = "pe-" + m.id;
+    const confInputs = m.confezioni.map((c,i)=>`
+      <div class="price-row">
+        <span class="price-row-label">${c.label}</span>
+        <input class="price-row-input" type="number" step="0.01" min="0"
+          inputmode="decimal"
+          value="${c.prezzo}"
+          id="pi-${m.id}-${i}"
+          onclick="event.stopPropagation()"
+          onkeydown="event.stopPropagation()">
+        <span class="price-row-euro">€</span>
+      </div>`).join("");
+    return `<div class="select-item-wrap">
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="select-item" style="flex:1" onclick="pickMat('${m.id}')">
+          <div style="text-align:left">
+            <div class="select-item-main">${m.nome}</div>
+            <div class="select-item-sub">Resa: ${m.resa} ${m.unitaResa} · ${m.note}</div>
+            <div class="select-item-price" id="pp-${m.id}" style="color:${cat.colore}">${prezzi}</div>
+          </div>
+          <span class="select-arrow" style="color:${cat.colore}">›</span>
+        </button>
+        <button class="btn-price-edit" onclick="event.stopPropagation();togglePriceEditor('${m.id}')">✏️ Prezzo</button>
+      </div>
+      <div class="price-editor" id="${editorId}">
+        <div class="price-editor-title">✏️ MODIFICA PREZZI — ${m.nome}</div>
+        ${confInputs}
+        <button class="btn-price-save" onclick="savePrices('${m.id}',${m.confezioni.length})">✓ Salva prezzi</button>
+      </div>
     </div>`;
+  }).join("");
+  return `<div style="font-size:13px;color:var(--muted);margin-bottom:10px">Scegli il prodotto da <b style="color:var(--navy)">${mState.sotto}</b>:</div>
+    <div class="select-list">${items}</div>`;
+}
+
+function togglePriceEditor(matId) {
+  const el = document.getElementById("pe-" + matId);
+  if (!el) return;
+  const isOpen = el.classList.contains("open");
+  // chiudi tutti
+  document.querySelectorAll(".price-editor.open").forEach(e => e.classList.remove("open"));
+  if (!isOpen) {
+    el.classList.add("open");
+    // focus primo input
+    setTimeout(() => { const inp = el.querySelector("input"); if(inp) inp.focus(); }, 80);
+  }
+}
+
+function savePrices(matId, nConf) {
+  // Trova il materiale nel DB
+  let mat = null;
+  for (const mk of Object.keys(DB)) {
+    for (const sk of Object.keys(DB[mk].sottocategorie)) {
+      const found = DB[mk].sottocategorie[sk].find(m => m.id === matId);
+      if (found) { mat = found; break; }
+    }
+    if (mat) break;
+  }
+  if (!mat) return;
+
+  // Aggiorna prezzi nel DB
+  for (let i = 0; i < nConf; i++) {
+    const inp = document.getElementById("pi-" + matId + "-" + i);
+    if (inp) mat.confezioni[i].prezzo = parseFloat(inp.value) || 0;
+  }
+
+  // Aggiorna anche le voci già nel preventivo che usano questo materiale
+  stato.voci.forEach(v => {
+    if (v.mat.id === matId) {
+      // aggiorna prezzi confezioni nella voce
+      v.mat.confezioni.forEach((c, i) => {
+        if (mat.confezioni[i]) c.prezzo = mat.confezioni[i].prezzo;
+      });
+      // ricalcola costo
+      const conf = v.mat.confezioni[v.ci];
+      v.conf = conf;
+      v.ris = calcola(v.sup, v.mat.resa, v.margine, conf);
+    }
+  });
+
+  // Salva nel localStorage per persistenza
+  try {
+    const saved = JSON.parse(localStorage.getItem("ce_prezzi") || "{}");
+    saved[matId] = mat.confezioni.map(c => c.prezzo);
+    localStorage.setItem("ce_prezzi", JSON.stringify(saved));
+  } catch(e) {}
+
+  // Aggiorna la riga prezzi visibile e chiudi editor
+  const pp = document.getElementById("pp-" + matId);
+  if (pp) pp.textContent = mat.confezioni.map(c => c.label + " → " + eur(c.prezzo)).join(" · ");
+  document.getElementById("pe-" + matId).classList.remove("open");
+
+  toast("✅ Prezzi aggiornati!");
+  updateTopbar();
 }
 function pickMat(id) {
   const cat=DB[mState.macro];
@@ -1213,7 +1389,23 @@ function exportPDF() {
     </div>`;
   });
   const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Preventivo</title>
-    <style>body{font-family:Arial,sans-serif;padding:30px;color:#0D1B3E} @media print{body{padding:10px}}</style>
+    <style>
+      body{font-family:Arial,sans-serif;padding:30px;color:#0D1B3E}
+      @media print{body{padding:10px}}
+      /* Filigrana su ogni pagina */
+      body::after{
+        content:"Calcolatore Edile · Geom. Daniel Meccanici";
+        position:fixed;
+        bottom:48%;left:50%;
+        transform:translateX(-50%) rotate(-35deg);
+        font-size:28px;font-weight:900;
+        color:rgba(13,27,62,0.045);
+        white-space:nowrap;
+        pointer-events:none;
+        z-index:0;
+        letter-spacing:2px;
+      }
+    </style>
     </head><body>
     <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #0D1B3E;padding-bottom:12px;margin-bottom:20px">
       <div><h1 style="margin:0;font-size:22px">🏗️ PREVENTIVO EDILE</h1><div style="font-size:13px;color:#888">${stato.nomeProg} · ${new Date().toLocaleDateString("it-IT")}</div></div>
@@ -1318,6 +1510,21 @@ function toast(msg) {
 }
 
 
+
+// ── WELCOME SCREEN ──────────────────────────────────────────────
+function closeWelcome() {
+  const el = document.getElementById("welcome");
+  el.classList.add("hiding");
+  setTimeout(() => { el.style.display = "none"; }, 500);
+  try { localStorage.setItem("ce_welcomed", "1"); } catch(e) {}
+}
+// Se già visitato, salta la welcome
+try {
+  if (localStorage.getItem("ce_welcomed")) {
+    document.getElementById("welcome").style.display = "none";
+  }
+} catch(e) {}
+
 // ── BOTTOM NAV MOBILE ──────────────────────────────────────────────────
 function bnClick(v, el) {
   document.querySelectorAll(".bn-btn").forEach(b => b.classList.remove("active"));
@@ -1369,6 +1576,20 @@ renderContent = function() {
 // INIT
 // ═══════════════════════════════════════════════════════════════════════════
 dbLoad();
+// Ripristina prezzi personalizzati salvati
+try {
+  const savedPrezzi = JSON.parse(localStorage.getItem("ce_prezzi") || "{}");
+  Object.keys(savedPrezzi).forEach(matId => {
+    for (const mk of Object.keys(DB)) {
+      for (const sk of Object.keys(DB[mk].sottocategorie)) {
+        const mat = DB[mk].sottocategorie[sk].find(m => m.id === matId);
+        if (mat) {
+          savedPrezzi[matId].forEach((p, i) => { if (mat.confezioni[i]) mat.confezioni[i].prezzo = p; });
+        }
+      }
+    }
+  });
+} catch(e) {}
 buildSidebar();
 renderContent();
 document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.add("active"));
