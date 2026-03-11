@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calcolatore Edile</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Arial,sans-serif;background:#F5F7FB;color:#0D1B3E;min-height:100vh}
+  :root{
+    --navy:#0D1B3E;--navy2:#1A2F6E;--sidebar:#0D1B3E;--sidebar-active:#1e3a6e;
+    --ocra:#C89A3A;--ocra-light:#E8C46A;--ocra-faint:#FDF8EE;
+    --bg:#FFFFFF;--gray:#F5F7FB;--border:#E2E8F4;--muted:#7A8AAE;
+    --success:#1A7A4A;--danger:#B83232;
+  }
+
+  /* LAYOUT */
+  #app{display:flex;min-height:100vh}
+
+  /* SIDEBAR */
+  #sidebar{
+    width:230px;min-height:100vh;background:var(--sidebar);
+    display:flex;flex-direction:column;flex-shrink:0;
+    position:sticky;top:0;align-self:flex-start;transition:width .2s;overflow:hidden;
+  }
+  #sidebar.collapsed{width:62px}
+  .sb-logo{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:10}
+  .sb-logo-icon{background:var(--ocra);border-radius:9px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  .sb-logo-text{color:#fff;font-weight:900;font-size:12px;line-height:1.3}
+  .sb-logo-sub{color:var(--ocra-light);font-size:10px;letter-spacing:1px}
+  .sb-toggle{background:transparent;border:none;color:rgba(255,255,255,.35);cursor:pointer;padding:6px 10px;font-size:14px;text-align:right;width:100%}
+  #sidebar.collapsed .sb-toggle{text-align:center}
+  .sb-label{padding:6px 16px 3px;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1px;font-weight:700;white-space:nowrap;overflow:hidden}
+  .sb-divider{height:1px;background:rgba(255,255,255,.08);margin:6px 0}
+  .sb-btn{
+    background:transparent;border:none;border-left:3px solid transparent;
+    color:rgba(255,255,255,.65);padding:11px 16px;
+    display:flex;align-items:center;gap:10;cursor:pointer;
+    font-family:Arial,sans-serif;font-size:13px;font-weight:500;
+    width:100%;text-align:left;transition:all .15s;white-space:nowrap;overflow:hidden;
+  }
+  .sb-btn:hover{background:rgba(255,255,255,.06);color:#fff}
+  .sb-btn.active{background:var(--sidebar-active);color:#fff;font-weight:700}
+  #sidebar.collapsed .sb-btn{padding:11px 0;justify-content:center}
+  #sidebar.collapsed .sb-btn-label,.sb-collapsed-hide{display:inline}
+  #sidebar.collapsed .sb-collapsed-hide{display:none}
+  .sb-badge{background:var(--ocra);color:#fff;border-radius:10px;font-size:10px;font-weight:900;padding:1px 7px;margin-left:auto;flex-shrink:0}
+  .sb-save{margin-top:auto;padding:10px;border-top:1px solid rgba(255,255,255,.1)}
+  .sb-save button{background:var(--ocra);border:none;color:#fff;border-radius:10px;padding:10px 0;width:100%;font-size:12px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;gap:6px}
+
+  /* MAIN */
+  #main{flex:1;display:flex;flex-direction:column;min-width:0}
+  #topbar{background:#fff;border-bottom:1px solid var(--border);padding:13px 22px;display:flex;align-items:center;justify-content:space-between;gap:12;flex-wrap:wrap}
+  #proj-name{font-size:17px;font-weight:900;color:var(--navy);cursor:pointer;background:none;border:none;font-family:Arial,sans-serif}
+  #proj-name-input{font-size:17px;font-weight:900;color:var(--navy);border:none;border-bottom:2px solid var(--ocra);outline:none;font-family:Arial,sans-serif;background:transparent}
+  .topbar-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .topbar-count{font-size:13px;color:var(--muted)}
+  .topbar-total{font-size:20px;font-weight:900;color:var(--success)}
+  .btn-ghost{background:var(--gray);border:none;color:var(--muted);border-radius:7px;padding:6px 12px;font-size:12px;cursor:pointer;font-family:Arial,sans-serif;font-weight:700}
+
+  /* CONTENT */
+  #content{flex:1;padding:24px;overflow-y:auto}
+
+  /* CARDS */
+  .card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:14px 16px}
+  .macro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+  .macro-card{background:#fff;border:2px solid var(--border);border-radius:16px;padding:22px 16px;cursor:pointer;font-family:Arial,sans-serif;text-align:left;display:flex;flex-direction:column;gap:8px;transition:all .15s;width:100%}
+  .macro-card:hover{box-shadow:0 4px 18px rgba(13,27,62,.1);transform:translateY(-2px)}
+  .macro-card-icon{font-size:34px}
+  .macro-card-title{font-weight:800;color:var(--navy);font-size:14px}
+  .macro-card-sub{font-size:12px;color:var(--muted)}
+  .macro-card-badge{border-radius:8px;font-size:11px;font-weight:700;padding:2px 8px;align-self:flex-start;color:#fff}
+
+  /* VOCI */
+  .voce-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12}
+  .voce-cat{font-size:11px;font-weight:700;margin-bottom:3px}
+  .voce-nome{font-weight:800;color:var(--navy);font-size:14px;margin-bottom:6px}
+  .voce-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+  .voce-costo{font-weight:900;font-size:18px;color:var(--success)}
+  .voce-actions{display:flex;gap:6px;margin-top:6px}
+  .btn-edit{background:#EEF4FF;border:1px solid #C0D0F0;color:var(--navy2);border-radius:7px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif}
+  .btn-del{background:#FEF2F2;border:1px solid rgba(184,50,50,.2);color:var(--danger);border-radius:7px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif}
+  .subtotal-bar{border-radius:12px;padding:12px 18px;display:flex;justify-content:space-between;margin-top:4px;color:#fff}
+  .subtotal-bar span:first-child{opacity:.7;font-weight:700;font-size:13px}
+  .subtotal-bar span:last-child{font-weight:900;font-size:18px}
+
+  /* RIEPILOGO */
+  .riepilogo-group{margin-bottom:18px}
+  .riepilogo-header{display:flex;justify-content:space-between;padding:8px 14px;border-radius:10px;border-left-width:4px;border-left-style:solid;margin-bottom:8px}
+  .riepilogo-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:10px;font-size:13px;margin-bottom:5px}
+  .totale-box{background:var(--navy);border-radius:16px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+  .totale-box span:first-child{color:rgba(255,255,255,.6);font-weight:700}
+  .totale-box span:last-child{color:var(--ocra-light);font-weight:900;font-size:28px}
+
+  /* STORICO */
+  .proj-row{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12;margin-bottom:10px;transition:all .15s}
+  .proj-row:hover{box-shadow:0 2px 12px rgba(13,27,62,.08)}
+  .proj-row.current{border-left:4px solid var(--ocra)}
+
+  /* MODALI */
+  .overlay{position:fixed;inset:0;background:rgba(13,27,62,.55);z-index:300;display:flex;align-items:center;justify-content:center;padding:16px}
+  .modal{background:#fff;border-radius:20px;width:100%;max-width:560px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(13,27,62,.3);overflow:hidden}
+  .modal-header{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-radius:20px 20px 0 0;flex-shrink:0}
+  .modal-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center}
+  .step-bar{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
+  .step-item{flex:1;text-align:center;padding:10px 4px;font-size:12px;font-weight:700;border-bottom:3px solid transparent;color:var(--muted)}
+  .step-item.active{color:var(--navy);border-bottom-color:var(--ocra)}
+  .step-item.done{color:var(--ocra)}
+  .step-num{background:var(--border);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;margin-right:5px;font-size:10px}
+  .step-item.active .step-num{background:var(--navy)}
+  .step-item.done .step-num{background:var(--ocra)}
+  .modal-body{flex:1;overflow-y:auto;padding:20px}
+  .modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:10;flex-shrink:0}
+
+  /* FORM ELEMENTI */
+  .field-label{font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:6px;letter-spacing:.5px}
+  .field-row{display:flex;align-items:center;border:2px solid var(--border);border-radius:10px;overflow:hidden;background:var(--gray)}
+  .field-row input{flex:1;border:none;background:transparent;padding:12px 16px;font-size:20px;font-weight:700;color:var(--navy);font-family:Arial,sans-serif;outline:none}
+  .field-row .field-unit{padding:0 16px;font-size:14px;color:var(--muted);font-weight:600}
+  .pill-btn{border-radius:8px;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;white-space:nowrap;border:2px solid var(--border);background:#fff;color:var(--muted);transition:all .15s}
+  .pill-btn.active{border-color:currentColor}
+  .select-list{display:flex;flex-direction:column;gap:8px}
+  .select-item{background:#fff;border:2px solid var(--border);border-radius:12px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:Arial,sans-serif;text-align:left;width:100%;transition:all .15s}
+  .select-item:hover{border-color:#aab;background:var(--gray)}
+  .select-item-main{font-weight:800;color:var(--navy);font-size:14px}
+  .select-item-sub{font-size:12px;color:var(--muted);margin-top:3px}
+  .select-item-price{font-size:11px;margin-top:3px;font-weight:700}
+  .select-arrow{font-size:22px;color:inherit;margin-left:10px;flex-shrink:0}
+  .info-box{border-radius:12px;padding:12px 16px;border:1.5px solid transparent}
+  .result-box{background:var(--navy);border-radius:14px;padding:16px 18px}
+  .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+  .result-cell{text-align:center;background:rgba(255,255,255,.06);border-radius:10px;padding:11px 6px}
+  .result-val{font-size:20px;font-weight:900}
+  .result-lbl{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+  .result-note{font-size:11px;color:rgba(255,255,255,.35);text-align:center}
+
+  /* EDIT FORM */
+  .edit-field{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+  .edit-field label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px}
+  .edit-field input{border:2px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;color:var(--navy);font-family:Arial,sans-serif;outline:none;background:var(--gray)}
+  .edit-field input:focus{border-color:var(--ocra)}
+  .edit-section-title{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin:14px 0 8px;text-transform:uppercase}
+  .conf-edit-row{display:flex;gap:8px;align-items:center;margin-bottom:6px;padding:8px;background:var(--gray);border-radius:8px}
+  .conf-edit-row input{flex:1;border:1.5px solid var(--border);border-radius:7px;padding:7px 10px;font-size:13px;color:var(--navy);font-family:Arial,sans-serif;outline:none;background:#fff}
+  .conf-edit-row input:focus{border-color:var(--ocra)}
+
+  /* EXPORT BTN */
+  .export-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+  .btn-export{border:none;border-radius:9px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;display:flex;align-items:center;gap:6px}
+  .btn-pdf{background:#C0392B;color:#fff}
+  .btn-xlsx{background:#1A7A4A;color:#fff}
+  .btn-csv{background:#1A5C8A;color:#fff}
+
+  /* PAGE TITLE */
+  .page-title{font-weight:900;font-size:19px;color:var(--navy);margin-bottom:4px}
+  .page-sub{color:var(--muted);font-size:13px;margin-bottom:20px}
+  .empty-state{text-align:center;padding:50px 20px;border-radius:16px;border:2px dashed}
+  .empty-state-icon{font-size:40px;margin-bottom:10px}
+  .empty-state-title{font-weight:700;color:var(--navy);font-size:15px;margin-bottom:4px}
+  .empty-state-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+  .btn-primary{border:none;color:#fff;border-radius:10px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif}
+
+  /* RANGE */
+  input[type=range]{width:100%;height:4px;cursor:pointer}
+  .range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
+
+  /* NOTIFICA */
+  #toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:700;z-index:999;display:none;box-shadow:0 8px 24px rgba(13,27,62,.3)}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-icon">🏗️</div>
+      <div class="sb-collapsed-hide">
+        <div class="sb-logo-text">CALCOLATORE</div>
+        <div class="sb-logo-sub">EDILE</div>
+      </div>
+    </div>
+    <button class="sb-toggle" onclick="toggleSidebar()">◂</button>
+    <button class="sb-btn" data-view="home" onclick="setVista('home',this)">
+      <span style="font-size:18px;flex-shrink:0">🏠</span>
+      <span class="sb-btn-label sb-collapsed-hide">Preventivo</span>
+    </button>
+    <button class="sb-btn" data-view="riepilogo" onclick="setVista('riepilogo',this)">
+      <span style="font-size:18px;flex-shrink:0">📊</span>
+      <span class="sb-btn-label sb-collapsed-hide">Riepilogo</span>
+    </button>
+    <button class="sb-btn" data-view="storico" onclick="setVista('storico',this)">
+      <span style="font-size:18px;flex-shrink:0">🗂️</span>
+      <span class="sb-btn-label sb-collapsed-hide">Storico</span>
+    </button>
+    <div class="sb-divider"></div>
+    <div class="sb-label sb-collapsed-hide">CATEGORIE</div>
+    <div id="sb-macro"></div>
+    <div class="sb-save">
+      <button onclick="salvaProgetto()">
+        <span>💾</span><span class="sb-collapsed-hide"> Salva progetto</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="main">
+    <div id="topbar">
+      <div style="display:flex;align-items:center;gap:8px">
+        <button id="proj-name" onclick="editNome()">Nuovo Progetto ✏️</button>
+        <input id="proj-name-input" style="display:none" onblur="saveNome()" onkeydown="if(event.key==='Enter')saveNome()">
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-count" id="topbar-count">0 voci</span>
+        <span class="topbar-total" id="topbar-total">€ 0,00</span>
+        <button class="btn-ghost" onclick="svuota()">Svuota</button>
+        <button class="btn-ghost" onclick="nuovoProgetto()">+ Nuovo</button>
+      </div>
+    </div>
+    <div id="content"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="modal-overlay" style="display:none" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal">
+    <div class="modal-header" id="modal-header">
+      <div style="display:flex;align-items:center;gap:10">
+        <span id="modal-icon" style="font-size:26px"></span>
+        <div>
+          <div id="modal-title" style="color:#fff;font-weight:900;font-size:15px"></div>
+          <div id="modal-step-label" style="color:rgba(255,255,255,.6);font-size:11px"></div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="step-bar" id="step-bar">
+      <div class="step-item" id="st1"><span class="step-num">1</span>Lavorazione</div>
+      <div class="step-item" id="st2"><span class="step-num">2</span>Materiale</div>
+      <div class="step-item" id="st3"><span class="step-num">3</span>Calcolo</div>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn-ghost" id="modal-back" onclick="modalBack()">← Indietro</button>
+      <button class="btn-primary" id="modal-add" onclick="modalAdd()" style="display:none">✓ Aggiungi al preventivo</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="overlay" id="edit-overlay" style="display:none" onclick="if(event.target===this)closeEdit()">
+  <div class="modal" id="edit-modal" style="max-width:520px">
+    <div class="modal-header" style="background:var(--navy)">
+      <div style="display:flex;align-items:center;gap:10">
+        <span style="font-size:22px">✏️</span>
+        <div style="color:#fff;font-weight:900;font-size:15px">Modifica voce</div>
+      </div>
+      <button class="modal-close" onclick="closeEdit()">✕</button>
+    </div>
+    <div class="modal-body" id="edit-body"></div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeEdit()">Annulla</button>
+      <button class="btn-primary" style="background:var(--ocra)" onclick="saveEdit()">✓ Salva modifiche</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<div style="position:fixed;bottom:0;left:0;right:0;background:#0D1B3E;color:rgba(255,255,255,.45);font-size:11px;text-align:center;padding:6px 16px;z-index:10;letter-spacing:.3px;border-top:1px solid rgba(255,255,255,.08)">
+  Ideata e sviluppata da <span style="color:#C89A3A;font-weight:700">Geom. Daniel Meccanici</span>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════
+// DATABASE MATERIALI
+// ═══════════════════════════════════════════════════════════════════════════
+const DB = {
+  "🧱 Muratura & Intonaci":{icon:"🧱",colore:"#8B5E14",sottocategorie:{
+    "Malte da muratura":[
+      {id:"mu1",nome:"Malta cementizia M5",resa:380,unitaResa:"kg/m³",unita:"m³",note:"Resistenza media",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 40 kg",kg:40,prezzo:7}]},
+      {id:"mu2",nome:"Malta cementizia M10",resa:400,unitaResa:"kg/m³",unita:"m³",note:"Alta resistenza strutturale",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:6},{label:"Sacco 40 kg",kg:40,prezzo:9}]},
+      {id:"mu3",nome:"Malta bastarda (cemento+calce)",resa:360,unitaResa:"kg/m³",unita:"m³",note:"Uso generale",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5}]},
+      {id:"mu4",nome:"Malta di calce idraulica",resa:340,unitaResa:"kg/m³",unita:"m³",note:"Edifici storici, traspirante",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7},{label:"Sacco 20 kg",kg:20,prezzo:6}]},
+    ],
+    "Intonaci":[
+      {id:"in1",nome:"Rinzaffo / Arriccio",resa:16,unitaResa:"kg/m²",unita:"m²",note:"Primo strato, sp. ~1 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 30 kg",kg:30,prezzo:6}]},
+      {id:"in2",nome:"Intonaco rustico",resa:14,unitaResa:"kg/m²",unita:"m²",note:"Sp. ~1 cm, finitura grezza",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:6},{label:"Sacco 30 kg",kg:30,prezzo:7}]},
+      {id:"in3",nome:"Intonaco civile",resa:12,unitaResa:"kg/m²",unita:"m²",note:"Sp. ~1 cm, finitura liscia",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7}]},
+      {id:"in4",nome:"Premiscelato generico (es. Cad)",resa:20,unitaResa:"kg/m²",unita:"m²",note:"Sp. ~1 cm, uso generico",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:4},{label:"Sacco 30 kg",kg:30,prezzo:5}]},
+      {id:"in5",nome:"Rasante cementizio",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Finitura sottile ~1 mm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:8},{label:"Sacco 10 kg",kg:10,prezzo:4}]},
+      {id:"in6",nome:"Stucco bianco da finitura",resa:0.8,unitaResa:"kg/m²",unita:"m²",note:"Ultimo strato prima pittura",confezioni:[{label:"Sacco 5 kg",kg:5,prezzo:5},{label:"Sacco 25 kg",kg:25,prezzo:18}]},
+      {id:"in7",nome:"Intonaco a base calce NHL 5",resa:14,unitaResa:"kg/m²",unita:"m²",note:"Restauro edifici storici",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
+    ],
+    "Stucchi & Fughe":[
+      {id:"sf1",nome:"Stucco vinilico in pasta",resa:0.7,unitaResa:"kg/m²",unita:"m²",note:"Cartongesso e pareti interne",confezioni:[{label:"Secchio 5 kg",kg:5,prezzo:8},{label:"Secchio 25 kg",kg:25,prezzo:28}]},
+      {id:"sf2",nome:"Stucco per fughe ceramica",resa:0.35,unitaResa:"kg/m²",unita:"m²",note:"Fuga 2 mm, piastrella 20x20",confezioni:[{label:"Busta 5 kg",kg:5,prezzo:6},{label:"Busta 25 kg",kg:25,prezzo:20}]},
+      {id:"sf3",nome:"Fugante epossidico bicomponente",resa:0.5,unitaResa:"kg/m²",unita:"m²",note:"Alta resistenza chimica",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:35}]},
+    ],
+  }},
+  "🪣 Impermeabilizzazione":{icon:"🪣",colore:"#1A5C8A",sottocategorie:{
+    "Membrane cementizie":[
+      {id:"ic1",nome:"Membrana cementosa monocomponente",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"2 mani, bagni e terrazzi",confezioni:[{label:"Sacco 20 kg",kg:20,prezzo:35},{label:"Sacco 25 kg",kg:25,prezzo:42}]},
+      {id:"ic2",nome:"Membrana cementosa bicomponente",resa:2,unitaResa:"kg/m²",unita:"m²",note:"2 mani, alta resistenza",confezioni:[{label:"Kit 24 kg",kg:24,prezzo:55},{label:"Kit 32 kg",kg:32,prezzo:70}]},
+      {id:"ic3",nome:"Cristallizzante per calcestruzzo",resa:1,unitaResa:"kg/m²",unita:"m²",note:"Fondazioni e vasche",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:55}]},
+    ],
+    "Guaine liquide":[
+      {id:"ig1",nome:"Guaina liquida poliuretanica",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Terrazzi e balconi",confezioni:[{label:"Secchio 5 kg",kg:5,prezzo:40},{label:"Secchio 20 kg",kg:20,prezzo:130}]},
+      {id:"ig2",nome:"Guaina liquida acrilica",resa:1.2,unitaResa:"kg/m²",unita:"m²",note:"Coperture e murature",confezioni:[{label:"Secchio 5 kg",kg:5,prezzo:28},{label:"Secchio 20 kg",kg:20,prezzo:90}]},
+      {id:"ig3",nome:"Guaina elastomerica in pasta",resa:1.8,unitaResa:"kg/m²",unita:"m²",note:"Ponti, viadotti, interrati",confezioni:[{label:"Secchio 10 kg",kg:10,prezzo:55},{label:"Secchio 25 kg",kg:25,prezzo:120}]},
+    ],
+    "Guaine bituminose":[
+      {id:"ib1",nome:"Guaina bituminosa autoprotetta 4mm",resa:5,unitaResa:"kg/m²",unita:"m²",note:"Coperture piane, sp. 4 mm",confezioni:[{label:"Rotolo 10 m²",kg:50,prezzo:42},{label:"Rotolo 20 m²",kg:100,prezzo:80}]},
+      {id:"ib2",nome:"Guaina bituminosa ardesiata 3mm",resa:3.5,unitaResa:"kg/m²",unita:"m²",note:"Finitura esterna, sp. 3 mm",confezioni:[{label:"Rotolo 10 m²",kg:35,prezzo:32}]},
+    ],
+  }},
+  "🎨 Pitture & Finiture":{icon:"🎨",colore:"#7A3E8A",sottocategorie:{
+    "Pitture per interni":[
+      {id:"pi1",nome:"Pittura murale traspirante",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"1 mano, colori chiari",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:28},{label:"Secchio 4 l",kg:4,prezzo:10},{label:"Latta 1 l",kg:1,prezzo:4}]},
+      {id:"pi2",nome:"Pittura lavabile premium",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"1 mano, alta coprenza",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:45},{label:"Secchio 4 l",kg:4,prezzo:15}]},
+      {id:"pi3",nome:"Fondo quarzo / isolante",resa:0.2,unitaResa:"l/m²",unita:"m²",note:"Pre-pittura su intonaco nuovo",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:38},{label:"Secchio 5 l",kg:5,prezzo:16}]},
+      {id:"pi4",nome:"Smalto ad acqua satinato",resa:0.1,unitaResa:"l/m²",unita:"m²",note:"Legno, ferro, muratura",confezioni:[{label:"Latta 0.75 l",kg:0.75,prezzo:8},{label:"Latta 2.5 l",kg:2.5,prezzo:18},{label:"Secchio 5 l",kg:5,prezzo:30}]},
+    ],
+    "Pitture per esterni":[
+      {id:"pe1",nome:"Pittura silossanica per facciata",resa:0.18,unitaResa:"l/m²",unita:"m²",note:"1 mano, idrorepellente",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:55},{label:"Secchio 4 l",kg:4,prezzo:18}]},
+      {id:"pe2",nome:"Pittura minerale al silicato",resa:0.2,unitaResa:"l/m²",unita:"m²",note:"Facciate storiche, traspirante",confezioni:[{label:"Secchio 15 l",kg:15,prezzo:70},{label:"Secchio 5 l",kg:5,prezzo:28}]},
+      {id:"pe3",nome:"Fondo consolidante per esterni",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Preparazione su intonaci esterni",confezioni:[{label:"Secchio 10 l",kg:10,prezzo:25},{label:"Latta 2.5 l",kg:2.5,prezzo:10}]},
+    ],
+    "Vernici speciali":[
+      {id:"vs1",nome:"Vernice per pavimenti",resa:0.13,unitaResa:"l/m²",unita:"m²",note:"1 mano, garage e officine",confezioni:[{label:"Secchio 5 l",kg:5,prezzo:32},{label:"Secchio 10 l",kg:10,prezzo:55}]},
+      {id:"vs2",nome:"Impregnante per legno esterno",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"Protezione UV e umidità",confezioni:[{label:"Latta 2.5 l",kg:2.5,prezzo:22},{label:"Secchio 5 l",kg:5,prezzo:38}]},
+    ],
+  }},
+  "🔲 Pavimenti & Rivestimenti":{icon:"🔲",colore:"#2A6A3A",sottocategorie:{
+    "Massetti":[
+      {id:"pa1",nome:"Massetto autolivellante",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Sp. ~1 cm, livellamento",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7},{label:"Sacco 30 kg",kg:30,prezzo:8}]},
+      {id:"pa2",nome:"Massetto tradizionale",resa:22,unitaResa:"kg/m²",unita:"m²",note:"Sp. ~1 cm, posa manuale",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 30 kg",kg:30,prezzo:6}]},
+      {id:"pa3",nome:"Fibra in polipropilene anti-ritiro",resa:0.6,unitaResa:"kg/m³",unita:"m³",note:"Aggiunta all'impasto massetto",confezioni:[{label:"Busta 600 g",kg:0.6,prezzo:4},{label:"Sacco 5 kg",kg:5,prezzo:22}]},
+    ],
+    "Adesivi per piastrelle":[
+      {id:"ad1",nome:"Malta adesiva C1 standard",resa:4.5,unitaResa:"kg/m²",unita:"m²",note:"Piastrelle fino a 30x30 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:8},{label:"Sacco 5 kg",kg:5,prezzo:3}]},
+      {id:"ad2",nome:"Malta adesiva migliorata C2",resa:5,unitaResa:"kg/m²",unita:"m²",note:"Grandi formati e materiali pesanti",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
+      {id:"ad3",nome:"Adesivo deformabile C2S1",resa:5.5,unitaResa:"kg/m²",unita:"m²",note:"Piscine, terrazzi, riscaldamento",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:16}]},
+      {id:"ad4",nome:"Adesivo epossidico per pietra",resa:3.5,unitaResa:"kg/m²",unita:"m²",note:"Marmo, granito, pietre naturali",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:28}]},
+    ],
+    "Fughe & Finitura":[
+      {id:"fu1",nome:"Stucco per fughe ceramica",resa:0.35,unitaResa:"kg/m²",unita:"m²",note:"Fuga 2mm, piastrella 20x20",confezioni:[{label:"Busta 5 kg",kg:5,prezzo:6},{label:"Busta 25 kg",kg:25,prezzo:20}]},
+      {id:"fu2",nome:"Fugante epossidico",resa:0.5,unitaResa:"kg/m²",unita:"m²",note:"Alta resistenza chimica e meccanica",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:35}]},
+    ],
+  }},
+  "⚡ Isolamento Termico":{icon:"⚡",colore:"#1A7A5C",sottocategorie:{
+    "Cappotto esterno":[
+      {id:"ca1",nome:"Pannello EPS 10 cm",resa:1,unitaResa:"pz/m²",unita:"m²",note:"Cappotto standard",confezioni:[{label:"Pacco 6 pz (6 m²)",kg:6,prezzo:24},{label:"Pacco 10 pz (10 m²)",kg:10,prezzo:38}]},
+      {id:"ca2",nome:"Pannello EPS grafitato 10 cm",resa:1,unitaResa:"pz/m²",unita:"m²",note:"Prestazione termica superiore",confezioni:[{label:"Pacco 6 pz (6 m²)",kg:6,prezzo:36}]},
+      {id:"ca3",nome:"Pannello lana di roccia 10 cm",resa:1,unitaResa:"pz/m²",unita:"m²",note:"Termoacustico",confezioni:[{label:"Pacco 4 pz (4 m²)",kg:4,prezzo:40}]},
+      {id:"ca4",nome:"Colla per cappotto EPS",resa:5,unitaResa:"kg/m²",unita:"m²",note:"Applicazione a punto e barra",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:10}]},
+      {id:"ca5",nome:"Rasante armato per cappotto",resa:6,unitaResa:"kg/m²",unita:"m²",note:"Con rete in fibra di vetro 160g",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
+    ],
+    "Isolamento interno":[
+      {id:"ii1",nome:"Schiuma poliuretanica espandente",resa:0.5,unitaResa:"pz/ml",unita:"ml",note:"Sigillatura spifferi e ponti termici",confezioni:[{label:"Bombola 750 ml",kg:0.75,prezzo:8},{label:"Bombola 300 ml",kg:0.3,prezzo:5}]},
+      {id:"ii2",nome:"Nastro butilico autodesivo",resa:1,unitaResa:"ml/ml",unita:"ml",note:"Sigillatura giunti cappotto",confezioni:[{label:"Rotolo 25 m",kg:25,prezzo:18}]},
+    ],
+  }},
+  "🧪 Resine & Speciali":{icon:"🧪",colore:"#8A1A1A",sottocategorie:{
+    "Resine per pavimenti":[
+      {id:"re1",nome:"Primer epossidico penetrante",resa:0.2,unitaResa:"kg/m²",unita:"m²",note:"Preparazione supporto",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:45},{label:"Kit 10 kg",kg:10,prezzo:80}]},
+      {id:"re2",nome:"Resina epossidica finitura",resa:0.4,unitaResa:"kg/m²",unita:"m²",note:"1 mano, garage e industriale",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:60},{label:"Kit 25 kg",kg:25,prezzo:250}]},
+      {id:"re3",nome:"Resina poliuretanica antisdrucciolo",resa:0.6,unitaResa:"kg/m²",unita:"m²",note:"Parcheggi, rampe, esterno",confezioni:[{label:"Kit 6 kg",kg:6,prezzo:80},{label:"Kit 20 kg",kg:20,prezzo:230}]},
+      {id:"re4",nome:"Resina epossidica autolivellante",resa:2.5,unitaResa:"kg/m²",unita:"m²",note:"Sp. 2mm, finitura continua",confezioni:[{label:"Kit 10 kg",kg:10,prezzo:95},{label:"Kit 30 kg",kg:30,prezzo:260}]},
+    ],
+    "Prodotti speciali":[
+      {id:"ps1",nome:"Betoncino strutturale / Grout",resa:2100,unitaResa:"kg/m³",unita:"m³",note:"Ancoraggi e ripristini strutturali",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:18}]},
+      {id:"ps2",nome:"Malta tissotropica di ripristino",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Ripristino calcestruzzo, sp. 1 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:22},{label:"Sacco 10 kg",kg:10,prezzo:10}]},
+      {id:"ps3",nome:"Additivo fluidificante",resa:3,unitaResa:"ml/kg cemento",unita:"kg cemento",note:"3 ml per kg di cemento",confezioni:[{label:"Tanica 5 l",kg:5,prezzo:18},{label:"Tanica 20 l",kg:20,prezzo:55}]},
+      {id:"ps4",nome:"Disarmante per casseforme",resa:0.1,unitaResa:"l/m²",unita:"m²",note:"Prevenzione incollaggio del cls",confezioni:[{label:"Tanica 5 l",kg:5,prezzo:15},{label:"Tanica 25 l",kg:25,prezzo:55}]},
+    ],
+  }},
+};
+
+const MACRO_KEYS = Object.keys(DB);
+
+// ═══════════════════════════════════════════════════════════════════════════
+// STATO APP
+// ═══════════════════════════════════════════════════════════════════════════
+let stato = {
+  voci: [],
+  nomeProg: "Nuovo Progetto",
+  progId: null,
+  vista: "home",
+  progetti: [],
+};
+
+// ── Calcolo ────────────────────────────────────────────────────────────────
+function calcola(sup, resa, margine, conf) {
+  if (!sup || !resa || !conf) return null;
+  const fab = sup * resa * (1 + margine/100);
+  const sacchi = Math.ceil(fab / conf.kg);
+  return { fabbisogno:fab, sacchi, totKg:sacchi*conf.kg, costo:sacchi*conf.prezzo };
+}
+const eur = n => new Intl.NumberFormat("it-IT",{style:"currency",currency:"EUR"}).format(n||0);
+const toN = v => parseFloat(v)||0;
+
+// ═══════════════════════════════════════════════════════════════════════════
+// DATABASE JSON (localStorage come simulazione file locale)
+// ═══════════════════════════════════════════════════════════════════════════
+function dbLoad() {
+  try { const d = localStorage.getItem("ce_db"); if(d) stato.progetti = JSON.parse(d).preventivi||[]; }
+  catch(e){}
+}
+function dbSave() {
+  const data = { versione:"1.0", aggiornato: new Date().toISOString(), preventivi: stato.progetti };
+  localStorage.setItem("ce_db", JSON.stringify(data));
+  // Scarica anche il JSON aggiornato
+  return data;
+}
+function exportDB() {
+  const data = dbSave();
+  const blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  scarica(blob,"database.json");
+}
+function importDB() {
+  const input = document.createElement("input"); input.type="file"; input.accept=".json";
+  input.onchange = e => {
+    const f = e.target.files[0]; if(!f) return;
+    const r = new FileReader(); r.onload = ev => {
+      try {
+        const d = JSON.parse(ev.target.result);
+        if(d.preventivi) { stato.progetti = d.preventivi; dbSave(); renderContent(); toast("✅ Database importato!"); }
+        else toast("❌ File non valido");
+      } catch { toast("❌ Errore lettura file"); }
+    }; r.readAsText(f);
+  };
+  input.click();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SIDEBAR
+// ═══════════════════════════════════════════════════════════════════════════
+function buildSidebar() {
+  const el = document.getElementById("sb-macro"); el.innerHTML = "";
+  MACRO_KEYS.forEach(mk => {
+    const cat = DB[mk]; const cnt = stato.voci.filter(v=>v.macro===mk).length;
+    const isA = stato.vista === "macro:"+mk;
+    const btn = document.createElement("button");
+    btn.className = "sb-btn" + (isA?" active":"");
+    btn.style.borderLeftColor = isA ? cat.colore : "transparent";
+    btn.dataset.view = "macro:"+mk;
+    btn.onclick = () => setVista("macro:"+mk, btn);
+    btn.innerHTML = `<span style="font-size:18px;flex-shrink:0">${cat.icon}</span>
+      <span class="sb-btn-label sb-collapsed-hide" style="flex:1;text-align:left">${mk.slice(3)}</span>
+      ${cnt>0?`<span class="sb-badge sb-collapsed-hide" style="background:${cat.colore}">${cnt}</span>`:""}`;
+    el.appendChild(btn);
+  });
+}
+
+function toggleSidebar() {
+  const sb = document.getElementById("sidebar");
+  sb.classList.toggle("collapsed");
+  sb.querySelector(".sb-toggle").textContent = sb.classList.contains("collapsed") ? "▸" : "◂";
+}
+
+function setVista(v, el) {
+  stato.vista = v;
+  document.querySelectorAll(".sb-btn").forEach(b=>b.classList.remove("active"));
+  if(el) el.classList.add("active");
+  buildSidebar();
+  renderContent();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TOPBAR
+// ═══════════════════════════════════════════════════════════════════════════
+function updateTopbar() {
+  document.getElementById("topbar-count").textContent = stato.voci.length + " voci";
+  const tot = stato.voci.reduce((s,v)=>s+v.ris.costo,0);
+  document.getElementById("topbar-total").textContent = eur(tot);
+  document.getElementById("proj-name").textContent = stato.nomeProg + " ✏️";
+}
+function editNome() {
+  const btn = document.getElementById("proj-name");
+  const inp = document.getElementById("proj-name-input");
+  btn.style.display="none"; inp.style.display=""; inp.value=stato.nomeProg; inp.focus();
+}
+function saveNome() {
+  const inp = document.getElementById("proj-name-input");
+  stato.nomeProg = inp.value || "Nuovo Progetto";
+  inp.style.display="none";
+  document.getElementById("proj-name").style.display="";
+  updateTopbar();
+}
+function svuota() {
+  if(!confirm("Svuotare tutte le voci del preventivo?")) return;
+  stato.voci=[]; updateTopbar(); renderContent(); buildSidebar();
+}
+function nuovoProgetto() {
+  if(stato.voci.length>0 && !confirm("Creare un nuovo preventivo? Le voci non salvate andranno perse.")) return;
+  stato.voci=[]; stato.nomeProg="Nuovo Progetto"; stato.progId=null;
+  updateTopbar(); setVista("home",null);
+  document.querySelectorAll(".sb-btn").forEach(b=>{b.classList.remove("active"); if(b.dataset.view==="home") b.classList.add("active");});
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PROGETTO SALVA/CARICA
+// ═══════════════════════════════════════════════════════════════════════════
+function salvaProgetto() {
+  const p = { id:stato.progId||Date.now(), nome:stato.nomeProg, voci:stato.voci, data:new Date().toLocaleDateString("it-IT") };
+  if(stato.progId) { stato.progetti = stato.progetti.map(x=>x.id===stato.progId?p:x); }
+  else { stato.progetti.push(p); stato.progId = p.id; }
+  dbSave();
+  toast("✅ Progetto salvato!");
+}
+function caricaProgetto(id) {
+  const p = stato.progetti.find(x=>x.id===id); if(!p) return;
+  stato.voci=p.voci; stato.nomeProg=p.nome; stato.progId=p.id;
+  updateTopbar(); setVista("home",null);
+  document.querySelectorAll(".sb-btn").forEach(b=>{b.classList.remove("active"); if(b.dataset.view==="home") b.classList.add("active");});
+}
+function eliminaProgetto(id) {
+  if(!confirm("Eliminare questo preventivo dallo storico?")) return;
+  stato.progetti = stato.progetti.filter(x=>x.id!==id); dbSave(); renderContent();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// RENDER PRINCIPALE
+// ═══════════════════════════════════════════════════════════════════════════
+function renderContent() {
+  const el = document.getElementById("content");
+  const v = stato.vista;
+  if(v==="home") el.innerHTML = renderHome();
+  else if(v==="riepilogo") el.innerHTML = renderRiepilogo();
+  else if(v==="storico") el.innerHTML = renderStorico();
+  else if(v.startsWith("macro:")) el.innerHTML = renderMacro(v.slice(6));
+  updateTopbar(); buildSidebar();
+}
+
+// ── HOME ──────────────────────────────────────────────────────────────────
+function renderHome() {
+  const cards = MACRO_KEYS.map(mk=>{
+    const cat=DB[mk]; const cnt=stato.voci.filter(v=>v.macro===mk).length;
+    return `<button class="macro-card" onclick="setVista('macro:${mk}',null)">
+      <span class="macro-card-icon">${cat.icon}</span>
+      <div class="macro-card-title">${mk.slice(3)}</div>
+      <div class="macro-card-sub">${Object.keys(cat.sottocategorie).length} sotto-categorie</div>
+      ${cnt>0?`<span class="macro-card-badge" style="background:${cat.colore}">${cnt} voci</span>`:""}
+    </button>`;
+  }).join("");
+  return `<div class="page-title">Benvenuto nel Calcolatore Edile</div>
+    <div class="page-sub">Scegli una categoria per iniziare a calcolare i materiali</div>
+    <div class="macro-grid">${cards}</div>`;
+}
+
+// ── MACRO ─────────────────────────────────────────────────────────────────
+function renderMacro(mk) {
+  const cat=DB[mk]; const vm=stato.voci.filter(v=>v.macro===mk);
+  const tot=vm.reduce((s,v)=>s+v.ris.costo,0);
+  let html=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <span style="font-size:34px">${cat.icon}</span>
+      <div>
+        <div class="page-title" style="margin:0">${mk.slice(3)}</div>
+        <div style="font-size:13px;color:var(--muted)">${Object.keys(cat.sottocategorie).length} sotto-categorie · ${vm.length} voci nel preventivo</div>
+      </div>
+    </div>
+    <button class="btn-primary" style="background:${cat.colore}" onclick="openModal('${mk}',null)">➕ Aggiungi materiale</button>
+  </div>`;
+  if(vm.length===0) {
+    html+=`<div class="empty-state" style="background:${cat.colore}0A;border-color:${cat.colore}40">
+      <div class="empty-state-icon">${cat.icon}</div>
+      <div class="empty-state-title">Nessun materiale ancora</div>
+      <div class="empty-state-sub">Aggiungi il primo materiale per questa categoria</div>
+      <button class="btn-primary" style="background:${cat.colore}" onclick="openModal('${mk}',null)">➕ Inizia il calcolo</button>
+    </div>`;
+  } else {
+    html += vm.map((v,i)=>renderVoceCard(v,i,stato.voci.indexOf(v))).join("");
+    html+=`<div class="subtotal-bar" style="background:${cat.colore}">
+      <span>Subtotale ${mk.slice(3)}</span><span>${eur(tot)}</span>
+    </div>`;
+  }
+  return html;
+}
+
+function renderVoceCard(v, _, idx) {
+  const colore = DB[v.macro].colore;
+  return `<div class="voce-card" style="border-left:4px solid ${colore};margin-bottom:10px">
+    <div style="flex:1">
+      <div class="voce-cat" style="color:${colore}">${v.macro.slice(3)} › ${v.sotto}</div>
+      <div class="voce-nome">${v.mat.nome}</div>
+      <div class="voce-meta">
+        <span>📐 ${v.sup} ${v.mat.unita}</span>
+        <span>📦 ${v.ris.sacchi}× ${v.conf.label}</span>
+        <span style="color:#B06020">+${v.margine}% margine</span>
+      </div>
+      <div class="voce-actions">
+        <button class="btn-edit" onclick="openEdit(${idx})">✏️ Modifica</button>
+        <button class="btn-del" onclick="rimuoviVoce(${idx})">🗑 Rimuovi</button>
+      </div>
+    </div>
+    <div style="text-align:right">
+      <div class="voce-costo">${eur(v.ris.costo)}</div>
+    </div>
+  </div>`;
+}
+
+function rimuoviVoce(idx) {
+  stato.voci.splice(idx,1); renderContent();
+}
+
+// ── RIEPILOGO ─────────────────────────────────────────────────────────────
+function renderRiepilogo() {
+  const tot = stato.voci.reduce((s,v)=>s+v.ris.costo,0);
+  let html = `<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+    <div>
+      <div class="page-title">📊 Riepilogo preventivo</div>
+      <div style="font-size:13px;color:var(--muted)">${stato.nomeProg} · ${new Date().toLocaleDateString("it-IT")}</div>
+    </div>
+    <div class="export-row" style="margin:0">
+      <button class="btn-export btn-pdf" onclick="exportPDF()">🖨️ PDF</button>
+      <button class="btn-export btn-xlsx" onclick="exportXLSX()">📊 Excel</button>
+      <button class="btn-export btn-csv" onclick="exportCSV()">📄 CSV</button>
+    </div>
+  </div>`;
+  if(stato.voci.length===0) {
+    return html+`<div style="text-align:center;padding:60px;color:var(--muted)"><div style="font-size:48px;margin-bottom:12px">📋</div><div style="font-size:15px;font-weight:700;color:var(--navy)">Nessun materiale aggiunto</div></div>`;
+  }
+  MACRO_KEYS.forEach(mk=>{
+    const vm=stato.voci.filter(v=>v.macro===mk); if(!vm.length) return;
+    const sub=vm.reduce((s,v)=>s+v.ris.costo,0); const col=DB[mk].colore;
+    html+=`<div class="riepilogo-group">
+      <div class="riepilogo-header" style="background:${col}14;border-color:${col}">
+        <span style="font-weight:800;color:${col};font-size:14px">${mk}</span>
+        <span style="font-weight:800;color:${col}">${eur(sub)}</span>
+      </div>
+      ${vm.map(v=>`<div class="riepilogo-row">
+        <div>
+          <div style="font-weight:700;color:var(--navy)">${v.mat.nome}</div>
+          <div style="color:var(--muted);font-size:12px">${v.ris.sacchi}× ${v.conf.label} · ${v.sup} ${v.mat.unita} (+${v.margine}%)</div>
+        </div>
+        <div style="font-weight:800;color:var(--success);white-space:nowrap;margin-left:12px">${eur(v.ris.costo)}</div>
+      </div>`).join("")}
+    </div>`;
+  });
+  html+=`<div class="totale-box"><span>TOTALE PREVENTIVO</span><span>${eur(tot)}</span></div>`;
+  return html;
+}
+
+// ── STORICO ───────────────────────────────────────────────────────────────
+function renderStorico() {
+  let html=`<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:20px">
+    <div><div class="page-title">🗂️ Storico preventivi</div><div style="font-size:13px;color:var(--muted)">${stato.progetti.length} preventivi salvati</div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn-export" style="background:var(--navy);color:#fff" onclick="exportDB()">💾 Esporta DB (JSON)</button>
+      <button class="btn-export" style="background:var(--muted);color:#fff" onclick="importDB()">📂 Importa DB</button>
+    </div>
+  </div>`;
+  if(!stato.progetti.length) {
+    return html+`<div style="text-align:center;padding:60px;color:var(--muted)"><div style="font-size:48px;margin-bottom:12px">🗂️</div><div style="font-size:15px;font-weight:700;color:var(--navy)">Nessun preventivo salvato</div><div style="font-size:13px">Premi "Salva progetto" nella barra laterale</div></div>`;
+  }
+  stato.progetti.slice().reverse().forEach(p=>{
+    const tot=p.voci.reduce((s,v)=>s+v.ris.costo,0); const isCur=p.id===stato.progId;
+    html+=`<div class="proj-row ${isCur?"current":""}" onclick="caricaProgetto(${p.id})">
+      <div>
+        <div style="font-weight:800;color:var(--navy);font-size:15px">${p.nome}</div>
+        <div style="font-size:12px;color:var(--muted)">${p.data} · ${p.voci.length} materiali${isCur?" · <b style='color:var(--ocra)'>attivo</b>":""}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-weight:900;color:var(--success);font-size:17px">${eur(tot)}</div>
+        <button class="btn-del" style="margin-top:5px" onclick="event.stopPropagation();eliminaProgetto(${p.id})">🗑 Elimina</button>
+      </div>
+    </div>`;
+  });
+  return html;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// MODAL AGGIUNGI (3 passi)
+// ═══════════════════════════════════════════════════════════════════════════
+let mState = { macro:null, passo:1, sotto:null, mat:null, sup:"", margine:10, ci:0, editIdx:null };
+
+function openModal(mk, editIdx) {
+  const cat = DB[mk];
+  mState = { macro:mk, passo:1, sotto:null, mat:null, sup:"", margine:10, ci:0, editIdx };
+  if(editIdx!==null && editIdx>=0) {
+    const v = stato.voci[editIdx];
+    mState = { macro:v.macro, passo:3, sotto:v.sotto, mat:v.mat, sup:String(v.sup), margine:v.margine, ci:v.ci, editIdx };
+  }
+  document.getElementById("modal-header").style.background = cat.colore;
+  document.getElementById("modal-icon").textContent = cat.icon;
+  document.getElementById("modal-title").textContent = mk.slice(3);
+  document.getElementById("modal-overlay").style.display = "flex";
+  renderModal();
+}
+
+function closeModal() {
+  document.getElementById("modal-overlay").style.display="none";
+  mState = { macro:null, passo:1, sotto:null, mat:null, sup:"", margine:10, ci:0, editIdx:null };
+}
+
+function renderModal() {
+  const cat = DB[mState.macro]; const STEPS=["Lavorazione","Materiale","Calcolo"];
+  document.getElementById("modal-step-label").textContent = `Passo ${mState.passo} di 3 — ${STEPS[mState.passo-1]}`;
+  // step bar
+  [1,2,3].forEach(i=>{
+    const el=document.getElementById("st"+i);
+    el.className="step-item"+(i===mState.passo?" active":mState.passo>i?" done":"");
+    el.querySelector(".step-num").textContent = mState.passo>i?"✓":i;
+  });
+  // back btn
+  document.getElementById("modal-back").textContent = mState.passo===1?"✕ Chiudi":"← Indietro";
+  // add btn
+  const addBtn = document.getElementById("modal-add");
+  addBtn.style.display = mState.passo===3?"":"none";
+  addBtn.style.background = cat.colore;
+  addBtn.textContent = mState.editIdx!==null?"✓ Salva modifiche":"✓ Aggiungi al preventivo";
+  // body
+  const body = document.getElementById("modal-body");
+  if(mState.passo===1) body.innerHTML = renderModalP1(cat);
+  else if(mState.passo===2) body.innerHTML = renderModalP2(cat);
+  else body.innerHTML = renderModalP3(cat);
+}
+
+function renderModalP1(cat) {
+  return `<div style="font-size:13px;color:var(--muted);margin-bottom:10px">Di cosa hai bisogno?</div>
+    <div class="select-list">${Object.keys(cat.sottocategorie).map(k=>`
+      <button class="select-item" onclick="pickSotto('${k}')">
+        <div style="text-align:left">
+          <div class="select-item-main">${k}</div>
+          <div class="select-item-sub">${cat.sottocategorie[k].length} prodotti disponibili</div>
+        </div>
+        <span class="select-arrow" style="color:${cat.colore}">›</span>
+      </button>`).join("")}
+    </div>`;
+}
+function pickSotto(k) { mState.sotto=k; mState.passo=2; renderModal(); }
+
+function renderModalP2(cat) {
+  return `<div style="font-size:13px;color:var(--muted);margin-bottom:10px">Scegli il prodotto da <b style="color:var(--navy)">${mState.sotto}</b>:</div>
+    <div class="select-list">${cat.sottocategorie[mState.sotto].map(m=>`
+      <button class="select-item" onclick="pickMat('${m.id}')">
+        <div style="text-align:left">
+          <div class="select-item-main">${m.nome}</div>
+          <div class="select-item-sub">Resa: ${m.resa} ${m.unitaResa} · ${m.note}</div>
+          <div class="select-item-price" style="color:${cat.colore}">${m.confezioni.map(c=>`${c.label} → ${eur(c.prezzo)}`).join(" · ")}</div>
+        </div>
+        <span class="select-arrow" style="color:${cat.colore}">›</span>
+      </button>`).join("")}
+    </div>`;
+}
+function pickMat(id) {
+  const cat=DB[mState.macro];
+  for(const k of Object.keys(cat.sottocategorie)){
+    const m=cat.sottocategorie[k].find(x=>x.id===id); if(m){mState.mat=m;break;}
+  }
+  mState.ci=0; mState.passo=3; renderModal();
+}
+
+function renderModalP3(cat) {
+  const m=mState.mat; const conf=m.confezioni[mState.ci];
+  const ris = calcola(toN(mState.sup), m.resa, mState.margine, conf);
+  const unitLabel = m.unitaResa.includes("m³")?"VOLUME (m³)":m.unitaResa.includes("/ml")?"LUNGHEZZA (ml)":"SUPERFICIE (m²)";
+  const pillsHtml = m.confezioni.map((c,i)=>`
+    <button class="pill-btn ${mState.ci===i?"active":""}" style="color:${mState.ci===i?cat.colore:"var(--muted)"};${mState.ci===i?"border-color:"+cat.colore:""}"
+      onclick="pickConf(${i})">${c.label} — ${eur(c.prezzo)}</button>`).join("");
+  const risHtml = ris && mState.sup ? `<div class="result-box">
+    <div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:1px;margin-bottom:12px">RISULTATO</div>
+    <div class="result-grid">
+      <div class="result-cell"><div class="result-val" style="color:var(--ocra-light)">${ris.fabbisogno.toFixed(2)} ${m.unitaResa.split("/")[0]}</div><div class="result-lbl">fabbisogno</div></div>
+      <div class="result-cell"><div class="result-val" style="color:#fff">${ris.sacchi}</div><div class="result-lbl">confezioni</div></div>
+      <div class="result-cell"><div class="result-val" style="color:var(--ocra-light)">${eur(ris.costo)}</div><div class="result-lbl">costo stimato</div></div>
+    </div>
+    <div class="result-note">${ris.sacchi}× ${conf.label} (${eur(conf.prezzo)}/conf) · margine +${mState.margine}%</div>
+  </div>` : `<div style="text-align:center;padding:20px;color:var(--muted);font-size:13px">Inserisci la quantità per vedere il risultato</div>`;
+  // update add button enabled state
+  setTimeout(()=>{
+    const btn=document.getElementById("modal-add");
+    btn.disabled = !ris || !mState.sup;
+    btn.style.opacity = !ris||!mState.sup?"0.5":"1";
+    btn.style.cursor = !ris||!mState.sup?"not-allowed":"pointer";
+  },0);
+  return `<div class="info-box" style="background:${cat.colore}12;border-color:${cat.colore}30;margin-bottom:14px">
+      <div style="font-weight:800;color:var(--navy);font-size:15px">${m.nome}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px">Resa: <b style="color:var(--navy)">${m.resa} ${m.unitaResa}</b> · ${m.note}</div>
+    </div>
+    <div style="margin-bottom:14px">
+      <label class="field-label">${unitLabel}</label>
+      <div class="field-row">
+        <input type="number" min="0" step="0.1" value="${mState.sup}" placeholder="es. 20" oninput="mState.sup=this.value;renderModal()">
+        <span class="field-unit">${m.unita}</span>
+      </div>
+    </div>
+    <div style="margin-bottom:14px">
+      <label class="field-label">FORMATO CONFEZIONE</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">${pillsHtml}</div>
+    </div>
+    <div style="margin-bottom:16px">
+      <label class="field-label">MARGINE IMPREVISTI — <span style="color:var(--ocra);font-size:13px">${mState.margine}%</span></label>
+      <input type="range" min="0" max="30" step="1" value="${mState.margine}" style="accent-color:${cat.colore}" oninput="mState.margine=+this.value;renderModal()">
+      <div class="range-labels"><span>0% — esatto</span><span>30% — abbondante</span></div>
+    </div>
+    ${risHtml}`;
+}
+function pickConf(i) { mState.ci=i; renderModal(); }
+
+function modalBack() {
+  if(mState.passo===1) closeModal();
+  else if(mState.passo===2){mState.sotto=null;mState.passo=1;renderModal();}
+  else if(mState.passo===3){mState.mat=null;mState.passo=2;renderModal();}
+}
+
+function modalAdd() {
+  const m=mState.mat; const conf=m.confezioni[mState.ci];
+  const ris=calcola(toN(mState.sup),m.resa,mState.margine,conf);
+  if(!ris||!mState.sup) return;
+  const voce={id:Date.now(),macro:mState.macro,sotto:mState.sotto,mat:m,sup:toN(mState.sup),margine:mState.margine,ci:mState.ci,conf,ris};
+  if(mState.editIdx!==null) stato.voci[mState.editIdx]=voce;
+  else stato.voci.push(voce);
+  closeModal(); renderContent();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// EDIT VOCE COMPLETO (modifica tutto: nome, resa, confezioni, prezzi)
+// ═══════════════════════════════════════════════════════════════════════════
+let editState = { idx:null, voce:null };
+
+function openEdit(idx) {
+  editState.idx = idx;
+  editState.voce = JSON.parse(JSON.stringify(stato.voci[idx])); // deep copy
+  const v = editState.voce;
+  const body = document.getElementById("edit-body");
+  body.innerHTML = `
+    <div class="edit-section-title">Identificazione</div>
+    <div class="edit-field"><label>NOME MATERIALE</label><input id="e-nome" value="${v.mat.nome}" oninput="editState.voce.mat.nome=this.value"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div class="edit-field"><label>RESA</label><input id="e-resa" type="number" step="any" value="${v.mat.resa}" oninput="editState.voce.mat.resa=+this.value;editRicalcola()"></div>
+      <div class="edit-field"><label>UNITÀ RESA (es. kg/m²)</label><input id="e-unitaResa" value="${v.mat.unitaResa}" oninput="editState.voce.mat.unitaResa=this.value"></div>
+    </div>
+    <div class="edit-section-title">Calcolo</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div class="edit-field"><label>QUANTITÀ (${v.mat.unita})</label><input id="e-sup" type="number" step="0.1" value="${v.sup}" oninput="editState.voce.sup=+this.value;editRicalcola()"></div>
+      <div class="edit-field"><label>MARGINE (%)</label><input id="e-margine" type="number" min="0" max="50" value="${v.margine}" oninput="editState.voce.margine=+this.value;editRicalcola()"></div>
+    </div>
+    <div class="edit-section-title">Confezioni (modifica o aggiungi righe)</div>
+    <div id="e-conf-list">${renderEditConf()}</div>
+    <button onclick="addEditConf()" style="background:var(--gray);border:1.5px dashed var(--border);color:var(--muted);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;width:100%;margin-bottom:14px">+ Aggiungi confezione</button>
+    <div class="edit-section-title">Confezione attiva</div>
+    <select id="e-ci" onchange="editState.voce.ci=+this.value;editRicalcola()" style="border:2px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;color:var(--navy);background:var(--gray);width:100%;font-family:Arial,sans-serif;outline:none">
+      ${v.mat.confezioni.map((c,i)=>`<option value="${i}" ${i===v.ci?"selected":""}>${c.label} — ${eur(c.prezzo)}</option>`).join("")}
+    </select>
+    <div id="e-result" style="margin-top:14px"></div>`;
+  document.getElementById("edit-overlay").style.display="flex";
+  editRicalcola();
+}
+
+function renderEditConf() {
+  return editState.voce.mat.confezioni.map((c,i)=>`
+    <div class="conf-edit-row" id="econf-${i}">
+      <input value="${c.label}" placeholder="es. Sacco 25 kg" style="flex:2" oninput="editState.voce.mat.confezioni[${i}].label=this.value;refreshEditSelect()">
+      <input type="number" value="${c.kg}" placeholder="kg" step="any" style="flex:1" oninput="editState.voce.mat.confezioni[${i}].kg=+this.value;editRicalcola()">
+      <input type="number" value="${c.prezzo}" placeholder="€" step="0.01" style="flex:1" oninput="editState.voce.mat.confezioni[${i}].prezzo=+this.value;editRicalcola()">
+      ${editState.voce.mat.confezioni.length>1?`<button onclick="removeEditConf(${i})" style="background:#fef2f2;border:1px solid #fcc;color:var(--danger);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:12px;flex-shrink:0">✕</button>`:""}
+    </div>`).join("");
+}
+function addEditConf() {
+  editState.voce.mat.confezioni.push({label:"",kg:25,prezzo:0});
+  document.getElementById("e-conf-list").innerHTML=renderEditConf();
+  refreshEditSelect();
+}
+function removeEditConf(i) {
+  editState.voce.mat.confezioni.splice(i,1);
+  if(editState.voce.ci>=editState.voce.mat.confezioni.length) editState.voce.ci=0;
+  document.getElementById("e-conf-list").innerHTML=renderEditConf();
+  refreshEditSelect(); editRicalcola();
+}
+function refreshEditSelect() {
+  const sel=document.getElementById("e-ci"); if(!sel) return;
+  const v=editState.voce;
+  sel.innerHTML=v.mat.confezioni.map((c,i)=>`<option value="${i}" ${i===v.ci?"selected":""}>${c.label||"(senza nome)"} — ${eur(c.prezzo)}</option>`).join("");
+}
+function editRicalcola() {
+  const v=editState.voce; const conf=v.mat.confezioni[v.ci];
+  const ris=conf?calcola(v.sup,v.mat.resa,v.margine,conf):null;
+  editState.voce.conf=conf; editState.voce.ris=ris;
+  const el=document.getElementById("e-result"); if(!el) return;
+  if(ris) {
+    el.innerHTML=`<div class="result-box">
+      <div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:1px;margin-bottom:10px">ANTEPRIMA CALCOLO</div>
+      <div class="result-grid">
+        <div class="result-cell"><div class="result-val" style="color:var(--ocra-light)">${ris.fabbisogno.toFixed(2)}</div><div class="result-lbl">fabbisogno</div></div>
+        <div class="result-cell"><div class="result-val" style="color:#fff">${ris.sacchi}</div><div class="result-lbl">confezioni</div></div>
+        <div class="result-cell"><div class="result-val" style="color:var(--ocra-light)">${eur(ris.costo)}</div><div class="result-lbl">costo stimato</div></div>
+      </div>
+    </div>`;
+  } else el.innerHTML="";
+}
+
+function saveEdit() {
+  const v=editState.voce; if(!v.ris) return alert("Calcolo non valido, controlla i dati.");
+  stato.voci[editState.idx]=v;
+  closeEdit(); renderContent();
+}
+function closeEdit() {
+  document.getElementById("edit-overlay").style.display="none";
+  editState={idx:null,voce:null};
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ESPORTAZIONI
+// ═══════════════════════════════════════════════════════════════════════════
+function scarica(blob, nome) {
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=nome; a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function exportCSV() {
+  const rows=[["Categoria","Sotto-categoria","Materiale","Quantità","Unità","Resa","Confezione","N° Confezioni","Margine %","Costo (€)"]];
+  stato.voci.forEach(v=>{
+    rows.push([v.macro.slice(3),v.sotto,v.mat.nome,v.sup,v.mat.unita,v.mat.resa+" "+v.mat.unitaResa,v.conf.label,v.ris.sacchi,v.margine+"%",v.ris.costo.toFixed(2)]);
+  });
+  const tot=stato.voci.reduce((s,v)=>s+v.ris.costo,0);
+  rows.push([]); rows.push(["","","","","","","","","TOTALE",tot.toFixed(2)]);
+  const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(";")).join("\n");
+  scarica(new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"}),"preventivo_"+stato.nomeProg+".csv");
+  toast("✅ CSV esportato!");
+}
+
+function exportPDF() {
+  const tot=stato.voci.reduce((s,v)=>s+v.ris.costo,0);
+  let gruppi="";
+  MACRO_KEYS.forEach(mk=>{
+    const vm=stato.voci.filter(v=>v.macro===mk); if(!vm.length) return;
+    const sub=vm.reduce((s,v)=>s+v.ris.costo,0); const col=DB[mk].colore;
+    gruppi+=`<div style="margin-bottom:18px">
+      <div style="background:${col};color:#fff;padding:6px 12px;border-radius:6px;display:flex;justify-content:space-between;margin-bottom:6px">
+        <b>${mk}</b><b>${eur(sub)}</b>
+      </div>
+      <table width="100%" style="border-collapse:collapse;font-size:12px">
+        <tr style="background:#f0f0f0"><th style="padding:5px 8px;text-align:left">Materiale</th><th>Qnt</th><th>Resa</th><th>Confezione</th><th>N°</th><th>Margine</th><th style="text-align:right">Costo</th></tr>
+        ${vm.map(v=>`<tr style="border-bottom:1px solid #eee">
+          <td style="padding:5px 8px">${v.mat.nome}</td>
+          <td style="text-align:center">${v.sup} ${v.mat.unita}</td>
+          <td style="text-align:center">${v.mat.resa} ${v.mat.unitaResa}</td>
+          <td style="text-align:center">${v.conf.label}</td>
+          <td style="text-align:center">${v.ris.sacchi}</td>
+          <td style="text-align:center">+${v.margine}%</td>
+          <td style="text-align:right;font-weight:700">${eur(v.ris.costo)}</td>
+        </tr>`).join("")}
+      </table>
+    </div>`;
+  });
+  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Preventivo</title>
+    <style>body{font-family:Arial,sans-serif;padding:30px;color:#0D1B3E} @media print{body{padding:10px}}</style>
+    </head><body>
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #0D1B3E;padding-bottom:12px;margin-bottom:20px">
+      <div><h1 style="margin:0;font-size:22px">🏗️ PREVENTIVO EDILE</h1><div style="font-size:13px;color:#888">${stato.nomeProg} · ${new Date().toLocaleDateString("it-IT")}</div></div>
+      <div style="text-align:right"><div style="font-size:12px;color:#888">TOTALE PREVENTIVO</div><div style="font-size:26px;font-weight:900;color:#1A7A4A">${eur(tot)}</div></div>
+    </div>
+    ${gruppi}
+    <div style="background:#0D1B3E;color:#fff;padding:14px 18px;border-radius:10px;display:flex;justify-content:space-between;margin-top:12px">
+      <b>TOTALE PREVENTIVO</b><b style="font-size:20px;color:#E8C46A">${eur(tot)}</b>
+    </div>
+    <div style="font-size:10px;color:#999;margin-top:20px;text-align:center">I prezzi sono indicativi. Verificare sempre le schede tecniche dei prodotti e i prezzi aggiornati del fornitore.</div>
+    <script>window.onload=()=>window.print()<\/script></body></html>`;
+  const w=window.open("","_blank","width=900,height=700");
+  if(w){w.document.write(html);w.document.close();}
+  else toast("❌ Abilita i popup per la stampa PDF");
+}
+
+function exportXLSX() {
+  // XLSX senza librerie: genera XML compatibile con Excel (SpreadsheetML)
+  const tot=stato.voci.reduce((s,v)=>s+v.ris.costo,0);
+  const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  const cell = (v,bold,align) => {
+    const num = typeof v==="number";
+    const s = bold&&align==="right"?"s2":bold?"s1":num?"s3":"s0";
+    return `<Cell ss:StyleID="${s}"><Data ss:Type="${num?"Number":"String"}">${esc(v)}</Data></Cell>`;
+  };
+  let rows="";
+  // Header
+  rows+=`<Row ss:Height="20">
+    ${["Categoria","Sotto-cat.","Materiale","Qnt","Unità","Resa","Confezione","N° Conf.","Margine %","Costo €"].map(h=>`<Cell ss:StyleID="hdr"><Data ss:Type="String">${esc(h)}</Data></Cell>`).join("")}
+  </Row>`;
+  // Dati
+  stato.voci.forEach(v=>{
+    rows+=`<Row>
+      ${cell(v.macro.slice(3))}${cell(v.sotto)}${cell(v.mat.nome)}${cell(v.sup,false,false)}${cell(v.mat.unita)}${cell(v.mat.resa+" "+v.mat.unitaResa)}${cell(v.conf.label)}${cell(v.ris.sacchi,false,false)}${cell(v.margine+"%")}${cell(v.ris.costo,false,"right")}
+    </Row>`;
+  });
+  // Totale
+  rows+=`<Row><Cell ss:MergeAcross="8" ss:StyleID="s1"><Data ss:Type="String">TOTALE PREVENTIVO</Data></Cell>
+    <Cell ss:StyleID="s2"><Data ss:Type="Number">${tot.toFixed(2)}</Data></Cell></Row>`;
+  const xml=`<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:x="urn:schemas-microsoft-com:office:excel">
+<Styles>
+  <Style ss:ID="s0"><Alignment ss:Vertical="Center"/></Style>
+  <Style ss:ID="s1"><Alignment ss:Vertical="Center"/><Font ss:Bold="1"/></Style>
+  <Style ss:ID="s2"><Alignment ss:Vertical="Center" ss:Horizontal="Right"/><Font ss:Bold="1" ss:Color="#1A7A4A"/></Style>
+  <Style ss:ID="s3"><Alignment ss:Vertical="Center" ss:Horizontal="Center"/></Style>
+  <Style ss:ID="hdr"><Alignment ss:Vertical="Center"/><Font ss:Bold="1" ss:Color="#FFFFFF"/>
+    <Interior ss:Color="#0D1B3E" ss:Pattern="Solid"/></Style>
+</Styles>
+<Worksheet ss:Name="Preventivo">
+<Table ss:DefaultColumnWidth="80">
+  <Column ss:Width="160"/><Column ss:Width="140"/><Column ss:Width="200"/>
+  <Column ss:Width="60"/><Column ss:Width="60"/><Column ss:Width="100"/>
+  <Column ss:Width="140"/><Column ss:Width="60"/><Column ss:Width="70"/><Column ss:Width="80"/>
+  ${rows}
+</Table></Worksheet></Workbook>`;
+  scarica(new Blob([xml],{type:"application/vnd.ms-excel;charset=utf-8"}),"preventivo_"+stato.nomeProg+".xls");
+  toast("✅ Excel esportato!");
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════════════════════════
+function toast(msg) {
+  const el=document.getElementById("toast"); el.textContent=msg; el.style.display="block";
+  setTimeout(()=>el.style.display="none",2500);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════════════
+dbLoad();
+buildSidebar();
+renderContent();
+document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.add("active"));
+</script>
+</body>
+</html>
