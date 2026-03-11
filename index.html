@@ -595,147 +595,429 @@ const DB = {
 
   }},
   "🪣 Impermeabilizzazione":{icon:"🪣",colore:"#1A5C8A",sottocategorie:{
-    "Membrane cementizie":[
-      {id:"ic1",nome:"Membrana cementosa monocomponente",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"2 mani, adatta per bagni e terrazzi",confezioni:[{label:"Sacco 20 kg",kg:20,prezzo:35},{label:"Sacco 25 kg",kg:25,prezzo:42}]},
-      {id:"ic2",nome:"Membrana cementosa bicomponente",resa:2,unitaResa:"kg/m²",unita:"m²",note:"2 mani, alta resistenza meccanica",confezioni:[{label:"Kit 24 kg",kg:24,prezzo:55},{label:"Kit 32 kg",kg:32,prezzo:70}]},
-      {id:"ic3",nome:"Cristallizzante per calcestruzzo",resa:1,unitaResa:"kg/m²",unita:"m²",note:"Fondazioni e vasche",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:55}]},
+
+    "Membrane bituminose elastomeriche (SBS)":[
+      {id:"sbs1",nome:"Guaina bituminosa SBS 3 mm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Elastomerica, flessibilità fino a −20°C, posa a fiamma, per tetti piani",confezioni:[{label:"Rotolo 10 m²",kg:35,prezzo:38},{label:"Rotolo 25 m²",kg:88,prezzo:88}]},
+      {id:"sbs2",nome:"Guaina bituminosa SBS 4 mm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alta resistenza meccanica, flessibilità −25°C, armatura in poliestere",confezioni:[{label:"Rotolo 10 m²",kg:45,prezzo:48},{label:"Rotolo 25 m²",kg:113,prezzo:112}]},
+      {id:"sbs3",nome:"Guaina bituminosa SBS ardesiata (finitura minerale)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Strato superficiale in graniglie minerali, resistente ai raggi UV, per coperture a vista",confezioni:[{label:"Rotolo 10 m²",kg:50,prezzo:55},{label:"Rotolo 25 m²",kg:125,prezzo:128}]},
+      {id:"sbs4",nome:"Guaina SBS autoprotetta riflettente (Cool Roof)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Scaglie bianche riflettenti, riduce il surriscaldamento estivo dell'edificio",confezioni:[{label:"Rotolo 10 m²",kg:50,prezzo:65}]},
     ],
-    "Guaine liquide":[
-      {id:"ig1",nome:"Guaina liquida poliuretanica",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Terrazzi e balconi",confezioni:[{label:"Secchio 5 kg",kg:5,prezzo:40},{label:"Secchio 20 kg",kg:20,prezzo:130}]},
-      {id:"ig2",nome:"Guaina liquida acrilica",resa:1.2,unitaResa:"kg/m²",unita:"m²",note:"Coperture e murature",confezioni:[{label:"Secchio 5 kg",kg:5,prezzo:28},{label:"Secchio 20 kg",kg:20,prezzo:90}]},
-      {id:"ig3",nome:"Guaina elastomerica in pasta",resa:1.8,unitaResa:"kg/m²",unita:"m²",note:"Ponti, viadotti, interrati",confezioni:[{label:"Secchio 10 kg",kg:10,prezzo:55},{label:"Secchio 25 kg",kg:25,prezzo:120}]},
+
+    "Membrane bituminose plastomeriche (APP)":[
+      {id:"app1",nome:"Guaina bituminosa APP 3 mm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Plastomerica, alta resistenza al calore, posa a fiamma, per climi caldi",confezioni:[{label:"Rotolo 10 m²",kg:35,prezzo:35},{label:"Rotolo 25 m²",kg:88,prezzo:82}]},
+      {id:"app2",nome:"Guaina bituminosa APP 4 mm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Elevata resistenza meccanica, flessibilità −10°C, per tetti in pendenza",confezioni:[{label:"Rotolo 10 m²",kg:45,prezzo:44},{label:"Rotolo 25 m²",kg:113,prezzo:105}]},
     ],
-    "Guaine bituminose":[
-      {id:"ib1",nome:"Guaina bituminosa autoprotetta 4mm",resa:5,unitaResa:"kg/m²",unita:"m²",note:"Coperture piane, spessore 4 mm",confezioni:[{label:"Rotolo 10 m²",kg:50,prezzo:42},{label:"Rotolo 20 m²",kg:100,prezzo:80}]},
-      {id:"ib2",nome:"Guaina bituminosa ardesiata 3mm",resa:3.5,unitaResa:"kg/m²",unita:"m²",note:"Finitura esterna, spessore 3 mm",confezioni:[{label:"Rotolo 10 m²",kg:35,prezzo:32}]},
+
+    "Guaina liquida bituminosa":[
+      {id:"liq_b1",nome:"Emulsione bituminosa all'acqua",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Impermeabilizzazione fondazioni e murature interrate, 2 mani",confezioni:[{label:"Secchio 10 kg",kg:10,prezzo:22},{label:"Secchio 25 kg",kg:25,prezzo:48}]},
+      {id:"liq_b2",nome:"Impermeabilizzante bituminoso liquido (pronto)",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Pronto all'uso, per fondazioni e zoccoli, resistente all'umidità",confezioni:[{label:"Secchio 10 kg",kg:10,prezzo:28},{label:"Secchio 25 kg",kg:25,prezzo:62}]},
+      {id:"liq_b3",nome:"Bitume elastico solventato",resa:1.2,unitaResa:"kg/m²",unita:"m²",note:"Alta elasticità, per supporti soggetti a movimenti e giunti",confezioni:[{label:"Secchio 5 kg",kg:5,prezzo:32},{label:"Secchio 20 kg",kg:20,prezzo:105}]},
     ],
+
+    "Impermeabilizzazioni cementizie rigide":[
+      {id:"cem_r1",nome:"Malta impermeabilizzante osmotica (cristallizzante)",resa:1,unitaResa:"kg/m²",unita:"m²",note:"Penetra nel cls e cristallizza, blocca infiltrazioni in pressione, per vasche e piscine",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:58},{label:"Sacco 5 kg",kg:5,prezzo:15}]},
+      {id:"cem_r2",nome:"Rivestimento cementizio impermeabile",resa:2,unitaResa:"kg/m²",unita:"m²",note:"2 mani, per cisterne, cantine e locali interrati",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:38},{label:"Sacco 10 kg",kg:10,prezzo:18}]},
+    ],
+
+    "Impermeabilizzazioni cementizie elastiche":[
+      {id:"cem_e1",nome:"Malta bicomponente elastica (cementizia)",resa:2,unitaResa:"kg/m²",unita:"m²",note:"2 mani, per bagni, terrazzi e balconi, resistente a vibrazioni e movimenti del supporto",confezioni:[{label:"Kit 24 kg",kg:24,prezzo:58},{label:"Kit 32 kg",kg:32,prezzo:75}]},
+      {id:"cem_e2",nome:"Guaina cementizia elastica monocomponente",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Pronta all'uso, 2 mani, per superfici in cls e muratura",confezioni:[{label:"Sacco 20 kg",kg:20,prezzo:38},{label:"Sacco 25 kg",kg:25,prezzo:45}]},
+    ],
+
+    "Guaine liquide acriliche ed elastomeriche":[
+      {id:"liq_a1",nome:"Guaina liquida acrilica",resa:1.2,unitaResa:"kg/m²",unita:"m²",note:"2 mani, per coperture e murature, resistente ai raggi UV",confezioni:[{label:"Secchio 5 kg",kg:5,prezzo:32},{label:"Secchio 20 kg",kg:20,prezzo:95}]},
+      {id:"liq_a2",nome:"Rivestimento elastomerico fibrorinforzato",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Con microfibre, copre fessure fino a 1 mm, per tetti e balconi",confezioni:[{label:"Secchio 10 kg",kg:10,prezzo:55},{label:"Secchio 25 kg",kg:25,prezzo:120}]},
+    ],
+
+    "Guaine liquide poliuretaniche":[
+      {id:"liq_pu1",nome:"Guaina poliuretanica monocomponente",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Pronta all'uso, per terrazzi calpestabili e balconi",confezioni:[{label:"Secchio 5 kg",kg:5,prezzo:55},{label:"Secchio 20 kg",kg:20,prezzo:180}]},
+      {id:"liq_pu2",nome:"Guaina poliuretanica bicomponente",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Alta resistenza meccanica, per terrazze ad alto traffico e parcheggi",confezioni:[{label:"Kit 10 kg",kg:10,prezzo:95},{label:"Kit 25 kg",kg:25,prezzo:220}]},
+    ],
+
+    "Guaine liquide epossidiche e ibride":[
+      {id:"liq_ep1",nome:"Rivestimento epossidico impermeabile",resa:0.4,unitaResa:"kg/m²",unita:"m²",note:"Per ambienti industriali, vasche e locali tecnici",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:55},{label:"Kit 25 kg",kg:25,prezzo:240}]},
+      {id:"liq_ib1",nome:"Resina ibrida poliuretano-cemento",resa:2,unitaResa:"kg/m²",unita:"m²",note:"Combinazione tra resistenza meccanica e flessibilità, per pavimenti e terrazzi",confezioni:[{label:"Kit 10 kg",kg:10,prezzo:88},{label:"Kit 25 kg",kg:25,prezzo:195}]},
+      {id:"liq_pu3",nome:"Resina poliurea",resa:1,unitaResa:"kg/m²",unita:"m²",note:"Reazione rapidissima, altissime prestazioni, per coperture industriali",confezioni:[{label:"Kit 10 kg",kg:10,prezzo:120},{label:"Kit 25 kg",kg:25,prezzo:275}]},
+    ],
+
+    "Membrane sintetiche in PVC":[
+      {id:"pvc1",nome:"Membrana in PVC flessibile 1,2 mm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per coperture piane e grandi superfici, posa a freddo o termosaldata",confezioni:[{label:"Rotolo 20 m²",kg:20,prezzo:88},{label:"Rotolo 50 m²",kg:50,prezzo:200}]},
+      {id:"pvc2",nome:"Membrana in PVC armata 1,5 mm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Con armatura in poliestere, alta resistenza meccanica e alla foratura",confezioni:[{label:"Rotolo 20 m²",kg:20,prezzo:115},{label:"Rotolo 50 m²",kg:50,prezzo:265}]},
+    ],
+
+    "Membrane sintetiche TPO ed EPDM":[
+      {id:"tpo1",nome:"Membrana termoplastica poliolefinica (TPO) 1,2 mm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Riciclabile, resistente agli UV, termosaldata, ecosostenibile",confezioni:[{label:"Rotolo 20 m²",kg:20,prezzo:98},{label:"Rotolo 50 m²",kg:50,prezzo:225}]},
+      {id:"epdm1",nome:"Membrana in gomma EPDM 1,14 mm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Durata oltre 50 anni, elasticissima, per tetti piani e piscine",confezioni:[{label:"Rotolo 20 m²",kg:20,prezzo:105},{label:"Rotolo 50 m²",kg:50,prezzo:240}]},
+      {id:"epdm2",nome:"Membrana in gomma EPDM 1,5 mm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Versione più spessa, per condizioni climatiche estreme",confezioni:[{label:"Rotolo 20 m²",kg:20,prezzo:128},{label:"Rotolo 50 m²",kg:50,prezzo:295}]},
+    ],
+
   }},
   "⚡ Isolamento Termico":{icon:"⚡",colore:"#1A7A5C",sottocategorie:{
-    "Cappotto esterno — EPS / Sintetici":[
-      {id:"ca1",nome:"Pannello EPS 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Cappotto leggero, spessore 4 cm",confezioni:[{label:"Pacco 10 pz (10 m²)",kg:10,prezzo:18},{label:"Pacco 6 pz (6 m²)",kg:6,prezzo:12}]},
-      {id:"ca1b",nome:"Pannello EPS 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Cappotto standard, spessore 6 cm",confezioni:[{label:"Pacco 10 pz (10 m²)",kg:10,prezzo:22},{label:"Pacco 6 pz (6 m²)",kg:6,prezzo:14}]},
-      {id:"ca1c",nome:"Pannello EPS 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Buona prestazione termica, spessore 8 cm",confezioni:[{label:"Pacco 10 pz (10 m²)",kg:10,prezzo:28},{label:"Pacco 6 pz (6 m²)",kg:6,prezzo:18}]},
-      {id:"ca1d",nome:"Pannello EPS 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Il cappotto più diffuso, spessore 10 cm",confezioni:[{label:"Pacco 10 pz (10 m²)",kg:10,prezzo:34},{label:"Pacco 6 pz (6 m²)",kg:6,prezzo:22}]},
-      {id:"ca1e",nome:"Pannello EPS 12 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alta prestazione termica, spessore 12 cm",confezioni:[{label:"Pacco 10 pz (10 m²)",kg:10,prezzo:42},{label:"Pacco 6 pz (6 m²)",kg:6,prezzo:28}]},
-      {id:"ca2a",nome:"Pannello EPS grafitato 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Conduttività ridotta (λ basso), spessore 6 cm",confezioni:[{label:"Pacco 6 pz (6 m²)",kg:6,prezzo:22}]},
-      {id:"ca2b",nome:"Pannello EPS grafitato 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Prestazione termica superiore all'EPS standard",confezioni:[{label:"Pacco 6 pz (6 m²)",kg:6,prezzo:36}]},
-      {id:"ca2c",nome:"Pannello EPS grafitato 12 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Massima prestazione, spessore 12 cm",confezioni:[{label:"Pacco 6 pz (6 m²)",kg:6,prezzo:44}]},
-      {id:"ca_xps1",nome:"Pannello XPS estruso 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Impermeabile, ideale per zoccolo e parti interrate",confezioni:[{label:"Pacco 7 pz (7 m²)",kg:7,prezzo:32}]},
-      {id:"ca_xps2",nome:"Pannello XPS estruso 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per fondazioni e pavimenti a contatto con il terreno",confezioni:[{label:"Pacco 5 pz (5 m²)",kg:5,prezzo:42}]},
-      {id:"ca_pir1",nome:"Pannello PIR/PUR 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Poliuretano rigido, λ = 0,022 W/mK",confezioni:[{label:"Pacco 6 pz (6 m²)",kg:6,prezzo:52}]},
-      {id:"ca_pir2",nome:"Pannello PIR/PUR 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alta efficienza termica con spessore ridotto",confezioni:[{label:"Pacco 4 pz (4 m²)",kg:4,prezzo:68}]},
+
+    "Cappotto esterno — EPS (polistirene espanso)":[
+      {id:"eps_b4",nome:"EPS bianco 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Cappotto leggero, spessore 4 cm, λ = 0,036 W/mK",confezioni:[{label:"Pacco 10 m²",kg:10,prezzo:18},{label:"Pacco 6 m²",kg:6,prezzo:12}]},
+      {id:"eps_b6",nome:"EPS bianco 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Cappotto standard, spessore 6 cm",confezioni:[{label:"Pacco 10 m²",kg:10,prezzo:22},{label:"Pacco 6 m²",kg:6,prezzo:14}]},
+      {id:"eps_b8",nome:"EPS bianco 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Buona prestazione termica, spessore 8 cm",confezioni:[{label:"Pacco 10 m²",kg:10,prezzo:28},{label:"Pacco 6 m²",kg:6,prezzo:18}]},
+      {id:"eps_b10",nome:"EPS bianco 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Il formato più diffuso per cappotto esterno",confezioni:[{label:"Pacco 10 m²",kg:10,prezzo:34},{label:"Pacco 6 m²",kg:6,prezzo:22}]},
+      {id:"eps_b12",nome:"EPS bianco 12 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alta prestazione termica, spessore 12 cm",confezioni:[{label:"Pacco 10 m²",kg:10,prezzo:42},{label:"Pacco 6 m²",kg:6,prezzo:28}]},
+      {id:"eps_g6",nome:"EPS grafitato 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Conduttività ridotta rispetto all'EPS bianco, λ = 0,031 W/mK",confezioni:[{label:"Pacco 6 m²",kg:6,prezzo:22}]},
+      {id:"eps_g10",nome:"EPS grafitato 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Prestazione superiore all'EPS bianco a parità di spessore",confezioni:[{label:"Pacco 6 m²",kg:6,prezzo:36}]},
+      {id:"eps_g12",nome:"EPS grafitato 12 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Massima prestazione EPS grafitato, λ = 0,031 W/mK",confezioni:[{label:"Pacco 6 m²",kg:6,prezzo:44}]},
+      {id:"eps_hd10",nome:"EPS ad alta densità 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Maggiore resistenza meccanica, per zone a rischio impatto",confezioni:[{label:"Pacco 6 m²",kg:6,prezzo:38}]},
     ],
-    "Cappotto esterno — Lana Minerale":[
-      {id:"ca3a",nome:"Lana di roccia per cappotto 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Termoacustico, densità 70 kg/m³",confezioni:[{label:"Pacco 4 pz (4 m²)",kg:4,prezzo:28},{label:"Pacco 8 pz (8 m²)",kg:8,prezzo:52}]},
-      {id:"ca3b",nome:"Lana di roccia per cappotto 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ottimo fonoassorbente e resistente al fuoco",confezioni:[{label:"Pacco 4 pz (4 m²)",kg:4,prezzo:36}]},
-      {id:"ca3c",nome:"Lana di roccia per cappotto 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Massima resistenza al fuoco, classe A1",confezioni:[{label:"Pacco 4 pz (4 m²)",kg:4,prezzo:44}]},
-      {id:"ca3d",nome:"Lana di roccia per cappotto 12 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per edifici con requisiti antincendio specifici",confezioni:[{label:"Pacco 4 pz (4 m²)",kg:4,prezzo:54}]},
-      {id:"ca_lv1",nome:"Lana di vetro per intercapedine 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per intercapedine in doppia parete, in rotoli",confezioni:[{label:"Rotolo 12 m²",kg:12,prezzo:22},{label:"Rotolo 6 m²",kg:6,prezzo:13}]},
-      {id:"ca_lv2",nome:"Lana di vetro per intercapedine 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ottimo rapporto qualità/prezzo per intercapedine",confezioni:[{label:"Rotolo 10 m²",kg:10,prezzo:28}]},
+
+    "Cappotto esterno — XPS (polistirene estruso)":[
+      {id:"xps_l4",nome:"XPS liscio 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Impermeabile, per zoccolo e parti interrate, λ = 0,033 W/mK",confezioni:[{label:"Pacco 7 m²",kg:7,prezzo:32}]},
+      {id:"xps_l8",nome:"XPS liscio 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per fondazioni e pavimenti a contatto con il terreno",confezioni:[{label:"Pacco 5 m²",kg:5,prezzo:42}]},
+      {id:"xps_g4",nome:"XPS con superficie goffrata 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Superficie ruvida per migliore adesione dei collanti",confezioni:[{label:"Pacco 7 m²",kg:7,prezzo:34}]},
+      {id:"xps_g8",nome:"XPS con superficie goffrata 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ideale per cappotto su superfici difficili",confezioni:[{label:"Pacco 5 m²",kg:5,prezzo:45}]},
+      {id:"xps_ar6",nome:"XPS ad alta resistenza 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Resistenza a compressione ≥ 300 kPa, per carichi elevati",confezioni:[{label:"Pacco 5 m²",kg:5,prezzo:48}]},
     ],
-    "Cappotto — Naturali ed Ecologici":[
-      {id:"ca_fl1",nome:"Pannello fibra di legno 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Materiale bioedile, elevato sfasamento termico",confezioni:[{label:"Pannello 1,2×0,6 m (0.72 m²)",kg:0.72,prezzo:14},{label:"Pacco 5 pz (3.6 m²)",kg:3.6,prezzo:65}]},
-      {id:"ca_fl2",nome:"Pannello fibra di legno 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Cappotto bioedile ad alta massa termica",confezioni:[{label:"Pannello 1,2×0,6 m (0.72 m²)",kg:0.72,prezzo:20},{label:"Pacco 5 pz (3.6 m²)",kg:3.6,prezzo:92}]},
-      {id:"ca_sg1",nome:"Pannello sughero naturale 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Sughero naturale, ecologico e impermeabile",confezioni:[{label:"Pannello 1×0,5 m (0.5 m²)",kg:0.5,prezzo:12},{label:"Pacco 10 pz (5 m²)",kg:5,prezzo:110}]},
-      {id:"ca_sg2",nome:"Pannello sughero naturale 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alta inerzia e sfasamento termico",confezioni:[{label:"Pannello 1×0,5 m (0.5 m²)",kg:0.5,prezzo:22},{label:"Pacco 10 pz (5 m²)",kg:5,prezzo:210}]},
-      {id:"ca_ca1",nome:"Pannello canapa naturale 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Traspirante, regola naturalmente l'umidità",confezioni:[{label:"Rotolo 8 m²",kg:8,prezzo:55}]},
+
+    "Cappotto esterno — PUR / PIR (poliuretano)":[
+      {id:"pur6",nome:"Pannello PUR 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Poliuretano rigido, λ = 0,025 W/mK, alta efficienza",confezioni:[{label:"Pacco 6 m²",kg:6,prezzo:48}]},
+      {id:"pur10",nome:"Pannello PUR 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ottimo rapporto spessore/prestazione",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:62}]},
+      {id:"pir6",nome:"Pannello PIR (poliisocianurato) 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Migliore resistenza al fuoco del PUR, λ = 0,022 W/mK",confezioni:[{label:"Pacco 6 m²",kg:6,prezzo:52}]},
+      {id:"pir10",nome:"Pannello PIR (poliisocianurato) 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alta efficienza termica con spessore contenuto",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:68}]},
     ],
-    "Isolamento interno e sottotetto":[
-      {id:"ii_lr1",nome:"Lana di roccia intercapedine 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per pareti interne, densità 40 kg/m³",confezioni:[{label:"Pacco 8 m²",kg:8,prezzo:18},{label:"Pacco 16 m²",kg:16,prezzo:32}]},
-      {id:"ii_lr2",nome:"Lana di roccia tetto/solaio 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per sottotetto non calpestabile",confezioni:[{label:"Pacco 6 m²",kg:6,prezzo:22}]},
-      {id:"ii_lv3",nome:"Lana di vetro rotolo sottotetto 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"In rotoli, da posare su solaio piano",confezioni:[{label:"Rotolo 8 m²",kg:8,prezzo:18},{label:"Rotolo 16 m²",kg:16,prezzo:32}]},
-      {id:"ii_fl3",nome:"Pannello fibra di legno interno 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Controparete interna bioedile, traspirante",confezioni:[{label:"Pacco 5 pz (3.6 m²)",kg:3.6,prezzo:48}]},
-      {id:"ii1",nome:"Schiuma poliuretanica espandente",resa:0.5,unitaResa:"pz/ml",unita:"ml",note:"Per sigillare spifferi e ponti termici",confezioni:[{label:"Bombola 750 ml",kg:0.75,prezzo:8},{label:"Bombola 300 ml",kg:0.3,prezzo:5}]},
-      {id:"ii2",nome:"Nastro butilico autodesivo",resa:1,unitaResa:"ml/ml",unita:"ml",note:"Per sigillare i giunti del cappotto",confezioni:[{label:"Rotolo 25 m",kg:25,prezzo:18}]},
-      {id:"ii_ae1",nome:"Pannello aerogel 2 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ultra-sottile, λ = 0,015 W/mK, ideale per ponti termici",confezioni:[{label:"Pannello 1×0,6 m (0.6 m²)",kg:0.6,prezzo:38}]},
+
+    "Cappotto esterno — Lana di roccia":[
+      {id:"lr_r6",nome:"Lana di roccia pannelli rigidi 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Termoacustico, resistente al fuoco classe A1, densità 70 kg/m³",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:28},{label:"Pacco 8 m²",kg:8,prezzo:52}]},
+      {id:"lr_r8",nome:"Lana di roccia pannelli rigidi 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ottimo fonoassorbente, non combustibile",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:36}]},
+      {id:"lr_r10",nome:"Lana di roccia pannelli rigidi 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Massima resistenza al fuoco, classe A1 certificata",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:44}]},
+      {id:"lr_r12",nome:"Lana di roccia pannelli rigidi 12 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per edifici con requisiti antincendio elevati",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:54}]},
+      {id:"lr_sr8",nome:"Lana di roccia pannelli semi-rigidi 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Maggiore adattabilità su superfici irregolari",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:32}]},
+      {id:"lr_sr10",nome:"Lana di roccia pannelli semi-rigidi 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ideale per intercapedini e pareti curve",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:40}]},
     ],
-    "Accessori cappotto":[
-      {id:"ca4",nome:"Colla per cappotto EPS",resa:5,unitaResa:"kg/m²",unita:"m²",note:"Applicazione a punti e barra perimetrale",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:10}]},
-      {id:"ca5",nome:"Rasante armato per cappotto",resa:6,unitaResa:"kg/m²",unita:"m²",note:"Con rete in fibra di vetro da 160 g/m²",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
-      {id:"ca_tass",nome:"Tasselli a vite per cappotto",resa:6,unitaResa:"pz/m²",unita:"m²",note:"6 tasselli per m², lunghezza da 10 a 16 cm",confezioni:[{label:"Busta 100 pz",kg:0.5,prezzo:18},{label:"Busta 250 pz",kg:1.2,prezzo:38}]},
-      {id:"ca_rete",nome:"Rete in fibra di vetro 160 g",resa:1.1,unitaResa:"m²/m²",unita:"m²",note:"Sovrapposizione 10 cm, include sfrido",confezioni:[{label:"Rotolo 50 m²",kg:8,prezzo:35},{label:"Rotolo 100 m²",kg:16,prezzo:65}]},
+
+    "Cappotto esterno — Lana di vetro":[
+      {id:"lv_p5",nome:"Lana di vetro pannelli 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Leggera, ottima coibenza termica e acustica",confezioni:[{label:"Pacco 6 m²",kg:6,prezzo:20}]},
+      {id:"lv_p8",nome:"Lana di vetro pannelli 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per intercapedini e contropareti, densità 20 kg/m³",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:26}]},
+      {id:"lv_r5",nome:"Lana di vetro rotoli 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per intercapedine in doppia parete, formato rotolo",confezioni:[{label:"Rotolo 12 m²",kg:12,prezzo:22},{label:"Rotolo 6 m²",kg:6,prezzo:13}]},
+      {id:"lv_r8",nome:"Lana di vetro rotoli 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ottimo rapporto qualità/prezzo per sottotetti e intercapedini",confezioni:[{label:"Rotolo 10 m²",kg:10,prezzo:28}]},
     ],
+
+    "Cappotto esterno — Silicato di calcio":[
+      {id:"sc1",nome:"Pannello in silicato di calcio isolante 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Minerale, incombustibile, traspirante, per restauro",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:38}]},
+      {id:"sc2",nome:"Pannello in silicato di calcio traspirante 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ideale per murature storiche con problemi di umidità",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:52}]},
+    ],
+
+    "Cappotto esterno — Isolanti naturali":[
+      {id:"fl6",nome:"Fibra di legno 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Bioedile, elevato sfasamento termico estivo",confezioni:[{label:"Pannello 1,2×0,6 m (0,72 m²)",kg:0.72,prezzo:14},{label:"Pacco 5 pz (3,6 m²)",kg:3.6,prezzo:65}]},
+      {id:"fl10",nome:"Fibra di legno 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Cappotto bioedile ad alta massa termica",confezioni:[{label:"Pannello 1,2×0,6 m (0,72 m²)",kg:0.72,prezzo:20},{label:"Pacco 5 pz (3,6 m²)",kg:3.6,prezzo:92}]},
+      {id:"fc5",nome:"Fibra di canapa 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Traspirante, regola naturalmente l'umidità interna",confezioni:[{label:"Rotolo 8 m²",kg:8,prezzo:55}]},
+      {id:"fli5",nome:"Fibra di lino 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Naturale, traspirante, ottima inerzia termica",confezioni:[{label:"Rotolo 8 m²",kg:8,prezzo:58}]},
+      {id:"fke5",nome:"Fibra di kenaf 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Fibra vegetale tropicale, biocompatibile e traspirante",confezioni:[{label:"Rotolo 6 m²",kg:6,prezzo:52}]},
+      {id:"sg4",nome:"Sughero espanso 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ecologico, impermeabile, ottima inerzia termica",confezioni:[{label:"Pannello 1×0,5 m (0,5 m²)",kg:0.5,prezzo:12},{label:"Pacco 10 pz (5 m²)",kg:5,prezzo:110}]},
+      {id:"sg8",nome:"Sughero espanso 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alta inerzia e sfasamento termico estivo",confezioni:[{label:"Pannello 1×0,5 m (0,5 m²)",kg:0.5,prezzo:22},{label:"Pacco 10 pz (5 m²)",kg:5,prezzo:210}]},
+      {id:"pe_gran",nome:"Perlite espansa (granulare)",resa:80,unitaResa:"l/m³",unita:"m³",note:"Riempimento intercapedini e solai, inerte e incombustibile",confezioni:[{label:"Sacco 100 l",kg:10,prezzo:18},{label:"Sacco 50 l",kg:5,prezzo:10}]},
+      {id:"ve_gran",nome:"Vermiculite espansa (granulare)",resa:80,unitaResa:"l/m³",unita:"m³",note:"Riempimento cavità, ottimo isolante termico e acustico",confezioni:[{label:"Sacco 100 l",kg:10,prezzo:22},{label:"Sacco 50 l",kg:5,prezzo:12}]},
+    ],
+
+    "Cappotto esterno — Isolanti ad alte prestazioni":[
+      {id:"ae2",nome:"Pannello in aerogel 2 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ultra-sottile, λ = 0,015 W/mK, ideale per ponti termici",confezioni:[{label:"Pannello 1×0,6 m (0,6 m²)",kg:0.6,prezzo:38}]},
+      {id:"ae4",nome:"Pannello in aerogel 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Massima efficienza in spazio minimo",confezioni:[{label:"Pannello 1×0,6 m (0,6 m²)",kg:0.6,prezzo:68}]},
+      {id:"vip2",nome:"Pannello sottovuoto VIP 2 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Prestazioni 10× superiori all'EPS, λ = 0,007 W/mK",confezioni:[{label:"Pannello 0,6×0,6 m (0,36 m²)",kg:0.36,prezzo:55}]},
+      {id:"fen6",nome:"Pannello in schiuma fenolica 6 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"λ = 0,020 W/mK, resistente al fuoco, basso spessore",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:58}]},
+    ],
+
+    "Isolamento interno — Sintetici":[
+      {id:"ii_eps5",nome:"EPS per interno 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Controparete interna, spessore contenuto",confezioni:[{label:"Pacco 10 m²",kg:10,prezzo:20}]},
+      {id:"ii_xps4",nome:"XPS per interno 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Impermeabile, per pareti con umidità di risalita",confezioni:[{label:"Pacco 7 m²",kg:7,prezzo:28}]},
+      {id:"ii_pur4",nome:"Poliuretano per interno 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alta efficienza in spessore ridotto, λ = 0,025 W/mK",confezioni:[{label:"Pacco 6 m²",kg:6,prezzo:38}]},
+    ],
+
+    "Isolamento interno — Minerali e Naturali":[
+      {id:"ii_lr5",nome:"Lana di roccia per interno 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Controparete o intercapedine, densità 40 kg/m³",confezioni:[{label:"Pacco 8 m²",kg:8,prezzo:18},{label:"Pacco 16 m²",kg:16,prezzo:32}]},
+      {id:"ii_lr8",nome:"Lana di roccia per tetto/solaio 8 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per sottotetto non calpestabile",confezioni:[{label:"Pacco 6 m²",kg:6,prezzo:22}]},
+      {id:"ii_lv10",nome:"Lana di vetro in rotoli 10 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"In rotoli, da posare su solaio piano o in sottotetto",confezioni:[{label:"Rotolo 8 m²",kg:8,prezzo:18},{label:"Rotolo 16 m²",kg:16,prezzo:32}]},
+      {id:"ii_sc4",nome:"Silicato di calcio per interno 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Traspirante, per murature con umidità, no condensa",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:42}]},
+      {id:"ii_fl4",nome:"Fibra di legno per interno 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Controparete bioedile interna, traspirante",confezioni:[{label:"Pacco 5 pz (3,6 m²)",kg:3.6,prezzo:48}]},
+      {id:"ii_sg4",nome:"Sughero per interno 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Ecologico, traspirante, per pareti interne",confezioni:[{label:"Pacco 5 m²",kg:5,prezzo:90}]},
+      {id:"ii_ca5",nome:"Canapa per interno 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Regolazione naturale dell'umidità, salubrità degli ambienti",confezioni:[{label:"Rotolo 8 m²",kg:8,prezzo:52}]},
+    ],
+
+    "Isolamento interno — Contropareti e sistemi":[
+      {id:"cp_cg",nome:"Sistema controparete cartongesso + isolante",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Profili metallici + lastra GK + isolante a scelta, resa totale",confezioni:[{label:"Kit 1 m²",kg:1,prezzo:22}]},
+      {id:"cp_fg",nome:"Sistema controparete fibrogesso + isolante",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Maggiore resistenza meccanica rispetto al cartongesso",confezioni:[{label:"Kit 1 m²",kg:1,prezzo:28}]},
+      {id:"cp_sw",nome:"Pannelli sandwich isolanti prefabbricati",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Pannello completo con isolante integrato, posa rapida",confezioni:[{label:"Pannello 1,2×0,6 m (0,72 m²)",kg:0.72,prezzo:32}]},
+    ],
+
+    "Isolamento interno — Isolanti sottili":[
+      {id:"it_ae2",nome:"Pannello aerogel sottile 2 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Dove lo spazio è limitato, λ = 0,015 W/mK",confezioni:[{label:"Pannello 1×0,6 m (0,6 m²)",kg:0.6,prezzo:38}]},
+      {id:"it_vip",nome:"Pannello sottovuoto VIP 1,5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Spessore minimo, prestazione massima, λ = 0,007 W/mK",confezioni:[{label:"Pannello 0,6×0,6 m (0,36 m²)",kg:0.36,prezzo:55}]},
+      {id:"it_mr",nome:"Isolante multistrato riflettente",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Film alluminizzato multistrato, riduce la trasmissione radiante",confezioni:[{label:"Rotolo 10 m²",kg:10,prezzo:28},{label:"Rotolo 25 m²",kg:25,prezzo:62}]},
+    ],
+
+    "Componenti del sistema cappotto — Collanti e rasanti":[
+      {id:"cc1",nome:"Collante per pannelli isolanti",resa:5,unitaResa:"kg/m²",unita:"m²",note:"Applicazione a punti e barra perimetrale su EPS e lana minerale",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:10}]},
+      {id:"cc2",nome:"Rasante per cappotto",resa:6,unitaResa:"kg/m²",unita:"m²",note:"Strato di base armato con rete, su qualsiasi isolante",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
+      {id:"cc3",nome:"Rasante fibrato per cappotto",resa:5,unitaResa:"kg/m²",unita:"m²",note:"Con microfibra in polipropilene, anti-fessurazione",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:14}]},
+    ],
+
+    "Componenti del sistema cappotto — Reti e fissaggi":[
+      {id:"cr1",nome:"Rete in fibra di vetro 160 g/m²",resa:1.1,unitaResa:"m²/m²",unita:"m²",note:"Armatura standard del rasante, sovrapposizione 10 cm inclusa",confezioni:[{label:"Rotolo 50 m²",kg:8,prezzo:35},{label:"Rotolo 100 m²",kg:16,prezzo:65}]},
+      {id:"cr2",nome:"Rete antifessurazione rinforzata",resa:1.1,unitaResa:"m²/m²",unita:"m²",note:"Grammatura 200 g/m², per zone con maggiore movimento",confezioni:[{label:"Rotolo 50 m²",kg:10,prezzo:48}]},
+      {id:"cf1",nome:"Tasselli a vite per cappotto",resa:6,unitaResa:"pz/m²",unita:"m²",note:"6 pz/m², lunghezza da 10 a 16 cm, testa a fungo",confezioni:[{label:"Busta 100 pz",kg:0.5,prezzo:18},{label:"Busta 250 pz",kg:1.2,prezzo:38}]},
+      {id:"cf2",nome:"Tasselli ad espansione per cappotto",resa:6,unitaResa:"pz/m²",unita:"m²",note:"Per supporti in cls e mattoni pieni",confezioni:[{label:"Busta 100 pz",kg:0.5,prezzo:15},{label:"Busta 250 pz",kg:1.2,prezzo:32}]},
+    ],
+
+    "Componenti del sistema cappotto — Profili":[
+      {id:"cpf1",nome:"Profilo di partenza (starter)",resa:1,unitaResa:"ml/ml",unita:"ml",note:"Profilo di base in alluminio o acciaio per iniziare il cappotto",confezioni:[{label:"Barra 2 m",kg:2,prezzo:5},{label:"Barra 3 m",kg:3,prezzo:7}]},
+      {id:"cpf2",nome:"Profilo angolare paraspigolo",resa:1,unitaResa:"ml/ml",unita:"ml",note:"Protezione degli spigoli, con rete preapplicata",confezioni:[{label:"Barra 2,5 m",kg:2.5,prezzo:4},{label:"Barra 3 m",kg:3,prezzo:5}]},
+      {id:"cpf3",nome:"Profilo gocciolatoio",resa:1,unitaResa:"ml/ml",unita:"ml",note:"Allontana l'acqua dalla facciata in corrispondenza dei davanzali",confezioni:[{label:"Barra 2 m",kg:2,prezzo:6},{label:"Barra 3 m",kg:3,prezzo:8}]},
+    ],
+
+    "Componenti del sistema cappotto — Finiture":[
+      {id:"cf_acr",nome:"Intonachino acrilico",resa:3,unitaResa:"kg/m²",unita:"m²",note:"Finitura colorata acrilica, granulometria 1,5 o 2 mm",confezioni:[{label:"Secchio 25 kg",kg:25,prezzo:28},{label:"Secchio 10 kg",kg:10,prezzo:13}]},
+      {id:"cf_sil",nome:"Intonachino silossanico",resa:3,unitaResa:"kg/m²",unita:"m²",note:"Idrorepellente e traspirante, per esterni durature",confezioni:[{label:"Secchio 25 kg",kg:25,prezzo:38},{label:"Secchio 10 kg",kg:10,prezzo:17}]},
+      {id:"cf_sis",nome:"Intonachino ai silicati",resa:3,unitaResa:"kg/m²",unita:"m²",note:"Minerale, traspirante, antialga, per facciate storiche",confezioni:[{label:"Secchio 25 kg",kg:25,prezzo:42},{label:"Secchio 10 kg",kg:10,prezzo:19}]},
+      {id:"cf_min",nome:"Rivestimento minerale",resa:4,unitaResa:"kg/m²",unita:"m²",note:"Finitura minerale naturale, massima traspirabilità",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:18},{label:"Sacco 10 kg",kg:10,prezzo:8}]},
+    ],
+
+    "Isolanti speciali — Acustici":[
+      {id:"is_fa",nome:"Pannello fonoassorbente in lana minerale",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Assorbe il suono, riduce la riverberazione negli ambienti",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:24}]},
+      {id:"is_fi",nome:"Pannello fonoisolante ad alta densità",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Blocca la trasmissione del suono tra ambienti, Rw > 50 dB",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:38}]},
+    ],
+
+    "Isolanti speciali — Termo-acustici":[
+      {id:"is_lrhd",nome:"Lana minerale ad alta densità 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Doppia funzione termica e acustica, densità ≥ 80 kg/m³",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:32}]},
+      {id:"is_flhd",nome:"Fibra di legno ad alta densità 5 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Sfasamento termico elevato + fonoisolamento, materiale naturale",confezioni:[{label:"Pacco 3 m²",kg:3,prezzo:42}]},
+    ],
+
+    "Isolanti speciali — Antincendio":[
+      {id:"is_lri",nome:"Lana di roccia ignifuga",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Non combustibile, classe A1, per compartimentazioni antincendio",confezioni:[{label:"Pacco 4 m²",kg:4,prezzo:44}]},
+      {id:"is_pmi",nome:"Pannello minerale resistente al fuoco",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per protezione strutturale da incendio, certificato EI 60-120",confezioni:[{label:"Pannello 1×0,6 m (0,6 m²)",kg:0.6,prezzo:35}]},
+    ],
+
+    "Accessori e sigillanti":[
+      {id:"acc1",nome:"Schiuma poliuretanica espandente",resa:0.5,unitaResa:"pz/ml",unita:"ml",note:"Per sigillare spifferi, ponti termici e giunti",confezioni:[{label:"Bombola 750 ml",kg:0.75,prezzo:8},{label:"Bombola 300 ml",kg:0.3,prezzo:5}]},
+      {id:"acc2",nome:"Nastro butilico autoadesivo",resa:1,unitaResa:"ml/ml",unita:"ml",note:"Sigillatura dei giunti del cappotto e delle barriere al vapore",confezioni:[{label:"Rotolo 25 m",kg:25,prezzo:18}]},
+    ],
+
   }},
   "🔲 Pavimenti & Rivestimenti":{icon:"🔲",colore:"#2A6A3A",sottocategorie:{
-    "Massetti":[
-      {id:"pa1",nome:"Massetto autolivellante",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Spessore ~1 cm, per livellamento superfici",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7},{label:"Sacco 30 kg",kg:30,prezzo:8}]},
-      {id:"pa2",nome:"Massetto tradizionale",resa:22,unitaResa:"kg/m²",unita:"m²",note:"Spessore ~1 cm, posa manuale",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 30 kg",kg:30,prezzo:6}]},
-      {id:"pa3",nome:"Fibra in polipropilene anti-ritiro",resa:0.6,unitaResa:"kg/m³",unita:"m³",note:"Da aggiungere all'impasto del massetto",confezioni:[{label:"Busta 600 g",kg:0.6,prezzo:4},{label:"Sacco 5 kg",kg:5,prezzo:22}]},
+
+    "Massetti e sottofondi":[
+      {id:"pa1",nome:"Massetto autolivellante",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Spessore ~1 cm, per livellamento rapido di superfici",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7},{label:"Sacco 30 kg",kg:30,prezzo:8}]},
+      {id:"pa2",nome:"Massetto tradizionale sabbia-cemento",resa:22,unitaResa:"kg/m²",unita:"m²",note:"Spessore ~1 cm, posa manuale, sottofondo per piastrelle e parquet",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 30 kg",kg:30,prezzo:6}]},
+      {id:"pa3",nome:"Fibra in polipropilene anti-ritiro",resa:0.6,unitaResa:"kg/m³",unita:"m³",note:"Da aggiungere all'impasto del massetto per prevenire fessurazioni",confezioni:[{label:"Busta 600 g",kg:0.6,prezzo:4},{label:"Sacco 5 kg",kg:5,prezzo:22}]},
     ],
-    "Adesivi per piastrelle":[
-      {id:"ad1",nome:"Malta adesiva C1 standard",resa:4.5,unitaResa:"kg/m²",unita:"m²",note:"Piastrelle fino a 30×30 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:8},{label:"Sacco 5 kg",kg:5,prezzo:3}]},
-      {id:"ad2",nome:"Malta adesiva migliorata C2",resa:5,unitaResa:"kg/m²",unita:"m²",note:"Per grandi formati e materiali pesanti",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
-      {id:"ad3",nome:"Adesivo deformabile C2S1",resa:5.5,unitaResa:"kg/m²",unita:"m²",note:"Per piscine, terrazzi e pavimenti riscaldati",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:16}]},
-      {id:"ad4",nome:"Adesivo epossidico per pietra",resa:3.5,unitaResa:"kg/m²",unita:"m²",note:"Per marmo, granito e pietre naturali",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:28}]},
+
+    "Adesivi e collanti":[
+      {id:"ad1",nome:"Malta adesiva C1 standard",resa:4.5,unitaResa:"kg/m²",unita:"m²",note:"Per piastrelle fino a 30×30 cm su fondi normali",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:8},{label:"Sacco 5 kg",kg:5,prezzo:3}]},
+      {id:"ad2",nome:"Malta adesiva migliorata C2",resa:5,unitaResa:"kg/m²",unita:"m²",note:"Per grandi formati, materiali pesanti e supporti difficili",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
+      {id:"ad3",nome:"Adesivo deformabile C2S1 (flessibile)",resa:5.5,unitaResa:"kg/m²",unita:"m²",note:"Per piscine, terrazzi e pavimenti con riscaldamento radiante",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:16}]},
+      {id:"ad4",nome:"Adesivo epossidico bicomponente",resa:3.5,unitaResa:"kg/m²",unita:"m²",note:"Per marmo, granito, pietre naturali e ambienti chimicamente aggressivi",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:28}]},
+      {id:"ad5",nome:"Colla per parquet (poliuretanica)",resa:1.2,unitaResa:"kg/m²",unita:"m²",note:"Per incollaggio di parquet e listoni su massetto, alta elasticità",confezioni:[{label:"Secchio 15 kg (12 m²)",kg:15,prezzo:52},{label:"Secchio 5 kg (4 m²)",kg:5,prezzo:22}]},
     ],
-    "Fughe & Finitura":[
-      {id:"fu1",nome:"Stucco per fughe ceramica",resa:0.35,unitaResa:"kg/m²",unita:"m²",note:"Fuga da 2 mm, piastrella 20×20 cm",confezioni:[{label:"Busta 5 kg",kg:5,prezzo:6},{label:"Busta 25 kg",kg:25,prezzo:20}]},
-      {id:"fu2",nome:"Fugante epossidico",resa:0.5,unitaResa:"kg/m²",unita:"m²",note:"Alta resistenza chimica e meccanica",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:35}]},
+
+    "Fughe e sigillanti":[
+      {id:"fu1",nome:"Stucco cementizio per fughe",resa:0.35,unitaResa:"kg/m²",unita:"m²",note:"Fuga da 2 mm, per piastrelle ceramica e gres",confezioni:[{label:"Busta 5 kg",kg:5,prezzo:6},{label:"Busta 25 kg",kg:25,prezzo:20}]},
+      {id:"fu2",nome:"Fugante epossidico bicomponente",resa:0.5,unitaResa:"kg/m²",unita:"m²",note:"Alta resistenza chimica e meccanica, per piscine e cucine professionali",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:35}]},
+      {id:"fu3",nome:"Silicone neutro per pavimenti e rivestimenti",resa:1,unitaResa:"ml/ml",unita:"ml",note:"Per sigillatura giunti di dilatazione e raccordi a parete",confezioni:[{label:"Cartuccia 300 ml",kg:0.3,prezzo:5},{label:"Cartuccia 600 ml",kg:0.6,prezzo:9}]},
     ],
-    "Piastrelle in ceramica e monocottura":[
-      {id:"pi_mc1",nome:"Monocottura standard (formato 20×20 / 25×25)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Economica, uso interno",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:9},{label:"Pacco 5 m²",kg:5,prezzo:42}]},
-      {id:"pi_mc2",nome:"Bicottura smaltata (30×30 / 33×33)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Bagni e cucine, finitura lucida",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:13},{label:"Pacco 5 m²",kg:5,prezzo:60}]},
-      {id:"pi_cer1",nome:"Ceramica da rivestimento 20×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Pareti bagno e cucina",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:14},{label:"Pacco 5 m²",kg:5,prezzo:65}]},
-      {id:"pi_cer2",nome:"Ceramica da rivestimento 30×90 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Pareti bagno, formato filante",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:18},{label:"Pacco 5 m²",kg:5,prezzo:85}]},
+
+    "Ceramica e piastrelle":[
+      {id:"cer1",nome:"Ceramica smaltata standard (20×20 / 25×25 cm)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Uso interno, economica, disponibile in molti colori",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:9},{label:"Pacco 5 m²",kg:5,prezzo:40}]},
+      {id:"cer2",nome:"Ceramica smaltata rivestimento (20×60 cm)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per pareti di bagno e cucina, finitura lucida",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:14},{label:"Pacco 5 m²",kg:5,prezzo:65}]},
+      {id:"cer3",nome:"Ceramica smaltata rivestimento (30×90 cm)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Formato filante per pareti bagno moderne",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:18},{label:"Pacco 5 m²",kg:5,prezzo:82}]},
+      {id:"cer4",nome:"Mosaico in ceramica / vetro (2,5×2,5 cm su rete)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per pareti, docce e piscine, su foglio da 30×30 cm",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:28},{label:"Pacco 5 m²",kg:5,prezzo:130}]},
+      {id:"cer5",nome:"Klinker per esterni (30×30 cm)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alta resistenza al gelo, antisdrucciolo, per terrazzi ed esterni",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:25},{label:"Pacco 5 m²",kg:5,prezzo:115}]},
     ],
-    "Gres porcellanato — Pavimento":[
-      {id:"gp1",nome:"Gres porcellanato rettificato 60×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Fuga minima 2 mm, interni",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:18},{label:"Pacco 5 m²",kg:5,prezzo:85}]},
-      {id:"gp2",nome:"Gres porcellanato rettificato 60×120 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Grande formato, cucine/soggiorni",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:25},{label:"Pacco 5 m²",kg:5,prezzo:115}]},
-      {id:"gp3",nome:"Gres porcellanato 80×80 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Formato quadrato moderno",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:22},{label:"Pacco 5 m²",kg:5,prezzo:100}]},
-      {id:"gp4",nome:"Gres porcellanato 120×120 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Grande formato premium",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:30},{label:"Pacco 5 m²",kg:5,prezzo:140}]},
-      {id:"gp5",nome:"Gres effetto legno 20×120 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Rivestimento filante effetto parquet",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:28},{label:"Pacco 5 m²",kg:5,prezzo:130}]},
-      {id:"gp6",nome:"Gres effetto marmo 60×120 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Look marmo senza manutenzione",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:32},{label:"Pacco 5 m²",kg:5,prezzo:150}]},
-      {id:"gp7",nome:"Gres effetto cemento / industrial 60×60",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Stile contemporaneo, superfici opache",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:20},{label:"Pacco 5 m²",kg:5,prezzo:92}]},
-      {id:"gp8",nome:"Gres porcellanato per esterno 60×60 (sp. 20mm)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Terrazzi e piscine, antisdrucciolo",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:28},{label:"Pacco 5 m²",kg:5,prezzo:130}]},
-      {id:"gp9",nome:"Lastra in gres 120×240 cm (sp. 6mm)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Maxi lastra, rivestimento tutta altezza",confezioni:[{label:"Lastra 2.88 m²",kg:2.88,prezzo:110},{label:"Pacco 3 lastre (8.64 m²)",kg:8.64,prezzo:310}]},
+
+    "Gres porcellanato — Interni":[
+      {id:"gp1",nome:"Gres porcellanato levigato 60×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Superficie liscia opaca, fuga minima 2 mm, per soggiorni e corridoi",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:18},{label:"Pacco 5 m²",kg:5,prezzo:82}]},
+      {id:"gp2",nome:"Gres porcellanato lucido 60×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Superficie lucida a specchio, effetto elegante, per interni",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:22},{label:"Pacco 5 m²",kg:5,prezzo:100}]},
+      {id:"gp3",nome:"Gres porcellanato 60×120 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Grande formato rettangolare, effetto minimal per soggiorni",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:28},{label:"Pacco 5 m²",kg:5,prezzo:128}]},
+      {id:"gp4",nome:"Gres porcellanato 80×80 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Formato quadrato moderno, cucine e livingroom",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:25},{label:"Pacco 5 m²",kg:5,prezzo:112}]},
+      {id:"gp5",nome:"Gres porcellanato 120×120 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Grande formato premium, fuga sottilissima 1 mm",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:35},{label:"Pacco 5 m²",kg:5,prezzo:160}]},
+      {id:"gp6",nome:"Gres effetto legno 20×120 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Finitura effetto parquet, caldo e resistente",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:28},{label:"Pacco 5 m²",kg:5,prezzo:128}]},
+      {id:"gp7",nome:"Gres effetto pietra / marmo 60×120 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Look marmo senza manutenzione",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:32},{label:"Pacco 5 m²",kg:5,prezzo:148}]},
+      {id:"gp8",nome:"Gres effetto cemento / industrial 60×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Stile contemporaneo industriale, superfici opache",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:20},{label:"Pacco 5 m²",kg:5,prezzo:90}]},
+      {id:"gp9",nome:"Lastra in gres 120×240 cm (spessore 6 mm)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Maxi lastra, per rivestimento continuo tutta altezza",confezioni:[{label:"Lastra 2,88 m²",kg:2.88,prezzo:115},{label:"Pacco 3 lastre (8,64 m²)",kg:8.64,prezzo:325}]},
     ],
-    "Cotto e Klinker":[
-      {id:"ct1",nome:"Cotto artigianale toscano 30×30 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Interni rustici, pavimenti storici",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:30},{label:"Pacco 5 m²",kg:5,prezzo:140}]},
-      {id:"ct2",nome:"Cotto industriale 20×20 / 25×25 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Uso interno/esterno, resistente",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:22},{label:"Pacco 5 m²",kg:5,prezzo:100}]},
-      {id:"ct3",nome:"Klinker per esterni 30×30 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alta resistenza gelo, esterno",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:25},{label:"Pacco 5 m²",kg:5,prezzo:115}]},
+
+    "Gres porcellanato — Esterni":[
+      {id:"gpe1",nome:"Gres porcellanato antisdrucciolo 60×60 cm (sp. 20 mm)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per terrazzi e piscine, resistente al gelo",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:30},{label:"Pacco 5 m²",kg:5,prezzo:138}]},
+      {id:"gpe2",nome:"Gres porcellanato tecnico antisdrucciolo 30×30 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alto traffico, scale e rampe esterne",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:18},{label:"Pacco 5 m²",kg:5,prezzo:82}]},
     ],
+
+    "Cotto e laterizio":[
+      {id:"ct1",nome:"Cotto artigianale toscano 30×30 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Per interni rustici e pavimenti storici, tonalità naturali",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:32},{label:"Pacco 5 m²",kg:5,prezzo:148}]},
+      {id:"ct2",nome:"Cotto industriale smaltato 20×20 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Uso interno/esterno, resistente e facile da pulire",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:22},{label:"Pacco 5 m²",kg:5,prezzo:100}]},
+    ],
+
     "Pietre naturali":[
-      {id:"pn1",nome:"Travertino Romano 40×40 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Classico, spessore 1.2 cm, int./est.",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:35},{label:"Pacco 5 m²",kg:5,prezzo:165}]},
-      {id:"pn2",nome:"Travertino Romano 30×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Formato rettangolare, finitura lappata",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:42},{label:"Pacco 5 m²",kg:5,prezzo:195}]},
-      {id:"pn3",nome:"Travertino noce 40×40 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Tono più scuro, caldo",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:40},{label:"Pacco 5 m²",kg:5,prezzo:185}]},
-      {id:"pn4",nome:"Marmo Bianco Carrara 30×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Pregiato, venatura grigia classica",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:55},{label:"Pacco 5 m²",kg:5,prezzo:260}]},
-      {id:"pn5",nome:"Marmo Botticino 30×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Crema con venature nocciola",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:60},{label:"Pacco 5 m²",kg:5,prezzo:280}]},
-      {id:"pn6",nome:"Marmo Nero Marquina 30×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Nero lucido con venature bianche",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:75},{label:"Pacco 5 m²",kg:5,prezzo:355}]},
-      {id:"pn7",nome:"Marmo Verde Alpi 30×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Verde intenso con venature bianche",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:80},{label:"Pacco 5 m²",kg:5,prezzo:380}]},
-      {id:"pn8",nome:"Pietra Serena (arenaria) 40×40 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Grigio toscano, int./est.",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:38},{label:"Pacco 5 m²",kg:5,prezzo:175}]},
-      {id:"pn9",nome:"Ardesia 30×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Pietra nera/grigia per esterni",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:32},{label:"Pacco 5 m²",kg:5,prezzo:148}]},
-      {id:"pn10",nome:"Impregnante/protettivo pietra naturale",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Pre-posa e finitura, 1-2 mani",confezioni:[{label:"Tanica 1 l",kg:1,prezzo:18},{label:"Tanica 5 l",kg:5,prezzo:75}]},
+      {id:"pn1",nome:"Travertino Romano 40×40 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Classico italiano, spessore 1,2 cm, per interni ed esterni",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:38},{label:"Pacco 5 m²",kg:5,prezzo:175}]},
+      {id:"pn2",nome:"Travertino Romano 30×60 cm (lappato)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Formato rettangolare, finitura levigata e lucida",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:45},{label:"Pacco 5 m²",kg:5,prezzo:210}]},
+      {id:"pn3",nome:"Marmo Bianco Carrara 30×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Pregiato, venatura grigia classica italiana",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:58},{label:"Pacco 5 m²",kg:5,prezzo:270}]},
+      {id:"pn4",nome:"Marmo Botticino 30×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Crema con venature nocciola, caldo e raffinato",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:62},{label:"Pacco 5 m²",kg:5,prezzo:290}]},
+      {id:"pn5",nome:"Marmo Nero Marquina 30×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Nero lucido con venature bianche, effetto elegante",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:78},{label:"Pacco 5 m²",kg:5,prezzo:365}]},
+      {id:"pn6",nome:"Pietra Serena (arenaria) 40×40 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Grigio toscano, adatta per interni ed esterni",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:40},{label:"Pacco 5 m²",kg:5,prezzo:185}]},
+      {id:"pn7",nome:"Ardesia naturale 30×60 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Pietra nera/grigia, per esterni e rivestimenti muro",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:34},{label:"Pacco 5 m²",kg:5,prezzo:158}]},
+      {id:"pn8",nome:"Pietra calcarea 40×40 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Tono beige/avorio naturale, per esterni e interni rustici",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:30},{label:"Pacco 5 m²",kg:5,prezzo:138}]},
+      {id:"pn9",nome:"Impregnante protettivo per pietra naturale",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Pre-posa e manutenzione, 1-2 mani, su marmo/travertino/ardesia",confezioni:[{label:"Tanica 1 l",kg:1,prezzo:18},{label:"Tanica 5 l",kg:5,prezzo:75}]},
     ],
+
+    "Parquet in legno":[
+      {id:"pk1",nome:"Parquet massello 10×70 cm (rovere)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Posa incollata o galleggiante, levigabile più volte nel tempo",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:55},{label:"Pacco 5 m²",kg:5,prezzo:265}]},
+      {id:"pk2",nome:"Parquet prefinito multistrato (rovere)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Posa flottante o incollata, finitura olio o lacca già applicata",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:38},{label:"Pacco 5 m²",kg:5,prezzo:178}]},
+      {id:"pk3",nome:"Listoni incollati 15×120 cm (rovere/noce)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Effetto elegante, posa con colla poliuretanica",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:45},{label:"Pacco 5 m²",kg:5,prezzo:210}]},
+      {id:"pk4",nome:"Parquet flottante a incastro",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Posa rapida senza colla, adatto su riscaldamento a pavimento",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:30},{label:"Pacco 5 m²",kg:5,prezzo:138}]},
+    ],
+
+    "Pavimenti in laminato e vinilico":[
+      {id:"lam1",nome:"Pavimento laminato HDF (AC4 — uso residenziale intenso)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Spessore 8-10 mm, resistente all'abrasione, posa flottante",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:16},{label:"Pacco 5 m²",kg:5,prezzo:72}]},
+      {id:"lam2",nome:"Pavimento laminato HDF (AC5 — uso commerciale)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Spessore 10-12 mm, alta resistenza, per uffici e locali commerciali",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:22},{label:"Pacco 5 m²",kg:5,prezzo:100}]},
+      {id:"lvt1",nome:"LVT — Luxury Vinyl Tile (effetto legno/pietra)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Impermeabile al 100%, posa a click o incollata, per cucina e bagno",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:20},{label:"Pacco 5 m²",kg:5,prezzo:92}]},
+      {id:"spc1",nome:"Pavimento SPC/WPC rigido impermeabile",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Nucleo in pietra composita, silenzioso, per ambienti umidi",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:25},{label:"Pacco 5 m²",kg:5,prezzo:115}]},
+    ],
+
+    "Pavimenti resilienti e industriali":[
+      {id:"res1",nome:"Gomma in rotoli (pavimento resiliente)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Antisdrucciolo naturale, per palestre, scale e ambienti tecnici",confezioni:[{label:"Rotolo 10 m²",kg:10,prezzo:80},{label:"Rotolo 5 m²",kg:5,prezzo:45}]},
+      {id:"res2",nome:"Linoleum naturale",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Materiale naturale a base di olio di lino, ecologico, per uffici",confezioni:[{label:"Rotolo 10 m²",kg:10,prezzo:75},{label:"Rotolo 5 m²",kg:5,prezzo:42}]},
+      {id:"res3",nome:"PVC omogeneo per ambienti sanitari",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Omogeneo su tutta la sezione, per ospedali e cliniche",confezioni:[{label:"Rotolo 10 m²",kg:10,prezzo:65}]},
+    ],
+
+    "Pavimenti esterni":[
+      {id:"est1",nome:"Decking in WPC (composito legno-plastica)",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Alternativa ecologica al legno, resistente all'umidità, per terrazzi",confezioni:[{label:"Pacco 1 m²",kg:1,prezzo:28},{label:"Pacco 5 m²",kg:5,prezzo:128}]},
+      {id:"est2",nome:"Autobloccanti in cls (betonella) 20×10 cm",resa:50,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:0.50,note:"Per vialetti, parcheggi e cortili",confezioni:[{label:"Bancale 400 pz (8 m²)",kg:400,prezzo:200},{label:"100 pezzi",kg:100,prezzo:55}]},
+      {id:"est3",nome:"Massello in cls autobloccante (6 cm)",resa:40,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:0.70,note:"Alta resistenza al traffico veicolare",confezioni:[{label:"Bancale 300 pz (7,5 m²)",kg:300,prezzo:210},{label:"100 pezzi",kg:100,prezzo:75}]},
+    ],
+
+    "Rivestimenti in resina e microcemento":[
+      {id:"rv1",nome:"Microcemento per pareti (monocomponente)",resa:0.5,unitaResa:"kg/m²",unita:"m²",note:"Effetto cemento opaco, spessore ~1 mm, 2 mani",confezioni:[{label:"Sacco 15 kg (30 m²)",kg:15,prezzo:48},{label:"Sacco 20 kg (40 m²)",kg:20,prezzo:62}]},
+      {id:"rv2",nome:"Microcemento per pavimenti (bicomponente)",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Alta resistenza al calpestio, spessore ~3 mm",confezioni:[{label:"Kit 20 kg (13 m²)",kg:20,prezzo:88},{label:"Kit 30 kg (20 m²)",kg:30,prezzo:125}]},
+      {id:"rv3",nome:"Resina epossidica decorativa per pareti",resa:0.4,unitaResa:"kg/m²",unita:"m²",note:"Effetto continuo lucido o opaco, per bagni e cucine",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:55},{label:"Kit 15 kg",kg:15,prezzo:145}]},
+    ],
+
+    "Rivestimenti decorativi":[
+      {id:"deco1",nome:"Carta da parati vinilica lavabile",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Facile da applicare e rimuovere, resistente all'umidità",confezioni:[{label:"Rotolo 10 m²",kg:10,prezzo:25},{label:"Rotolo 5 m²",kg:5,prezzo:14}]},
+      {id:"deco2",nome:"Pannelli 3D decorativi in PVC",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Effetto tridimensionale, leggeri, facili da incollare",confezioni:[{label:"Pacco 5 m²",kg:5,prezzo:38},{label:"Pacco 1 m²",kg:1,prezzo:10}]},
+    ],
+
+    "Accessori, profili e battiscopa":[
+      {id:"acc1",nome:"Battiscopa in legno MDF laccato bianco (7 cm)",resa:1,unitaResa:"ml/ml",unita:"ml",note:"Finitura bianca, spessore 12 mm, h 70 mm",confezioni:[{label:"Barra 2,4 m",kg:2.4,prezzo:6},{label:"Barra 2 m",kg:2,prezzo:5}]},
+      {id:"acc2",nome:"Battiscopa in PVC flessibile",resa:1,unitaResa:"ml/ml",unita:"ml",note:"Flessibile per pareti curve, facile da tagliare e incollare",confezioni:[{label:"Rotolo 25 m",kg:25,prezzo:28},{label:"Rotolo 50 m",kg:50,prezzo:52}]},
+      {id:"acc3",nome:"Profilo di transizione in alluminio",resa:1,unitaResa:"ml/ml",unita:"ml",note:"Per raccordo tra pavimenti diversi, varie larghezze",confezioni:[{label:"Barra 0,9 m",kg:0.9,prezzo:8},{label:"Barra 1,8 m",kg:1.8,prezzo:14}]},
+      {id:"acc4",nome:"Profilo angolare in acciaio inox",resa:1,unitaResa:"ml/ml",unita:"ml",note:"Protezione spigoli di scale e gradini",confezioni:[{label:"Barra 2,7 m",kg:2.7,prezzo:12}]},
+    ],
+
   }},
   "🎨 Pitture & Finiture":{icon:"🎨",colore:"#7A3E8A",sottocategorie:{
-    "Pitture per interni":[
-      {id:"pi1",nome:"Pittura murale traspirante",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"1 mano, ideale per colori chiari",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:28},{label:"Secchio 4 l",kg:4,prezzo:10},{label:"Latta 1 l",kg:1,prezzo:4}]},
-      {id:"pi2",nome:"Pittura lavabile premium",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"1 mano, alta potere coprente",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:45},{label:"Secchio 4 l",kg:4,prezzo:15}]},
-      {id:"pi3",nome:"Fondo quarzo / isolante",resa:0.2,unitaResa:"l/m²",unita:"m²",note:"Fondo per intonaci nuovi e assorbenti",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:38},{label:"Secchio 5 l",kg:5,prezzo:16}]},
-      {id:"pi4",nome:"Smalto ad acqua satinato",resa:0.1,unitaResa:"l/m²",unita:"m²",note:"Adatto su legno, ferro e muratura",confezioni:[{label:"Latta 0.75 l",kg:0.75,prezzo:8},{label:"Latta 2.5 l",kg:2.5,prezzo:18},{label:"Secchio 5 l",kg:5,prezzo:30}]},
+
+    "Pitture per interni — Lavabili e traspiranti":[
+      {id:"pi_lv1",nome:"Pittura lavabile vinilica standard",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"1 mano, economica, facile applicazione su pareti e soffitti",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:28},{label:"Secchio 4 l",kg:4,prezzo:10}]},
+      {id:"pi_lv2",nome:"Pittura lavabile acrilica premium",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"1 mano, alta coprenza, resistente allo strofinamento",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:45},{label:"Secchio 4 l",kg:4,prezzo:15}]},
+      {id:"pi_lv3",nome:"Pittura superlavabile (alta resistenza)",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"Per ambienti ad alta usura: corridoi, cucine, locali commerciali",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:58},{label:"Secchio 4 l",kg:4,prezzo:19}]},
+      {id:"pi_tr1",nome:"Pittura traspirante per muri interni",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Permette la traspirazione del muro, ideale per ambienti umidi",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:35},{label:"Secchio 4 l",kg:4,prezzo:12}]},
+      {id:"pi_tr2",nome:"Pittura traspirante antimuffa",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Con additivi antimuffa, per bagni e ambienti soggetti a condensa",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:48},{label:"Secchio 4 l",kg:4,prezzo:16}]},
     ],
-    "Pitture per esterni":[
-      {id:"pe1",nome:"Pittura silossanica per facciata",resa:0.18,unitaResa:"l/m²",unita:"m²",note:"1 mano, effetto idrorepellente",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:55},{label:"Secchio 4 l",kg:4,prezzo:18}]},
-      {id:"pe2",nome:"Pittura minerale al silicato",resa:0.2,unitaResa:"l/m²",unita:"m²",note:"Facciate storiche, altamente traspirante",confezioni:[{label:"Secchio 15 l",kg:15,prezzo:70},{label:"Secchio 5 l",kg:5,prezzo:28}]},
-      {id:"pe3",nome:"Fondo consolidante per esterni",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Primer di preparazione per intonaci esterni",confezioni:[{label:"Secchio 10 l",kg:10,prezzo:25},{label:"Latta 2.5 l",kg:2.5,prezzo:10}]},
+
+    "Pitture per interni — Antimuffa e coprenti":[
+      {id:"pi_am1",nome:"Pittura antimuffa igienizzante",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"Elimina e previene muffa e alghe, per cucine e bagni",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:55},{label:"Secchio 4 l",kg:4,prezzo:19}]},
+      {id:"pi_am2",nome:"Pittura antimuffa con additivi antibatterici",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"Certificata per ambienti sanitari, inibisce la crescita batterica",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:68},{label:"Secchio 4 l",kg:4,prezzo:23}]},
+      {id:"pi_co1",nome:"Pittura supercoprente",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"Copre anche tinte scure in 1-2 mani, bianca ad alta resa",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:52},{label:"Secchio 4 l",kg:4,prezzo:18}]},
+      {id:"pi_co2",nome:"Pittura ad alta resa (economica)",resa:0.08,unitaResa:"l/m²",unita:"m²",note:"Elevata copertura per litro, per grandi superfici",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:32},{label:"Secchio 4 l",kg:4,prezzo:11}]},
     ],
-    "Vernici speciali":[
-      {id:"vs1",nome:"Vernice per pavimenti",resa:0.13,unitaResa:"l/m²",unita:"m²",note:"1 mano, per garage e officine",confezioni:[{label:"Secchio 5 l",kg:5,prezzo:32},{label:"Secchio 10 l",kg:10,prezzo:55}]},
-      {id:"vs2",nome:"Impregnante per legno esterno",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"Protezione da raggi UV e umidità",confezioni:[{label:"Latta 2.5 l",kg:2.5,prezzo:22},{label:"Secchio 5 l",kg:5,prezzo:38}]},
+
+    "Pitture per esterni — Acriliche e silossaniche":[
+      {id:"pe_ac1",nome:"Pittura acrilica per facciate",resa:0.18,unitaResa:"l/m²",unita:"m²",note:"Resistente agli agenti atmosferici, per facciate nuove e riprese",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:45},{label:"Secchio 4 l",kg:4,prezzo:16}]},
+      {id:"pe_ac2",nome:"Pittura acrilica elastomerica",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Elastica, copre micro-fessure fino a 1 mm, per facciate con movimenti",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:62},{label:"Secchio 4 l",kg:4,prezzo:21}]},
+      {id:"pe_si1",nome:"Pittura silossanica traspirante",resa:0.18,unitaResa:"l/m²",unita:"m²",note:"Idrorepellente e traspirante, alta durata per facciate",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:58},{label:"Secchio 4 l",kg:4,prezzo:20}]},
+      {id:"pe_si2",nome:"Pittura silossanica idrorepellente",resa:0.18,unitaResa:"l/m²",unita:"m²",note:"Effetto loto, respinge acqua e sporco, per facciate difficili",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:72},{label:"Secchio 4 l",kg:4,prezzo:24}]},
     ],
+
+    "Pitture per esterni — Minerali e quarzo":[
+      {id:"pe_ss1",nome:"Pittura ai silicati di potassio",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Minerale pura, si lega chimicamente all'intonaco, altamente traspirante",confezioni:[{label:"Secchio 15 l",kg:15,prezzo:72},{label:"Secchio 5 l",kg:5,prezzo:28}]},
+      {id:"pe_ss2",nome:"Pittura ai silicati modificata",resa:0.18,unitaResa:"l/m²",unita:"m²",note:"Con aggiunta di resine per migliore adesione su supporti diversi",confezioni:[{label:"Secchio 15 l",kg:15,prezzo:62},{label:"Secchio 5 l",kg:5,prezzo:24}]},
+      {id:"pe_q1",nome:"Pittura al quarzo per esterni",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Riempitiva, copre micro-crepe, resistente ai raggi UV",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:48},{label:"Secchio 4 l",kg:4,prezzo:16}]},
+      {id:"pe_q2",nome:"Rivestimento quarzato (granulato)",resa:2.5,unitaResa:"kg/m²",unita:"m²",note:"Finitura a granelli, effetto ruvido decorativo, alte prestazioni",confezioni:[{label:"Secchio 25 kg",kg:25,prezzo:38},{label:"Secchio 5 kg",kg:5,prezzo:10}]},
+    ],
+
+    "Pitture minerali (restauro e bioedilizia)":[
+      {id:"pm_c1",nome:"Pittura a calce naturale",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Traspirante, antibatterica naturale, per interni ed esterni",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:38},{label:"Secchio 4 l",kg:4,prezzo:14}]},
+      {id:"pm_c2",nome:"Pittura a grassello di calce",resa:0.25,unitaResa:"l/m²",unita:"m²",note:"Tradizionale, per restauro di edifici storici, alta traspirabilità",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:32},{label:"Secchio 4 l",kg:4,prezzo:12}]},
+      {id:"pm_s1",nome:"Pittura ai silossani minerali",resa:0.18,unitaResa:"l/m²",unita:"m²",note:"Minerale con idrorepellenza integrata, per facciate storiche ed edifici di pregio",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:82},{label:"Secchio 4 l",kg:4,prezzo:28}]},
+    ],
+
+    "Pitture decorative — Effetti materici":[
+      {id:"pd_e1",nome:"Spatolato veneziano",resa:0.30,unitaResa:"kg/m²",unita:"m²",note:"Effetto continuo a spatola, lucido o opaco, per interni eleganti",confezioni:[{label:"Secchio 20 kg (66 m²)",kg:20,prezzo:65},{label:"Secchio 5 kg",kg:5,prezzo:20}]},
+      {id:"pd_e2",nome:"Stucco veneziano a calce e marmo",resa:0.25,unitaResa:"kg/m²",unita:"m²",note:"Finitura lucidissima a base di calce e polvere di marmo, effetto pietra",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:85},{label:"Secchio 5 kg",kg:5,prezzo:25}]},
+      {id:"pd_e3",nome:"Marmorino (calce + polvere di marmo)",resa:0.35,unitaResa:"kg/m²",unita:"m²",note:"Finitura tradizionale veneziana, traspirante e antibatterica",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:78},{label:"Secchio 5 kg",kg:5,prezzo:22}]},
+    ],
+
+    "Pitture decorative — Effetti speciali":[
+      {id:"pd_s1",nome:"Pittura effetto sabbiato",resa:0.30,unitaResa:"kg/m²",unita:"m²",note:"Superficie granulare effetto sabbia, opaco e contemporaneo",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:52},{label:"Secchio 4 l",kg:4,prezzo:18}]},
+      {id:"pd_s2",nome:"Pittura effetto metallizzato",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Riflessi metallici (oro, argento, rame), per pareti d'accento",confezioni:[{label:"Secchio 5 l",kg:5,prezzo:48},{label:"Secchio 1 l",kg:1,prezzo:12}]},
+      {id:"pd_s3",nome:"Pittura effetto velluto",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Superficie morbida e vellutata, profondità cromatica unica",confezioni:[{label:"Secchio 5 l",kg:5,prezzo:55},{label:"Secchio 1 l",kg:1,prezzo:14}]},
+      {id:"pd_s4",nome:"Velatura decorativa",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"Effetto semitrasparente su tinta di fondo, per effetti artistici",confezioni:[{label:"Secchio 5 l",kg:5,prezzo:32},{label:"Latta 1 l",kg:1,prezzo:8}]},
+      {id:"pd_s5",nome:"Pittura effetto cemento",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Look industriale, grigio opaco materico, senza la complessità del microcemento",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:62},{label:"Secchio 4 l",kg:4,prezzo:21}]},
+    ],
+
+    "Pitture tecniche — Termiche e ignifughe":[
+      {id:"pt_t1",nome:"Pittura termoisolante anticondensa",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Riduce la formazione di condensa sulle pareti fredde",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:65},{label:"Secchio 4 l",kg:4,prezzo:22}]},
+      {id:"pt_t2",nome:"Pittura termica (nano-isolante)",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Riduce le dispersioni termiche, 2-3 mani equivalgono a 2-3 cm di isolante",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:95},{label:"Secchio 4 l",kg:4,prezzo:32}]},
+      {id:"pt_f1",nome:"Pittura intumescente (antincendio)",resa:0.30,unitaResa:"l/m²",unita:"m²",note:"Si espande al calore formando uno strato protettivo, per strutture in acciaio e legno",confezioni:[{label:"Secchio 5 l",kg:5,prezzo:85},{label:"Secchio 15 l",kg:15,prezzo:230}]},
+      {id:"pt_f2",nome:"Pittura ritardante di fiamma (classe 1)",resa:0.25,unitaResa:"l/m²",unita:"m²",note:"Classifica la superficie come classe 1 di reazione al fuoco",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:78},{label:"Secchio 4 l",kg:4,prezzo:26}]},
+    ],
+
+    "Pitture tecniche — Impermeabilizzanti":[
+      {id:"pt_i1",nome:"Pittura elastomerica impermeabile",resa:0.25,unitaResa:"l/m²",unita:"m²",note:"Per terrazzi non calpestabili e coperture piane, elastica e resistente ai raggi UV",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:72},{label:"Secchio 4 l",kg:4,prezzo:24}]},
+      {id:"pt_i2",nome:"Pittura protettiva impermeabilizzante per terrazzi",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"2-3 mani, su calcestruzzo e muratura, resistente al calpestio",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:85},{label:"Secchio 4 l",kg:4,prezzo:28}]},
+      {id:"pt_ab1",nome:"Pittura igienizzante antibatterica",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"Certificata, per ospedali, scuole e ambienti dove serve igiene elevata",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:78},{label:"Secchio 4 l",kg:4,prezzo:26}]},
+    ],
+
+    "Pitture per legno":[
+      {id:"leg1",nome:"Impregnante per legno esterno",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"Protegge dall'umidità, raggi UV e insetti, penetra in profondità",confezioni:[{label:"Latta 2,5 l",kg:2.5,prezzo:22},{label:"Secchio 5 l",kg:5,prezzo:38}]},
+      {id:"leg2",nome:"Smalto per legno (satinato/lucido)",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"Finitura coprente, per porte, finestre e mobili, resistente all'usura",confezioni:[{label:"Latta 0,75 l",kg:0.75,prezzo:9},{label:"Latta 2,5 l",kg:2.5,prezzo:22},{label:"Secchio 5 l",kg:5,prezzo:38}]},
+      {id:"leg3",nome:"Vernice protettiva trasparente per legno",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"Trasparente, mantiene la venatura naturale, per pavimenti e mobili",confezioni:[{label:"Latta 2,5 l",kg:2.5,prezzo:18},{label:"Secchio 5 l",kg:5,prezzo:32}]},
+    ],
+
+    "Pitture per metallo":[
+      {id:"met1",nome:"Smalto antiruggine per ferro",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"Protegge dall'ossidazione, diretto su metallo anche arrugginito",confezioni:[{label:"Latta 0,75 l",kg:0.75,prezzo:8},{label:"Latta 2,5 l",kg:2.5,prezzo:20},{label:"Secchio 5 l",kg:5,prezzo:35}]},
+      {id:"met2",nome:"Smalto ferro micaceo",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"Finitura a scaglie di mica, alta resistenza agli agenti atmosferici",confezioni:[{label:"Latta 2,5 l",kg:2.5,prezzo:24},{label:"Secchio 5 l",kg:5,prezzo:42}]},
+      {id:"met3",nome:"Vernice anticorrosiva epossidica",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Per ambienti aggressivi, strutture metalliche in esterno",confezioni:[{label:"Latta 2,5 l",kg:2.5,prezzo:35},{label:"Secchio 5 l",kg:5,prezzo:62}]},
+    ],
+
+    "Pitture per pavimenti":[
+      {id:"pav1",nome:"Pittura epossidica per pavimenti",resa:0.13,unitaResa:"l/m²",unita:"m²",note:"1 mano, per garage, cantine e officine, facile da pulire",confezioni:[{label:"Secchio 5 l",kg:5,prezzo:32},{label:"Secchio 10 l",kg:10,prezzo:58}]},
+      {id:"pav2",nome:"Pittura poliuretanica per pavimenti",resa:0.13,unitaResa:"l/m²",unita:"m²",note:"Alta resistenza chimica e meccanica, per capannoni e parcheggi",confezioni:[{label:"Secchio 5 l",kg:5,prezzo:48},{label:"Secchio 10 l",kg:10,prezzo:85}]},
+      {id:"pav3",nome:"Vernice per pavimenti garage (ad acqua)",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"Facile applicazione, resistente all'abrasione, ad asciugatura rapida",confezioni:[{label:"Secchio 5 l",kg:5,prezzo:28},{label:"Secchio 10 l",kg:10,prezzo:48}]},
+    ],
+
+    "Primer, fondi e fissativi":[
+      {id:"fo1",nome:"Fissativo acrilico per muri",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Consolida intonaci polverosi e porosi prima della tinteggiatura",confezioni:[{label:"Secchio 10 l",kg:10,prezzo:18},{label:"Secchio 5 l",kg:5,prezzo:10}]},
+      {id:"fo2",nome:"Fondo uniformante (quarzo / bianco)",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Uniforma l'assorbimento del supporto, migliora la resa della pittura finale",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:35},{label:"Secchio 4 l",kg:4,prezzo:12}]},
+      {id:"fo3",nome:"Primer acrilico per muri (fondo aggrappante)",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Per intonaci nuovi o supporti lisci difficili, miglioradesione della pittura",confezioni:[{label:"Secchio 10 l",kg:10,prezzo:25},{label:"Secchio 5 l",kg:5,prezzo:15}]},
+    ],
+
   }},
-  "🧪 Resine & Speciali":{icon:"🧪",colore:"#8A1A1A",sottocategorie:{
+    "🧪 Resine & Speciali":{icon:"🧪",colore:"#8A1A1A",sottocategorie:{
     "Resine per pavimenti":[
       {id:"re1",nome:"Primer epossidico penetrante",resa:0.2,unitaResa:"kg/m²",unita:"m²",note:"Preparazione del supporto",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:45},{label:"Kit 10 kg",kg:10,prezzo:80}]},
       {id:"re2",nome:"Resina epossidica finitura",resa:0.4,unitaResa:"kg/m²",unita:"m²",note:"1 mano, per garage e ambienti industriali",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:60},{label:"Kit 25 kg",kg:25,prezzo:250}]},
       {id:"re3",nome:"Resina poliuretanica antisdrucciolo",resa:0.6,unitaResa:"kg/m²",unita:"m²",note:"Per parcheggi, rampe e superfici esterne",confezioni:[{label:"Kit 6 kg",kg:6,prezzo:80},{label:"Kit 20 kg",kg:20,prezzo:230}]},
       {id:"re4",nome:"Resina epossidica autolivellante",resa:2.5,unitaResa:"kg/m²",unita:"m²",note:"Spessore 2 mm, finitura continua",confezioni:[{label:"Kit 10 kg",kg:10,prezzo:95},{label:"Kit 30 kg",kg:30,prezzo:260}]},
     ],
+    "Malte da costruzione (allettamento)":[
+      {id:"mu_b1",nome:"Malta bastarda (calce + cemento + sabbia)",resa:380,unitaResa:"kg/m³",unita:"m³",note:"La più usata in edilizia: elastica ma resistente, per murature divisorie e tamponamenti",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 40 kg",kg:40,prezzo:8}]},
+      {id:"mu_c1",nome:"Malta cementizia (cemento + sabbia)",resa:400,unitaResa:"kg/m³",unita:"m³",note:"Molto rigida, per muri portanti e fondazioni dove serve la massima tenuta meccanica",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:6},{label:"Sacco 40 kg",kg:40,prezzo:9}]},
+      {id:"mu_nhl",nome:"Malta di calce idraulica naturale (NHL 5)",resa:340,unitaResa:"kg/m³",unita:"m³",note:"Per restauro e bioedilizia: traspirante, permette all'umidità di uscire dal muro",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12},{label:"Sacco 20 kg",kg:20,prezzo:10}]},
+    ],
+    "Malte da ripristino strutturale":[
+      {id:"mr1",nome:"Malta tissotropica R3/R4 (anti-ritiro)",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Non cola neanche a soffitto, ritiro compensato: per spigoli di pilastri e travi ammalorate",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:28},{label:"Sacco 10 kg",kg:10,prezzo:13}]},
+      {id:"mr2",nome:"Malta colabile strutturale (grout)",resa:2100,unitaResa:"kg/m³",unita:"m³",note:"Molto fluida, si versa in casseri: per teste di pilastri e riempimento di grandi cavità",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:22}]},
+      {id:"mr3",nome:"Malta fibrorinforzata per ripristino",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Con fibre (vetro/acciaio/polimeri): migliora la resistenza a trazione e previene fessurazioni",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:32},{label:"Sacco 10 kg",kg:10,prezzo:15}]},
+    ],
+    "Malte per condizioni estreme":[
+      {id:"me1",nome:"Malta refrattaria (resistenza al fuoco)",resa:1800,unitaResa:"kg/m³",unita:"m³",note:"Resiste fino a oltre 1200°C: per barbecue, forni a legna, camini e stufe",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:18},{label:"Sacco 5 kg",kg:5,prezzo:6}]},
+      {id:"me2",nome:"Malta rapida / lampo",resa:1800,unitaResa:"kg/m³",unita:"m³",note:"Presa in 2-5 minuti anche sott'acqua: per fissaggio zanche, tasselli e bloccaggio perdite",confezioni:[{label:"Sacco 5 kg",kg:5,prezzo:8},{label:"Sacco 25 kg",kg:25,prezzo:22}]},
+    ],
     "Prodotti speciali":[
-      {id:"ps1",nome:"Betoncino strutturale / Grout",resa:2100,unitaResa:"kg/m³",unita:"m³",note:"Per ancoraggi meccanici e ripristini strutturali",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:18}]},
-      {id:"ps2",nome:"Malta tissotropica di ripristino",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Ripristino di calcestruzzo ammalorato, spessore 1 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:22},{label:"Sacco 10 kg",kg:10,prezzo:10}]},
-      {id:"ps3",nome:"Additivo fluidificante",resa:3,unitaResa:"ml/kg cemento",unita:"kg cemento",note:"Dosaggio: 3 ml per kg di cemento",confezioni:[{label:"Tanica 5 l",kg:5,prezzo:18},{label:"Tanica 20 l",kg:20,prezzo:55}]},
-      {id:"ps4",nome:"Disarmante per casseforme",resa:0.1,unitaResa:"l/m²",unita:"m²",note:"Previene l'adesione del calcestruzzo alle casseforme",confezioni:[{label:"Tanica 5 l",kg:5,prezzo:15},{label:"Tanica 25 l",kg:25,prezzo:55}]},
+      {id:"ps3",nome:"Additivo fluidificante per calcestruzzo",resa:3,unitaResa:"ml/kg cemento",unita:"kg cemento",note:"Dosaggio: 3 ml per kg di cemento, migliora lavorabilità e riduce acqua",confezioni:[{label:"Tanica 5 l",kg:5,prezzo:18},{label:"Tanica 20 l",kg:20,prezzo:55}]},
+      {id:"ps4",nome:"Disarmante per casseforme",resa:0.1,unitaResa:"l/m²",unita:"m²",note:"Previene l'adesione del calcestruzzo alle casseforme, per riutilizzo",confezioni:[{label:"Tanica 5 l",kg:5,prezzo:15},{label:"Tanica 25 l",kg:25,prezzo:55}]},
     ],
     "Resine decorative a parete":[
       {id:"rp1",nome:"Resina acrilica decorativa per pareti",resa:0.3,unitaResa:"kg/m²",unita:"m²",note:"Effetto materico, 1 mano, interni",confezioni:[{label:"Secchio 5 kg",kg:5,prezzo:38},{label:"Secchio 15 kg",kg:15,prezzo:105}]},
@@ -1112,7 +1394,9 @@ function pickSotto(k) { mState.sotto=k; mState.passo=2; renderModal(); }
 
 function renderModalP2(cat) {
   const items = cat.sottocategorie[mState.sotto].map(m => {
+    const tipoLabel = m.tipo==="pz"?"🧱 Venduto a pezzi":m.tipo==="lastra"?"📄 Venduto a lastre":"";
     const prezzi = m.confezioni.map(c=>`${c.label} → ${eur(c.prezzo)}`).join(" · ");
+    const prezziPills = m.confezioni.map(c=>`<span style="display:inline-block;background:${cat.colore}15;border:1px solid ${cat.colore}40;border-radius:20px;padding:2px 8px;font-size:11px;font-weight:700;color:${cat.colore};white-space:nowrap">${c.label} <b>${eur(c.prezzo)}</b></span>`).join("");
     const editorId = "pe-" + m.id;
     const confInputs = m.confezioni.map((c,i)=>`
       <div class="price-row">
@@ -1130,8 +1414,12 @@ function renderModalP2(cat) {
         <button class="select-item" style="flex:1" onclick="pickMat('${m.id}')">
           <div style="text-align:left">
             <div class="select-item-main">${m.nome}</div>
-            <div class="select-item-sub">Resa: ${m.resa} ${m.unitaResa} · ${m.note}</div>
-            <div class="select-item-price" id="pp-${m.id}" style="color:${cat.colore}">${prezzi}</div>
+            <div class="select-item-sub">${m.note}</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
+              <span style="font-size:10px;background:${cat.colore}22;color:${cat.colore};border-radius:20px;padding:2px 8px;font-weight:800;letter-spacing:.3px">⚖️ ${m.resa} ${m.unitaResa}</span>
+              ${tipoLabel?`<span style="font-size:10px;background:#f5f5f5;color:#888;border-radius:20px;padding:2px 7px">${tipoLabel}</span>`:""}
+            </div>
+            <div class="select-item-price" id="pp-${m.id}" data-color="${cat.colore}">${prezziPills}</div>
           </div>
           <span class="select-arrow" style="color:${cat.colore}">›</span>
         </button>
