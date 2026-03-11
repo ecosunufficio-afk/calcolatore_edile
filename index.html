@@ -468,32 +468,41 @@
 const DB = {
   "🏗️ Elementi Costruttivi":{icon:"🏗️",colore:"#5E3A1A",sottocategorie:{
     "Blocchi forati in laterizio":[
-      {id:"bf1",nome:"Laterizio forato 8×12×25 cm",resa:16,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:0.20,note:"Tramezza leggera sp. 8 cm",confezioni:[{label:"Bancale (640 pz)",kg:640,prezzo:128},{label:"100 pezzi",kg:100,prezzo:20}]},
-      {id:"bf2",nome:"Laterizio forato 10×20×25 cm",resa:10,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:0.22,note:"Tramezza standard sp. 10 cm",confezioni:[{label:"Bancale (400 pz)",kg:400,prezzo:88},{label:"100 pezzi",kg:100,prezzo:22}]},
-      {id:"bf3",nome:"Laterizio forato 12×20×25 cm",resa:10,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:0.25,note:"Tramezza o controparete sp. 12 cm",confezioni:[{label:"Bancale (360 pz)",kg:360,prezzo:90},{label:"100 pezzi",kg:100,prezzo:25}]},
-      {id:"bf4",nome:"Laterizio forato 15×20×25 cm",resa:10,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:0.30,note:"Controparete e doppia parete sp. 15 cm",confezioni:[{label:"Bancale (300 pz)",kg:300,prezzo:90},{label:"100 pezzi",kg:100,prezzo:30}]},
-      {id:"bf5",nome:"Laterizio forato 20×20×25 cm",resa:10,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:0.38,note:"Tamponamento perimetrale sp. 20 cm",confezioni:[{label:"Bancale (240 pz)",kg:240,prezzo:91},{label:"100 pezzi",kg:100,prezzo:38}]},
-      {id:"bf6",nome:"Laterizio forato 25×20×25 cm",resa:10,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:0.45,note:"Tamponamento spesso o parete doppia sp. 25 cm",confezioni:[{label:"Bancale (200 pz)",kg:200,prezzo:90},{label:"100 pezzi",kg:100,prezzo:45}]},
+      {id:"bf1",nome:"Laterizio forato 8×12×25 cm",resa:16,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tramezza leggera sp. 8 cm",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.20}]},
+      {id:"bf1b",nome:"Laterizio forato 8×25×25 cm",resa:8,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tramezza leggera sp. 8 cm — formato 25×25",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.28}]},
+      {id:"bf2",nome:"Laterizio forato 10×20×25 cm",resa:10,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tramezza standard sp. 10 cm",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.22}]},
+      {id:"bf2b",nome:"Laterizio forato 10×25×25 cm",resa:8,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tramezza standard sp. 10 cm — formato 25×25",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.30}]},
+      {id:"bf3",nome:"Laterizio forato 12×20×25 cm",resa:10,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tramezza o controparete sp. 12 cm",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.25}]},
+      {id:"bf3b",nome:"Laterizio forato 12×25×25 cm",resa:8,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tramezza o controparete sp. 12 cm — formato 25×25",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.33}]},
+      {id:"bf4",nome:"Laterizio forato 15×20×25 cm",resa:10,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Controparete e doppia parete sp. 15 cm",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.30}]},
+      {id:"bf5",nome:"Laterizio forato 20×20×25 cm",resa:10,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tamponamento perimetrale sp. 20 cm",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.38}]},
+      {id:"bf6",nome:"Laterizio forato 25×20×25 cm",resa:10,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tamponamento spesso o parete doppia sp. 25 cm",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.45}]},
+    ],
+    "Blocchi di gesso — Siporex":[
+      {id:"sg1",nome:"Blocco in gesso Siporex 8×25×62,5 cm",resa:6.4,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tramezza leggera sp. 8 cm, blocco 25×62,5 cm",confezioni:[{label:"1 pezzo",kg:1,prezzo:3.50}]},
+      {id:"sg2",nome:"Blocco in gesso Siporex 10×25×62,5 cm",resa:6.4,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tramezza standard sp. 10 cm, blocco 25×62,5 cm",confezioni:[{label:"1 pezzo",kg:1,prezzo:4.50}]},
+      {id:"sg3",nome:"Blocco in gesso Siporex 15×25×62,5 cm",resa:6.4,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tramezza rinforzata sp. 15 cm, blocco 25×62,5 cm",confezioni:[{label:"1 pezzo",kg:1,prezzo:5.50}]},
+      {id:"sg4",nome:"Blocco in gesso Siporex 20×25×62,5 cm",resa:6.4,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Parete divisoria spessa sp. 20 cm, blocco 25×62,5 cm",confezioni:[{label:"1 pezzo",kg:1,prezzo:6.80}]},
     ],
     "Blocchi Poroton — laterizio porizzato":[
-      {id:"bp1",nome:"Poroton sp. 20 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:3.00,note:"Tamponamento, trasmittanza λ 0.18 W/mK",confezioni:[{label:"Bancale (60 pz — 12 m²)",kg:60,prezzo:180},{label:"25 pezzi",kg:25,prezzo:75}]},
-      {id:"bp2",nome:"Poroton sp. 25 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:3.50,note:"Tamponamento o muratura portante",confezioni:[{label:"Bancale (50 pz — 10 m²)",kg:50,prezzo:175},{label:"25 pezzi",kg:25,prezzo:88}]},
-      {id:"bp3",nome:"Poroton sp. 30 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:4.20,note:"Alta inerzia e sfasamento termico, λ 0.14 W/mK",confezioni:[{label:"Bancale (40 pz — 8 m²)",kg:40,prezzo:168},{label:"20 pezzi",kg:20,prezzo:84}]},
-      {id:"bp4",nome:"Poroton sp. 38 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:5.50,note:"Parete monostrato senza cappotto",confezioni:[{label:"Bancale (30 pz — 6 m²)",kg:30,prezzo:165},{label:"15 pezzi",kg:15,prezzo:83}]},
-      {id:"bp5",nome:"Poroton sp. 45 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:7.00,note:"Massima prestazione termica monostrato",confezioni:[{label:"Bancale (25 pz — 5 m²)",kg:25,prezzo:175},{label:"10 pezzi",kg:10,prezzo:70}]},
+      {id:"bp1",nome:"Poroton sp. 20 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tamponamento, trasmittanza λ 0.18 W/mK",confezioni:[{label:"1 pezzo",kg:1,prezzo:3.00}]},
+      {id:"bp2",nome:"Poroton sp. 25 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tamponamento o muratura portante",confezioni:[{label:"1 pezzo",kg:1,prezzo:3.50}]},
+      {id:"bp3",nome:"Poroton sp. 30 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Alta inerzia e sfasamento termico, λ 0.14 W/mK",confezioni:[{label:"1 pezzo",kg:1,prezzo:4.20}]},
+      {id:"bp4",nome:"Poroton sp. 38 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Parete monostrato senza cappotto",confezioni:[{label:"1 pezzo",kg:1,prezzo:5.50}]},
+      {id:"bp5",nome:"Poroton sp. 45 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Massima prestazione termica monostrato",confezioni:[{label:"1 pezzo",kg:1,prezzo:7.00}]},
     ],
     "Mattoni pieni e semipieni":[
-      {id:"mp1",nome:"Mattone pieno 5,5×12×25 cm",resa:32,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:0.38,note:"Muratura portante, consolidamenti e restauro",confezioni:[{label:"Bancale (500 pz)",kg:500,prezzo:190},{label:"100 pezzi",kg:100,prezzo:38}]},
-      {id:"mp2",nome:"Mattone pieno faccia a vista",resa:32,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:0.55,note:"Finitura a vista senza intonaco",confezioni:[{label:"Bancale (500 pz)",kg:500,prezzo:275},{label:"100 pezzi",kg:100,prezzo:55}]},
-      {id:"mp3",nome:"Mattone semipieno 12×12×25 cm",resa:16,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:0.56,note:"Muratura portante con buon isolamento",confezioni:[{label:"Bancale (300 pz)",kg:300,prezzo:168},{label:"100 pezzi",kg:100,prezzo:56}]},
-      {id:"mp4",nome:"Mattone clinker faccia a vista",resa:32,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:1.00,note:"Alta resistenza e finitura premium",confezioni:[{label:"Bancale (400 pz)",kg:400,prezzo:400},{label:"100 pezzi",kg:100,prezzo:100}]},
+      {id:"mp1",nome:"Mattone pieno 5,5×12×25 cm",resa:32,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Muratura portante, consolidamenti e restauro",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.38}]},
+      {id:"mp2",nome:"Mattone pieno faccia a vista",resa:32,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Finitura a vista senza intonaco",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.55}]},
+      {id:"mp3",nome:"Mattone semipieno 12×12×25 cm",resa:16,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Muratura portante con buon isolamento",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.56}]},
+      {id:"mp4",nome:"Mattone clinker faccia a vista",resa:32,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Alta resistenza e finitura premium",confezioni:[{label:"1 pezzo",kg:1,prezzo:1.00}]},
     ],
     "Blocchi in calcestruzzo":[
-      {id:"bc1",nome:"Blocco in cls cavo 20×20×40 cm",resa:12.5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:1.20,note:"Muri interrati e recinzioni",confezioni:[{label:"Bancale (80 pz)",kg:80,prezzo:96},{label:"20 pezzi",kg:20,prezzo:24}]},
-      {id:"bc2",nome:"Blocco in cls pieno 20×20×40 cm",resa:12.5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:1.50,note:"Fondazioni e muri armati",confezioni:[{label:"Bancale (80 pz)",kg:80,prezzo:120},{label:"20 pezzi",kg:20,prezzo:30}]},
-      {id:"bc3",nome:"Blocco in cls sp. 30 cm",resa:8,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:2.40,note:"Muri di contenimento e scantinati",confezioni:[{label:"Bancale (48 pz)",kg:48,prezzo:115},{label:"20 pezzi",kg:20,prezzo:48}]},
-      {id:"bc4",nome:"Blocco in calcestruzzo cellulare (Ytong) sp. 20 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:4.50,note:"Leggero, coibente, facile da tagliare",confezioni:[{label:"Bancale (35 pz — 7 m²)",kg:35,prezzo:158},{label:"10 pezzi",kg:10,prezzo:45}]},
-      {id:"bc5",nome:"Blocco in calcestruzzo cellulare (Ytong) sp. 30 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",prezzoUnitario:7.50,note:"Alta prestazione termica",confezioni:[{label:"Bancale (25 pz — 5 m²)",kg:25,prezzo:188},{label:"10 pezzi",kg:10,prezzo:75}]},
+      {id:"bc1",nome:"Blocco in cls cavo 20×20×40 cm",resa:12.5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Muri interrati e recinzioni",confezioni:[{label:"1 pezzo",kg:1,prezzo:1.20}]},
+      {id:"bc2",nome:"Blocco in cls pieno 20×20×40 cm",resa:12.5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Fondazioni e muri armati",confezioni:[{label:"1 pezzo",kg:1,prezzo:1.50}]},
+      {id:"bc3",nome:"Blocco in cls sp. 30 cm",resa:8,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Muri di contenimento e scantinati",confezioni:[{label:"1 pezzo",kg:1,prezzo:2.40}]},
+      {id:"bc4",nome:"Blocco in calcestruzzo cellulare (Ytong) sp. 20 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Leggero, coibente, facile da tagliare",confezioni:[{label:"1 pezzo",kg:1,prezzo:4.50}]},
+      {id:"bc5",nome:"Blocco in calcestruzzo cellulare (Ytong) sp. 30 cm",resa:5,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Alta prestazione termica",confezioni:[{label:"1 pezzo",kg:1,prezzo:7.50}]},
     ],
     "Lastre in cartongesso — Standard":[
       {id:"cg1",nome:"Lastra standard (bianca) 12,5 mm",resa:1,unitaResa:"m²/m²",unita:"m²",tipo:"lastra",note:"Pareti e controsoffitti interni",confezioni:[{label:"Lastra 2×1,2 m (2.4 m²)",kg:2.4,prezzo:9}]},
@@ -943,35 +952,12 @@ const DB = {
     ],
 
   }},
-    "🧪 Resine & Speciali":{icon:"🧪",colore:"#8A1A1A",sottocategorie:{
+    "🧪 Resine & Microcemento":{icon:"🧪",colore:"#8A1A1A",sottocategorie:{
     "Resine per pavimenti":[
       {id:"re1",nome:"Primer epossidico penetrante",resa:0.2,unitaResa:"kg/m²",unita:"m²",note:"Preparazione del supporto",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:45},{label:"Kit 10 kg",kg:10,prezzo:80}]},
       {id:"re2",nome:"Resina epossidica finitura",resa:0.4,unitaResa:"kg/m²",unita:"m²",note:"1 mano, per garage e ambienti industriali",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:60},{label:"Kit 25 kg",kg:25,prezzo:250}]},
       {id:"re3",nome:"Resina poliuretanica antisdrucciolo",resa:0.6,unitaResa:"kg/m²",unita:"m²",note:"Per parcheggi, rampe e superfici esterne",confezioni:[{label:"Kit 6 kg",kg:6,prezzo:80},{label:"Kit 20 kg",kg:20,prezzo:230}]},
       {id:"re4",nome:"Resina epossidica autolivellante",resa:2.5,unitaResa:"kg/m²",unita:"m²",note:"Spessore 2 mm, finitura continua",confezioni:[{label:"Kit 10 kg",kg:10,prezzo:95},{label:"Kit 30 kg",kg:30,prezzo:260}]},
-    ],
-    "Malte da costruzione — Allettamento":[
-      {id:"mu_b1",nome:"Malta bastarda (calce + cemento + sabbia)",resa:380,unitaResa:"kg/m³",unita:"m³",note:"La più usata in edilizia: elastica ma resistente, ideale per murature divisorie e tamponamenti",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 40 kg",kg:40,prezzo:8}]},
-      {id:"mu_c1",nome:"Malta cementizia (cemento + sabbia)",resa:400,unitaResa:"kg/m³",unita:"m³",note:"Molto rigida e resistente: per muri portanti e fondazioni dove serve la massima tenuta meccanica",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:6},{label:"Sacco 40 kg",kg:40,prezzo:9}]},
-      {id:"mu_nhl",nome:"Malta di calce idraulica naturale (NHL 5)",resa:340,unitaResa:"kg/m³",unita:"m³",note:"Ideale per restauro e bioedilizia: traspirante, permette all'umidità di uscire dal muro",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12},{label:"Sacco 20 kg",kg:20,prezzo:10}]},
-    ],
-    "Malte da ripristino strutturale":[
-      {id:"mr1",nome:"Malta tissotropica R3/R4 — la «regina» del ripristino",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Non cola neanche a soffitto, ritiro compensato: non crepa asciugandosi. Per spigoli di pilastri e parti mancanti di travi",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:28},{label:"Sacco 10 kg",kg:10,prezzo:13}]},
-      {id:"mr2",nome:"Malta colabile strutturale (grout)",resa:2100,unitaResa:"kg/m³",unita:"m³",note:"Molto fluida, si versa dentro casseri/casseforme: per rinforzo di teste di pilastri e grandi cavità strutturali",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:22}]},
-      {id:"mr3",nome:"Malta fibrorinforzata per ripristino",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Con microfibre di vetro, acciaio o polimeri: migliora la resistenza a trazione e impedisce fessurazioni",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:32},{label:"Sacco 10 kg",kg:10,prezzo:15}]},
-    ],
-    "Malte da protezione e rifinitura":[
-      {id:"mp1",nome:"Intonaco di fondo (strato di sacrificio)",resa:14,unitaResa:"kg/m²",unita:"m²",note:"Primo strato che protegge la struttura dagli agenti esterni: a base calce o cemento secondo il supporto",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:6},{label:"Sacco 30 kg",kg:30,prezzo:7}]},
-      {id:"mp2",nome:"Rasante di finitura (grana finissima)",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Malta a grana finissima per rendere la parete perfettamente liscia prima della pittura",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:8},{label:"Sacco 10 kg",kg:10,prezzo:4}]},
-      {id:"mp3",nome:"Malta osmotica impermeabilizzante",resa:1,unitaResa:"kg/m²",unita:"m²",note:"Penetra nei pori del supporto e cristallizza: barriera definitiva contro l'acqua. Per cantine, fosse ascensore e piscine",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:55},{label:"Sacco 5 kg",kg:5,prezzo:14}]},
-    ],
-    "Malte per condizioni estreme":[
-      {id:"me1",nome:"Malta refrattaria (resistente al fuoco)",resa:1800,unitaResa:"kg/m³",unita:"m³",note:"Resiste fino a oltre 1200°C di calore diretto: per barbecue, forni a legna, camini e stufe",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:18},{label:"Sacco 5 kg",kg:5,prezzo:6}]},
-      {id:"me2",nome:"Malta rapida / lampo",resa:1800,unitaResa:"kg/m³",unita:"m³",note:"Fa presa in 2-5 minuti anche sott'acqua: per fissaggio di zanche, tasselli o bloccaggio immediato di perdite d'acqua",confezioni:[{label:"Sacco 5 kg",kg:5,prezzo:8},{label:"Sacco 25 kg",kg:25,prezzo:22}]},
-    ],
-    "Prodotti speciali":[
-      {id:"ps3",nome:"Additivo fluidificante per calcestruzzo",resa:3,unitaResa:"ml/kg cemento",unita:"kg cemento",note:"Dosaggio: 3 ml per kg di cemento. Migliora la lavorabilità e riduce il fabbisogno d'acqua",confezioni:[{label:"Tanica 5 l",kg:5,prezzo:18},{label:"Tanica 20 l",kg:20,prezzo:55}]},
-      {id:"ps4",nome:"Disarmante per casseforme",resa:0.1,unitaResa:"l/m²",unita:"m²",note:"Previene l'adesione del calcestruzzo alle casseforme per consentirne il riutilizzo",confezioni:[{label:"Tanica 5 l",kg:5,prezzo:15},{label:"Tanica 25 l",kg:25,prezzo:55}]},
     ],
     "Resine decorative a parete":[
       {id:"rp1",nome:"Resina acrilica decorativa per pareti",resa:0.3,unitaResa:"kg/m²",unita:"m²",note:"Effetto materico, 1 mano, interni",confezioni:[{label:"Secchio 5 kg",kg:5,prezzo:38},{label:"Secchio 15 kg",kg:15,prezzo:105}]},
