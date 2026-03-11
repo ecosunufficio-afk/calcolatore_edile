@@ -517,27 +517,82 @@ const DB = {
       {id:"cga5",nome:"Nastro carta per giunti",resa:1.1,unitaResa:"ml/m²",unita:"m²",note:"Rinforzo dei giunti, larghezza 50 mm",confezioni:[{label:"Rotolo 75 m",kg:0.3,prezzo:5},{label:"Rotolo 150 m",kg:0.6,prezzo:9}]},
     ],
   }},
-  "🧱 Muratura & Intonaci":{icon:"🧱",colore:"#8B5E14",sottocategorie:{
+  "🧱 Intonaci & Finiture":{icon:"🧱",colore:"#8B5E14",sottocategorie:{
+
+    "Intonaci premiscelati cementizi":[
+      {id:"pc1",nome:"Intonaco civile cementizio",resa:13,unitaResa:"kg/m²",unita:"m²",note:"Finitura liscia per interni ed esterni, spessore ~1 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7},{label:"Sacco 30 kg",kg:30,prezzo:8}]},
+      {id:"pc2",nome:"Intonaco strutturale (rinzaffo/arriccio)",resa:16,unitaResa:"kg/m²",unita:"m²",note:"Primo strato di aggrappo, spessore ~1 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 30 kg",kg:30,prezzo:6}]},
+      {id:"pc3",nome:"Intonaco premiscelato per esterni",resa:15,unitaResa:"kg/m²",unita:"m²",note:"Resistente agli agenti atmosferici, spessore ~1 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:8},{label:"Sacco 30 kg",kg:30,prezzo:9}]},
+    ],
+
+    "Intonaci premiscelati a calce":[
+      {id:"pl1",nome:"Intonaco a calce naturale",resa:14,unitaResa:"kg/m²",unita:"m²",note:"Traspirante, adatto a murature tradizionali e restauro",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:9},{label:"Sacco 20 kg",kg:20,prezzo:7}]},
+      {id:"pl2",nome:"Intonaco a calce idraulica naturale (NHL 5)",resa:14,unitaResa:"kg/m²",unita:"m²",note:"Ideale per restauro di edifici storici, alta traspirabilità",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12},{label:"Sacco 20 kg",kg:20,prezzo:10}]},
+    ],
+
+    "Intonaci premiscelati a gesso":[
+      {id:"pg1",nome:"Intonaco a gesso per interni",resa:8,unitaResa:"kg/m²",unita:"m²",note:"Posa manuale, finitura liscia, solo per interni",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:6},{label:"Sacco 30 kg",kg:30,prezzo:7}]},
+      {id:"pg2",nome:"Intonaco a gesso proiettato (spruzzato)",resa:9,unitaResa:"kg/m²",unita:"m²",note:"Per macchina intonacatrice, resa elevata",confezioni:[{label:"Sacco 30 kg",kg:30,prezzo:7},{label:"Sacco 25 kg",kg:25,prezzo:6}]},
+    ],
+
+    "Intonaci premiscelati alleggeriti":[
+      {id:"pa1",nome:"Intonaco alleggerito con perlite",resa:10,unitaResa:"kg/m²",unita:"m²",note:"Leggerezza e coibenza, spessore ~1,5 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:11},{label:"Sacco 20 kg",kg:20,prezzo:9}]},
+      {id:"pa2",nome:"Intonaco alleggerito con vermiculite",resa:10,unitaResa:"kg/m²",unita:"m²",note:"Ottimo isolamento termico e acustico",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
+      {id:"pa3",nome:"Intonaco alleggerito con polistirolo",resa:8,unitaResa:"kg/m²",unita:"m²",note:"Leggerissimo, elevata coibenza termica",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:13},{label:"Sacco 20 kg",kg:20,prezzo:11}]},
+    ],
+
+    "Intonaci termoisolanti e deumidificanti":[
+      {id:"pt1",nome:"Intonaco termico (termoisolante)",resa:9,unitaResa:"kg/m²",unita:"m²",note:"Riduce le dispersioni termiche, spessore ~2 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:14},{label:"Sacco 20 kg",kg:20,prezzo:12}]},
+      {id:"pt2",nome:"Intonaco deumidificante macroporoso",resa:12,unitaResa:"kg/m²",unita:"m²",note:"Per murature con umidità di risalita capillare",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:16},{label:"Sacco 20 kg",kg:20,prezzo:13}]},
+    ],
+
+    "Rasanti cementizi":[
+      {id:"rc1",nome:"Rasante cementizio fine",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Finitura sottile per interni ed esterni, spessore ~1 mm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:8},{label:"Sacco 10 kg",kg:10,prezzo:4}]},
+      {id:"rc2",nome:"Rasante fibrorinforzato",resa:1.8,unitaResa:"kg/m²",unita:"m²",note:"Con fibre sintetiche anti-fessurazione",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:10},{label:"Sacco 10 kg",kg:10,prezzo:5}]},
+      {id:"rc3",nome:"Rasante per sistemi a cappotto",resa:6,unitaResa:"kg/m²",unita:"m²",note:"Applicato su isolante, con rete in fibra di vetro",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
+      {id:"rc4",nome:"Rasante strutturale",resa:3,unitaResa:"kg/m²",unita:"m²",note:"Per livellamenti importanti e consolidamento superfici",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:9},{label:"Sacco 10 kg",kg:10,prezzo:4}]},
+    ],
+
+    "Rasanti a calce":[
+      {id:"rl1",nome:"Rasante a calce naturale",resa:1.2,unitaResa:"kg/m²",unita:"m²",note:"Finitura traspirante per interni su intonaco a calce",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:11},{label:"Sacco 10 kg",kg:10,prezzo:5}]},
+      {id:"rl2",nome:"Rasante a calce idraulica",resa:1.4,unitaResa:"kg/m²",unita:"m²",note:"Per esterni e restauro, resistente all'umidità",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:13},{label:"Sacco 10 kg",kg:10,prezzo:6}]},
+      {id:"rl3",nome:"Rasante a calce fine (finitura)",resa:0.9,unitaResa:"kg/m²",unita:"m²",note:"Ultimo strato, finitura liscia e traspirante",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:14},{label:"Sacco 5 kg",kg:5,prezzo:4}]},
+    ],
+
+    "Rasanti a gesso":[
+      {id:"rg1",nome:"Rasante a gesso fine",resa:0.8,unitaResa:"kg/m²",unita:"m²",note:"Finitura liscia per interni, pronto per la pittura",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7},{label:"Sacco 5 kg",kg:5,prezzo:3}]},
+      {id:"rg2",nome:"Rasante a gesso superfine (finitura pittura)",resa:0.5,unitaResa:"kg/m²",unita:"m²",note:"Finitura a specchio, massima lisciatura prima della pittura",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:9},{label:"Sacco 5 kg",kg:5,prezzo:3}]},
+    ],
+
+    "Rasanti polimerici":[
+      {id:"rp_e1",nome:"Rasante elastico",resa:1.2,unitaResa:"kg/m²",unita:"m²",note:"Elastico, copre micro-fessure, adatto a supporti soggetti a movimento",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:18},{label:"Secchio 5 kg",kg:5,prezzo:6}]},
+      {id:"rp_e2",nome:"Rasante acrilico",resa:1.0,unitaResa:"kg/m²",unita:"m²",note:"Ottima adesione, resistente all'acqua, per interni ed esterni",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:16},{label:"Secchio 5 kg",kg:5,prezzo:5}]},
+      {id:"rp_e3",nome:"Rasante per cartongesso",resa:0.6,unitaResa:"kg/m²",unita:"m²",note:"Stuccatura giunti e teste viti su lastre in gesso",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:14},{label:"Secchio 5 kg",kg:5,prezzo:5}]},
+    ],
+
+    "Rasanti speciali — Fibrati":[
+      {id:"rs1",nome:"Rasante con fibre sintetiche",resa:1.6,unitaResa:"kg/m²",unita:"m²",note:"Rinforzo anti-fessurazione con microfibra in polipropilene",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:11}]},
+      {id:"rs2",nome:"Rasante con fibre di vetro",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Alta resistenza meccanica e all'umidità",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:13}]},
+    ],
+
+    "Rasanti speciali — Impermeabilizzanti":[
+      {id:"ri1",nome:"Rasante cementizio impermeabile",resa:2,unitaResa:"kg/m²",unita:"m²",note:"Protezione all'acqua in pressione, per vasche e locali interrati",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:14},{label:"Sacco 10 kg",kg:10,prezzo:7}]},
+      {id:"ri2",nome:"Rasante osmotico",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Penetra nel calcestruzzo e cristallizza, blocca le infiltrazioni",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:18}]},
+    ],
+
+    "Rasanti decorativi":[
+      {id:"rd1",nome:"Rasante spatolato (effetto liscio/materico)",resa:0.8,unitaResa:"kg/m²",unita:"m²",note:"Finitura decorativa a spatola, effetto continuo",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:22},{label:"Secchio 5 kg",kg:5,prezzo:7}]},
+      {id:"rd2",nome:"Rasante effetto marmo (stucco veneziano)",resa:0.7,unitaResa:"kg/m²",unita:"m²",note:"Finitura lucida a base di calce e marmo in polvere",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:35},{label:"Secchio 5 kg",kg:5,prezzo:10}]},
+      {id:"rd3",nome:"Rasante minerale decorativo",resa:1.0,unitaResa:"kg/m²",unita:"m²",note:"Effetto materico naturale, traspirante, per interni ed esterni",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:28},{label:"Secchio 5 kg",kg:5,prezzo:9}]},
+    ],
+
     "Malte da muratura":[
-      {id:"mu1",nome:"Malta cementizia M5",resa:380,unitaResa:"kg/m³",unita:"m³",note:"Resistenza media",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 40 kg",kg:40,prezzo:7}]},
+      {id:"mu1",nome:"Malta cementizia M5",resa:380,unitaResa:"kg/m³",unita:"m³",note:"Resistenza media, per murature non strutturali",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 40 kg",kg:40,prezzo:7}]},
       {id:"mu2",nome:"Malta cementizia M10",resa:400,unitaResa:"kg/m³",unita:"m³",note:"Alta resistenza strutturale",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:6},{label:"Sacco 40 kg",kg:40,prezzo:9}]},
-      {id:"mu3",nome:"Malta bastarda (cemento+calce)",resa:360,unitaResa:"kg/m³",unita:"m³",note:"Uso generale",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5}]},
-      {id:"mu4",nome:"Malta di calce idraulica",resa:340,unitaResa:"kg/m³",unita:"m³",note:"Edifici storici, traspirante",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7},{label:"Sacco 20 kg",kg:20,prezzo:6}]},
+      {id:"mu3",nome:"Malta bastarda (cemento e calce)",resa:360,unitaResa:"kg/m³",unita:"m³",note:"Uso generale, buona lavorabilità",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5}]},
+      {id:"mu4",nome:"Malta di calce idraulica",resa:340,unitaResa:"kg/m³",unita:"m³",note:"Per edifici storici, altamente traspirante",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7},{label:"Sacco 20 kg",kg:20,prezzo:6}]},
     ],
-    "Intonaci":[
-      {id:"in1",nome:"Rinzaffo / Arriccio",resa:16,unitaResa:"kg/m²",unita:"m²",note:"Primo strato, spessore ~1 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 30 kg",kg:30,prezzo:6}]},
-      {id:"in2",nome:"Intonaco rustico",resa:14,unitaResa:"kg/m²",unita:"m²",note:"Spessore ~1 cm, finitura grezza",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:6},{label:"Sacco 30 kg",kg:30,prezzo:7}]},
-      {id:"in3",nome:"Intonaco civile",resa:12,unitaResa:"kg/m²",unita:"m²",note:"Spessore ~1 cm, finitura liscia",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7}]},
-      {id:"in4",nome:"Premiscelato generico (es. Cad)",resa:20,unitaResa:"kg/m²",unita:"m²",note:"Spessore ~1 cm, uso generico",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:4},{label:"Sacco 30 kg",kg:30,prezzo:5}]},
-      {id:"in5",nome:"Rasante cementizio",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Finitura sottile, spessore ~1 mm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:8},{label:"Sacco 10 kg",kg:10,prezzo:4}]},
-      {id:"in6",nome:"Stucco bianco da finitura",resa:0.8,unitaResa:"kg/m²",unita:"m²",note:"Ultimo strato prima della pittura",confezioni:[{label:"Sacco 5 kg",kg:5,prezzo:5},{label:"Sacco 25 kg",kg:25,prezzo:18}]},
-      {id:"in7",nome:"Intonaco a base calce NHL 5",resa:14,unitaResa:"kg/m²",unita:"m²",note:"Restauro edifici storici",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
-    ],
-    "Stucchi & Fughe":[
-      {id:"sf1",nome:"Stucco vinilico in pasta",resa:0.7,unitaResa:"kg/m²",unita:"m²",note:"Cartongesso e pareti in muratura interna",confezioni:[{label:"Secchio 5 kg",kg:5,prezzo:8},{label:"Secchio 25 kg",kg:25,prezzo:28}]},
-      {id:"sf2",nome:"Stucco per fughe ceramica",resa:0.35,unitaResa:"kg/m²",unita:"m²",note:"Fuga da 2 mm, piastrella 20×20 cm",confezioni:[{label:"Busta 5 kg",kg:5,prezzo:6},{label:"Busta 25 kg",kg:25,prezzo:20}]},
-      {id:"sf3",nome:"Fugante epossidico bicomponente",resa:0.5,unitaResa:"kg/m²",unita:"m²",note:"Alta resistenza chimica",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:35}]},
-    ],
+
   }},
   "🪣 Impermeabilizzazione":{icon:"🪣",colore:"#1A5C8A",sottocategorie:{
     "Membrane cementizie":[
