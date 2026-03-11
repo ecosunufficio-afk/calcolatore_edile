@@ -517,52 +517,29 @@ const DB = {
       {id:"cga5",nome:"Nastro carta per giunti",resa:1.1,unitaResa:"ml/m²",unita:"m²",note:"Rinforzo dei giunti, larghezza 50 mm",confezioni:[{label:"Rotolo 75 m",kg:0.3,prezzo:5},{label:"Rotolo 150 m",kg:0.6,prezzo:9}]},
     ],
   }},
-  "🧱 Intonaci & Finiture":{icon:"🧱",colore:"#8B5E14",sottocategorie:{
+  "🧱 Malte & Intonaci":{icon:"🧱",colore:"#8B5E14",sottocategorie:{
 
-    "🏠 Interni — Strato grezzo (1° mano)":[
-      {id:"in_g1",nome:"Intonaco a gesso manuale",resa:8,unitaResa:"kg/m²",unita:"m²",note:"Primo strato su muratura interna: facile da lavorare, presa rapida, solo per interni",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:6},{label:"Sacco 30 kg",kg:30,prezzo:7}]},
-      {id:"in_g2",nome:"Intonaco a gesso proiettato (macchina)",resa:9,unitaResa:"kg/m²",unita:"m²",note:"Per intonacatrice: alta resa, superficie omogenea, ideale su grandi superfici interne",confezioni:[{label:"Sacco 30 kg",kg:30,prezzo:7},{label:"Sacco 25 kg",kg:25,prezzo:6}]},
-      {id:"in_c1",nome:"Intonaco cementizio di fondo (rinzaffo/arriccio)",resa:16,unitaResa:"kg/m²",unita:"m²",note:"Strato di aggrappo su mattoni o blocchi: crea la base per il successivo strato di finitura",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 30 kg",kg:30,prezzo:6}]},
+    "1 — Malte da costruzione (allettamento)":[
+      {id:"mu_b1",nome:"Malta bastarda — calce + cemento + sabbia",resa:380,unitaResa:"kg/m³",unita:"m³",note:"La più usata in edilizia generale: elastica ma resistente, ideale per murature divisorie e tamponamenti. Prezzo: Gras Calce/Leroy Merlin ~€3,85–4,32/sacco",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:4},{label:"Sacco 40 kg",kg:40,prezzo:7}]},
+      {id:"mu_c1",nome:"Malta cementizia — cemento + sabbia",resa:400,unitaResa:"kg/m³",unita:"m³",note:"Molto rigida e resistente: per muri portanti e fondazioni dove serve la massima tenuta meccanica. Prezzo: ~€4–5/sacco fascia bassa, Knauf qualità ~€21/sacco",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 40 kg",kg:40,prezzo:8}]},
+      {id:"mu_nhl",nome:"Malta di calce idraulica naturale (NHL 5)",resa:340,unitaResa:"kg/m³",unita:"m³",note:"Per restauro e bioedilizia: traspirante, permette all'umidità di uscire dal muro. Compatibile con murature storiche. Prezzo: Mape-Antique NHL ~€28,90/sacco",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:22},{label:"Sacco 20 kg",kg:20,prezzo:18}]},
     ],
 
-    "🏠 Interni — Rasatura e finitura (2° e 3° mano)":[
-      {id:"in_r1",nome:"Rasante a gesso fine",resa:0.8,unitaResa:"kg/m²",unita:"m²",note:"Secondo strato su intonaco a gesso: chiude i pori e prepara la superficie per la pittura",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7},{label:"Sacco 5 kg",kg:5,prezzo:3}]},
-      {id:"in_r2",nome:"Rasante a gesso superfine (finitura a specchio)",resa:0.5,unitaResa:"kg/m²",unita:"m²",note:"Strato finale di lisciatura: superficie impeccabile prima della pittura, per ambienti di pregio",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:9},{label:"Sacco 5 kg",kg:5,prezzo:3}]},
-      {id:"in_r3",nome:"Rasante polimerico per cartongesso",resa:0.6,unitaResa:"kg/m²",unita:"m²",note:"Per stuccare giunti e teste delle viti sulle lastre in gesso: finitura liscia pronta per la pittura",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:14},{label:"Secchio 5 kg",kg:5,prezzo:5}]},
-      {id:"in_r4",nome:"Rasante elastico polimerico",resa:1.2,unitaResa:"kg/m²",unita:"m²",note:"Copre micro-fessure fino a 0,5 mm: ideale su pareti soggette a leggeri movimenti o assestamenti",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:18},{label:"Secchio 5 kg",kg:5,prezzo:6}]},
+    "2 — Malte da ripristino strutturale":[
+      {id:"mr1",nome:"Malta tissotropica R3/R4 — la «regina» del ripristino",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Non cola neanche a soffitto, ritiro compensato (non crepa asciugandosi): per spigoli di pilastri e parti mancanti di travi. Prezzo: Mapegrout Tissotropico ~€35/sacco",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:35},{label:"Sacco 10 kg",kg:10,prezzo:15}]},
+      {id:"mr2",nome:"Malta colabile strutturale (grout)",resa:2100,unitaResa:"kg/m³",unita:"m³",note:"Molto fluida, si versa dentro casseri/casseforme: per rinforzo di teste di pilastri e riempimento di grandi cavità strutturali. Prezzo: ~€22–25/sacco",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:23}]},
+      {id:"mr3",nome:"Malta fibrorinforzata per ripristino",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Con microfibre di vetro, acciaio o polimeri: migliora la resistenza a trazione e impedisce fessurazioni. Prezzo: Mapewall Mapei ~€25,30/sacco",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:25},{label:"Sacco 10 kg",kg:10,prezzo:11}]},
     ],
 
-    "🌤️ Esterni — Strato grezzo (1° mano)":[
-      {id:"ex_g1",nome:"Intonaco cementizio per esterni",resa:15,unitaResa:"kg/m²",unita:"m²",note:"Strato di base resistente agli agenti atmosferici: pioggia, gelo e umidità, spessore ~1 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:8},{label:"Sacco 30 kg",kg:30,prezzo:9}]},
-      {id:"ex_g2",nome:"Intonaco civile cementizio",resa:13,unitaResa:"kg/m²",unita:"m²",note:"Strato grezzo con finitura già discreta: riduce i passaggi su facciate in buone condizioni",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7},{label:"Sacco 30 kg",kg:30,prezzo:8}]},
+    "3 — Malte da protezione e rifinitura":[
+      {id:"mp1",nome:"Intonaco di fondo — strato grezzo",resa:13,unitaResa:"kg/m²",unita:"m²",note:"Primo strato che protegge la struttura dagli agenti esterni: a base calce+cemento (esterno) o gesso (interno). Prezzo LM: intonaco cementizio ~€2,90–4,10/sacco, intonaco a gesso Gyproc ~€7,40/sacco",confezioni:[{label:"Sacco 25 kg cemento/calce",kg:25,prezzo:4},{label:"Sacco 25 kg gesso",kg:25,prezzo:7}]},
+      {id:"mp2",nome:"Rasante di finitura — grana finissima",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Malta a grana finissima per rendere la parete perfettamente liscia prima della pittura. Prezzo: rasante cemento Planitop 525 ~€37/sacco · rasante gesso ~€7–9/sacco",confezioni:[{label:"Sacco 25 kg (gesso)",kg:25,prezzo:8},{label:"Sacco 25 kg (cemento)",kg:25,prezzo:22}]},
+      {id:"mp3",nome:"Malta osmotica impermeabilizzante",resa:1,unitaResa:"kg/m²",unita:"m²",note:"Penetra nei pori del supporto e cristallizza: barriera definitiva contro l'acqua. Per cantine, fosse ascensore e piscine. Prezzo: ~€55–60/sacco 25 kg",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:58},{label:"Sacco 5 kg",kg:5,prezzo:14}]},
     ],
 
-    "🌤️ Esterni — Rasatura e finitura (2° e 3° mano)":[
-      {id:"ex_r1",nome:"Rasante cementizio fine",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Chiude i pori dell'intonaco grezzo esterno: prepara la facciata alla pittura o al rivestimento",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:8},{label:"Sacco 10 kg",kg:10,prezzo:4}]},
-      {id:"ex_r2",nome:"Rasante fibrorinforzato",resa:1.8,unitaResa:"kg/m²",unita:"m²",note:"Con microfibre di polipropilene: resiste alle fessurazioni da dilatazione termica su facciate esposte",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:10},{label:"Sacco 10 kg",kg:10,prezzo:5}]},
-      {id:"ex_r3",nome:"Rasante per sistemi a cappotto (ETICS)",resa:6,unitaResa:"kg/m²",unita:"m²",note:"Strato armato applicato sull'isolante: incorpora la rete in fibra di vetro, è la finitura del cappotto",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
-      {id:"ex_r4",nome:"Rasante elastico impermeabile",resa:2,unitaResa:"kg/m²",unita:"m²",note:"Copre fessure fino a 1 mm, impermeabile: per facciate con micro-crepe o esposte a pioggia battente",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:14},{label:"Sacco 10 kg",kg:10,prezzo:7}]},
-    ],
-
-    "🏛️ Restauro e bioedilizia":[
-      {id:"re_g1",nome:"Intonaco a calce naturale",resa:14,unitaResa:"kg/m²",unita:"m²",note:"Per murature tradizionali in mattoni o pietra: traspirante, non intrappola l'umidità nel muro",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:9},{label:"Sacco 20 kg",kg:20,prezzo:7}]},
-      {id:"re_g2",nome:"Intonaco a calce idraulica naturale (NHL 5)",resa:14,unitaResa:"kg/m²",unita:"m²",note:"Per edifici storici vincolati: compatibile con le murature antiche, altamente traspirante e reversibile",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12},{label:"Sacco 20 kg",kg:20,prezzo:10}]},
-      {id:"re_r1",nome:"Rasante a calce naturale (finitura)",resa:1.2,unitaResa:"kg/m²",unita:"m²",note:"Ultimo strato su intonaco a calce: finitura liscia e traspirante, compatibile con pitture a calce",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:11},{label:"Sacco 10 kg",kg:10,prezzo:5}]},
-      {id:"re_r2",nome:"Rasante a calce idraulica (esterno storico)",resa:1.4,unitaResa:"kg/m²",unita:"m²",note:"Per facciate storiche esterne: resiste all'umidità senza impermeabilizzare, rispetta il comportamento originale",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:13},{label:"Sacco 10 kg",kg:10,prezzo:6}]},
-      {id:"re_d1",nome:"Intonaco deumidificante macroporoso",resa:12,unitaResa:"kg/m²",unita:"m²",note:"Per murature con umidità di risalita capillare: crea pori che evaporano l'acqua invece di trattenerla",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:16},{label:"Sacco 20 kg",kg:20,prezzo:13}]},
-    ],
-
-    "⚙️ Intonaci speciali":[
-      {id:"sp_t1",nome:"Intonaco termoisolante (alleggerito)",resa:9,unitaResa:"kg/m²",unita:"m²",note:"Riduce le dispersioni termiche senza cappotto: utile dove non si può intervenire dall'esterno, spessore ~2 cm",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:14},{label:"Sacco 20 kg",kg:20,prezzo:12}]},
-      {id:"sp_p1",nome:"Intonaco alleggerito con perlite",resa:10,unitaResa:"kg/m²",unita:"m²",note:"Più leggero del cementizio standard: riduce i carichi sulla struttura, buona coibenza termica",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:11},{label:"Sacco 20 kg",kg:20,prezzo:9}]},
-      {id:"sp_v1",nome:"Intonaco alleggerito con vermiculite",resa:10,unitaResa:"kg/m²",unita:"m²",note:"Coibenza termica e acustica superiore alla perlite: per ambienti con requisiti di isolamento acustico",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:12}]},
-      {id:"sp_os1",nome:"Rasante osmotico impermeabilizzante",resa:1.5,unitaResa:"kg/m²",unita:"m²",note:"Penetra nel cls e cristallizza i pori: barriera definitiva contro infiltrazioni d'acqua in pressione",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:18}]},
-    ],
-
-    "✨ Finiture decorative":[
-      {id:"dec1",nome:"Rasante spatolato (effetto materico continuo)",resa:0.8,unitaResa:"kg/m²",unita:"m²",note:"Finitura a spatola su pareti interne: effetto continuo liscio o graffiato, contemporaneo e versatile",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:22},{label:"Secchio 5 kg",kg:5,prezzo:7}]},
-      {id:"dec2",nome:"Stucco veneziano (calce + polvere di marmo)",resa:0.7,unitaResa:"kg/m²",unita:"m²",note:"Finitura lucida tradizionale veneziana: effetto marmo, applicazione a più strati incrociati",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:35},{label:"Secchio 5 kg",kg:5,prezzo:10}]},
-      {id:"dec3",nome:"Rasante minerale decorativo",resa:1.0,unitaResa:"kg/m²",unita:"m²",note:"Effetto materico naturale, traspirante: per interni ed esterni, ampia scelta di colori e granulometrie",confezioni:[{label:"Secchio 20 kg",kg:20,prezzo:28},{label:"Secchio 5 kg",kg:5,prezzo:9}]},
+    "4 — Malte per condizioni estreme":[
+      {id:"me1",nome:"Malta refrattaria — resistente al fuoco",resa:1800,unitaResa:"kg/m³",unita:"m³",note:"Resiste fino a oltre 1200°C di calore diretto: per barbecue, forni a legna, camini e stufe. Prezzo LM: M-Refrattario 5 kg ~€6",confezioni:[{label:"Sacco 5 kg",kg:5,prezzo:6},{label:"Sacco 10 kg",kg:10,prezzo:12},{label:"Sacco 25 kg",kg:25,prezzo:22}]},
+      {id:"me2",nome:"Malta rapida / lampo",resa:1800,unitaResa:"kg/m³",unita:"m³",note:"Fa presa in 2–5 minuti anche sott'acqua: per fissaggio di zanche, tasselli o bloccaggio immediato di perdite d'acqua. Prezzo: ~€8–10/sacco 5 kg",confezioni:[{label:"Sacco 5 kg",kg:5,prezzo:9},{label:"Sacco 25 kg",kg:25,prezzo:22}]},
     ],
 
   }},
