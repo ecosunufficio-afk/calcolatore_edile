@@ -1,38 +1,5 @@
 {
-  "versione": "2.0",
-  "aggiornato": "2024-05-23",
-  "DB": {
-    "Impermeabilizzazioni": [
-      { "id": "imp_1", "nome": "Guaina Bituminosa SBS 4mm (-15°C)", "resa": 1.1, "unitaResa": "m²/m²", "confezioni": [{ "label": "Rotolo 10 m²", "kg": 45, "prezzo": 138.50 }] },
-      { "id": "imp_2", "nome": "Guaina Bituminosa APP 4mm (-10°C)", "resa": 1.1, "unitaResa": "m²/m²", "confezioni": [{ "label": "Rotolo 10 m²", "kg": 42, "prezzo": 115.00 }] },
-      { "id": "imp_3", "nome": "Guaina Ardesiata Minerale 4.5kg", "resa": 1.1, "unitaResa": "m²/m²", "confezioni": [{ "label": "Rotolo 10 m²", "kg": 45, "prezzo": 128.00 }] },
-      { "id": "imp_4", "nome": "Guaina Liquida Bituminosa", "resa": 1.5, "unitaResa": "kg/m²", "confezioni": [{ "label": "Secchio 20 kg", "kg": 20, "prezzo": 68.00 }] },
-      { "id": "imp_5", "nome": "Malta Bicomponente Elastica (Mapelastic)", "resa": 3.4, "unitaResa": "kg/m²", "confezioni": [{ "label": "Kit 32 kg (A+B)", "kg": 32, "prezzo": 72.50 }] }
-    ],
-    "Pitture": [
-      { "id": "pit_1", "nome": "Pittura Lavabile Interni Professionale", "resa": 0.22, "unitaResa": "L/m²", "confezioni": [{ "label": "Secchio 14 L", "kg": 20, "prezzo": 62.00 }] },
-      { "id": "pit_2", "nome": "Pittura Traspirante Antimuffa", "resa": 0.25, "unitaResa": "L/m²", "confezioni": [{ "label": "Secchio 14 L", "kg": 20, "prezzo": 78.50 }] },
-      { "id": "pit_3", "nome": "Pittura Silossanica Idrorepellente", "resa": 0.30, "unitaResa": "L/m²", "confezioni": [{ "label": "Secchio 14 L", "kg": 20, "prezzo": 125.00 }] },
-      { "id": "pit_4", "nome": "Pittura Termica Anticondensa", "resa": 0.40, "unitaResa": "L/m²", "confezioni": [{ "label": "Secchio 10 L", "kg": 15, "prezzo": 110.00 }] }
-    ],
-    "Pavimenti e Rivestimenti": [
-      { "id": "pav_1", "nome": "Gres Porcellanato 1a Scelta", "resa": 1.07, "unitaResa": "m²/m²", "confezioni": [{ "label": "Scatola 1.5 m²", "kg": 32, "prezzo": 36.00 }] },
-      { "id": "pav_2", "nome": "Laminato HDF AC4 Professionale", "resa": 1.05, "unitaResa": "m²/m²", "confezioni": [{ "label": "Pacco 2.2 m²", "kg": 16, "prezzo": 48.40 }] },
-      { "id": "pav_3", "nome": "Resina Epossidica / Microcemento Kit", "resa": 2.5, "unitaResa": "kg/m²", "confezioni": [{ "label": "Kit 20 kg", "kg": 20, "prezzo": 235.00 }] },
-      { "id": "pav_4", "nome": "Colla per Piastrelle C2TE S1", "resa": 4.5, "unitaResa": "kg/m²", "confezioni": [{ "label": "Sacco 25 kg", "kg": 25, "prezzo": 22.50 }] }
-    ],
-    "Isolamento Termico": [
-      { "id": "iso_1", "nome": "EPS Grafitato 100mm (λ 0.031)", "resa": 1.03, "unitaResa": "m²/m²", "confezioni": [{ "label": "Pacco 3 m²", "kg": 12, "prezzo": 46.50 }] },
-      { "id": "iso_2", "nome": "Lana di Roccia 100mm Alta Densità", "resa": 1.02, "unitaResa": "m²/m²", "confezioni": [{ "label": "Pacco 1.44 m²", "kg": 22, "prezzo": 49.00 }] },
-      { "id": "iso_3", "nome": "Pannello Aerogel 10mm", "resa": 1.0, "unitaResa": "m²/m²", "confezioni": [{ "label": "Pannello 0.90 m²", "kg": 2, "prezzo": 98.00 }] }
-    ],
-    "Malte Cementizie": [
-      { "id": "mal_1", "nome": "Malta Bastarda Professionale", "resa": 16, "unitaResa": "kg/m² per cm", "confezioni": [{ "label": "Sacco 25 kg", "kg": 25, "prezzo": 4.90 }] },
-      { "id": "mal_2", "nome": "Malta di Calce Idraulica NHL 3.5", "resa": 14, "unitaResa": "kg/m² per cm", "confezioni": [{ "label": "Sacco 25 kg", "kg": 25, "prezzo": 8.90 }] },
-      { "id": "mal_3", "nome": "Malta Tissotropica R4 (Ripristino)", "resa": 19, "unitaResa": "kg/m² per cm", "confezioni": [{ "label": "Sacco 25 kg", "kg": 25, "prezzo": 29.50 }] },
-      { "id": "mal_4", "nome": "Malta Refrattaria (Alte Temp.)", "resa": 1.8, "unitaResa": "kg/dm³", "confezioni": [{ "label": "Sacco 25 kg", "kg": 25, "prezzo": 24.00 }] },
-      { "id": "mal_5", "nome": "Malta Rapida (Bloccaggio Lampo)", "resa": 1.6, "unitaResa": "kg/dm³", "confezioni": [{ "label": "Sacco 5 kg", "kg": 5, "prezzo": 9.50 }] }
-    ]
-  },
+  "versione": "1.0",
+  "aggiornato": "",
   "preventivi": []
 }
