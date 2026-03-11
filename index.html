@@ -412,6 +412,39 @@
   <div class="wl-credit">Ideata e sviluppata da <b>Geom. Daniel Meccanici</b></div>
 </div>
 
+<!-- DISCLAIMER MODAL -->
+<div id="disclaimer-overlay" style="display:none;position:fixed;inset:0;background:rgba(13,27,62,.7);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:20px;max-width:460px;width:100%;box-shadow:0 24px 64px rgba(13,27,62,.35);overflow:hidden">
+    <div style="background:#C89A3A;padding:18px 22px;display:flex;align-items:center;gap:12px">
+      <span style="font-size:28px">⚠️</span>
+      <div>
+        <div style="color:#fff;font-weight:900;font-size:16px">Avviso importante</div>
+        <div style="color:rgba(255,255,255,.75);font-size:11px;letter-spacing:.5px">Leggere prima di utilizzare l'app</div>
+      </div>
+    </div>
+    <div style="padding:24px 22px">
+      <p style="font-size:14px;color:#0D1B3E;line-height:1.7;margin-bottom:14px">
+        Questo calcolatore è uno <strong>strumento di riferimento indicativo</strong> per la stima dei materiali edili.
+      </p>
+      <div style="background:#FDF8EE;border-left:4px solid #C89A3A;border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:14px">
+        <div style="font-size:12px;font-weight:700;color:#C89A3A;letter-spacing:.5px;margin-bottom:6px">I PREZZI SONO STIME</div>
+        <p style="font-size:13px;color:#5A4010;line-height:1.6;margin:0">
+          I prezzi preimpostati sono <strong>valori medi di mercato</strong> e possono variare significativamente in base al fornitore, alla zona geografica e al periodo.
+        </p>
+      </div>
+      <div style="background:#F0F4FF;border-left:4px solid #1A2F6E;border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:22px">
+        <div style="font-size:12px;font-weight:700;color:#1A2F6E;letter-spacing:.5px;margin-bottom:6px">VERIFICA SEMPRE</div>
+        <p style="font-size:13px;color:#1A2F6E;line-height:1.6;margin:0">
+          Prima di presentare un preventivo ufficiale, verifica sempre i prezzi aggiornati con il tuo fornitore e adegua le rese ai prodotti specifici utilizzati.
+        </p>
+      </div>
+      <button onclick="closeDisclaimer()" style="background:#0D1B3E;border:none;color:#fff;border-radius:12px;padding:14px 0;width:100%;font-size:15px;font-weight:900;cursor:pointer;font-family:Arial,sans-serif;letter-spacing:.3px">
+        ✓ Ho capito, procedi
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL -->
 <div class="overlay" id="modal-overlay" style="display:none" onclick="if(event.target===this)closeModal()">
   <div class="modal" id="modal">
@@ -1798,13 +1831,27 @@ function toast(msg) {
 function closeWelcome() {
   const el = document.getElementById("welcome");
   el.classList.add("hiding");
-  setTimeout(() => { el.style.display = "none"; }, 500);
+  setTimeout(() => {
+    el.style.display = "none";
+    showDisclaimer();
+  }, 500);
   try { localStorage.setItem("ce_welcomed", "1"); } catch(e) {}
 }
-// Se già visitato, salta la welcome
+function showDisclaimer() {
+  const d = document.getElementById("disclaimer-overlay");
+  d.style.display = "flex";
+}
+function closeDisclaimer() {
+  document.getElementById("disclaimer-overlay").style.display = "none";
+  try { localStorage.setItem("ce_disclaimed", "1"); } catch(e) {}
+}
+// Se già visitato, salta la welcome ma mostra il disclaimer se non ancora accettato
 try {
   if (localStorage.getItem("ce_welcomed")) {
     document.getElementById("welcome").style.display = "none";
+    if (!localStorage.getItem("ce_disclaimed")) {
+      showDisclaimer();
+    }
   }
 } catch(e) {}
 
