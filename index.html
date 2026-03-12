@@ -2158,7 +2158,6 @@ function closeWelcome() {
     el.classList.add("hidden");
     showDisclaimer();
   }, 600);
-  try { localStorage.setItem("ce_welcomed", "1"); } catch(e) {}
 }
 function showDisclaimer() {
   const d = document.getElementById("disclaimer-overlay");
@@ -2166,18 +2165,7 @@ function showDisclaimer() {
 }
 function closeDisclaimer() {
   document.getElementById("disclaimer-overlay").style.display = "none";
-  try { localStorage.setItem("ce_disclaimed", "1"); } catch(e) {}
 }
-// Se già visitato, salta la welcome ma mostra il disclaimer se non ancora accettato
-try {
-  if (localStorage.getItem("ce_welcomed")) {
-    const w = document.getElementById("welcome");
-    w.classList.add("hidden");
-    if (!localStorage.getItem("ce_disclaimed")) {
-      showDisclaimer();
-    }
-  }
-} catch(e) {}
 
 // ── BOTTOM NAV MOBILE ──────────────────────────────────────────────────
 function bnClick(v, el) {
