@@ -319,6 +319,40 @@
   input[type=range]{width:100%;height:4px;cursor:pointer}
   .range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
 
+  /* FAB — Salva progetto */
+  #fab-salva {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 190;
+    display: none; /* shown via JS when unsaved changes */
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--ocra), #E0B44A);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 22px;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(200,154,58,.45);
+    transition: transform .18s, box-shadow .18s, opacity .2s;
+    letter-spacing: .2px;
+  }
+  #fab-salva:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(200,154,58,.5); }
+  #fab-salva:active { transform: scale(.97); }
+  #fab-salva.visible { display: flex; }
+  #fab-salva .fab-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #fff; opacity: .6; animation: fab-pulse 1.6s infinite;
+  }
+  @keyframes fab-pulse { 0%,100%{opacity:.4;transform:scale(1)} 50%{opacity:1;transform:scale(1.3)} }
+  @media (max-width: 768px) {
+    #fab-salva { bottom: 74px; right: 14px; padding: 12px 18px; font-size: 13px; }
+  }
+
 
   /* ═══════════════════════════════════════════════
      BOTTOM NAV (solo mobile)
@@ -1478,6 +1512,9 @@ function updateTopbar() {
   if(sbc) sbc.textContent = n + (n===1?" voce":" voci");
   const sbt = document.getElementById("sb-proj-total");
   if(sbt) sbt.textContent = eur(tot);
+  // FAB salva: visibile se ci sono voci
+  const fab = document.getElementById("fab-salva");
+  if(fab) fab.classList.toggle("visible", n > 0);
 }
 function editNome() {
   const btn = document.getElementById("proj-name");
@@ -1647,13 +1684,16 @@ function renderRiepilogo() {
         <span style="font-weight:800;color:${col};font-size:14px">${mk}</span>
         <span style="font-weight:800;color:${col}">${eur(sub)}</span>
       </div>
-      ${vm.map(v=>`<div class="riepilogo-row">
-        <div>
-          <div style="font-weight:700;color:var(--navy)">${v.mat.nome}</div>
-          <div style="color:var(--muted);font-size:12px">${v.ris.sacchi}× ${v.conf.label} · ${v.sup} ${v.mat.unita} (+${v.margine}%)</div>
+      ${vm.map((v,_)=>{const idx=stato.voci.indexOf(v);return`<div class="riepilogo-row">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.mat.nome}</div>
+          <div style="color:var(--muted);font-size:12px;margin-top:2px">${v.ris.sacchi}× ${v.conf.label} · ${v.sup} ${v.mat.unita} (+${v.margine}%)</div>
         </div>
-        <div style="font-weight:800;color:var(--success);white-space:nowrap;margin-left:12px">${eur(v.ris.costo)}</div>
-      </div>`).join("")}
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;margin-left:12px">
+          <div style="font-weight:800;color:var(--success);white-space:nowrap">${eur(v.ris.costo)}</div>
+          <button class="btn-edit" onclick="openEdit(${idx})" title="Modifica voce">✏️</button>
+        </div>
+      </div>`}).join("")}
     </div>`;
   });
   html+=`<div class="totale-box"><span>TOTALE PREVENTIVO</span><span>${eur(tot)}</span></div>`;
@@ -2390,6 +2430,12 @@ document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.ad
     <div id="macro-drawer-list"></div>
   </div>
 </div>
+
+<!-- FAB Salva progetto -->
+<button id="fab-salva" onclick="salvaProgetto()" title="Salva progetto">
+  <div class="fab-dot"></div>
+  💾 Salva progetto
+</button>
 
 </body>
 </html>
