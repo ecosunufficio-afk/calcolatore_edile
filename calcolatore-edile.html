@@ -4,577 +4,518 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calcolatore Edile</title>
+<title>Calcolatore Materiali — D.ESIGN STUDIOS</title>
+
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:Arial,sans-serif;background:#F5F7FB;color:#0D1B3E;min-height:100vh}
+  body{font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;background:#F8F6F4;color:#1A1A1A;min-height:100vh}
   :root{
-    --navy:#0D1B3E;--navy2:#1A2F6E;--sidebar:#0D1B3E;--sidebar-active:#1e3a6e;
-    --ocra:#C89A3A;--ocra-light:#E8C46A;--ocra-faint:#FDF8EE;
-    --bg:#FFFFFF;--gray:#F5F7FB;--border:#E2E8F4;--muted:#7A8AAE;
-    --success:#1A7A4A;--danger:#B83232;
+    --red:#8B1A1A;
+    --red2:#A52020;
+    --red-dark:#6B1212;
+    --red-light:#C4393930;
+    --red-faint:#FDF5F5;
+    --black:#1A1A1A;
+    --white:#FFFFFF;
+    --gray:#F8F6F4;
+    --gray2:#F0EDE9;
+    --border:#E8E2DC;
+    --muted:#8A7F78;
+    --success:#2E7D4F;
+    --danger:#8B1A1A;
+    --sidebar:#1A1A1A;
+    --sidebar-active:#2C2C2C;
+    --font-display:'Helvetica Neue','Helvetica',Arial,sans-serif;
+    --font-body:'Helvetica Neue','Helvetica',Arial,sans-serif;
   }
 
-  /* LAYOUT */
+  /* ── LAYOUT ── */
   #app{display:flex;min-height:100vh}
 
-  /* SIDEBAR */
-  /* ── SIDEBAR ────────────────────────────────────────── */
+  /* ── SIDEBAR ── */
   #sidebar{
-    width:250px;min-height:100vh;background:var(--sidebar);
+    width:260px;min-height:100vh;background:var(--sidebar);
     display:flex;flex-direction:column;flex-shrink:0;
     position:sticky;top:0;align-self:flex-start;
     transition:width .25s cubic-bezier(.4,0,.2,1);overflow:hidden;
-    box-shadow:3px 0 18px rgba(13,27,62,.18);
+    box-shadow:3px 0 24px rgba(0,0,0,.2);
   }
-  #sidebar.collapsed{width:66px}
+  #sidebar.collapsed{width:64px}
 
-  /* Logo */
   .sb-logo{
-    padding:20px 16px 16px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    display:flex;align-items:center;gap:11px;
+    padding:22px 18px 16px;
+    border-bottom:1px solid rgba(255,255,255,.07);
+    display:flex;align-items:center;gap:12px;
+    min-height:72px;
   }
-  .sb-logo-icon{
-    background:linear-gradient(135deg,var(--ocra),#E8C46A);
-    border-radius:11px;width:40px;height:40px;flex-shrink:0;
-    display:flex;align-items:center;justify-content:center;font-size:20px;
-    box-shadow:0 3px 10px rgba(200,154,58,.4);
+  .sb-logo-img{
+    width:36px;height:36px;flex-shrink:0;object-fit:contain;
+    filter:brightness(0) invert(1);
+    border-radius:4px;
   }
-  .sb-logo-text{color:#fff;font-weight:900;font-size:13px;line-height:1.3;letter-spacing:.3px}
-  .sb-logo-sub{color:var(--ocra-light);font-size:10px;letter-spacing:1.5px;font-weight:700}
+  .sb-logo-text-wrap{display:flex;flex-direction:column;gap:1px}
+  .sb-logo-brand{color:#fff;font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:.5px;white-space:nowrap}
+  .sb-logo-tool{color:rgba(255,255,255,.35);font-size:9px;letter-spacing:2px;font-weight:600;text-transform:uppercase;white-space:nowrap}
 
-  /* Toggle */
   .sb-toggle{
-    background:transparent;border:none;color:rgba(255,255,255,.25);
-    cursor:pointer;padding:5px 12px;font-size:13px;text-align:right;width:100%;
-    transition:color .15s;
+    background:transparent;border:none;color:rgba(255,255,255,.2);
+    cursor:pointer;padding:4px 14px;font-size:12px;text-align:right;width:100%;
+    transition:color .15s;font-family:var(--font-body);
   }
-  .sb-toggle:hover{color:rgba(255,255,255,.6)}
+  .sb-toggle:hover{color:rgba(255,255,255,.5)}
   #sidebar.collapsed .sb-toggle{text-align:center}
 
-  /* Nav labels */
   .sb-label{
-    padding:10px 16px 4px;font-size:9.5px;
-    color:rgba(255,255,255,.28);letter-spacing:1.8px;font-weight:800;
+    padding:10px 18px 4px;font-size:9px;
+    color:rgba(255,255,255,.2);letter-spacing:2px;font-weight:700;
     white-space:nowrap;overflow:hidden;text-transform:uppercase;
   }
-  .sb-divider{height:1px;background:rgba(255,255,255,.07);margin:8px 12px}
+  .sb-divider{height:1px;background:rgba(255,255,255,.06);margin:8px 14px}
 
-  /* Nav buttons */
   .sb-btn{
-    background:transparent;border:none;border-left:3px solid transparent;
-    color:rgba(255,255,255,.6);padding:12px 16px;
-    display:flex;align-items:center;gap:11px;cursor:pointer;
-    font-family:Arial,sans-serif;font-size:13.5px;font-weight:500;
-    width:100%;text-align:left;transition:all .18s;
-    white-space:nowrap;overflow:hidden;border-radius:0 10px 10px 0;margin:1px 0;
-  }
-  .sb-btn:hover{
-    background:rgba(255,255,255,.07);color:#fff;
-    border-left-color:rgba(200,154,58,.5);
-  }
-  .sb-btn.active{
-    background:linear-gradient(90deg,rgba(200,154,58,.2),rgba(200,154,58,.06));
-    color:#fff;font-weight:700;
-    border-left-color:var(--ocra);
-  }
-  .sb-btn .sb-btn-icon{font-size:18px;flex-shrink:0;width:22px;text-align:center}
-  #sidebar.collapsed .sb-btn{padding:12px 0;justify-content:center;border-radius:0;border-left:none;margin:1px 0}
-  #sidebar.collapsed .sb-btn.active{background:rgba(200,154,58,.18)}
-  #sidebar.collapsed .sb-btn-label,.sb-collapsed-hide{display:inline}
-  #sidebar.collapsed .sb-collapsed-hide{display:none}
-
-  /* Macro category buttons in sidebar */
-  .sb-macro-btn{
-    background:transparent;border:none;border-left:3px solid transparent;
-    color:rgba(255,255,255,.5);padding:9px 16px 9px 20px;
-    display:flex;align-items:center;gap:10px;cursor:pointer;
-    font-family:Arial,sans-serif;font-size:12.5px;font-weight:500;
+    background:transparent;border:none;border-left:2px solid transparent;
+    color:rgba(255,255,255,.5);padding:11px 18px;
+    display:flex;align-items:center;gap:12px;cursor:pointer;
+    font-family:var(--font-body);font-size:13px;font-weight:500;
     width:100%;text-align:left;transition:all .15s;
     white-space:nowrap;overflow:hidden;
   }
-  .sb-macro-btn:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.85)}
-  .sb-macro-btn.active{color:#fff;font-weight:700}
-  #sidebar.collapsed .sb-macro-btn{padding:9px 0;justify-content:center}
+  .sb-btn:hover{background:rgba(255,255,255,.05);color:#fff;border-left-color:rgba(139,26,26,.5)}
+  .sb-btn.active{background:rgba(139,26,26,.15);color:#fff;font-weight:600;border-left-color:var(--red)}
+  .sb-btn .sb-btn-icon{font-size:16px;flex-shrink:0;width:20px;text-align:center;display:flex;align-items:center;justify-content:center}
+  #sidebar.collapsed .sb-btn{padding:12px 0;justify-content:center;border-left:none}
+  #sidebar.collapsed .sb-btn.active{background:rgba(139,26,26,.2)}
+  #sidebar.collapsed .sb-collapsed-hide{display:none}
+  #sidebar.collapsed #sb-logo-collapsed{display:flex!important}
+  #sidebar:not(.collapsed) #sb-logo-collapsed{display:none!important}
 
-  .sb-badge{
-    background:var(--ocra);color:#fff;border-radius:20px;
-    font-size:10px;font-weight:900;padding:2px 8px;
-    margin-left:auto;flex-shrink:0;
-  }
+  .sb-badge{background:var(--red);color:#fff;border-radius:20px;font-size:9px;font-weight:700;padding:2px 7px;margin-left:auto;flex-shrink:0}
 
-  /* Project summary box inside sidebar */
-  .sb-proj-box{
-    margin:10px 10px 0;padding:12px 14px;
-    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-    border-radius:12px;cursor:pointer;transition:background .15s;
-  }
-  .sb-proj-box:hover{background:rgba(255,255,255,.09)}
-  .sb-proj-name{
-    color:#fff;font-weight:800;font-size:13px;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    display:flex;align-items:center;gap:6px;margin-bottom:8px;
-  }
-  .sb-proj-name span.edit-hint{font-size:11px;color:var(--ocra-light);font-weight:400}
+  .sb-proj-box{margin:10px 12px 0;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;cursor:pointer;transition:background .15s}
+  .sb-proj-box:hover{background:rgba(255,255,255,.07)}
+  .sb-proj-name{color:#fff;font-weight:600;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px;margin-bottom:8px}
   .sb-proj-stats{display:flex;justify-content:space-between;align-items:center}
-  .sb-proj-count{font-size:11px;color:rgba(255,255,255,.45)}
-  .sb-proj-total{font-size:17px;font-weight:900;color:var(--ocra-light);letter-spacing:-.3px}
+  .sb-proj-count{font-size:11px;color:rgba(255,255,255,.35)}
+  .sb-proj-total{font-size:16px;font-weight:700;color:#E8A0A0;letter-spacing:-.2px;font-family:var(--font-display)}
 
-  /* Save button */
-  .sb-save{padding:10px 10px 12px;border-top:1px solid rgba(255,255,255,.07);margin-top:auto}
+  .sb-save{padding:12px 12px 14px;border-top:1px solid rgba(255,255,255,.06);margin-top:auto}
   .sb-save button{
-    background:linear-gradient(135deg,var(--ocra),#E0B44A);
-    border:none;color:#fff;border-radius:11px;padding:11px 0;
-    width:100%;font-size:12.5px;font-weight:800;cursor:pointer;
-    font-family:Arial,sans-serif;display:flex;align-items:center;
-    justify-content:center;gap:7px;
-    box-shadow:0 3px 10px rgba(200,154,58,.3);transition:opacity .15s;
+    background:var(--red);border:none;color:#fff;border-radius:8px;padding:11px 0;
+    width:100%;font-size:12.5px;font-weight:600;cursor:pointer;
+    font-family:var(--font-body);display:flex;align-items:center;
+    justify-content:center;gap:8px;letter-spacing:.3px;
+    transition:background .15s;
   }
-  .sb-save button:hover{opacity:.9}
+  .sb-save button:hover{background:var(--red2)}
 
-  /* ── TOPBAR ────────────────────────────────────────── */
+  .sb-instagram{display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 12px 0;text-decoration:none;color:rgba(255,255,255,.3);font-size:11px;transition:color .15s;white-space:nowrap;overflow:hidden}
+  .sb-instagram:hover{color:rgba(255,255,255,.6)}
+  .sb-instagram svg{flex-shrink:0}
+
+  /* ── TOPBAR ── */
   #main{flex:1;display:flex;flex-direction:column;min-width:0}
   #topbar{
-    background:#fff;border-bottom:2px solid var(--border);
-    padding:0 24px;
+    background:#fff;border-bottom:1px solid var(--border);
+    padding:0 28px;
     display:flex;align-items:stretch;justify-content:space-between;
-    gap:12px;min-height:64px;
+    gap:12px;min-height:66px;
   }
   .topbar-left{display:flex;align-items:center;gap:14px}
   .topbar-proj-wrap{display:flex;flex-direction:column;justify-content:center;gap:2px}
-  .topbar-proj-label{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase}
-  #proj-name{
-    font-size:18px;font-weight:900;color:var(--navy);cursor:pointer;
-    background:none;border:none;font-family:Arial,sans-serif;
-    padding:0;transition:color .15s;display:flex;align-items:center;gap:6px;
-  }
-  #proj-name:hover{color:var(--navy2)}
-  #proj-name .edit-pen{font-size:13px;color:var(--ocra);opacity:.7}
-  #proj-name-input{
-    font-size:18px;font-weight:900;color:var(--navy);
-    border:none;border-bottom:2px solid var(--ocra);
-    outline:none;font-family:Arial,sans-serif;background:transparent;
-    min-width:180px;
-  }
+  .topbar-proj-label{font-size:9px;color:var(--muted);font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+  #proj-name{font-size:14px;font-weight:700;color:var(--black);cursor:pointer;background:none;border:none;font-family:var(--font-display);padding:0;transition:color .15s;display:flex;align-items:center;gap:6px;letter-spacing:2px;text-transform:uppercase}
+  #proj-name:hover{color:var(--red)}
+  #proj-name .edit-pen{font-size:11px;color:var(--red);opacity:.6}
+  #proj-name-input{font-size:17px;font-weight:600;color:var(--black);border:none;border-bottom:2px solid var(--red);outline:none;font-family:var(--font-display);background:transparent;min-width:180px}
   .topbar-right{display:flex;align-items:center;gap:0;flex-wrap:wrap}
-  .topbar-stat{
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:0 18px;border-left:1px solid var(--border);height:100%;min-height:64px;
-  }
-  .topbar-stat-label{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:2px}
-  .topbar-count{font-size:16px;font-weight:800;color:var(--navy)}
-  .topbar-total{font-size:22px;font-weight:900;color:var(--success);letter-spacing:-.5px}
-  .topbar-actions{display:flex;align-items:center;gap:8px;padding:0 0 0 16px;border-left:1px solid var(--border)}
-  .btn-ghost{background:var(--gray);border:1.5px solid var(--border);color:var(--muted);border-radius:8px;padding:7px 13px;font-size:12px;cursor:pointer;font-family:Arial,sans-serif;font-weight:700;transition:all .15s}
-  .btn-ghost:hover{background:var(--border);color:var(--navy)}
+  .topbar-stat{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 20px;border-left:1px solid var(--border);height:100%;min-height:66px}
+  .topbar-stat-label{font-size:9px;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+  .topbar-count{font-size:15px;font-weight:700;color:var(--black);text-transform:uppercase;letter-spacing:.5px}
+  .topbar-total{font-size:20px;font-weight:700;color:var(--success);letter-spacing:-.5px;font-family:var(--font-display)}
+  .topbar-actions{display:flex;align-items:center;gap:8px;padding:0 0 0 18px;border-left:1px solid var(--border)}
+  .btn-ghost{background:var(--gray2);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:7px 14px;font-size:12px;cursor:pointer;font-family:var(--font-body);font-weight:600;transition:all .15s;letter-spacing:.2px}
+  .btn-ghost:hover{background:var(--border);color:var(--black)}
 
-  /* CONTENT */
-  #content{flex:1;padding:24px;overflow-y:auto}
+  /* ── CONTENT ── */
+  #content{flex:1;padding:28px;overflow-y:auto}
 
-  /* CARDS */
-  .card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:14px 16px}
-  .macro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
-  .macro-card{background:#fff;border:2px solid var(--border);border-radius:16px;padding:22px 16px;cursor:pointer;font-family:Arial,sans-serif;text-align:left;display:flex;flex-direction:column;gap:8px;transition:all .15s;width:100%}
-  .macro-card:hover{box-shadow:0 4px 18px rgba(13,27,62,.1);transform:translateY(-2px)}
-  .macro-card-icon{font-size:34px}
-  .macro-card-title{font-weight:800;color:var(--navy);font-size:14px}
-  .macro-card-sub{font-size:12px;color:var(--muted)}
-  .macro-card-badge{border-radius:8px;font-size:11px;font-weight:700;padding:2px 8px;align-self:flex-start;color:#fff}
+  /* ── PAGE TITLES ── */
+  .page-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--black);margin-bottom:4px;letter-spacing:2px;text-transform:uppercase}
+  .page-sub{color:var(--muted);font-size:11px;margin-bottom:28px;letter-spacing:1px;text-transform:uppercase;font-weight:500}
 
-  /* VOCI */
-  .voce-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12}
-  .voce-cat{font-size:11px;font-weight:700;margin-bottom:3px}
-  .voce-nome{font-weight:800;color:var(--navy);font-size:14px;margin-bottom:6px}
-  .voce-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
-  .voce-costo{font-weight:900;font-size:18px;color:var(--success)}
-  .voce-actions{display:flex;gap:6px;margin-top:6px}
-  .btn-edit{background:#EEF4FF;border:1px solid #C0D0F0;color:var(--navy2);border-radius:7px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif}
-  .btn-del{background:#FEF2F2;border:1px solid rgba(184,50,50,.2);color:var(--danger);border-radius:7px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif}
-  .subtotal-bar{border-radius:12px;padding:12px 18px;display:flex;justify-content:space-between;margin-top:4px;color:#fff}
-  .subtotal-bar span:first-child{opacity:.7;font-weight:700;font-size:13px}
-  .subtotal-bar span:last-child{font-weight:900;font-size:18px}
+  /* ── CARDS MACRO ── */
+  .macro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+  .macro-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px 20px;cursor:pointer;font-family:var(--font-body);text-align:left;display:flex;flex-direction:column;gap:0;transition:all .2s;width:100%}
+  .macro-card:hover{box-shadow:0 6px 24px rgba(139,26,26,.1);transform:translateY(-2px);border-color:rgba(139,26,26,.2)}
+  .macro-card-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:10px;margin-bottom:10px;background:var(--gray2)}
+  .macro-card-title{font-weight:700;color:var(--black);font-size:11px;font-family:var(--font-display);letter-spacing:1.8px;text-transform:uppercase;margin-bottom:4px}
+  .macro-card-sub{font-size:11px;color:var(--muted);font-weight:400;letter-spacing:.2px}
+  .macro-card-badge{border-radius:4px;font-size:9px;font-weight:700;padding:2px 7px;align-self:flex-start;color:#fff;letter-spacing:.5px;margin-top:10px}
 
-  /* RIEPILOGO */
+  /* ── VOCE CARDS ── */
+  .voce-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
+  .voce-cat{font-size:10px;font-weight:700;margin-bottom:3px;letter-spacing:.5px;text-transform:uppercase}
+  .voce-nome{font-weight:600;color:var(--black);font-size:13px;margin-bottom:6px;font-family:var(--font-display);letter-spacing:1px;text-transform:uppercase}
+  .voce-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--muted)}
+  .voce-costo{font-weight:700;font-size:18px;color:var(--success);font-family:var(--font-display)}
+  .voce-actions{display:flex;gap:6px;margin-top:8px}
+  .btn-edit{background:var(--gray2);border:1px solid var(--border);color:var(--black);border-radius:6px;padding:4px 11px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all .15s}
+  .btn-edit:hover{background:var(--border)}
+  .btn-del{background:#FEF2F2;border:1px solid rgba(139,26,26,.15);color:var(--red);border-radius:6px;padding:4px 11px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all .15s}
+  .btn-del:hover{background:#fde8e8}
+  .subtotal-bar{border-radius:10px;padding:13px 20px;display:flex;justify-content:space-between;margin-top:4px;color:#fff}
+  .subtotal-bar span:first-child{opacity:.75;font-weight:600;font-size:12.5px}
+  .subtotal-bar span:last-child{font-weight:700;font-size:17px;font-family:var(--font-display)}
+
+  /* ── RIEPILOGO ── */
   .riepilogo-group{margin-bottom:18px}
-  .riepilogo-header{display:flex;justify-content:space-between;padding:8px 14px;border-radius:10px;border-left-width:4px;border-left-style:solid;margin-bottom:8px}
-  .riepilogo-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:10px;font-size:13px;margin-bottom:5px}
-  .totale-box{background:var(--navy);border-radius:16px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;margin-top:8px}
-  .totale-box span:first-child{color:rgba(255,255,255,.6);font-weight:700}
-  .totale-box span:last-child{color:var(--ocra-light);font-weight:900;font-size:28px}
+  .riepilogo-header{display:flex;justify-content:space-between;padding:9px 16px;border-radius:8px;border-left-width:3px;border-left-style:solid;margin-bottom:8px}
+  .riepilogo-row{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;background:#fff;border:1px solid var(--border);border-radius:8px;font-size:13px;margin-bottom:5px;transition:background .1s}
+  .riepilogo-row:hover{background:var(--gray2)}
+  .totale-box{background:var(--black);border-radius:12px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+  .totale-box span:first-child{color:rgba(255,255,255,.5);font-weight:700;font-size:10px;letter-spacing:2px;text-transform:uppercase}
+  .totale-box span:last-child{color:#E8A0A0;font-weight:700;font-size:28px;font-family:var(--font-display)}
 
-  /* STORICO */
-  .proj-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s;box-shadow:0 1px 4px rgba(13,27,62,.05)}
-  .proj-card:hover{box-shadow:0 4px 18px rgba(13,27,62,.1)}
-  .proj-card.current{border-left:4px solid var(--ocra)}
-  .proj-card.current .proj-card-head{background:linear-gradient(90deg,#FDF8EE,#fff)}
-  .proj-card-head{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:16px 20px;cursor:pointer;gap:12px;
-  }
+  /* ── STORICO ── */
+  .proj-card{background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:box-shadow .2s}
+  .proj-card:hover{box-shadow:0 4px 18px rgba(0,0,0,.07)}
+  .proj-card.current{border-left:3px solid var(--red)}
+  .proj-card.current .proj-card-head{background:linear-gradient(90deg,#FDF5F5,#fff)}
+  .proj-card-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;cursor:pointer;gap:12px}
   .proj-card-headleft{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
-  .proj-card-icon{
-    width:44px;height:44px;border-radius:12px;
-    background:var(--gray);display:flex;align-items:center;justify-content:center;
-    font-size:20px;flex-shrink:0;
-  }
-  .proj-card.current .proj-card-icon{background:#FDF0CC}
+  .proj-card-icon{width:42px;height:42px;border-radius:10px;background:var(--gray2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  .proj-card.current .proj-card-icon{background:#FDEAEA}
   .proj-card-info{flex:1;min-width:0}
-  .proj-card-nome{font-weight:800;color:var(--navy);font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .proj-card-meta{font-size:11.5px;color:var(--muted);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .proj-card-badge{background:var(--ocra);color:#fff;border-radius:20px;font-size:10px;font-weight:800;padding:2px 8px}
+  .proj-card-nome{font-weight:700;color:var(--black);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--font-display);letter-spacing:1px;text-transform:uppercase}
+  .proj-card-meta{font-size:11px;color:var(--muted);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .proj-card-badge{background:var(--red);color:#fff;border-radius:20px;font-size:9px;font-weight:700;padding:2px 8px;letter-spacing:.3px}
   .proj-card-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
-  .proj-card-tot{font-weight:900;color:var(--success);font-size:18px;letter-spacing:-.3px}
-  .proj-card-chevron{color:var(--muted);font-size:12px;transition:transform .2s;margin-top:2px;text-align:right}
+  .proj-card-tot{font-weight:700;color:var(--success);font-size:17px;font-family:var(--font-display)}
+  .proj-card-chevron{color:var(--muted);font-size:11px;transition:transform .2s}
   .proj-card.open .proj-card-chevron{transform:rotate(180deg)}
-  /* Anteprima */
-  .proj-preview{
-    display:none;border-top:1px solid var(--border);
-    padding:0 20px 16px;
-  }
+  .proj-preview{display:none;border-top:1px solid var(--border);padding:0 20px 16px}
   .proj-card.open .proj-preview{display:block}
-  .proj-preview-title{font-size:10.5px;font-weight:800;color:var(--muted);letter-spacing:1px;text-transform:uppercase;padding:14px 0 8px}
-  .proj-preview-row{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:7px 10px;background:var(--gray);border-radius:8px;
-    font-size:12.5px;margin-bottom:4px;
-  }
-  .proj-preview-row-name{color:var(--navy);font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:10px}
-  .proj-preview-row-cost{color:var(--success);font-weight:800;flex-shrink:0}
-  .proj-preview-more{font-size:12px;color:var(--muted);padding:6px 0 0;font-style:italic}
+  .proj-preview-title{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;padding:14px 0 8px}
+  .proj-preview-row{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--gray2);border-radius:7px;font-size:12.5px;margin-bottom:4px}
+  .proj-preview-row-name{color:var(--black);font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:10px}
+  .proj-preview-row-cost{color:var(--success);font-weight:700;flex-shrink:0;font-family:var(--font-display)}
+  .proj-preview-more{font-size:11.5px;color:var(--muted);padding:6px 0 0;font-style:italic}
   .proj-preview-actions{display:flex;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
-  .btn-carica{background:var(--navy);border:none;color:#fff;border-radius:9px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;display:flex;align-items:center;gap:6px;transition:opacity .15s}
-  .btn-carica:hover{opacity:.85}
-  .btn-del-confirm{background:#FEF2F2;border:1.5px solid rgba(184,50,50,.25);color:var(--danger);border-radius:9px;padding:9px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;transition:all .15s}
-  .btn-del-confirm:hover{background:#fee2e2;border-color:var(--danger)}
+  .btn-carica{background:var(--black);border:none;color:#fff;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);display:flex;align-items:center;gap:6px;transition:background .15s}
+  .btn-carica:hover{background:#333}
+  .btn-del-confirm{background:#FEF2F2;border:1px solid rgba(139,26,26,.2);color:var(--red);border-radius:8px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all .15s}
+  .btn-del-confirm:hover{background:#fde8e8}
   .proj-empty{text-align:center;padding:70px 20px;color:var(--muted)}
-  .proj-empty-icon{font-size:52px;margin-bottom:14px}
-  .proj-empty-title{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:6px}
-  .proj-empty-sub{font-size:13px}
+  .proj-empty-icon{font-size:48px;margin-bottom:14px}
+  .proj-empty-title{font-size:16px;font-weight:600;color:var(--black);margin-bottom:6px;font-family:var(--font-display)}
 
-  /* MODALI */
-  .overlay{position:fixed;inset:0;background:rgba(13,27,62,.55);z-index:300;display:flex;align-items:center;justify-content:center;padding:16px}
-  .modal{background:#fff;border-radius:20px;width:100%;max-width:560px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(13,27,62,.3);overflow:hidden}
-  .modal-header{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-radius:20px 20px 0 0;flex-shrink:0}
-  .modal-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center}
+  /* ── MODAL ── */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:300;display:flex;align-items:center;justify-content:center;padding:16px}
+  .modal{background:#fff;border-radius:16px;width:100%;max-width:560px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.25);overflow:hidden}
+  .modal-header{padding:18px 22px;display:flex;align-items:center;justify-content:space-between;border-radius:16px 16px 0 0;flex-shrink:0}
+  .modal-close{background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:7px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .15s}
+  .modal-close:hover{background:rgba(255,255,255,.25)}
   .step-bar{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
-  .step-item{flex:1;text-align:center;padding:10px 4px;font-size:12px;font-weight:700;border-bottom:3px solid transparent;color:var(--muted)}
-  .step-item.active{color:var(--navy);border-bottom-color:var(--ocra)}
-  .step-item.done{color:var(--ocra)}
-  .step-num{background:var(--border);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;margin-right:5px;font-size:10px}
-  .step-item.active .step-num{background:var(--navy)}
-  .step-item.done .step-num{background:var(--ocra)}
-  .modal-body{flex:1;overflow-y:auto;padding:20px}
-  .modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:10;flex-shrink:0}
+  .step-item{flex:1;text-align:center;padding:11px 4px;font-size:11.5px;font-weight:600;border-bottom:2px solid transparent;color:var(--muted)}
+  .step-item.active{color:var(--black);border-bottom-color:var(--red)}
+  .step-item.done{color:var(--red)}
+  .step-num{background:var(--border);color:var(--muted);border-radius:50%;width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center;margin-right:5px;font-size:10px}
+  .step-item.active .step-num{background:var(--black);color:#fff}
+  .step-item.done .step-num{background:var(--red);color:#fff}
+  .modal-body{flex:1;overflow-y:auto;padding:22px}
+  .modal-footer{padding:14px 22px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:10px;flex-shrink:0}
 
-  /* FORM ELEMENTI */
-  .field-label{font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:6px;letter-spacing:.5px}
-  .field-row{display:flex;align-items:center;border:2px solid var(--border);border-radius:10px;overflow:hidden;background:var(--gray)}
-  .field-row input{flex:1;border:none;background:transparent;padding:12px 16px;font-size:20px;font-weight:700;color:var(--navy);font-family:Arial,sans-serif;outline:none}
-  .field-row .field-unit{padding:0 16px;font-size:14px;color:var(--muted);font-weight:600}
-  .pill-btn{border-radius:8px;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;white-space:nowrap;border:2px solid var(--border);background:#fff;color:var(--muted);transition:all .15s}
+  /* ── FORM ELEMENTS ── */
+  .field-label{font-size:10px;font-weight:700;color:var(--muted);display:block;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase}
+  .field-row{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:9px;overflow:hidden;background:var(--gray2)}
+  .field-row:focus-within{border-color:var(--red)}
+  .field-row input{flex:1;border:none;background:transparent;padding:12px 16px;font-size:22px;font-weight:600;color:var(--black);font-family:var(--font-display);outline:none}
+  .field-row .field-unit{padding:0 16px;font-size:13px;color:var(--muted);font-weight:600}
+  .pill-btn{border-radius:7px;padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--font-body);white-space:nowrap;border:1.5px solid var(--border);background:#fff;color:var(--muted);transition:all .15s}
   .pill-btn.active{border-color:currentColor}
   .select-list{display:flex;flex-direction:column;gap:8px}
-  .select-item{background:#fff;border:2px solid var(--border);border-radius:12px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:Arial,sans-serif;text-align:left;width:100%;transition:all .15s}
-  .select-item:hover{border-color:#aab;background:var(--gray)}
-  .select-item-main{font-weight:800;color:var(--navy);font-size:14px}
-  .select-item-sub{font-size:12px;color:var(--muted);margin-top:3px}
-  .select-item-price{font-size:11px;margin-top:3px;font-weight:700}
-  .select-arrow{font-size:22px;color:inherit;margin-left:10px;flex-shrink:0}
-  .info-box{border-radius:12px;padding:12px 16px;border:1.5px solid transparent}
-  .result-box{background:var(--navy);border-radius:14px;padding:16px 18px}
+  .select-item{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:var(--font-body);text-align:left;width:100%;transition:all .15s}
+  .select-item:hover{border-color:rgba(139,26,26,.3);background:var(--red-faint)}
+  .select-item-main{font-weight:700;color:var(--black);font-size:12px;font-family:var(--font-display);letter-spacing:1px;text-transform:uppercase}
+  .select-item-sub{font-size:11.5px;color:var(--muted);margin-top:3px}
+  .select-item-price{font-size:11px;margin-top:3px;font-weight:600}
+  .select-arrow{font-size:20px;color:var(--red);margin-left:10px;flex-shrink:0}
+  .info-box{border-radius:10px;padding:13px 16px;border:1px solid transparent}
+  .result-box{background:var(--black);border-radius:12px;padding:16px 20px}
   .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
-  .result-cell{text-align:center;background:rgba(255,255,255,.06);border-radius:10px;padding:11px 6px}
-  .result-val{font-size:20px;font-weight:900}
-  .result-lbl{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
-  .result-note{font-size:11px;color:rgba(255,255,255,.35);text-align:center}
+  .result-cell{text-align:center;background:rgba(255,255,255,.05);border-radius:9px;padding:11px 6px}
+  .result-val{font-size:19px;font-weight:700;font-family:var(--font-display)}
+  .result-lbl{font-size:10px;color:rgba(255,255,255,.35);margin-top:2px;letter-spacing:.5px;text-transform:uppercase}
+  .result-note{font-size:11px;color:rgba(255,255,255,.3);text-align:center}
 
-  /* EDIT FORM */
+  /* ── EDIT FORM ── */
   .edit-field{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
-  .edit-field label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px}
-  .edit-field input{border:2px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;color:var(--navy);font-family:Arial,sans-serif;outline:none;background:var(--gray)}
-  .edit-field input:focus{border-color:var(--ocra)}
-  .edit-section-title{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin:14px 0 8px;text-transform:uppercase}
-  .conf-edit-row{display:flex;gap:8px;align-items:center;margin-bottom:6px;padding:8px;background:var(--gray);border-radius:8px}
-  .conf-edit-row input{flex:1;border:1.5px solid var(--border);border-radius:7px;padding:7px 10px;font-size:13px;color:var(--navy);font-family:Arial,sans-serif;outline:none;background:#fff}
-  .conf-edit-row input:focus{border-color:var(--ocra)}
+  .edit-field label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+  .edit-field input{border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;color:var(--black);font-family:var(--font-body);outline:none;background:var(--gray2);transition:border-color .15s}
+  .edit-field input:focus{border-color:var(--red)}
+  .edit-section-title{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;margin:14px 0 8px;text-transform:uppercase}
+  .conf-edit-row{display:flex;gap:8px;align-items:center;margin-bottom:6px;padding:8px;background:var(--gray2);border-radius:8px}
+  .conf-edit-row input{flex:1;border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-size:13px;color:var(--black);font-family:var(--font-body);outline:none;background:#fff;transition:border-color .15s}
+  .conf-edit-row input:focus{border-color:var(--red)}
 
-  /* EXPORT BTN */
+  /* ── EXPORT BUTTONS ── */
   .export-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-  .btn-export{border:none;border-radius:9px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;display:flex;align-items:center;gap:6px}
-  .btn-pdf{background:#C0392B;color:#fff}
-  .btn-xlsx{background:#1A7A4A;color:#fff}
-  .btn-csv{background:#1A5C8A;color:#fff}
+  .btn-export{border:none;border-radius:8px;padding:9px 18px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--font-body);display:flex;align-items:center;gap:6px;letter-spacing:.2px;transition:opacity .15s}
+  .btn-export:hover{opacity:.85}
+  .btn-pdf{background:var(--red);color:#fff}
+  .btn-xlsx{background:#1A6B3F;color:#fff}
+  .btn-csv{background:#1A4A6B;color:#fff}
 
-  /* PAGE TITLE */
-  .page-title{font-weight:900;font-size:19px;color:var(--navy);margin-bottom:4px}
-  .page-sub{color:var(--muted);font-size:13px;margin-bottom:20px}
-  .empty-state{text-align:center;padding:50px 20px;border-radius:16px;border:2px dashed}
-  .empty-state-icon{font-size:40px;margin-bottom:10px}
-  .empty-state-title{font-weight:700;color:var(--navy);font-size:15px;margin-bottom:4px}
-  .empty-state-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
-  .btn-primary{border:none;color:#fff;border-radius:10px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif}
+  /* ── RANGE ── */
+  input[type=range]{width:100%;height:4px;cursor:pointer;accent-color:var(--red)}
+  .range-labels{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:4px}
 
-  /* RANGE */
-  input[type=range]{width:100%;height:4px;cursor:pointer}
-  .range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
-
-  /* FAB — Salva progetto */
-  #fab-salva {
-    position: fixed;
-    right: 24px;
-    bottom: 24px;
-    z-index: 190;
-    display: none; /* shown via JS when unsaved changes */
-    align-items: center;
-    gap: 10px;
-    background: linear-gradient(135deg, var(--ocra), #E0B44A);
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    padding: 14px 22px;
-    font-size: 14px;
-    font-weight: 800;
-    font-family: Arial, sans-serif;
-    cursor: pointer;
-    box-shadow: 0 6px 24px rgba(200,154,58,.45);
-    transition: transform .18s, box-shadow .18s, opacity .2s;
-    letter-spacing: .2px;
-  }
-  #fab-salva:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(200,154,58,.5); }
-  #fab-salva:active { transform: scale(.97); }
-  #fab-salva.visible { display: flex; }
-  #fab-salva .fab-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #fff; opacity: .6; animation: fab-pulse 1.6s infinite;
-  }
-  @keyframes fab-pulse { 0%,100%{opacity:.4;transform:scale(1)} 50%{opacity:1;transform:scale(1.3)} }
-  @media (max-width: 768px) {
-    #fab-salva { bottom: 74px; right: 14px; padding: 12px 18px; font-size: 13px; }
-  }
-
-
-  /* ═══════════════════════════════════════════════
-     BOTTOM NAV (solo mobile)
-  ═══════════════════════════════════════════════ */
-  #bottom-nav {
-    display: none;
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
-    background: var(--sidebar);
-    border-top: 1px solid rgba(255,255,255,.1);
-    height: 62px;
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-    box-shadow: 0 -4px 20px rgba(13,27,62,.25);
-  }
-  .bn-btn {
-    flex: 1; display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: 3px; background: transparent; border: none;
-    color: rgba(255,255,255,.45); cursor: pointer; font-family: Arial,sans-serif;
-    font-size: 9.5px; font-weight: 700; letter-spacing: .3px; padding: 8px 4px;
-    border-top: 3px solid transparent; transition: all .18s;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .bn-btn:active { background: rgba(255,255,255,.07); }
-  .bn-btn.active { color: var(--ocra-light); border-top-color: var(--ocra); }
-  .bn-btn span:first-child { font-size: 21px; line-height: 1; }
-  .bn-badge {
-    position: absolute; top: 6px; right: calc(50% - 18px);
-    background: var(--ocra); color: #fff; border-radius: 8px;
-    font-size: 9px; font-weight: 900; padding: 1px 5px; min-width: 16px; text-align: center;
-  }
-
-  /* ═══════════════════════════════════════════════
-     RESPONSIVE — MOBILE (max-width: 768px)
-  ═══════════════════════════════════════════════ */
-  @media (max-width: 768px) {
-
-    /* ── Layout base ── */
-    #sidebar { display: none !important; }
-    #bottom-nav { display: flex !important; }
-    #app { flex-direction: column; padding-bottom: 62px; }
-    #main { min-width: 0; width: 100%; }
-    #footer-copy { display: none; }
-
-    /* ── Topbar mobile ── */
-    #topbar {
-      padding: 0 14px;
-      min-height: 56px;
-      flex-wrap: nowrap;
-      gap: 0;
-    }
-    .topbar-left { gap: 0; flex: 1; min-width: 0; }
-    .topbar-proj-label { display: none; }
-    #proj-name { font-size: 15px; max-width: 160px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-    #proj-name-input { font-size: 15px; max-width: 160px; }
-    .topbar-right { flex-wrap: nowrap; gap: 0; }
-    /* Nasconde il contatore voci, mostra solo il totale */
-    .topbar-stat:first-child { display: none; }
-    .topbar-stat { padding: 0 10px; min-height: 56px; }
-    .topbar-stat-label { font-size: 9px; }
-    .topbar-total { font-size: 17px; }
-    /* Azioni: solo icone su mobile */
-    .topbar-actions { padding: 0 0 0 10px; gap: 6px; }
-    .btn-ghost { padding: 6px 9px; font-size: 11px; }
-
-    /* ── Content ── */
-    #content { padding: 12px 12px 24px; }
-
-    /* ── Macro grid: 2 colonne ── */
-    .macro-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .macro-card { padding: 16px 12px; gap: 5px; border-radius: 14px; }
-    .macro-card-icon { font-size: 28px; }
-    .macro-card-title { font-size: 12px; line-height: 1.3; }
-    .macro-card-sub { font-size: 10.5px; }
-
-    /* ── Titoli pagina ── */
-    .page-title { font-size: 17px; }
-    .page-sub { font-size: 12px; margin-bottom: 12px; }
-
-    /* ── Voce card preventivo ── */
-    .voce-card { flex-direction: column; gap: 6px; border-radius: 12px; padding: 12px 14px; }
-    .voce-nome { font-size: 13px; }
-    .voce-costo { font-size: 17px; }
-    .voce-meta { gap: 8px; }
-    .voce-actions { gap: 6px; margin-top: 2px; }
-    .subtotal-bar { border-radius: 10px; padding: 10px 14px; }
-    .subtotal-bar span:last-child { font-size: 16px; }
-
-    /* ── Riepilogo ── */
-    .riepilogo-row { flex-direction: column; align-items: flex-start; gap: 3px; font-size: 12px; }
-    .riepilogo-header { padding: 7px 12px; }
-    .totale-box { border-radius: 14px; padding: 16px 18px; }
-    .totale-box span:last-child { font-size: 22px; }
-    .export-row { gap: 6px; flex-wrap: wrap; }
-    .btn-export { padding: 9px 13px; font-size: 12px; flex: 1; justify-content: center; }
-
-    /* ── Storico ── */
-    .proj-card-head { padding: 14px 14px; }
-    .proj-card-icon { width: 38px; height: 38px; font-size: 18px; border-radius: 10px; }
-    .proj-card-nome { font-size: 14px; }
-    .proj-card-tot { font-size: 16px; }
-    .proj-preview { padding: 0 14px 14px; }
-    .proj-preview-actions { flex-direction: column; gap: 8px; }
-    .btn-carica, .btn-del-confirm { width: 100%; justify-content: center; padding: 12px; font-size: 14px; }
-
-    /* ── Modal: drawer dal basso ── */
-    .overlay { padding: 0; align-items: flex-end; }
-    .modal {
-      border-radius: 22px 22px 0 0;
-      max-width: 100%;
-      max-height: 92vh;
-      width: 100%;
-    }
-    #edit-modal { border-radius: 22px 22px 0 0; max-height: 92vh; }
-    .modal-body { padding: 16px; }
-    .modal-header { padding: 14px 16px; }
-    .modal-footer { padding: 12px 16px; gap: 8px; }
-    .result-grid { gap: 6px; }
-    .result-val { font-size: 18px; }
-
-    /* ── Select list ── */
-    .select-item { padding: 12px 14px; border-radius: 10px; }
-    .select-item-main { font-size: 13px; }
-
-    /* ── Input numeri ── */
-    .field-row input { font-size: 22px; padding: 12px 14px; }
-
-    /* ── Toast ── */
-    #toast { bottom: 72px; right: 12px; left: 12px; text-align: center; font-size: 13px; }
-
-    /* ── Misc ── */
-    .macro-header-row { flex-direction: column; align-items: flex-start !important; gap: 10px !important; }
-    .btn-primary { font-size: 14px; padding: 11px 18px; width: 100%; text-align: center; }
-  }
-
-  /* ── Extra small (max 400px) ── */
-  @media (max-width: 400px) {
-    .macro-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .macro-card-title { font-size: 11px; }
-    .result-grid { grid-template-columns: 1fr 1fr; }
-    .topbar-total { font-size: 15px; }
-    #proj-name { font-size: 13px; max-width: 120px; }
-  }
-
-
-  /* MINI EDITOR PREZZI INLINE */
-  .price-editor{background:#fff;border:2px solid var(--ocra);border-radius:12px;padding:12px 14px;margin-top:8px;display:none}
+  /* ── PRICE EDITOR ── */
+  .price-editor{display:none;background:var(--gray2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:8px}
   .price-editor.open{display:block}
-  .price-editor-title{font-size:11px;font-weight:700;color:var(--ocra);letter-spacing:.5px;margin-bottom:10px}
-  .price-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-  .price-row-label{font-size:12px;color:var(--navy);font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .price-row-input{width:80px;border:2px solid var(--border);border-radius:7px;padding:6px 8px;font-size:14px;font-weight:700;color:var(--navy);font-family:Arial,sans-serif;outline:none;text-align:right;background:var(--gray)}
-  .price-row-input:focus{border-color:var(--ocra)}
-  .price-row-euro{font-size:13px;color:var(--muted);font-weight:600}
-  .btn-price-save{background:var(--ocra);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;width:100%;margin-top:4px}
-  .btn-price-edit{background:var(--ocra-faint);border:1.5px solid var(--ocra);color:var(--ocra);border-radius:7px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;flex-shrink:0;white-space:nowrap}
-  .select-item-wrap{display:flex;flex-direction:column;width:100%}
+  .price-editor-title{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+  .price-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .price-row-label{font-size:12px;color:var(--black);font-weight:500;flex:1;min-width:80px}
+  .price-row-input{border:1.5px solid var(--border);border-radius:7px;padding:6px 10px;font-size:13px;font-weight:600;color:var(--black);font-family:var(--font-body);outline:none;background:#fff;width:80px;text-align:right;transition:border-color .15s}
+  .price-row-input:focus{border-color:var(--red)}
+  .price-row-euro{font-size:12px;color:var(--muted);font-weight:600}
+  .btn-price-edit{background:var(--gray2);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:6px 10px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-body);flex-shrink:0;transition:all .15s}
+  .btn-price-edit:hover{border-color:var(--red);color:var(--red)}
+  .btn-price-save{background:var(--black);border:none;color:#fff;border-radius:7px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-body);margin-top:4px;transition:background .15s}
+  .btn-price-save:hover{background:#333}
 
+  /* ── BTN PRIMARY ── */
+  .btn-primary{border:none;color:#fff;border-radius:9px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);letter-spacing:.2px;transition:opacity .15s}
+  .btn-primary:hover{opacity:.85}
+
+  /* ── EMPTY STATE ── */
+  .empty-state{text-align:center;padding:50px 20px;border-radius:12px;border:1.5px dashed}
+  .empty-state-icon{font-size:36px;margin-bottom:10px}
+  .empty-state-title{font-weight:600;color:var(--black);font-size:15px;margin-bottom:4px;font-family:var(--font-display)}
+  .empty-state-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+
+  /* ── FAB ── */
+  #fab-salva{position:fixed;right:24px;bottom:24px;z-index:190;display:none;align-items:center;gap:10px;background:var(--red);color:#fff;border:none;border-radius:50px;padding:13px 22px;font-size:13.5px;font-weight:600;font-family:var(--font-body);cursor:pointer;box-shadow:0 6px 24px rgba(139,26,26,.4);transition:transform .18s,box-shadow .18s,opacity .2s;letter-spacing:.2px}
+  #fab-salva:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(139,26,26,.45)}
+  #fab-salva:active{transform:scale(.97)}
+  #fab-salva.visible{display:flex}
+  #fab-salva .fab-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.6);animation:fab-pulse 1.6s infinite}
+  @keyframes fab-pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+
+  /* ── TOAST ── */
+  #toast{position:fixed;bottom:24px;right:24px;background:var(--black);color:#fff;border-radius:10px;padding:12px 20px;font-size:13.5px;font-weight:600;z-index:999;display:none;box-shadow:0 8px 24px rgba(0,0,0,.2);letter-spacing:.2px}
 
   /* ── WELCOME SCREEN ── */
   #welcome{
-    position:fixed;inset:0;z-index:9999;
-    background:var(--navy);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:32px 24px;text-align:center;
-    transition:opacity .5s ease, transform .5s ease;
+    position:fixed;inset:0;z-index:500;
+    display:grid;grid-template-columns:1fr 1fr;
+    transition:opacity .6s ease,transform .6s ease;
+    overflow:hidden;
   }
-  #welcome.hiding{opacity:0;transform:scale(1.04);pointer-events:none}
-  .wl-logo{background:var(--ocra);border-radius:20px;width:72px;height:72px;
-    display:flex;align-items:center;justify-content:center;font-size:36px;
-    margin:0 auto 22px;box-shadow:0 8px 32px rgba(200,154,58,.35)}
-  .wl-title{font-size:28px;font-weight:900;color:#fff;margin-bottom:6px;line-height:1.2}
-  .wl-subtitle{font-size:14px;color:var(--ocra-light);font-weight:700;letter-spacing:1.5px;
-    margin-bottom:28px;text-transform:uppercase}
-  .wl-divider{width:48px;height:3px;background:var(--ocra);border-radius:2px;
-    margin:0 auto 28px}
-  .wl-steps{display:flex;flex-direction:column;gap:14px;max-width:360px;
-    width:100%;margin-bottom:36px}
-  .wl-step{display:flex;align-items:flex-start;gap:14px;text-align:left;
-    background:rgba(255,255,255,.06);border-radius:14px;padding:14px 16px}
-  .wl-step-icon{font-size:22px;flex-shrink:0;margin-top:1px}
-  .wl-step-text{color:rgba(255,255,255,.85);font-size:13px;line-height:1.5}
-  .wl-step-title{font-weight:800;color:#fff;font-size:14px;margin-bottom:3px}
+  #welcome.hiding{opacity:0;transform:scale(1.02);pointer-events:none}
+  #welcome.hidden{display:none!important}
+  
+  /* Left panel - red brand side */
+  .wl-left{
+    background:var(--red);
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;
+    padding:48px 52px;
+    position:relative;overflow:hidden;
+  }
+  /* Geometric background lines */
+  .wl-left::before{
+    content:'';position:absolute;inset:0;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.05) 0%, transparent 50%),
+      repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,.02) 40px, rgba(255,255,255,.02) 41px);
+    pointer-events:none;
+  }
+  .wl-left::after{
+    content:'';
+    position:absolute;
+    bottom:-120px;left:-80px;
+    width:400px;height:400px;
+    border-radius:50%;
+    background:rgba(0,0,0,.12);
+    pointer-events:none;
+  }
+  .wl-logo-wrap{position:relative;z-index:1}
+  .wl-logo{
+    width:180px;height:auto;
+    filter:brightness(0) invert(1);
+    display:block;
+    opacity:.95;
+  }
+  .wl-left-bottom{position:relative;z-index:1}
+  .wl-headline{
+    font-family:var(--font-display);
+    font-size:42px;font-weight:700;
+    color:#fff;line-height:1.1;
+    letter-spacing:-.5px;
+    margin-bottom:14px;
+  }
+  .wl-headline em{font-style:normal;opacity:.6}
+  .wl-tagline{
+    font-size:13px;color:rgba(255,255,255,.6);
+    line-height:1.6;max-width:280px;font-weight:400;
+  }
+  
+  /* Right panel - white content side */
+  .wl-right{
+    background:#fff;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:56px 52px;
+    position:relative;
+  }
+  .wl-right-title{
+    font-family:var(--font-display);
+    font-size:13px;font-weight:600;
+    color:var(--red);letter-spacing:3px;
+    text-transform:uppercase;margin-bottom:10px;
+  }
+  .wl-right-heading{
+    font-family:var(--font-display);
+    font-size:28px;font-weight:600;
+    color:var(--black);line-height:1.2;
+    margin-bottom:36px;letter-spacing:-.3px;
+  }
+  .wl-steps{display:flex;flex-direction:column;gap:0;margin-bottom:40px}
+  .wl-step{
+    display:flex;align-items:flex-start;gap:20px;
+    padding:18px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .wl-step:first-child{padding-top:0}
+  .wl-step:last-child{border-bottom:none;padding-bottom:0}
+  .wl-step-num{
+    width:28px;height:28px;border-radius:50%;
+    background:var(--red);color:#fff;
+    font-size:12px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;margin-top:1px;
+  }
+  .wl-step-content{}
+  .wl-step-title{font-weight:600;color:var(--black);font-size:14px;margin-bottom:3px;letter-spacing:-.1px}
+  .wl-step-text{color:var(--muted);font-size:12.5px;line-height:1.5}
   .wl-btn{
-    background:var(--ocra);border:none;color:#fff;border-radius:14px;
-    padding:16px 48px;font-size:16px;font-weight:900;cursor:pointer;
-    font-family:Arial,sans-serif;
-    box-shadow:0 6px 24px rgba(200,154,58,.45);
-    transition:transform .1s,box-shadow .1s;
-    letter-spacing:.3px;
+    background:var(--black);border:none;color:#fff;
+    border-radius:10px;padding:16px 36px;
+    font-size:14px;font-weight:600;cursor:pointer;
+    font-family:var(--font-body);letter-spacing:.3px;
+    transition:all .2s;display:inline-flex;align-items:center;gap:10px;
+    align-self:flex-start;
   }
-  .wl-btn:active{transform:scale(.97);box-shadow:0 2px 10px rgba(200,154,58,.3)}
-  .wl-credit{margin-top:20px;font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.3px}
-  .wl-credit b{color:rgba(255,255,255,.5)}
-  @media(max-width:480px){
-    .wl-title{font-size:22px}
-    .wl-steps{gap:10px}
-    .wl-step{padding:12px 13px}
-    .wl-btn{padding:14px 36px;font-size:15px}
+  .wl-btn:hover{background:var(--red);transform:translateX(3px)}
+  .wl-btn svg{transition:transform .2s}
+  .wl-btn:hover svg{transform:translateX(3px)}
+  .wl-credit{position:absolute;bottom:28px;left:52px;font-size:10px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}
+  
+  .wl-brand-name{
+    font-family:var(--font-display);
+    font-size:52px;font-weight:700;
+    color:#fff;
+    letter-spacing:-1px;
+    line-height:1.05;
+    text-transform:uppercase;
+  }
+  .wl-presents{
+    font-size:11px;font-weight:500;
+    color:rgba(255,255,255,.55);
+    letter-spacing:4px;
+    text-transform:lowercase;
+    font-style:italic;
   }
 
-  /* NOTIFICA */
-  #toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:700;z-index:999;display:none;box-shadow:0 8px 24px rgba(13,27,62,.3)}
+  @media(max-width:900px){
+    #welcome{grid-template-columns:1fr}
+    .wl-left{
+      display:flex;flex-direction:row;align-items:center;justify-content:space-between;
+      padding:28px 28px;min-height:auto;
+    }
+    .wl-left::after{display:none}
+    .wl-headline{font-size:22px;margin-bottom:0}
+    .wl-tagline{display:none}
+    .wl-left-bottom{display:flex;align-items:center;gap:0}
+    .wl-brand-name{font-size:28px}
+    .wl-right{padding:32px 28px 72px;justify-content:flex-start;overflow-y:auto}
+    .wl-right-heading{font-size:22px;margin-bottom:24px}
+    .wl-btn{align-self:stretch;justify-content:center}
+    .wl-credit{left:28px;bottom:16px}
+  }
+  @media(max-width:480px){
+    .wl-left{padding:22px 20px}
+    .wl-right{padding:28px 20px 68px}
+    .wl-right-heading{font-size:20px}
+    .wl-step{padding:14px 0}
+    .wl-step-title{font-size:13.5px}
+  }
+
+  /* ── BOTTOM NAV (mobile only) ── */
+  #bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--black);border-top:1px solid rgba(255,255,255,.08);height:60px;padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -4px 20px rgba(0,0,0,.2)}
+  .bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:transparent;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:.5px;padding:7px 4px;border-top:2px solid transparent;transition:all .15s;-webkit-tap-highlight-color:transparent;text-transform:uppercase}
+  .bn-btn:active{background:rgba(255,255,255,.05)}
+  .bn-btn.active{color:#E8A0A0;border-top-color:var(--red)}
+  .bn-btn span:first-child{font-size:18px;line-height:1}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:768px){
+    #sidebar{display:none!important}
+    #bottom-nav{display:flex!important}
+    #app{flex-direction:column;padding-bottom:60px}
+    #main{min-width:0;width:100%}
+    #footer-copy{display:none}
+    #topbar{padding:0 14px;min-height:56px}
+    .topbar-left{gap:0;flex:1;min-width:0}
+    .topbar-proj-label{display:none}
+    #proj-name{font-size:15px;max-width:160px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+    .topbar-right{flex-wrap:nowrap;gap:0}
+    .topbar-stat:first-child{display:none}
+    .topbar-stat{padding:0 10px;min-height:56px}
+    .topbar-total{font-size:17px}
+    .topbar-actions{padding:0 0 0 10px;gap:6px}
+    .btn-ghost{padding:6px 9px;font-size:11px}
+    #content{padding:14px 12px 24px}
+    .macro-grid{grid-template-columns:1fr 1fr;gap:10px}
+    .macro-card{padding:16px 13px;gap:5px}
+    .page-title{font-size:22px}
+    .page-sub{font-size:12px;margin-bottom:14px}
+    .voce-card{flex-direction:column;gap:6px;padding:13px 14px}
+    .voce-costo{font-size:16px}
+    .overlay{padding:0;align-items:flex-end}
+    .modal{border-radius:20px 20px 0 0;max-width:100%;width:100%;max-height:92vh}
+    .modal-body{padding:16px}
+    .modal-header{padding:14px 16px}
+    .modal-footer{padding:12px 16px;gap:8px}
+    .result-grid{gap:6px}
+    .result-val{font-size:17px}
+    .select-item{padding:12px 14px;border-radius:9px}
+    .field-row input{font-size:20px;padding:11px 14px}
+    #toast{bottom:70px;right:12px;left:12px;text-align:center;font-size:12.5px}
+    #fab-salva{bottom:70px;right:14px;padding:11px 18px;font-size:13px}
+    .totale-box span:last-child{font-size:22px}
+    .riepilogo-row{flex-direction:column;align-items:flex-start;gap:3px;font-size:12px}
+    .btn-export{padding:9px 12px;font-size:11.5px;flex:1;justify-content:center}
+    .proj-card-head{padding:14px}
+    .proj-preview-actions{flex-direction:column;gap:8px}
+    .btn-carica,.btn-del-confirm{width:100%;justify-content:center;padding:12px}
+    .select-item-wrap{margin-bottom:4px}
+  }
 </style>
 </head>
 <body>
 <div id="app">
   <div id="sidebar">
-    <!-- Logo -->
     <div class="sb-logo">
-      <div class="sb-logo-icon">🏗️</div>
-      <div class="sb-collapsed-hide">
-        <div class="sb-logo-text">CALCOLATORE</div>
-        <div class="sb-logo-sub">EDILE PRO</div>
-      </div>
+      <div class="sb-logo-text-wrap sb-collapsed-hide"><div class="sb-logo-brand">D.ESIGN STUDIOS</div><div class="sb-logo-tool">Calcolatore Materiali</div></div>
+      <div style="width:28px;height:28px;background:var(--red);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:800;letter-spacing:-.5px" id="sb-logo-collapsed">DS</div>
     </div>
-    <button class="sb-toggle sb-collapsed-hide" onclick="toggleSidebar()" title="Comprimi menu">◂ riduci</button>
-    <button class="sb-toggle" id="sb-toggle-icon" style="display:none" onclick="toggleSidebar()" title="Espandi menu">▸</button>
+    <button class="sb-toggle sb-collapsed-hide" onclick="toggleSidebar()">◂ riduci</button>
+    <button class="sb-toggle" id="sb-toggle-icon" style="display:none" onclick="toggleSidebar()">▸</button>
 
-    <!-- Progetto corrente (visibile solo espanso) -->
     <div class="sb-proj-box sb-collapsed-hide" onclick="editNome()" title="Rinomina progetto">
       <div class="sb-proj-name">
         <span id="sb-proj-name-text">Nuovo Progetto</span>
-        <span class="edit-hint">✏️</span>
+        <span style="font-size:10px;color:rgba(255,255,255,.3);font-weight:400">✏</span>
       </div>
       <div class="sb-proj-stats">
         <span class="sb-proj-count" id="sb-proj-count">0 voci</span>
@@ -583,51 +524,49 @@
     </div>
 
     <div class="sb-divider"></div>
-
-    <!-- Navigazione principale -->
-    <div class="sb-label sb-collapsed-hide">NAVIGAZIONE</div>
+    <div class="sb-label sb-collapsed-hide">Navigazione</div>
     <button class="sb-btn" data-view="home" onclick="setVista('home',this)">
-      <span class="sb-btn-icon">🏠</span>
+      <span class="sb-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
       <span class="sb-btn-label sb-collapsed-hide">Preventivo</span>
     </button>
     <button class="sb-btn" data-view="riepilogo" onclick="setVista('riepilogo',this)">
-      <span class="sb-btn-icon">📊</span>
+      <span class="sb-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></span>
       <span class="sb-btn-label sb-collapsed-hide">Riepilogo</span>
     </button>
     <button class="sb-btn" data-view="storico" onclick="setVista('storico',this)">
-      <span class="sb-btn-icon">🗂️</span>
-      <span class="sb-btn-label sb-collapsed-hide">Storico progetti</span>
+      <span class="sb-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+      <span class="sb-btn-label sb-collapsed-hide">Storico</span>
     </button>
 
     <div class="sb-divider"></div>
-
-    <!-- Categorie materiali -->
-    <div class="sb-label sb-collapsed-hide">CATEGORIE</div>
+    <div class="sb-label sb-collapsed-hide">Categorie</div>
     <div id="sb-macro" style="overflow-y:auto;flex:1"></div>
 
-    <!-- Salva -->
+    <a href="https://www.instagram.com/d.esignstudios?igsh=MWJieXo2aDNxOTlvNQ%3D%3D&utm_source=qr" target="_blank" class="sb-instagram sb-collapsed-hide">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      @d.esign_studios
+    </a>
+
     <div class="sb-save">
       <button onclick="salvaProgetto()">
-        <span>💾</span><span class="sb-collapsed-hide"> Salva progetto</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        <span class="sb-collapsed-hide">Salva progetto</span>
       </button>
     </div>
   </div>
 
   <div id="main">
     <div id="topbar">
-      <!-- Nome progetto -->
       <div class="topbar-left">
-        <!-- Toggle sidebar per mobile / fallback -->
         <div class="topbar-proj-wrap">
-          <div class="topbar-proj-label">Progetto</div>
+          <div class="topbar-proj-label">Progetto attivo</div>
           <button id="proj-name" onclick="editNome()">
             <span id="proj-name-text">Nuovo Progetto</span>
-            <span class="edit-pen">✏️</span>
+            <span class="edit-pen">✎</span>
           </button>
           <input id="proj-name-input" style="display:none" onblur="saveNome()" onkeydown="if(event.key==='Enter')saveNome()">
         </div>
       </div>
-      <!-- Stats + azioni -->
       <div class="topbar-right">
         <div class="topbar-stat">
           <div class="topbar-stat-label">Voci</div>
@@ -638,8 +577,8 @@
           <span class="topbar-total" id="topbar-total">€ 0,00</span>
         </div>
         <div class="topbar-actions">
-          <button class="btn-ghost" onclick="svuota()" title="Svuota preventivo">🗑 Svuota</button>
-          <button class="btn-ghost" onclick="nuovoProgetto()" title="Nuovo preventivo">+ Nuovo</button>
+          <button class="btn-ghost" onclick="svuota()">Svuota</button>
+          <button class="btn-ghost" onclick="nuovoProgetto()">+ Nuovo</button>
         </div>
       </div>
     </div>
@@ -647,82 +586,83 @@
   </div>
 </div>
 
-
 <!-- WELCOME SCREEN -->
 <div id="welcome">
-  <div class="wl-logo">🏗️</div>
-  <div class="wl-title">Calcolatore Edile</div>
-  <div class="wl-subtitle">Preventivi professionali</div>
-  <div class="wl-divider"></div>
-  <div class="wl-steps">
-    <div class="wl-step">
-      <span class="wl-step-icon">📐</span>
-      <div>
-        <div class="wl-step-title">Scegli il materiale</div>
-        <div class="wl-step-text">Seleziona la categoria, la lavorazione e il prodotto dalla lista completa.</div>
-      </div>
+  <!-- LEFT PANEL -->
+  <div class="wl-left">
+    <div class="wl-logo-wrap">
+      <div class="wl-brand-name">D.ESIGN<br>STUDIOS</div>
     </div>
-    <div class="wl-step">
-      <span class="wl-step-icon">🔢</span>
-      <div>
-        <div class="wl-step-title">Inserisci la superficie</div>
-        <div class="wl-step-text">Digita i metri quadri (o il volume). L'app calcola automaticamente i pezzi e il costo, margine incluso.</div>
-      </div>
-    </div>
-    <div class="wl-step">
-      <span class="wl-step-icon">📊</span>
-      <div>
-        <div class="wl-step-title">Esporta il preventivo</div>
-        <div class="wl-step-text">Genera il riepilogo in PDF, Excel o CSV con un solo tap.</div>
-      </div>
+    <div class="wl-left-bottom">
+      <div class="wl-presents">presenta</div>
     </div>
   </div>
-  <button class="wl-btn" onclick="closeWelcome()">Inizia →</button>
-  <div class="wl-credit">Ideata e sviluppata da <b>Geom. Daniel Meccanici</b></div>
+  <!-- RIGHT PANEL -->
+  <div class="wl-right">
+    <div class="wl-right-title">Calcolatore Materiali</div>
+    <div class="wl-right-heading">Il tuo preventivo,<br>in tre passaggi.</div>
+    <div class="wl-steps">
+      <div class="wl-step">
+        <div class="wl-step-num">1</div>
+        <div class="wl-step-content">
+          <div class="wl-step-title">Scegli il materiale</div>
+          <div class="wl-step-text">Seleziona categoria, lavorazione e prodotto dalla lista.</div>
+        </div>
+      </div>
+      <div class="wl-step">
+        <div class="wl-step-num">2</div>
+        <div class="wl-step-content">
+          <div class="wl-step-title">Inserisci la superficie</div>
+          <div class="wl-step-text">L'app calcola automaticamente le confezioni e il costo totale.</div>
+        </div>
+      </div>
+      <div class="wl-step">
+        <div class="wl-step-num">3</div>
+        <div class="wl-step-content">
+          <div class="wl-step-title">Esporta il preventivo</div>
+          <div class="wl-step-text">Genera il riepilogo in PDF, Excel o CSV con un solo tap.</div>
+        </div>
+      </div>
+    </div>
+    <button class="wl-btn" onclick="closeWelcome()">
+      Inizia ora
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+    <div class="wl-credit">D.ESIGN STUDIOS · Napoli</div>
+  </div>
 </div>
 
 <!-- DISCLAIMER MODAL -->
-<div id="disclaimer-overlay" style="display:none;position:fixed;inset:0;background:rgba(13,27,62,.7);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px">
-  <div style="background:#fff;border-radius:20px;max-width:460px;width:100%;box-shadow:0 24px 64px rgba(13,27,62,.35);overflow:hidden">
-    <div style="background:#C89A3A;padding:18px 22px;display:flex;align-items:center;gap:12px">
-      <span style="font-size:28px">⚠️</span>
+<div id="disclaimer-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:16px;max-width:460px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.3);overflow:hidden">
+    <div style="background:var(--red);padding:18px 22px;display:flex;align-items:center;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       <div>
-        <div style="color:#fff;font-weight:900;font-size:16px">Avviso importante</div>
-        <div style="color:rgba(255,255,255,.75);font-size:11px;letter-spacing:.5px">Leggere prima di utilizzare l'app</div>
+        <div style="color:#fff;font-weight:700;font-size:15px;font-family:var(--font-display)">Avviso importante</div>
+        <div style="color:rgba(255,255,255,.7);font-size:11px;letter-spacing:.5px">Leggere prima di utilizzare l'app</div>
       </div>
     </div>
     <div style="padding:24px 22px">
-      <p style="font-size:14px;color:#0D1B3E;line-height:1.7;margin-bottom:14px">
-        Questo calcolatore è uno <strong>strumento di riferimento indicativo</strong> per la stima dei materiali edili.
-      </p>
-      <div style="background:#FDF8EE;border-left:4px solid #C89A3A;border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:14px">
-        <div style="font-size:12px;font-weight:700;color:#C89A3A;letter-spacing:.5px;margin-bottom:6px">I PREZZI SONO STIME</div>
-        <p style="font-size:13px;color:#5A4010;line-height:1.6;margin:0">
-          I prezzi preimpostati sono <strong>valori medi di mercato</strong> e possono variare significativamente in base al fornitore, alla zona geografica e al periodo.
-        </p>
+      <p style="font-size:14px;color:var(--black);line-height:1.7;margin-bottom:14px">Questo calcolatore è uno <strong>strumento di riferimento indicativo</strong> per la stima dei materiali.</p>
+      <div style="background:var(--red-faint);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:14px">
+        <div style="font-size:11px;font-weight:700;color:var(--red);letter-spacing:.5px;margin-bottom:6px;text-transform:uppercase">I prezzi sono stime</div>
+        <p style="font-size:13px;color:#5A1010;line-height:1.6;margin:0">I valori preimpostati sono prezzi medi di mercato. Verificare sempre con il fornitore.</p>
       </div>
-      <div style="background:#F0F4FF;border-left:4px solid #1A2F6E;border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:22px">
-        <div style="font-size:12px;font-weight:700;color:#1A2F6E;letter-spacing:.5px;margin-bottom:6px">VERIFICA SEMPRE</div>
-        <p style="font-size:13px;color:#1A2F6E;line-height:1.6;margin:0">
-          Prima di presentare un preventivo ufficiale, verifica sempre i prezzi aggiornati con il tuo fornitore e adegua le rese ai prodotti specifici utilizzati.
-        </p>
-      </div>
-      <button onclick="closeDisclaimer()" style="background:#0D1B3E;border:none;color:#fff;border-radius:12px;padding:14px 0;width:100%;font-size:15px;font-weight:900;cursor:pointer;font-family:Arial,sans-serif;letter-spacing:.3px">
-        ✓ Ho capito, procedi
-      </button>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px">Le rese sono valori tecnici da schede prodotto. Aggiungere sempre un margine di sicurezza per sprechi e tagli.</p>
+      <button onclick="closeDisclaimer()" style="background:var(--black);border:none;color:#fff;border-radius:9px;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-body);width:100%;letter-spacing:.2px;transition:background .15s" onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--black)'">Ho capito, procedi</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- MAIN MODAL -->
 <div class="overlay" id="modal-overlay" style="display:none" onclick="if(event.target===this)closeModal()">
-  <div class="modal" id="modal">
-    <div class="modal-header" id="modal-header">
-      <div style="display:flex;align-items:center;gap:10">
-        <span id="modal-icon" style="font-size:26px"></span>
+  <div class="modal">
+    <div class="modal-header" id="modal-header" style="background:var(--red)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span id="modal-icon" style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:#fff;opacity:.9"></span>
         <div>
-          <div id="modal-title" style="color:#fff;font-weight:900;font-size:15px"></div>
-          <div id="modal-step-label" style="color:rgba(255,255,255,.6);font-size:11px"></div>
+          <div id="modal-title" style="color:#fff;font-weight:600;font-size:15px;font-family:var(--font-display)"></div>
+          <div id="modal-step-label" style="color:rgba(255,255,255,.6);font-size:11px;margin-top:1px"></div>
         </div>
       </div>
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -735,7 +675,7 @@
     <div class="modal-body" id="modal-body"></div>
     <div class="modal-footer">
       <button class="btn-ghost" id="modal-back" onclick="modalBack()">← Indietro</button>
-      <button class="btn-primary" id="modal-add" onclick="modalAdd()" style="display:none">✓ Aggiungi al preventivo</button>
+      <button class="btn-primary" id="modal-add" onclick="modalAdd()" style="display:none;background:var(--red)">✓ Aggiungi</button>
     </div>
   </div>
 </div>
@@ -743,32 +683,34 @@
 <!-- EDIT MODAL -->
 <div class="overlay" id="edit-overlay" style="display:none" onclick="if(event.target===this)closeEdit()">
   <div class="modal" id="edit-modal" style="max-width:520px">
-    <div class="modal-header" style="background:var(--navy)">
-      <div style="display:flex;align-items:center;gap:10">
-        <span style="font-size:22px">✏️</span>
-        <div style="color:#fff;font-weight:900;font-size:15px">Modifica voce</div>
+    <div class="modal-header" style="background:var(--black)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <div style="color:#fff;font-weight:600;font-size:15px;font-family:var(--font-display)">Modifica voce</div>
       </div>
       <button class="modal-close" onclick="closeEdit()">✕</button>
     </div>
     <div class="modal-body" id="edit-body"></div>
     <div class="modal-footer">
       <button class="btn-ghost" onclick="closeEdit()">Annulla</button>
-      <button class="btn-primary" style="background:var(--ocra)" onclick="saveEdit()">✓ Salva modifiche</button>
+      <button class="btn-primary" style="background:var(--red)" onclick="saveEdit()">✓ Salva modifiche</button>
     </div>
   </div>
 </div>
 
 <div id="toast"></div>
-<div id="footer-copy" style="position:fixed;bottom:0;left:0;right:0;background:#0D1B3E;color:rgba(255,255,255,.45);font-size:11px;text-align:center;padding:6px 16px;z-index:10;letter-spacing:.3px;border-top:1px solid rgba(255,255,255,.08)">
-  Ideata e sviluppata da <span style="color:#C89A3A;font-weight:700">Geom. Daniel Meccanici</span>
+<div id="footer-copy" style="position:fixed;bottom:0;left:0;right:0;background:var(--black);color:rgba(255,255,255,.25);font-size:10px;text-align:center;padding:5px 16px;z-index:10;letter-spacing:.5px;border-top:1px solid rgba(255,255,255,.05)">
+  D.ESIGN STUDIOS — Calcolatore Materiali
 </div>
 
+<button id="fab-salva" onclick="salvaProgetto()" title="Salva progetto">
+  <div class="fab-dot"></div>
+  Salva progetto
+</button>
+
 <script>
-// ═══════════════════════════════════════════════════════════════════════════
-// DATABASE MATERIALI
-// ═══════════════════════════════════════════════════════════════════════════
 const DB = {
-  "🏗️ Elementi Costruttivi":{icon:"🏗️",colore:"#5E3A1A",sottocategorie:{
+  "🏗️ Elementi Costruttivi":{icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M17 14h.01M17 17h.01M14 17h.01M20 17h.01M20 14h.01M14 20h.01M17 20h.01M20 20h.01"/></svg>`,colore:"#7A3020",sottocategorie:{
     "Blocchi forati in laterizio":[
       {id:"bf1",nome:"Laterizio forato 8×12×25 cm",resa:16,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tramezza leggera sp. 8 cm",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.20}]},
       {id:"bf1b",nome:"Laterizio forato 8×25×25 cm",resa:8,unitaResa:"pz/m²",unita:"m²",tipo:"pz",note:"Tramezza leggera sp. 8 cm — formato 25×25",confezioni:[{label:"1 pezzo",kg:1,prezzo:0.28}]},
@@ -808,7 +750,7 @@ const DB = {
     ],
   }},
 
-  "🏛️ Costruzione a Secco":{icon:"🏛️",colore:"#2E6EA6",sottocategorie:{
+  "🏛️ Costruzione a Secco":{icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="1"/><path d="M3 10h18M8 6V4M16 6V4"/></svg>`,colore:"#2A5A9A",sottocategorie:{
     "Lastre standard":[
       {id:"cg_s1",nome:"Lastra standard 9,5 mm — 120×200 cm",resa:1,unitaResa:"m²/m²",unita:"m²",tipo:"lastra",note:"Lastra base per pareti leggere e controsoffitti, spessore ridotto",confezioni:[{label:"Lastra 2×1,2 m (2.4 m²)",kg:2.4,prezzo:7}]},
       {id:"cg_s2",nome:"Lastra standard 12,5 mm — 120×200 cm",resa:1,unitaResa:"m²/m²",unita:"m²",tipo:"lastra",note:"Lastra standard universale per pareti e controsoffitti interni",confezioni:[{label:"Lastra 2×1,2 m (2.4 m²)",kg:2.4,prezzo:9}]},
@@ -908,7 +850,7 @@ const DB = {
       {id:"cga5",nome:"Nastro carta per giunti",resa:1.1,unitaResa:"ml/m²",unita:"m²",note:"Rinforzo dei giunti, larghezza 50 mm",confezioni:[{label:"Rotolo 75 m",kg:0.3,prezzo:5},{label:"Rotolo 150 m",kg:0.6,prezzo:9}]},
     ],
   }},
-  "🧱 Cemento, Malte & Intonaci":{icon:"🧱",colore:"#8B5E14",sottocategorie:{
+  "🧱 Cemento, Malte & Intonaci":{icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="4" rx="1"/><rect x="2" y="10" width="9" height="4" rx="1"/><rect x="13" y="10" width="9" height="4" rx="1"/><rect x="2" y="16" width="20" height="4" rx="1"/></svg>`,colore:"#7A4A10",sottocategorie:{
 
     "Cemento e leganti":[
       {id:"cem1",nome:"Cemento Portland 32,5 R (uso generale)",resa:350,unitaResa:"kg/m³",unita:"m³",note:"Il cemento più diffuso in edilizia: per malte, intonaci, massetti e calcestruzzo generico. EN 197-1 CEM II/B-L 32,5 R",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:5},{label:"Sacco 40 kg",kg:40,prezzo:8}]},
@@ -977,7 +919,7 @@ const DB = {
     ],
 
   }},
-  "🪣 Impermeabilizzazione":{icon:"🪣",colore:"#1A5C8A",sottocategorie:{
+  "🪣 Impermeabilizzazione":{icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10l2 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L7 3z"/><path d="M5 7h14"/><path d="M8 3a4 4 0 0 1 8 0"/></svg>`,colore:"#1A3A6B",sottocategorie:{
 
     "Membrane bituminose elastomeriche (SBS)":[
       {id:"sbs1",nome:"Guaina bituminosa SBS 3 mm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Elastomerica, flessibilità fino a −20°C, posa a fiamma, per tetti piani",confezioni:[{label:"Rotolo 10 m²",kg:35,prezzo:38},{label:"Rotolo 25 m²",kg:88,prezzo:88}]},
@@ -1035,7 +977,7 @@ const DB = {
     ],
 
   }},
-  "⚡ Isolamento Termico":{icon:"⚡",colore:"#1A7A5C",sottocategorie:{
+  "⚡ Isolamento Termico":{icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h6l-2 9 14-11h-6l2-9L3 12z"/></svg>`,colore:"#1A5C3A",sottocategorie:{
 
     "Cappotto esterno — EPS (polistirene espanso)":[
       {id:"eps_b4",nome:"EPS bianco 4 cm",resa:1,unitaResa:"m²/m²",unita:"m²",note:"Cappotto leggero, spessore 4 cm, λ = 0,036 W/mK",confezioni:[{label:"Pacco 10 m²",kg:10,prezzo:18},{label:"Pacco 6 m²",kg:6,prezzo:12}]},
@@ -1179,7 +1121,7 @@ const DB = {
     ],
 
   }},
-  "🔲 Pavimenti & Rivestimenti":{icon:"🔲",colore:"#2A6A3A",sottocategorie:{
+  "🔲 Pavimenti & Rivestimenti":{icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>`,colore:"#246040",sottocategorie:{
 
     "Massetti e sottofondi":[
       {id:"pa1",nome:"Massetto autolivellante",resa:18,unitaResa:"kg/m²",unita:"m²",note:"Spessore ~1 cm, per livellamento rapido di superfici",confezioni:[{label:"Sacco 25 kg",kg:25,prezzo:7},{label:"Sacco 30 kg",kg:30,prezzo:8}]},
@@ -1288,14 +1230,14 @@ const DB = {
     ],
 
   }},
-  "🎨 Pitture & Finiture":{icon:"🎨",colore:"#7A3E8A",sottocategorie:{
+  "🎨 Pitture & Finiture":{icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l6 16M4 4h16M4 4l6 8M20 4l-6 16M20 4l-6 8M10 12h4"/></svg>`,colore:"#8B1A1A",sottocategorie:{
 
     "Pitture per interni — Lavabili e traspiranti":[
-      {id:"pi_lv1",nome:"Pittura lavabile vinilica standard",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"1 mano, economica, facile applicazione su pareti e soffitti",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:28},{label:"Secchio 4 l",kg:4,prezzo:10}]},
-      {id:"pi_lv2",nome:"Pittura lavabile acrilica premium",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"1 mano, alta coprenza, resistente allo strofinamento",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:45},{label:"Secchio 4 l",kg:4,prezzo:15}]},
+      {id:"pi_lv1",nome:"Pittura lavabile vinilica standard",resa:0.12,unitaResa:"l/m²",unita:"m²",note:"1 mano, resa ~9 mq/l su sup. liscia, 11 mq/l su sup. intonacata",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:28},{label:"Secchio 4 l",kg:4,prezzo:10}]},
+      {id:"pi_lv2",nome:"Pittura lavabile acrilica premium",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"1 mano, resa ~10 mq/l, alta coprenza — dati Boero/Oikos",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:45},{label:"Secchio 4 l",kg:4,prezzo:15}]},
       {id:"pi_lv3",nome:"Pittura superlavabile (alta resistenza)",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"Per ambienti ad alta usura: corridoi, cucine, locali commerciali",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:58},{label:"Secchio 4 l",kg:4,prezzo:19}]},
-      {id:"pi_tr1",nome:"Pittura traspirante per muri interni",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Permette la traspirazione del muro, ideale per ambienti umidi",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:35},{label:"Secchio 4 l",kg:4,prezzo:12}]},
-      {id:"pi_tr2",nome:"Pittura traspirante antimuffa",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Con additivi antimuffa, per bagni e ambienti soggetti a condensa",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:48},{label:"Secchio 4 l",kg:4,prezzo:16}]},
+      {id:"pi_tr1",nome:"Pittura traspirante per muri interni",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"Permette la traspirazione del muro, ideale per ambienti umidi",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:35},{label:"Secchio 4 l",kg:4,prezzo:12}]},
+      {id:"pi_tr2",nome:"Pittura traspirante antimuffa",resa:0.10,unitaResa:"l/m²",unita:"m²",note:"Resa ~10 mq/l per mano — dati Mapei Dursilite, Kerakoll Biocalce",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:48},{label:"Secchio 4 l",kg:4,prezzo:16}]},
     ],
 
     "Pitture per interni — Antimuffa e coprenti":[
@@ -1306,10 +1248,10 @@ const DB = {
     ],
 
     "Pitture per esterni — Acriliche e silossaniche":[
-      {id:"pe_ac1",nome:"Pittura acrilica per facciate",resa:0.18,unitaResa:"l/m²",unita:"m²",note:"Resistente agli agenti atmosferici, per facciate nuove e riprese",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:45},{label:"Secchio 4 l",kg:4,prezzo:16}]},
+      {id:"pe_ac1",nome:"Pittura acrilica per facciate",resa:0.14,unitaResa:"l/m²",unita:"m²",note:"Resistente agli agenti atmosferici, per facciate nuove e riprese",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:45},{label:"Secchio 4 l",kg:4,prezzo:16}]},
       {id:"pe_ac2",nome:"Pittura acrilica elastomerica",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Elastica, copre micro-fessure fino a 1 mm, per facciate con movimenti",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:62},{label:"Secchio 4 l",kg:4,prezzo:21}]},
-      {id:"pe_si1",nome:"Pittura silossanica traspirante",resa:0.18,unitaResa:"l/m²",unita:"m²",note:"Idrorepellente e traspirante, alta durata per facciate",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:58},{label:"Secchio 4 l",kg:4,prezzo:20}]},
-      {id:"pe_si2",nome:"Pittura silossanica idrorepellente",resa:0.18,unitaResa:"l/m²",unita:"m²",note:"Effetto loto, respinge acqua e sporco, per facciate difficili",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:72},{label:"Secchio 4 l",kg:4,prezzo:24}]},
+      {id:"pe_si1",nome:"Pittura silossanica traspirante",resa:0.14,unitaResa:"l/m²",unita:"m²",note:"Idrorepellente e traspirante, alta durata per facciate",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:58},{label:"Secchio 4 l",kg:4,prezzo:20}]},
+      {id:"pe_si2",nome:"Pittura silossanica idrorepellente",resa:0.14,unitaResa:"l/m²",unita:"m²",note:"Effetto loto, respinge acqua e sporco, per facciate difficili",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:72},{label:"Secchio 4 l",kg:4,prezzo:24}]},
     ],
 
     "Pitture per esterni — Minerali e quarzo":[
@@ -1320,8 +1262,8 @@ const DB = {
     ],
 
     "Pitture minerali (restauro e bioedilizia)":[
-      {id:"pm_c1",nome:"Pittura a calce naturale",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Traspirante, antibatterica naturale, per interni ed esterni",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:38},{label:"Secchio 4 l",kg:4,prezzo:14}]},
-      {id:"pm_c2",nome:"Pittura a grassello di calce",resa:0.25,unitaResa:"l/m²",unita:"m²",note:"Tradizionale, per restauro di edifici storici, alta traspirabilità",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:32},{label:"Secchio 4 l",kg:4,prezzo:12}]},
+      {id:"pm_c1",nome:"Pittura a calce naturale",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Traspirante, antibatterica naturale, per interni ed esterni",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:38},{label:"Secchio 4 l",kg:4,prezzo:14}]},
+      {id:"pm_c2",nome:"Pittura a grassello di calce",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Tradizionale, per restauro di edifici storici, alta traspirabilità",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:32},{label:"Secchio 4 l",kg:4,prezzo:12}]},
       {id:"pm_s1",nome:"Pittura ai silossani minerali",resa:0.18,unitaResa:"l/m²",unita:"m²",note:"Minerale con idrorepellenza integrata, per facciate storiche ed edifici di pregio",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:82},{label:"Secchio 4 l",kg:4,prezzo:28}]},
     ],
 
@@ -1371,13 +1313,13 @@ const DB = {
     ],
 
     "Primer, fondi e fissativi":[
-      {id:"fo1",nome:"Fissativo acrilico per muri",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Consolida intonaci polverosi e porosi prima della tinteggiatura",confezioni:[{label:"Secchio 10 l",kg:10,prezzo:18},{label:"Secchio 5 l",kg:5,prezzo:10}]},
+      {id:"fo1",nome:"Fissativo acrilico per muri",resa:0.05,unitaResa:"l/m²",unita:"m²",note:"Diluire 1:3 con acqua, resa ~20 mq/l; dose ridotta su supporti molto assorbenti",confezioni:[{label:"Secchio 10 l",kg:10,prezzo:18},{label:"Secchio 5 l",kg:5,prezzo:10}]},
       {id:"fo2",nome:"Fondo uniformante (quarzo / bianco)",resa:0.20,unitaResa:"l/m²",unita:"m²",note:"Uniforma l'assorbimento del supporto, migliora la resa della pittura finale",confezioni:[{label:"Secchio 14 l",kg:14,prezzo:35},{label:"Secchio 4 l",kg:4,prezzo:12}]},
-      {id:"fo3",nome:"Primer acrilico per muri (fondo aggrappante)",resa:0.15,unitaResa:"l/m²",unita:"m²",note:"Per intonaci nuovi o supporti lisci difficili, miglioradesione della pittura",confezioni:[{label:"Secchio 10 l",kg:10,prezzo:25},{label:"Secchio 5 l",kg:5,prezzo:15}]},
+      {id:"fo3",nome:"Primer acrilico per muri (fondo aggrappante)",resa:0.08,unitaResa:"l/m²",unita:"m²",note:"Per intonaci nuovi o supporti lisci difficili, miglioradesione della pittura",confezioni:[{label:"Secchio 10 l",kg:10,prezzo:25},{label:"Secchio 5 l",kg:5,prezzo:15}]},
     ],
 
   }},
-    "🧪 Resine & Microcemento":{icon:"🧪",colore:"#8A1A1A",sottocategorie:{
+    "🧪 Resine & Microcemento":{icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M9 3v9l-4 9h14l-4-9V3M9 14h6"/></svg>`,colore:"#8B1A1A",sottocategorie:{
     "Resine per pavimenti":[
       {id:"re1",nome:"Primer epossidico penetrante",resa:0.2,unitaResa:"kg/m²",unita:"m²",note:"Preparazione del supporto",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:45},{label:"Kit 10 kg",kg:10,prezzo:80}]},
       {id:"re2",nome:"Resina epossidica finitura",resa:0.4,unitaResa:"kg/m²",unita:"m²",note:"1 mano, per garage e ambienti industriali",confezioni:[{label:"Kit 5 kg",kg:5,prezzo:60},{label:"Kit 25 kg",kg:25,prezzo:250}]},
@@ -1401,7 +1343,6 @@ const DB = {
     ],
   }},
 };;
-
 const MACRO_KEYS = Object.keys(DB);
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1471,7 +1412,7 @@ function buildSidebar() {
     btn.style.borderLeftColor = isA ? cat.colore : "transparent";
     btn.dataset.view = "macro:"+mk;
     btn.onclick = () => setVista("macro:"+mk, btn);
-    btn.innerHTML = `<span style="font-size:18px;flex-shrink:0">${cat.icon}</span>
+    btn.innerHTML = `<span class="sb-btn-icon" style="color:${cat.colore}">${cat.icon}</span>
       <span class="sb-btn-label sb-collapsed-hide" style="flex:1;text-align:left">${mk.slice(3)}</span>
       ${cnt>0?`<span class="sb-badge sb-collapsed-hide" style="background:${cat.colore}">${cnt}</span>`:""}`;
     el.appendChild(btn);
@@ -1592,14 +1533,14 @@ function renderHome() {
   const cards = MACRO_KEYS.map(mk=>{
     const cat=DB[mk]; const cnt=stato.voci.filter(v=>v.macro===mk).length;
     return `<button class="macro-card" onclick="setVista('macro:${mk}',null)">
-      <span class="macro-card-icon">${cat.icon}</span>
+      <div class="macro-card-icon" style="color:${cat.colore}">${cat.icon}</div>
       <div class="macro-card-title">${mk.slice(3)}</div>
       <div class="macro-card-sub">${Object.keys(cat.sottocategorie).length} sotto-categorie</div>
       ${cnt>0?`<span class="macro-card-badge" style="background:${cat.colore}">${cnt} voci</span>`:""}
     </button>`;
   }).join("");
-  return `<div class="page-title">Benvenuto nel Calcolatore Edile</div>
-    <div class="page-sub">Scegli una categoria per iniziare a calcolare i materiali</div>
+  return `<div class="page-title">Preventivo materiali</div>
+    <div class="page-sub">seleziona una categoria</div>
     <div class="macro-grid">${cards}</div>`;
 }
 
@@ -1609,7 +1550,7 @@ function renderMacro(mk) {
   const tot=vm.reduce((s,v)=>s+v.ris.costo,0);
   let html=`<div class="macro-header-row" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
     <div style="display:flex;align-items:center;gap:12px">
-      <span style="font-size:34px">${cat.icon}</span>
+      <div style="width:40px;height:40px;color:${cat.colore};display:flex;align-items:center;justify-content:center">${cat.icon}</div>
       <div>
         <div class="page-title" style="margin:0">${mk.slice(3)}</div>
         <div style="font-size:13px;color:var(--muted)">${Object.keys(cat.sottocategorie).length} sotto-categorie · ${vm.length} voci nel preventivo</div>
@@ -1619,7 +1560,7 @@ function renderMacro(mk) {
   </div>`;
   if(vm.length===0) {
     html+=`<div class="empty-state" style="background:${cat.colore}0A;border-color:${cat.colore}40">
-      <div class="empty-state-icon">${cat.icon}</div>
+      <div class="empty-state-icon" style="color:${cat.colore}">${cat.icon}</div>
       <div class="empty-state-title">Nessun materiale ancora</div>
       <div class="empty-state-sub">Aggiungi il primo materiale per questa categoria</div>
       <button class="btn-primary" style="background:${cat.colore}" onclick="openModal('${mk}',null)">➕ Inizia il calcolo</button>
@@ -1674,7 +1615,7 @@ function renderRiepilogo() {
     </div>
   </div>`;
   if(stato.voci.length===0) {
-    return html+`<div style="text-align:center;padding:60px;color:var(--muted)"><div style="font-size:48px;margin-bottom:12px">📋</div><div style="font-size:15px;font-weight:700;color:var(--navy)">Nessun materiale aggiunto</div></div>`;
+    return html+`<div style="text-align:center;padding:60px;color:var(--muted)"><div style="font-size:48px;margin-bottom:12px">📋</div><div style="font-size:15px;font-weight:700;color:var(--black)">Nessun materiale aggiunto</div></div>`;
   }
   MACRO_KEYS.forEach(mk=>{
     const vm=stato.voci.filter(v=>v.macro===mk); if(!vm.length) return;
@@ -1686,7 +1627,7 @@ function renderRiepilogo() {
       </div>
       ${vm.map((v,_)=>{const idx=stato.voci.indexOf(v);return`<div class="riepilogo-row">
         <div style="flex:1;min-width:0">
-          <div style="font-weight:700;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.mat.nome}</div>
+          <div style="font-weight:700;color:var(--black);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.mat.nome}</div>
           <div style="color:var(--muted);font-size:12px;margin-top:2px">${v.ris.sacchi}× ${v.conf.label} · ${v.sup} ${v.mat.unita} (+${v.margine}%)</div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;margin-left:12px">
@@ -1710,7 +1651,7 @@ function renderStorico() {
       <div style="font-size:13px;color:var(--muted);margin-top:2px">${n} preventiv${n===1?"o":"i"} salvat${n===1?"o":"i"}</div>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn-export" style="background:var(--navy);color:#fff" onclick="exportDB()">💾 Esporta DB</button>
+      <button class="btn-export" style="background:var(--black);color:#fff" onclick="exportDB()">💾 Esporta DB</button>
       <button class="btn-export" style="background:var(--muted);color:#fff" onclick="importDB()">📂 Importa DB</button>
     </div>
   </div>`;
@@ -1788,7 +1729,7 @@ function openModal(mk, editIdx) {
     mState = { macro:v.macro, passo:3, sotto:v.sotto, mat:v.mat, sup:String(v.sup), margine:v.margine, ci:v.ci, editIdx };
   }
   document.getElementById("modal-header").style.background = cat.colore;
-  document.getElementById("modal-icon").textContent = cat.icon;
+  document.getElementById("modal-icon").innerHTML = cat.icon;
   document.getElementById("modal-title").textContent = mk.slice(3);
   document.getElementById("modal-overlay").style.display = "flex";
   renderModal();
@@ -1876,7 +1817,7 @@ function renderModalP2(cat) {
       </div>
     </div>`;
   }).join("");
-  return `<div style="font-size:13px;color:var(--muted);margin-bottom:10px">Scegli il prodotto da <b style="color:var(--navy)">${mState.sotto}</b>:</div>
+  return `<div style="font-size:13px;color:var(--muted);margin-bottom:10px">Scegli il prodotto da <b style="color:var(--black)">${mState.sotto}</b>:</div>
     <div class="select-list">${items}</div>`;
 }
 
@@ -1960,9 +1901,9 @@ function renderModalP3(cat) {
   const risHtml = ris && mState.sup ? `<div class="result-box">
     <div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:1px;margin-bottom:12px">RISULTATO</div>
     <div class="result-grid">
-      <div class="result-cell"><div class="result-val" style="color:var(--ocra-light)">${ris.fabbisogno.toFixed(2)} ${m.unitaResa.split("/")[0]}</div><div class="result-lbl">fabbisogno</div></div>
+      <div class="result-cell"><div class="result-val" style="color:#E8A0A0">${ris.fabbisogno.toFixed(2)} ${m.unitaResa.split("/")[0]}</div><div class="result-lbl">fabbisogno</div></div>
       <div class="result-cell"><div class="result-val" style="color:#fff">${ris.sacchi}</div><div class="result-lbl">confezioni</div></div>
-      <div class="result-cell"><div class="result-val" style="color:var(--ocra-light)">${eur(ris.costo)}</div><div class="result-lbl">costo stimato</div></div>
+      <div class="result-cell"><div class="result-val" style="color:#E8A0A0">${eur(ris.costo)}</div><div class="result-lbl">costo stimato</div></div>
     </div>
     <div class="result-note">${ris.sacchi}× ${conf.label} (${eur(conf.prezzo)}/conf) · margine +${mState.margine}%</div>
   </div>` : `<div style="text-align:center;padding:20px;color:var(--muted);font-size:13px">Inserisci la quantità per vedere il risultato</div>`;
@@ -1976,8 +1917,8 @@ function renderModalP3(cat) {
   // avvolgi il risultato in un container aggiornabile
   const risHtml2 = ris && mState.sup ? buildResultHTML(ris, m, conf, unitConf) : `<div style="text-align:center;padding:20px;color:var(--muted);font-size:13px">Inserisci la quantità per vedere il risultato</div>`;
   return `<div class="info-box" style="background:${cat.colore}12;border-color:${cat.colore}30;margin-bottom:14px">
-      <div style="font-weight:800;color:var(--navy);font-size:15px">${m.nome}</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:3px">Resa: <b style="color:var(--navy)">${m.resa} ${m.unitaResa}</b> · ${m.note}</div>
+      <div style="font-weight:800;color:var(--black);font-size:15px">${m.nome}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px">Resa: <b style="color:var(--black)">${m.resa} ${m.unitaResa}</b> · ${m.note}</div>
     </div>
     <div style="margin-bottom:14px">
       <label class="field-label">${unitLabel}</label>
@@ -1991,7 +1932,7 @@ function renderModalP3(cat) {
       <div style="display:flex;gap:8px;flex-wrap:wrap">${pillsHtml}</div>
     </div>
     <div style="margin-bottom:16px">
-      <label class="field-label">MARGINE IMPREVISTI — <span id="margine-val" style="color:var(--ocra);font-size:13px">${mState.margine}%</span></label>
+      <label class="field-label">MARGINE IMPREVISTI — <span id="margine-val" style="color:var(--red);font-size:13px">${mState.margine}%</span></label>
       <input type="range" min="0" max="30" step="1" value="${mState.margine}" style="accent-color:${cat.colore}" oninput="mState.margine=+this.value;document.getElementById('margine-val').textContent=mState.margine+'%';updateResult()">
       <div class="range-labels"><span>0% — esatto</span><span>30% — abbondante</span></div>
     </div>
@@ -2003,9 +1944,9 @@ function buildResultHTML(ris, m, conf, unitConf) { unitConf = unitConf || "confe
   return '<div class="result-box">' +
     '<div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:1px;margin-bottom:12px">RISULTATO</div>' +
     '<div class="result-grid">' +
-      '<div class="result-cell"><div class="result-val" style="color:var(--ocra-light)">' + ris.fabbisogno.toFixed(2) + ' ' + m.unitaResa.split("/")[0] + '</div><div class="result-lbl">fabbisogno</div></div>' +
+      '<div class="result-cell"><div class="result-val" style="color:#E8A0A0">' + ris.fabbisogno.toFixed(2) + ' ' + m.unitaResa.split("/")[0] + '</div><div class="result-lbl">fabbisogno</div></div>' +
       '<div class="result-cell"><div class="result-val" style="color:#fff">' + ris.sacchi + '</div><div class="result-lbl">' + unitConf + '</div></div>' +
-      '<div class="result-cell"><div class="result-val" style="color:var(--ocra-light)">' + eur(ris.costo) + '</div><div class="result-lbl">costo stimato</div></div>' +
+      '<div class="result-cell"><div class="result-val" style="color:#E8A0A0">' + eur(ris.costo) + '</div><div class="result-lbl">costo stimato</div></div>' +
     '</div>' +
     '<div class="result-note">' + ris.sacchi + '× ' + conf.label + ' (' + eur(conf.prezzo) + '/un.) · margine +' + mState.margine + '%</div>' +
   '</div>';
@@ -2071,7 +2012,7 @@ function openEdit(idx) {
     <div id="e-conf-list">${renderEditConf()}</div>
     <button onclick="addEditConf()" style="background:var(--gray);border:1.5px dashed var(--border);color:var(--muted);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;width:100%;margin-bottom:14px">+ Aggiungi confezione</button>
     <div class="edit-section-title">Confezione attiva</div>
-    <select id="e-ci" onchange="editState.voce.ci=+this.value;editRicalcola()" style="border:2px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;color:var(--navy);background:var(--gray);width:100%;font-family:Arial,sans-serif;outline:none">
+    <select id="e-ci" onchange="editState.voce.ci=+this.value;editRicalcola()" style="border:2px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;color:var(--black);background:var(--gray);width:100%;font-family:Arial,sans-serif;outline:none">
       ${v.mat.confezioni.map((c,i)=>`<option value="${i}" ${i===v.ci?"selected":""}>${c.label} — ${eur(c.prezzo)}</option>`).join("")}
     </select>
     <div id="e-result" style="margin-top:14px"></div>`;
@@ -2113,9 +2054,9 @@ function editRicalcola() {
     el.innerHTML=`<div class="result-box">
       <div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:1px;margin-bottom:10px">ANTEPRIMA CALCOLO</div>
       <div class="result-grid">
-        <div class="result-cell"><div class="result-val" style="color:var(--ocra-light)">${ris.fabbisogno.toFixed(2)}</div><div class="result-lbl">fabbisogno</div></div>
+        <div class="result-cell"><div class="result-val" style="color:#E8A0A0">${ris.fabbisogno.toFixed(2)}</div><div class="result-lbl">fabbisogno</div></div>
         <div class="result-cell"><div class="result-val" style="color:#fff">${ris.sacchi}</div><div class="result-lbl">confezioni</div></div>
-        <div class="result-cell"><div class="result-val" style="color:var(--ocra-light)">${eur(ris.costo)}</div><div class="result-lbl">costo stimato</div></div>
+        <div class="result-cell"><div class="result-val" style="color:#E8A0A0">${eur(ris.costo)}</div><div class="result-lbl">costo stimato</div></div>
       </div>
     </div>`;
   } else el.innerHTML="";
@@ -2177,11 +2118,11 @@ function exportPDF() {
   });
   const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Preventivo</title>
     <style>
-      body{font-family:Arial,sans-serif;padding:30px;color:#0D1B3E}
+      body{font-family:Arial,sans-serif;padding:30px;color:#1A1A1A}
       @media print{body{padding:10px}}
       /* Filigrana su ogni pagina */
       body::after{
-        content:"Calcolatore Edile · Geom. Daniel Meccanici";
+        content:"Calcolatore Edile · D.ESIGN STUDIOS";
         position:fixed;
         bottom:48%;left:50%;
         transform:translateX(-50%) rotate(-35deg);
@@ -2194,118 +2135,29 @@ function exportPDF() {
       }
     </style>
     </head><body>
-    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #0D1B3E;padding-bottom:12px;margin-bottom:20px">
-      <div><h1 style="margin:0;font-size:22px">🏗️ PREVENTIVO EDILE</h1><div style="font-size:13px;color:#888">${stato.nomeProg} · ${new Date().toLocaleDateString("it-IT")}</div></div>
-      <div style="text-align:right"><div style="font-size:12px;color:#888">TOTALE PREVENTIVO</div><div style="font-size:26px;font-weight:900;color:#1A7A4A">${eur(tot)}</div></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #1A1A1A;padding-bottom:12px;margin-bottom:20px">
+      <div><h1 style="margin:0;font-size:22px">PREVENTIVO — D.ESIGN STUDIOS</h1><div style="font-size:13px;color:#888">${stato.nomeProg} · ${new Date().toLocaleDateString("it-IT")}</div></div>
+      <div style="text-align:right"><div style="font-size:12px;color:#888">TOTALE PREVENTIVO</div><div style="font-size:26px;font-weight:900;color:#2E7D4F">${eur(tot)}</div></div>
     </div>
     ${gruppi}
-    <div style="background:#0D1B3E;color:#fff;padding:14px 18px;border-radius:10px;display:flex;justify-content:space-between;margin-top:12px">
-      <b>TOTALE PREVENTIVO</b><b style="font-size:20px;color:#E8C46A">${eur(tot)}</b>
+    <div style="background:var(--black, #1A1A1A);color:#fff;padding:14px 18px;border-radius:10px;display:flex;justify-content:space-between;margin-top:12px">
+      <b>TOTALE PREVENTIVO</b><b style="font-size:20px;color:#E8A0A0">${eur(tot)}</b>
     </div>
     <div style="font-size:10px;color:#999;margin-top:20px;text-align:center">I prezzi sono indicativi. Verificare sempre le schede tecniche dei prodotti e i prezzi aggiornati del fornitore.</div>
     <script>window.onload=()=>window.print()<\/script>
-<!-- BOTTOM NAV MOBILE -->
-<div id="bottom-nav">
-  <button class="bn-btn active" id="bn-home" onclick="bnClick('home',this)">
-    <span>🏠</span>HOME
-  </button>
-  <div style="position:relative;flex:1;display:flex">
-    <button class="bn-btn" id="bn-macro" onclick="bnShowMacro()" style="width:100%">
-      <span>🧱</span>CATEGORIE
-    </button>
-  </div>
-  <button class="bn-btn" id="bn-riepilogo" onclick="bnClick('riepilogo',this)">
-    <span>📊</span>RIEPILOGO
-  </button>
-  <button class="bn-btn" id="bn-storico" onclick="bnClick('storico',this)">
-    <span>🗂️</span>STORICO
-  </button>
-  <button class="bn-btn" onclick="salvaProgetto()">
-    <span>💾</span>SALVA
-  </button>
-</div>
-
-<!-- DRAWER CATEGORIE MOBILE -->
-<div id="macro-drawer" style="display:none;position:fixed;inset:0;z-index:250;background:rgba(13,27,62,.6)" onclick="if(event.target===this)closeMacroDrawer()">
-  <div style="position:absolute;bottom:62px;left:0;right:0;background:var(--sidebar);border-radius:20px 20px 0 0;padding:16px 0 8px;max-height:70vh;overflow-y:auto">
-    <div style="text-align:center;margin-bottom:10px">
-      <div style="width:36px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;display:inline-block"></div>
-    </div>
-    <div id="macro-drawer-list"></div>
-  </div>
-</div>
-
-</body></html>`;
+`;
   const w=window.open("","_blank","width=900,height=700");
   if(w){w.document.write(html);w.document.close();}
   else toast("❌ Abilita i popup per la stampa PDF");
 }
 
-function exportXLSX() {
-  // XLSX senza librerie: genera XML compatibile con Excel (SpreadsheetML)
-  const tot=stato.voci.reduce((s,v)=>s+v.ris.costo,0);
-  const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-  const cell = (v,bold,align) => {
-    const num = typeof v==="number";
-    const s = bold&&align==="right"?"s2":bold?"s1":num?"s3":"s0";
-    return `<Cell ss:StyleID="${s}"><Data ss:Type="${num?"Number":"String"}">${esc(v)}</Data></Cell>`;
-  };
-  let rows="";
-  // Header
-  rows+=`<Row ss:Height="20">
-    ${["Categoria","Sotto-cat.","Materiale","Qnt","Unità","Resa","Confezione","N° Conf.","Margine %","Costo €"].map(h=>`<Cell ss:StyleID="hdr"><Data ss:Type="String">${esc(h)}</Data></Cell>`).join("")}
-  </Row>`;
-  // Dati
-  stato.voci.forEach(v=>{
-    rows+=`<Row>
-      ${cell(v.macro.slice(3))}${cell(v.sotto)}${cell(v.mat.nome)}${cell(v.sup,false,false)}${cell(v.mat.unita)}${cell(v.mat.resa+" "+v.mat.unitaResa)}${cell(v.conf.label)}${cell(v.ris.sacchi,false,false)}${cell(v.margine+"%")}${cell(v.ris.costo,false,"right")}
-    </Row>`;
-  });
-  // Totale
-  rows+=`<Row><Cell ss:MergeAcross="8" ss:StyleID="s1"><Data ss:Type="String">TOTALE PREVENTIVO</Data></Cell>
-    <Cell ss:StyleID="s2"><Data ss:Type="Number">${tot.toFixed(2)}</Data></Cell></Row>`;
-  const xml=`<?xml version="1.0" encoding="UTF-8"?>
-<?mso-application progid="Excel.Sheet"?>
-<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
-  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
-  xmlns:x="urn:schemas-microsoft-com:office:excel">
-<Styles>
-  <Style ss:ID="s0"><Alignment ss:Vertical="Center"/></Style>
-  <Style ss:ID="s1"><Alignment ss:Vertical="Center"/><Font ss:Bold="1"/></Style>
-  <Style ss:ID="s2"><Alignment ss:Vertical="Center" ss:Horizontal="Right"/><Font ss:Bold="1" ss:Color="#1A7A4A"/></Style>
-  <Style ss:ID="s3"><Alignment ss:Vertical="Center" ss:Horizontal="Center"/></Style>
-  <Style ss:ID="hdr"><Alignment ss:Vertical="Center"/><Font ss:Bold="1" ss:Color="#FFFFFF"/>
-    <Interior ss:Color="#0D1B3E" ss:Pattern="Solid"/></Style>
-</Styles>
-<Worksheet ss:Name="Preventivo">
-<Table ss:DefaultColumnWidth="80">
-  <Column ss:Width="160"/><Column ss:Width="140"/><Column ss:Width="200"/>
-  <Column ss:Width="60"/><Column ss:Width="60"/><Column ss:Width="100"/>
-  <Column ss:Width="140"/><Column ss:Width="60"/><Column ss:Width="70"/><Column ss:Width="80"/>
-  ${rows}
-</Table></Worksheet></Workbook>`;
-  scarica(new Blob([xml],{type:"application/vnd.ms-excel;charset=utf-8"}),"preventivo_"+stato.nomeProg+".xls");
-  toast("✅ Excel esportato!");
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════════════════════════════════════
-function toast(msg) {
-  const el=document.getElementById("toast"); el.textContent=msg; el.style.display="block";
-  setTimeout(()=>el.style.display="none",2500);
-}
-
-
-
-// ── WELCOME SCREEN ──────────────────────────────────────────────
 function closeWelcome() {
   const el = document.getElementById("welcome");
   el.classList.add("hiding");
   setTimeout(() => {
-    el.style.display = "none";
+    el.classList.add("hidden");
     showDisclaimer();
-  }, 500);
+  }, 600);
   try { localStorage.setItem("ce_welcomed", "1"); } catch(e) {}
 }
 function showDisclaimer() {
@@ -2319,7 +2171,8 @@ function closeDisclaimer() {
 // Se già visitato, salta la welcome ma mostra il disclaimer se non ancora accettato
 try {
   if (localStorage.getItem("ce_welcomed")) {
-    document.getElementById("welcome").style.display = "none";
+    const w = document.getElementById("welcome");
+    w.classList.add("hidden");
     if (!localStorage.getItem("ce_disclaimed")) {
       showDisclaimer();
     }
@@ -2340,9 +2193,9 @@ function bnShowMacro() {
     return `<button onclick="bnPickMacro('${mk}')" style="
       display:flex;align-items:center;gap:12px;width:100%;background:transparent;
       border:none;border-left:3px solid transparent;color:rgba(255,255,255,.8);
-      padding:13px 20px;font-family:Arial,sans-serif;font-size:14px;font-weight:600;cursor:pointer;
+      padding:13px 20px;font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:14px;font-weight:600;cursor:pointer;
       border-bottom:1px solid rgba(255,255,255,.06)">
-      <span style="font-size:22px">${cat.icon}</span>
+      <span style="width:22px;height:22px;display:flex;align-items:center;justify-content:center;color:${cat.colore};flex-shrink:0">${cat.icon}</span>
       <span style="flex:1;text-align:left">${mk.slice(3)}</span>
       ${cnt>0?`<span style="background:${cat.colore};color:#fff;border-radius:8px;font-size:11px;font-weight:900;padding:2px 8px">${cnt}</span>`:""}
     </button>`;
@@ -2394,48 +2247,41 @@ try {
 buildSidebar();
 renderContent();
 document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.add("active"));
+
 </script>
 
 <!-- BOTTOM NAV MOBILE -->
 <div id="bottom-nav">
   <button class="bn-btn active" id="bn-home" onclick="bnClick('home',this)">
-    <span>🏠</span>Preventivo
+    <span>⊞</span>Preventivo
   </button>
   <div style="position:relative;flex:1;display:flex">
     <button class="bn-btn" id="bn-macro" onclick="bnShowMacro()" style="width:100%">
-      <span>🧱</span>Categorie
+      <span>⬡</span>Categorie
     </button>
   </div>
   <button class="bn-btn" id="bn-riepilogo" onclick="bnClick('riepilogo',this)">
-    <span>📊</span>Riepilogo
+    <span>≡</span>Riepilogo
   </button>
   <button class="bn-btn" id="bn-storico" onclick="bnClick('storico',this)">
-    <span>🗂️</span>Storico
+    <span>◷</span>Storico
   </button>
   <button class="bn-btn" onclick="salvaProgetto()">
-    <span>💾</span>Salva
+    <span>⊕</span>Salva
   </button>
 </div>
 
 <!-- DRAWER CATEGORIE MOBILE -->
-<div id="macro-drawer" style="display:none;position:fixed;inset:0;z-index:250;background:rgba(13,27,62,.55);backdrop-filter:blur(3px)" onclick="if(event.target===this)closeMacroDrawer()">
-  <div style="position:absolute;bottom:62px;left:0;right:0;background:var(--sidebar);border-radius:24px 24px 0 0;padding:14px 0 10px;max-height:75vh;overflow-y:auto;box-shadow:0 -8px 32px rgba(13,27,62,.4)">
-    <div style="text-align:center;padding-bottom:12px">
-      <div style="width:40px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;display:inline-block"></div>
-    </div>
+<div id="macro-drawer" style="display:none;position:fixed;inset:0;z-index:250;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)" onclick="if(event.target===this)closeMacroDrawer()">
+  <div style="position:absolute;bottom:60px;left:0;right:0;background:var(--black);border-radius:20px 20px 0 0;padding:14px 0 8px;max-height:75vh;overflow-y:auto">
+    <div style="text-align:center;padding-bottom:10px"><div style="width:36px;height:3px;background:rgba(255,255,255,.15);border-radius:2px;display:inline-block"></div></div>
     <div style="padding:0 18px 10px;display:flex;justify-content:space-between;align-items:center">
-      <div style="color:#fff;font-weight:800;font-size:14px;letter-spacing:.3px">Categorie materiali</div>
-      <button onclick="closeMacroDrawer()" style="background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer;font-family:Arial,sans-serif">✕ Chiudi</button>
+      <div style="color:#fff;font-weight:600;font-size:14px;font-family:var(--font-display)">Categorie materiali</div>
+      <button onclick="closeMacroDrawer()" style="background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.5);border-radius:7px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:var(--font-body)">✕</button>
     </div>
     <div id="macro-drawer-list"></div>
   </div>
 </div>
-
-<!-- FAB Salva progetto -->
-<button id="fab-salva" onclick="salvaProgetto()" title="Salva progetto">
-  <div class="fab-dot"></div>
-  💾 Salva progetto
-</button>
 
 </body>
 </html>
