@@ -1390,6 +1390,56 @@ function calcola(sup, resa, margine, conf) {
 const eur = n => new Intl.NumberFormat("it-IT",{style:"currency",currency:"EUR"}).format(n||0);
 const toN = v => parseFloat(v)||0;
 
+// ── Resa leggibile: traduce i valori tecnici in frasi per neofiti ──────────
+function resaLeggibile(m) {
+  const r = m.resa; const u = m.unitaResa || "";
+  // Pitture e liquidi: l/m²
+  if(u.includes("l/m²") || u.includes("l/m2")) {
+    const mq = +(1/r).toFixed(1);
+    return `resa ${r} l / ${mq} m²`;
+  }
+  // Polveri/malte: kg/m²
+  if(u.includes("kg/m²") || u.includes("kg/m2")) {
+    return `resa ${r} kg / m²`;
+  }
+  // Polveri/malte volumetriche: kg/m³
+  if(u.includes("kg/m³") || u.includes("kg/m3")) {
+    return `resa ${r} kg / m³`;
+  }
+  // Lastre: m²/m²
+  if(u.includes("m²/m²") || u.includes("m2/m2")) {
+    return `resa 1 m² / m²`;
+  }
+  // Pezzi: pz/m²
+  if(u.includes("pz/m²") || u.includes("pz/m2")) {
+    return `resa ${r} pz / m²`;
+  }
+  // Lunghezze: ml/ml
+  if(u.includes("ml/ml")) {
+    return `resa 1 ml / ml`;
+  }
+  // Lunghezze: ml/m²
+  if(u.includes("ml/m²")) {
+    return `resa ${r} ml / m²`;
+  }
+  // Liquidi volumetrici: l/m³
+  if(u.includes("l/m³") || u.includes("l/m3")) {
+    return `resa ${r} l / m³`;
+  }
+  // Fallback generico
+  return `resa ${r} ${u}`;
+}
+
+// ── Badge colore resa (da usare in passo 2 e voce card) ───────────────────
+function resaBadgeHTML(m, colore) {
+  return `<span style="
+    display:inline-flex;align-items:center;gap:5px;
+    background:${colore}18;border:1px solid ${colore}40;
+    border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;
+    color:${colore};white-space:nowrap;line-height:1.4;
+  ">${resaLeggibile(m)}</span>`;
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // DATABASE JSON (localStorage come simulazione file locale)
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1600,10 +1650,12 @@ function renderMacro(mk) {
 
 function renderVoceCard(v, _, idx) {
   const colore = DB[v.macro].colore;
+  const resaFrase = resaLeggibile(v.mat);
   return `<div class="voce-card" style="border-left:4px solid ${colore};margin-bottom:10px">
     <div style="flex:1">
       <div class="voce-cat" style="color:${colore}">${v.macro.slice(3)} › ${v.sotto}</div>
       <div class="voce-nome">${v.mat.nome}</div>
+      <div style="margin:5px 0 4px">${resaBadgeHTML(v.mat, colore)}</div>
       <div class="voce-meta">
         <span>📐 ${v.sup} ${v.mat.unita}</span>
         <span>📦 ${v.ris.sacchi}× ${v.conf.label}</span>
@@ -1652,11 +1704,12 @@ function renderRiepilogo() {
       ${vm.map((v,_)=>{const idx=stato.voci.indexOf(v);return`<div class="riepilogo-row">
         <div style="flex:1;min-width:0">
           <div style="font-weight:700;color:var(--black);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.mat.nome}</div>
+          <div style="margin:3px 0 2px">${resaBadgeHTML(v.mat, DB[v.macro].colore)}</div>
           <div style="color:var(--muted);font-size:12px;margin-top:2px">${v.ris.sacchi}× ${v.conf.label} · ${v.sup} ${v.mat.unita} (+${v.margine}%)</div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;margin-left:12px">
           <div style="font-weight:800;color:var(--success);white-space:nowrap">${eur(v.ris.costo)}</div>
-          <button class="btn-edit" onclick="openEdit(${idx})" title="Modifica voce">✏️</button>
+          <button class="btn-edit" onclick="openEditQuantita(${idx})" title="Modifica quantità">✏️</button>
         </div>
       </div>`}).join("")}
     </div>`;
@@ -1804,7 +1857,6 @@ function pickSotto(k) { mState.sotto=k; mState.passo=2; renderModal(); }
 function renderModalP2(cat) {
   const items = cat.sottocategorie[mState.sotto].map(m => {
     const tipoLabel = m.tipo==="pz"?"🧱 Venduto a pezzi":m.tipo==="lastra"?"📄 Venduto a lastre":"";
-    const prezzi = m.confezioni.map(c=>`${c.label} → ${eur(c.prezzo)}`).join(" · ");
     const prezziPills = m.confezioni.map(c=>`<span style="display:inline-block;background:${cat.colore}15;border:1px solid ${cat.colore}40;border-radius:20px;padding:2px 8px;font-size:11px;font-weight:700;color:${cat.colore};white-space:nowrap">${c.label} <b>${eur(c.prezzo)}</b></span>`).join("");
     const editorId = "pe-" + m.id;
     const confInputs = m.confezioni.map((c,i)=>`
@@ -1821,13 +1873,10 @@ function renderModalP2(cat) {
     return `<div class="select-item-wrap">
       <div style="display:flex;align-items:center;gap:8px">
         <button class="select-item" style="flex:1" onclick="pickMat('${m.id}')">
-          <div style="text-align:left">
+          <div style="text-align:left;width:100%">
             <div class="select-item-main">${m.nome}</div>
-            <div class="select-item-sub">${m.note}</div>
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
-              <span style="font-size:10px;background:${cat.colore}22;color:${cat.colore};border-radius:20px;padding:2px 8px;font-weight:800;letter-spacing:.3px">⚖️ ${m.resa} ${m.unitaResa}</span>
-              ${tipoLabel?`<span style="font-size:10px;background:#f5f5f5;color:#888;border-radius:20px;padding:2px 7px">${tipoLabel}</span>`:""}
-            </div>
+            <div class="select-item-sub" style="margin-bottom:7px">${m.note}</div>
+            <div style="margin-bottom:6px">${resaBadgeHTML(m, cat.colore)}${tipoLabel?` <span style="display:inline-block;font-size:10px;background:#f5f5f5;color:#888;border-radius:20px;padding:2px 7px;vertical-align:middle">${tipoLabel}</span>`:""}</div>
             <div class="select-item-price" id="pp-${m.id}" data-color="${cat.colore}">${prezziPills}</div>
           </div>
           <span class="select-arrow" style="color:${cat.colore}">›</span>
@@ -1941,8 +1990,9 @@ function renderModalP3(cat) {
   // avvolgi il risultato in un container aggiornabile
   const risHtml2 = ris && mState.sup ? buildResultHTML(ris, m, conf, unitConf) : `<div style="text-align:center;padding:20px;color:var(--muted);font-size:13px">Inserisci la quantità per vedere il risultato</div>`;
   return `<div class="info-box" style="background:${cat.colore}12;border-color:${cat.colore}30;margin-bottom:14px">
-      <div style="font-weight:800;color:var(--black);font-size:15px">${m.nome}</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:3px">Resa: <b style="color:var(--black)">${m.resa} ${m.unitaResa}</b> · ${m.note}</div>
+      <div style="font-weight:800;color:var(--black);font-size:15px;margin-bottom:6px">${m.nome}</div>
+      <div style="margin-bottom:8px">${resaBadgeHTML(m, cat.colore)}</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.5">${m.note}</div>
     </div>
     <div style="margin-bottom:14px">
       <label class="field-label">${unitLabel}</label>
@@ -1964,16 +2014,60 @@ function renderModalP3(cat) {
 }
 function pickConf(i) { mState.ci=i; renderModal(); }
 
-function buildResultHTML(ris, m, conf, unitConf) { unitConf = unitConf || "confezioni";
-  return '<div class="result-box">' +
-    '<div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:1px;margin-bottom:12px">RISULTATO</div>' +
-    '<div class="result-grid">' +
-      '<div class="result-cell"><div class="result-val" style="color:#E8A0A0">' + ris.fabbisogno.toFixed(2) + ' ' + m.unitaResa.split("/")[0] + '</div><div class="result-lbl">fabbisogno</div></div>' +
-      '<div class="result-cell"><div class="result-val" style="color:#fff">' + ris.sacchi + '</div><div class="result-lbl">' + unitConf + '</div></div>' +
-      '<div class="result-cell"><div class="result-val" style="color:#E8A0A0">' + eur(ris.costo) + '</div><div class="result-lbl">costo stimato</div></div>' +
-    '</div>' +
-    '<div class="result-note">' + ris.sacchi + '× ' + conf.label + ' (' + eur(conf.prezzo) + '/un.) · margine +' + mState.margine + '%</div>' +
-  '</div>';
+function buildResultHTML(ris, m, conf, unitConf) {
+  unitConf = unitConf || "confezioni";
+  const isPz     = unitConf === "pezzi";
+  const isLastra = unitConf === "lastre";
+  const isConf   = !isPz && !isLastra;
+
+  // Etichette grammaticalmente corrette
+  const singolo  = isPz ? "pezzo" : isLastra ? "lastra" : "confezione";
+  const plurale  = isPz ? "pezzi" : isLastra ? "lastre" : "confezioni";
+  const n        = ris.sacchi;
+  const nLabel   = n === 1 ? `1 ${singolo}` : `${n} ${plurale}`;
+
+  // Riga quantità: adatta il verbo e il contesto al tipo
+  let rigaQt;
+  if (isPz) {
+    rigaQt = `${nLabel} — ${conf.label}`;
+  } else {
+    rigaQt = `${nLabel} da ${conf.label}`;
+  }
+
+  // Riga secondaria sotto la quantità
+  const unitMisura = m.unitaResa.split("/")[0].trim();
+  let rigaSub;
+  if (isPz) {
+    rigaSub = `${eur(conf.prezzo)} a pezzo · ${ris.totKg} pz totali`;
+  } else if (isLastra) {
+    rigaSub = `${eur(conf.prezzo)} a lastra · ${ris.fabbisogno.toFixed(1)} m² da coprire`;
+  } else {
+    // confezioni (liquidi, polveri, malte…)
+    const totUm = ris.totKg;
+    rigaSub = `${eur(conf.prezzo)} a ${singolo} · ${totUm} ${unitMisura} totali`;
+  }
+
+  const dettagliId = "det-" + Math.random().toString(36).slice(2,7);
+  return `<div class="result-box">
+    <div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:1px;margin-bottom:10px">RISULTATO</div>
+    <div style="font-size:22px;color:#fff;font-weight:800;letter-spacing:-.3px;line-height:1.2;margin-bottom:4px">${rigaQt}</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:14px">${rigaSub}</div>
+    <div style="font-size:30px;font-weight:900;color:#E8A0A0;letter-spacing:-1px;margin-bottom:4px">${eur(ris.costo)}</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:14px">costo stimato · IVA esclusa</div>
+    <button onclick="(function(id){var el=document.getElementById(id);var open=el.style.display!=='none';el.style.display=open?'none':'block';el.previousElementSibling.querySelector('.det-arrow').textContent=open?'▾':'▴';}('${dettagliId}'))"
+      style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);border-radius:7px;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center">
+      <span>Mostra dettagli tecnici</span><span class="det-arrow">▾</span>
+    </button>
+    <div id="${dettagliId}" style="display:none;margin-top:10px">
+      <div class="result-grid" style="margin-bottom:8px">
+        <div class="result-cell"><div class="result-val" style="color:#E8A0A0;font-size:18px">${ris.fabbisogno.toFixed(2)}</div><div class="result-lbl">${unitMisura} fabbisogno</div></div>
+        <div class="result-cell"><div class="result-val" style="color:#fff;font-size:18px">${n}</div><div class="result-lbl">${plurale}</div></div>
+        <div class="result-cell"><div class="result-val" style="color:#E8A0A0;font-size:18px">${eur(ris.costo)}</div><div class="result-lbl">costo totale</div></div>
+      </div>
+      <div class="result-note">${n}× ${conf.label} · ${eur(conf.prezzo)}/un. · +${mState.margine}% margine</div>
+      <div class="result-note" style="margin-top:4px">${mState.sup||"Q"} ${m.unita} × ${m.resa} ${m.unitaResa} × ${(1+mState.margine/100).toFixed(2)} = ${ris.fabbisogno.toFixed(2)} → arrotondato a ${n} ${plurale}</div>
+    </div>
+  </div>`;
 }
 
 function updateResult() {
@@ -2094,6 +2188,77 @@ function saveEdit() {
 function closeEdit() {
   document.getElementById("edit-overlay").style.display="none";
   editState={idx:null,voce:null};
+}
+
+// ── EDIT QUANTITÀ (dal riepilogo): solo sup, confezione e margine ──────────
+function openEditQuantita(idx) {
+  editState.idx = idx;
+  editState.voce = JSON.parse(JSON.stringify(stato.voci[idx]));
+  const v = editState.voce;
+  const colore = DB[v.macro].colore;
+  const unitLabel = v.mat.unitaResa.includes("m³")?"Volume (m³)":v.mat.unitaResa.includes("/ml")?"Lunghezza (ml)":"Superficie (m²)";
+  const confOptions = v.mat.confezioni.map((c,i)=>`<option value="${i}" ${i===v.ci?"selected":""}>${c.label} — ${eur(c.prezzo)}</option>`).join("");
+  const body = document.getElementById("edit-body");
+  body.innerHTML = `
+    <div style="background:${colore}12;border:1px solid ${colore}30;border-radius:10px;padding:12px 16px;margin-bottom:16px">
+      <div style="font-weight:800;color:var(--black);font-size:14px;margin-bottom:4px">${v.mat.nome}</div>
+      <div style="margin-bottom:2px">${resaBadgeHTML(v.mat, colore)}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">${v.mat.note}</div>
+    </div>
+    <div class="edit-field">
+      <label>${unitLabel.toUpperCase()}</label>
+      <div style="display:flex;align-items:center;gap:8px">
+        <input id="eq-sup" type="number" step="0.1" min="0" value="${v.sup}"
+          style="flex:1;border:2px solid var(--border);border-radius:8px;padding:10px 12px;font-size:18px;font-weight:700;color:var(--black);background:var(--gray);outline:none;font-family:inherit"
+          oninput="editState.voce.sup=+this.value;eqRicalcola()"
+          onfocus="this.style.borderColor='${colore}'" onblur="this.style.borderColor='var(--border)'">
+        <span style="font-size:14px;font-weight:600;color:var(--muted)">${v.mat.unita}</span>
+      </div>
+    </div>
+    <div class="edit-field" style="margin-top:12px">
+      <label>FORMATO CONFEZIONE</label>
+      <select id="eq-ci" onchange="editState.voce.ci=+this.value;eqRicalcola()"
+        style="border:2px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;color:var(--black);background:var(--gray);width:100%;font-family:inherit;outline:none">
+        ${confOptions}
+      </select>
+    </div>
+    <div class="edit-field" style="margin-top:12px">
+      <label>MARGINE IMPREVISTI — <span id="eq-margine-val" style="color:var(--red)">${v.margine}%</span></label>
+      <input type="range" min="0" max="30" step="1" value="${v.margine}"
+        style="width:100%;accent-color:${colore}"
+        oninput="editState.voce.margine=+this.value;document.getElementById('eq-margine-val').textContent=editState.voce.margine+'%';eqRicalcola()">
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:2px"><span>0% esatto</span><span>30% abbondante</span></div>
+    </div>
+    <div id="eq-result" style="margin-top:16px"></div>`;
+  document.getElementById("edit-overlay").style.display = "flex";
+  // Cambio titolo modal
+  document.querySelector("#edit-modal .modal-header div div").textContent = "Modifica quantità";
+  // Cambio pulsante salva
+  const saveBtn = document.querySelector("#edit-modal .modal-footer .btn-primary");
+  saveBtn.onclick = saveEditQuantita;
+  eqRicalcola();
+}
+
+function eqRicalcola() {
+  const v = editState.voce;
+  const conf = v.mat.confezioni[v.ci];
+  const ris = conf ? calcola(v.sup, v.mat.resa, v.margine, conf) : null;
+  editState.voce.conf = conf;
+  editState.voce.ris = ris;
+  const el = document.getElementById("eq-result"); if(!el) return;
+  if(ris && v.sup) {
+    const uc = v.mat.tipo==="pz"?"pezzi":v.mat.tipo==="lastra"?"lastre":"confezioni";
+    el.innerHTML = buildResultHTML(ris, v.mat, conf, uc);
+  } else {
+    el.innerHTML = `<div style="text-align:center;padding:16px;color:var(--muted);font-size:13px">Inserisci la quantità per vedere il risultato</div>`;
+  }
+}
+
+function saveEditQuantita() {
+  const v = editState.voce;
+  if(!v.ris) return alert("Inserisci una quantità valida.");
+  stato.voci[editState.idx] = v;
+  closeEdit(); renderContent();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -2292,8 +2457,17 @@ document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.ad
       <button onclick="closeMacroDrawer()" style="background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.5);border-radius:7px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:var(--font-body)">✕</button>
     </div>
     <div id="macro-drawer-list"></div>
-  </div>
-</div>
+    <!-- Link D.ESIGN STUDIOS — discreto, in fondo al drawer -->
+    <div style="margin:12px 18px 4px;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+      <div style="font-size:11px;color:rgba(255,255,255,.35);line-height:1.5">
+        Calcolatore by <b style="color:rgba(255,255,255,.55)">D.ESIGN STUDIOS</b>
+      </div>
+      <a href="https://www.instagram.com/d.esignstudios?igsh=MWJieXo2aDNxOTlvNQ%3D%3D&utm_source=qr" target="_blank"
+        style="display:inline-flex;align-items:center;gap:5px;background:rgba(139,26,26,.5);border:1px solid rgba(139,26,26,.6);color:#E8A0A0;border-radius:7px;padding:5px 10px;font-size:11px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @d.esign_studios
+      </a>
+    </div>
 
 </body>
 </html>
