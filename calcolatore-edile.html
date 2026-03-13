@@ -169,10 +169,27 @@
   .subtotal-bar span:last-child{font-weight:800;font-size:17px;font-family:var(--font-body);letter-spacing:-.3px}
 
   /* ── RIEPILOGO ── */
-  .riepilogo-group{margin-bottom:18px}
-  .riepilogo-header{display:flex;justify-content:space-between;padding:10px 16px;border-radius:8px;border-left-width:3px;border-left-style:solid;margin-bottom:8px;align-items:center}
-  .riepilogo-row{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;background:#fff;border:1px solid var(--border);border-radius:8px;font-size:13px;margin-bottom:5px;transition:background .1s}
-  .riepilogo-row:hover{background:var(--gray2)}
+  .rp-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+  .rp-macro-block{margin-bottom:24px}
+  .rp-macro-title{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-radius:8px;border-left:3px solid;margin-bottom:10px}
+  .rp-macro-label{font-weight:800;font-size:13px;display:flex;align-items:center;gap:8px}
+  .rp-macro-sub{font-size:11px;font-weight:700}
+  .rp-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;transition:box-shadow .15s}
+  .rp-card:hover{box-shadow:0 3px 14px rgba(0,0,0,.07)}
+  .rp-card-accent{width:4px;border-radius:4px;flex-shrink:0;align-self:stretch;min-height:40px}
+  .rp-card-body{flex:1;min-width:0}
+  .rp-card-nome{font-weight:700;font-size:13px;color:var(--black);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rp-card-resa{margin-bottom:6px}
+  .rp-card-detail{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:4px}
+  .rp-card-chip{background:var(--gray2);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;color:var(--black);white-space:nowrap}
+  .rp-card-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:10px;flex-shrink:0;min-height:56px}
+  .rp-card-cost{font-weight:800;font-size:18px;color:var(--success);white-space:nowrap;letter-spacing:-.3px}
+  .rp-card-actions{display:flex;gap:6px}
+  .rp-btn-edit{background:var(--gray2);border:1px solid var(--border);color:var(--black);border-radius:7px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--font-body);transition:all .15s;white-space:nowrap}
+  .rp-btn-edit:hover{background:var(--border)}
+  .rp-btn-del{background:#FEF2F2;border:1px solid rgba(139,26,26,.15);color:var(--red);border-radius:7px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--font-body);transition:all .15s}
+  .rp-btn-del:hover{background:#fde8e8}
+  .rp-subtotale{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-radius:8px;margin-top:2px;margin-bottom:4px}
   .totale-box{background:var(--black);border-radius:12px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:8px}
   .totale-box span:first-child{color:rgba(255,255,255,.5);font-weight:700;font-size:10px;letter-spacing:2px;text-transform:uppercase}
   .totale-box span:last-child{color:#E8A0A0;font-weight:800;font-size:30px;font-family:var(--font-body);letter-spacing:-1px}
@@ -194,14 +211,28 @@
   .proj-card-tot{font-weight:800;color:var(--success);font-size:17px;font-family:var(--font-body);letter-spacing:-.3px}
   .proj-card-chevron{color:var(--muted);font-size:11px;transition:transform .2s}
   .proj-card.open .proj-card-chevron{transform:rotate(180deg)}
-  .proj-preview{display:none;border-top:1px solid var(--border);padding:0 20px 16px}
+  .proj-preview{display:none;border-top:1px solid var(--border);padding:0 20px 20px}
   .proj-card.open .proj-preview{display:block}
   .proj-preview-title{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;padding:14px 0 8px}
   .proj-preview-row{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--gray2);border-radius:7px;font-size:12.5px;margin-bottom:4px}
   .proj-preview-row-name{color:var(--black);font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:10px}
   .proj-preview-row-cost{color:var(--success);font-weight:700;flex-shrink:0;font-family:var(--font-display)}
   .proj-preview-more{font-size:11.5px;color:var(--muted);padding:6px 0 0;font-style:italic}
-  .proj-preview-actions{display:flex;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+
+  /* Rinomina inline */
+  .proj-rename-wrap{display:flex;align-items:center;gap:8px;margin:14px 0 10px}
+  .proj-rename-input{flex:1;border:2px solid var(--border);border-radius:8px;padding:8px 12px;font-size:14px;font-weight:700;font-family:var(--font-display);color:var(--black);background:var(--gray);outline:none;letter-spacing:.5px;text-transform:uppercase}
+  .proj-rename-input:focus{border-color:var(--red)}
+  .proj-rename-btn{background:var(--black);border:none;color:#fff;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-body);white-space:nowrap;transition:background .15s}
+  .proj-rename-btn:hover{background:#333}
+
+  /* Azioni export singolo preventivo */
+  .proj-export-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .proj-export-btn{display:flex;align-items:center;gap:5px;background:var(--gray2);border:1px solid var(--border);color:var(--black);border-radius:7px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--font-body);transition:all .15s;white-space:nowrap}
+  .proj-export-btn:hover{background:var(--border)}
+
+  /* Azioni principali (apri/elimina) */
+  .proj-main-actions{display:flex;gap:8px;padding-top:14px;border-top:1px solid var(--border)}
   .btn-carica{background:var(--black);border:none;color:#fff;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);display:flex;align-items:center;gap:6px;transition:background .15s}
   .btn-carica:hover{background:#333}
   .btn-del-confirm{background:#FEF2F2;border:1px solid rgba(139,26,26,.2);color:var(--red);border-radius:8px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all .15s}
@@ -209,6 +240,13 @@
   .proj-empty{text-align:center;padding:70px 20px;color:var(--muted)}
   .proj-empty-icon{font-size:48px;margin-bottom:14px}
   .proj-empty-title{font-size:16px;font-weight:600;color:var(--black);margin-bottom:6px;font-family:var(--font-display)}
+
+  /* Card nuovo preventivo */
+  .proj-new-card{background:#fff;border:1.5px dashed var(--border);border-radius:12px;padding:18px 20px;margin-bottom:10px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s}
+  .proj-new-card:hover{border-color:var(--red);background:var(--red-faint)}
+  .proj-new-icon{width:42px;height:42px;border-radius:10px;background:var(--gray2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;transition:background .2s}
+  .proj-new-card:hover .proj-new-icon{background:#FDEAEA}
+  .proj-db-row{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
 
   /* ── MODAL ── */
   .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:300;display:flex;align-items:center;justify-content:center;padding:16px}
@@ -506,10 +544,10 @@
     .field-row input{font-size:22px;padding:10px 14px}
     .pill-btn{padding:8px 12px;font-size:12px}
     /* riepilogo */
-    .riepilogo-row{flex-direction:column;align-items:flex-start;gap:2px;font-size:12px}
-    .riepilogo-header{padding:8px 12px}
-    .totale-box{padding:16px 18px}
-    .totale-box span:last-child{font-size:24px}
+    .rp-card{flex-wrap:wrap;gap:8px}
+    .rp-card-right{flex-direction:row;align-items:center;justify-content:space-between;min-height:auto;width:100%}
+    .rp-card-cost{font-size:16px}
+    .rp-macro-title{flex-wrap:wrap;gap:4px}
     .export-row{gap:6px}
     .btn-export{padding:9px 10px;font-size:11px;flex:1;justify-content:center}
     /* storico */
@@ -559,8 +597,8 @@
       <span class="sb-btn-label sb-collapsed-hide">Riepilogo</span>
     </button>
     <button class="sb-btn" data-view="storico" onclick="setVista('storico',this)">
-      <span class="sb-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
-      <span class="sb-btn-label sb-collapsed-hide">Storico</span>
+      <span class="sb-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
+      <span class="sb-btn-label sb-collapsed-hide">Progetti</span>
     </button>
 
     <div class="sb-divider"></div>
@@ -602,7 +640,10 @@
           <span class="topbar-total" id="topbar-total">€ 0,00</span>
         </div>
         <div class="topbar-actions">
-          <button class="btn-ghost" onclick="nuovoProgetto()">+ Nuovo</button>
+          <button class="btn-ghost" onclick="setVista('storico',null)" title="Gestisci preventivi" style="display:flex;align-items:center;gap:6px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Progetti
+          </button>
         </div>
       </div>
     </div>
@@ -1679,10 +1720,14 @@ function rimuoviVoce(idx) {
 // ── RIEPILOGO ─────────────────────────────────────────────────────────────
 function renderRiepilogo() {
   const tot = stato.voci.reduce((s,v)=>s+v.ris.costo,0);
-  let html = `<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+  const nVoci = stato.voci.length;
+
+  // ── Header con stats e export ──
+  let html = `
+  <div class="rp-header">
     <div>
-      <div class="page-title">📊 Riepilogo preventivo</div>
-      <div style="font-size:13px;color:var(--muted)">${stato.nomeProg} · ${new Date().toLocaleDateString("it-IT")}</div>
+      <div class="page-title" style="margin-bottom:2px">Riepilogo preventivo</div>
+      <div style="font-size:12px;color:var(--muted)">${stato.nomeProg} · ${new Date().toLocaleDateString("it-IT")} · <b style="color:var(--black)">${nVoci} ${nVoci===1?"voce":"voci"}</b></div>
     </div>
     <div class="export-row" style="margin:0">
       <button class="btn-export btn-pdf" onclick="exportPDF()">🖨️ PDF</button>
@@ -1690,107 +1735,272 @@ function renderRiepilogo() {
       <button class="btn-export btn-csv" onclick="exportCSV()">📄 CSV</button>
     </div>
   </div>`;
-  if(stato.voci.length===0) {
-    return html+`<div style="text-align:center;padding:60px;color:var(--muted)"><div style="font-size:48px;margin-bottom:12px">📋</div><div style="font-size:15px;font-weight:700;color:var(--black)">Nessun materiale aggiunto</div></div>`;
-  }
-  MACRO_KEYS.forEach(mk=>{
-    const vm=stato.voci.filter(v=>v.macro===mk); if(!vm.length) return;
-    const sub=vm.reduce((s,v)=>s+v.ris.costo,0); const col=DB[mk].colore;
-    html+=`<div class="riepilogo-group">
-      <div class="riepilogo-header" style="background:${col}14;border-color:${col}">
-        <span style="font-weight:800;color:${col};font-size:14px">${mk}</span>
-        <span style="font-weight:800;color:${col}">${eur(sub)}</span>
-      </div>
-      ${vm.map((v,_)=>{const idx=stato.voci.indexOf(v);return`<div class="riepilogo-row">
-        <div style="flex:1;min-width:0">
-          <div style="font-weight:700;color:var(--black);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.mat.nome}</div>
-          <div style="margin:3px 0 2px">${resaBadgeHTML(v.mat, DB[v.macro].colore)}</div>
-          <div style="color:var(--muted);font-size:12px;margin-top:2px">${v.ris.sacchi}× ${v.conf.label} · ${v.sup} ${v.mat.unita} (+${v.margine}%)</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;margin-left:12px">
-          <div style="font-weight:800;color:var(--success);white-space:nowrap">${eur(v.ris.costo)}</div>
-          <button class="btn-edit" onclick="openEditQuantita(${idx})" title="Modifica quantità">✏️</button>
-        </div>
-      </div>`}).join("")}
+
+  if(nVoci === 0) {
+    return html + `
+    <div style="text-align:center;padding:70px 20px;border:1.5px dashed var(--border);border-radius:14px;color:var(--muted)">
+      <div style="font-size:48px;margin-bottom:14px">📋</div>
+      <div style="font-size:16px;font-weight:700;color:var(--black);margin-bottom:6px">Nessun materiale ancora</div>
+      <div style="font-size:13px">Aggiungi materiali dalla schermata <b>Preventivo</b></div>
     </div>`;
+  }
+
+  // ── Blocchi per macro-categoria ──
+  MACRO_KEYS.forEach(mk => {
+    const vm = stato.voci.filter(v => v.macro === mk);
+    if(!vm.length) return;
+    const sub = vm.reduce((s,v) => s+v.ris.costo, 0);
+    const col = DB[mk].colore;
+    const cat = DB[mk];
+
+    html += `<div class="rp-macro-block">
+      <div class="rp-macro-title" style="background:${col}12;border-color:${col}">
+        <span class="rp-macro-label" style="color:${col}">
+          <span style="width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center">${cat.icon}</span>
+          ${mk.slice(3)}
+          <span style="font-size:10px;background:${col};color:#fff;border-radius:20px;padding:1px 8px;font-weight:700">${vm.length}</span>
+        </span>
+        <span class="rp-macro-sub" style="color:${col}">${eur(sub)}</span>
+      </div>`;
+
+    vm.forEach(v => {
+      const idx = stato.voci.indexOf(v);
+      const isPz     = v.mat.tipo === "pz";
+      const isLastra = v.mat.tipo === "lastra";
+      const singolo  = isPz ? "pezzo" : isLastra ? "lastra" : "conf.";
+      const plurale  = isPz ? "pezzi" : isLastra ? "lastre" : "confezioni";
+      const nConf    = v.ris.sacchi;
+      const qtDesc   = `${nConf} ${nConf===1?singolo:plurale} da ${v.conf.label}`;
+
+      html += `
+      <div class="rp-card">
+        <div class="rp-card-accent" style="background:${col}"></div>
+        <div class="rp-card-body">
+          <div class="rp-card-nome" title="${v.mat.nome}">${v.mat.nome}</div>
+          <div class="rp-card-resa">${resaBadgeHTML(v.mat, col)}</div>
+          <div class="rp-card-detail">
+            <span class="rp-card-chip">📐 ${v.sup} ${v.mat.unita}</span>
+            <span class="rp-card-chip">📦 ${qtDesc}</span>
+            <span class="rp-card-chip" style="color:#B06020;background:#FFF7ED">+${v.margine}% margine</span>
+          </div>
+        </div>
+        <div class="rp-card-right">
+          <div class="rp-card-cost">${eur(v.ris.costo)}</div>
+          <div class="rp-card-actions">
+            <button class="rp-btn-edit" onclick="openEditQuantita(${idx})" title="Modifica quantità e margine">
+              ✏️ Modifica
+            </button>
+            <button class="rp-btn-del" onclick="rimuoviVoceRiepilogo(${idx})" title="Rimuovi voce">
+              🗑
+            </button>
+          </div>
+        </div>
+      </div>`;
+    });
+
+    // Subtotale categoria
+    html += `<div class="rp-subtotale" style="background:${col}0A;border:1px solid ${col}25">
+      <span style="font-size:11px;font-weight:700;color:${col};letter-spacing:.5px;text-transform:uppercase">Subtotale ${mk.slice(3)}</span>
+      <span style="font-weight:800;font-size:15px;color:${col}">${eur(sub)}</span>
+    </div>`;
+
+    html += `</div>`; // chiudi rp-macro-block
   });
-  html+=`<div class="totale-box"><span>TOTALE PREVENTIVO</span><span>${eur(tot)}</span></div>`;
+
+  // ── Totale finale ──
+  html += `<div class="totale-box" style="margin-top:16px">
+    <div>
+      <div style="color:rgba(255,255,255,.4);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">TOTALE PREVENTIVO</div>
+      <div style="color:rgba(255,255,255,.3);font-size:11px">${nVoci} ${nVoci===1?"voce":"voci"} · ${MACRO_KEYS.filter(mk=>stato.voci.some(v=>v.macro===mk)).length} categorie</div>
+    </div>
+    <span style="color:#E8A0A0;font-weight:800;font-size:30px;letter-spacing:-1px">${eur(tot)}</span>
+  </div>`;
+
   return html;
 }
 
-// ── STORICO ───────────────────────────────────────────────────────────────
+function rimuoviVoceRiepilogo(idx) {
+  const v = stato.voci[idx];
+  if(!v) return;
+  if(!confirm(`Rimuovere "${v.mat.nome}" dal preventivo?`)) return;
+  stato.voci.splice(idx, 1);
+  renderContent();
+}
+
+// ── STORICO / PROGETTI ────────────────────────────────────────────────────
 function renderStorico() {
   const n = stato.progetti.length;
+
   let html = `
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:22px">
     <div>
-      <div class="page-title">🗂️ Storico preventivi</div>
-      <div style="font-size:13px;color:var(--muted);margin-top:2px">${n} preventiv${n===1?"o":"i"} salvat${n===1?"o":"i"}</div>
+      <div class="page-title" style="margin-bottom:2px">Progetti</div>
+      <div style="font-size:12px;color:var(--muted)">${n} preventiv${n===1?"o":"i"} salvat${n===1?"o":"i"}</div>
     </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn-export" style="background:var(--black);color:#fff" onclick="exportDB()">💾 Esporta DB</button>
-      <button class="btn-export" style="background:var(--muted);color:#fff" onclick="importDB()">📂 Importa DB</button>
+  </div>
+
+  <!-- Card: Nuovo preventivo -->
+  <div class="proj-new-card" onclick="nuovoProgetto()">
+    <div class="proj-new-icon">＋</div>
+    <div>
+      <div style="font-weight:700;font-size:14px;color:var(--black)">Nuovo preventivo</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:2px">Crea un preventivo vuoto e inizia ad aggiungere materiali</div>
     </div>
   </div>`;
 
-  if(!n) return html + `
-  <div class="proj-empty">
-    <div class="proj-empty-icon">🗂️</div>
-    <div class="proj-empty-title">Nessun preventivo salvato</div>
-    <div class="proj-empty-sub">Premi <b>Salva progetto</b> nella barra laterale per archiviare il preventivo corrente.</div>
-  </div>`;
-
-  stato.progetti.slice().reverse().forEach(p => {
-    const tot = p.voci.reduce((s,v)=>s+v.ris.costo, 0);
-    const isCur = p.id === stato.progId;
-    const macroUsate = [...new Set(p.voci.map(v=>v.macro.slice(0,2)))].join(" ");
-    const preview = p.voci.length ? p.voci.slice(0,5).map(v=>`
-      <div class="proj-preview-row">
-        <span class="proj-preview-row-name">${v.mat.nome}</span>
-        <span class="proj-preview-row-cost">${eur(v.ris.costo)}</span>
-      </div>`).join("") : "";
-    const more = p.voci.length > 5
-      ? `<div class="proj-preview-more">+ altri ${p.voci.length-5} materiali…</div>` : "";
-
+  if(n === 0) {
     html += `
-    <div class="proj-card${isCur?" current":""}" id="proj-card-${p.id}">
-      <!-- Testa cliccabile -->
-      <div class="proj-card-head" onclick="togglePreview(${p.id})">
-        <div class="proj-card-headleft">
-          <div class="proj-card-icon">${macroUsate||"📋"}</div>
-          <div class="proj-card-info">
-            <div class="proj-card-nome">${p.nome}</div>
-            <div class="proj-card-meta">
-              <span>📅 ${p.data}</span>
-              <span>·</span>
-              <span>📦 ${p.voci.length} material${p.voci.length===1?"e":"i"}</span>
-              ${isCur?`<span class="proj-card-badge">✓ Attivo</span>`:""}
+    <div class="proj-empty" style="padding:48px 20px">
+      <div class="proj-empty-icon">📁</div>
+      <div class="proj-empty-title">Nessun preventivo salvato</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">Usa il pulsante <b>Salva progetto</b> in basso a sinistra per archiviare il preventivo corrente.</div>
+    </div>`;
+  } else {
+    stato.progetti.slice().reverse().forEach(p => {
+      const tot  = p.voci.reduce((s,v) => s+v.ris.costo, 0);
+      const isCur = p.id === stato.progId;
+      const macroUsate = [...new Set(p.voci.map(v=>v.macro.slice(0,2)))].join(" ");
+      const preview = p.voci.slice(0,4).map(v=>`
+        <div class="proj-preview-row">
+          <span class="proj-preview-row-name">${v.mat.nome}</span>
+          <span class="proj-preview-row-cost">${eur(v.ris.costo)}</span>
+        </div>`).join("");
+      const more = p.voci.length > 4
+        ? `<div class="proj-preview-more">+ altri ${p.voci.length-4} materiali…</div>` : "";
+
+      html += `
+      <div class="proj-card${isCur?" current":""}" id="proj-card-${p.id}">
+
+        <!-- Intestazione cliccabile -->
+        <div class="proj-card-head" onclick="togglePreview(${p.id})">
+          <div class="proj-card-headleft">
+            <div class="proj-card-icon">${macroUsate||"📋"}</div>
+            <div class="proj-card-info">
+              <div class="proj-card-nome">${p.nome}</div>
+              <div class="proj-card-meta">
+                <span>📅 ${p.data}</span>·
+                <span>📦 ${p.voci.length} ${p.voci.length===1?"voce":"voci"}</span>
+                ${isCur?`<span class="proj-card-badge">● Attivo</span>`:""}
+              </div>
             </div>
           </div>
+          <div class="proj-card-right">
+            <div class="proj-card-tot">${eur(tot)}</div>
+            <div class="proj-card-chevron">▼</div>
+          </div>
         </div>
-        <div class="proj-card-right">
-          <div class="proj-card-tot">${eur(tot)}</div>
-          <div class="proj-card-chevron">▼</div>
-        </div>
-      </div>
 
-      <!-- Anteprima espandibile -->
-      <div class="proj-preview">
-        <div class="proj-preview-title">Anteprima materiali</div>
-        ${p.voci.length
-          ? preview + more
-          : `<div style="color:var(--muted);font-size:13px;padding:8px 0">Nessun materiale in questo preventivo.</div>`
-        }
-        <div class="proj-preview-actions">
-          <button class="btn-carica" onclick="caricaProgetto(${p.id})">
-            ${isCur ? "🔄 Ricarica" : "📂 Apri preventivo"}
-          </button>
-          <button class="btn-del-confirm" onclick="eliminaProgetto(${p.id})">🗑 Elimina</button>
+        <!-- Corpo espandibile -->
+        <div class="proj-preview">
+
+          <!-- Rinomina inline -->
+          <div class="proj-preview-title">Nome progetto</div>
+          <div class="proj-rename-wrap">
+            <input class="proj-rename-input" id="rename-${p.id}" value="${p.nome}"
+              onclick="event.stopPropagation()"
+              onkeydown="if(event.key==='Enter'){event.preventDefault();rinominaProgetto(${p.id})}">
+            <button class="proj-rename-btn" onclick="rinominaProgetto(${p.id})">
+              ✓ Rinomina
+            </button>
+          </div>
+
+          <!-- Anteprima materiali -->
+          ${p.voci.length ? `
+          <div class="proj-preview-title">Materiali inclusi</div>
+          ${preview}${more}` : `<div style="color:var(--muted);font-size:13px;padding:6px 0 10px">Preventivo vuoto.</div>`}
+
+          <!-- Export singolo preventivo -->
+          <div class="proj-preview-title" style="margin-top:10px">Esporta questo preventivo</div>
+          <div class="proj-export-row">
+            <button class="proj-export-btn" onclick="exportPDFProgetto(${p.id})">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              PDF
+            </button>
+            <button class="proj-export-btn" onclick="exportXLSXProgetto(${p.id})">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Excel
+            </button>
+            <button class="proj-export-btn" onclick="exportCSVProgetto(${p.id})">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              CSV
+            </button>
+          </div>
+
+          <!-- Azioni principali -->
+          <div class="proj-main-actions">
+            <button class="btn-carica" onclick="caricaProgetto(${p.id})">
+              ${isCur
+                ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> Ricarica`
+                : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Apri preventivo`}
+            </button>
+            <button class="btn-del-confirm" onclick="eliminaProgetto(${p.id})">🗑 Elimina</button>
+          </div>
         </div>
-      </div>
-    </div>`;
-  });
+      </div>`;
+    });
+  }
+
+  // DB backup in fondo
+  html += `
+  <div class="proj-db-row">
+    <button class="proj-export-btn" onclick="importDB()" style="background:var(--gray2)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Importa backup
+    </button>
+    <button class="proj-export-btn" onclick="exportDB()" style="background:var(--black);color:#fff;border-color:var(--black)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Esporta backup DB
+    </button>
+  </div>`;
+
   return html;
+}
+
+// Rinomina inline dalla pagina Progetti
+function rinominaProgetto(id) {
+  const inp = document.getElementById("rename-"+id);
+  if(!inp) return;
+  const nuovoNome = inp.value.trim();
+  if(!nuovoNome) return;
+  const p = stato.progetti.find(x=>x.id===id);
+  if(!p) return;
+  p.nome = nuovoNome;
+  if(stato.progId === id) stato.nomeProg = nuovoNome;
+  dbSave();
+  updateTopbar();
+  toast("✅ Progetto rinominato");
+  const nomeEl = document.querySelector(`#proj-card-${id} .proj-card-nome`);
+  if(nomeEl) nomeEl.textContent = nuovoNome;
+}
+
+// ── Export singolo progetto (PDF / XLSX / CSV) ────────────────────────────
+function _progettoById(id) {
+  return stato.progetti.find(x=>x.id===Number(id)) || null;
+}
+
+function exportPDFProgetto(id) {
+  const p = _progettoById(id); if(!p) return;
+  // Salva temporaneamente lo stato corrente, simula il progetto
+  const _voci = stato.voci; const _nome = stato.nomeProg;
+  stato.voci = p.voci; stato.nomeProg = p.nome;
+  exportPDF();
+  stato.voci = _voci; stato.nomeProg = _nome;
+}
+
+function exportXLSXProgetto(id) {
+  const p = _progettoById(id); if(!p) return;
+  const _voci = stato.voci; const _nome = stato.nomeProg;
+  stato.voci = p.voci; stato.nomeProg = p.nome;
+  exportXLSX();
+  stato.voci = _voci; stato.nomeProg = _nome;
+}
+
+function exportCSVProgetto(id) {
+  const p = _progettoById(id); if(!p) return;
+  const _voci = stato.voci; const _nome = stato.nomeProg;
+  stato.voci = p.voci; stato.nomeProg = p.nome;
+  exportCSV();
+  stato.voci = _voci; stato.nomeProg = _nome;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -2441,7 +2651,7 @@ document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.ad
     <span>≡</span>Riepilogo
   </button>
   <button class="bn-btn" id="bn-storico" onclick="bnClick('storico',this)">
-    <span>◷</span>Storico
+    <span>📁</span>Progetti
   </button>
   <button class="bn-btn" onclick="salvaProgetto()">
     <span>⊕</span>Salva
