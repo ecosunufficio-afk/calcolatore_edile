@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Calcolatore Materiali — D.ESIGN STUDIOS</title>
+<title>D.Metric PRO — D.ESIGN STUDIOS</title>
 
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
@@ -468,22 +468,24 @@
   @media(max-width:900px){
     #welcome{grid-template-columns:1fr}
     .wl-left{
-      display:flex;flex-direction:row;align-items:center;justify-content:space-between;
-      padding:28px 28px;min-height:auto;
+      display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+      padding:28px 28px 24px;min-height:auto;gap:8px;
     }
     .wl-left::after{display:none}
     .wl-headline{font-size:22px;margin-bottom:0}
     .wl-tagline{display:none}
-    .wl-left-bottom{display:flex;align-items:center;gap:0}
-    .wl-brand-name{font-size:28px}
-    .wl-right{padding:32px 28px 72px;justify-content:flex-start;overflow-y:auto}
+    .wl-left-bottom{display:none}
+    .wl-brand-name{font-size:36px}
+    .wl-presents{font-size:10px;margin-bottom:6px!important}
+    .wl-right{padding:28px 28px 72px;justify-content:flex-start;overflow-y:auto}
     .wl-right-heading{font-size:22px;margin-bottom:24px}
     .wl-btn{align-self:stretch;justify-content:center}
     .wl-credit{left:28px;bottom:16px}
   }
   @media(max-width:480px){
-    .wl-left{padding:22px 20px}
-    .wl-right{padding:28px 20px 68px}
+    .wl-left{padding:20px 20px 18px}
+    .wl-brand-name{font-size:30px}
+    .wl-right{padding:24px 20px 68px}
     .wl-right-heading{font-size:20px}
     .wl-step{padding:14px 0}
     .wl-step-title{font-size:13.5px}
@@ -623,11 +625,11 @@
   .lav-res-medio{font-size:20px;font-weight:900;color:#3A3A3A;letter-spacing:-.5px;line-height:1}
   .lav-res-label{font-size:9px;color:#AAA;margin-top:2px}
   /* Input quantità */
-  .lav-qty-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .lav-qty-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:nowrap}
   .lav-qty-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#AAA;white-space:nowrap;flex-shrink:0}
-  .lav-qty-wrap{display:flex;align-items:center;border:1.5px solid #D0CDCA;border-radius:8px;overflow:hidden;background:#F8F6F4;transition:border-color .15s;max-width:160px}
+  .lav-qty-wrap{display:flex;align-items:center;border:1.5px solid #D0CDCA;border-radius:8px;overflow:hidden;background:#F8F6F4;transition:border-color .15s;flex:1;max-width:200px}
   .lav-qty-wrap.active{border-color:#3A3A3A}
-  .lav-qty-wrap input{flex:1;padding:9px 10px;border:none;font-size:18px;font-weight:700;font-family:var(--font-body);outline:none;background:transparent;color:#1A1A1A;width:0;min-width:0}
+  .lav-qty-wrap input{flex:1;padding:9px 10px;border:none;font-size:18px;font-weight:700;font-family:var(--font-body);outline:none;background:transparent;color:#1A1A1A;min-width:60px;width:100%}
   .lav-qty-wrap input::-webkit-inner-spin-button,.lav-qty-wrap input::-webkit-outer-spin-button{opacity:.4}
   .lav-qty-um{padding:0 10px;font-size:12px;color:#999;font-weight:600;white-space:nowrap;flex-shrink:0}
   /* Bottoni aggiungi */
@@ -722,7 +724,7 @@
 </div>
   <div id="sidebar">
     <div class="sb-logo">
-      <div class="sb-logo-text-wrap sb-collapsed-hide"><div class="sb-logo-brand">D.ESIGN STUDIOS</div><div class="sb-logo-tool">Calcolatore Materiali</div></div>
+      <div class="sb-logo-text-wrap sb-collapsed-hide"><div class="sb-logo-brand">D.ESIGN STUDIOS</div><div class="sb-logo-tool">D.Metric PRO</div></div>
       <div style="width:28px;height:28px;background:var(--red);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:800;letter-spacing:-.5px" id="sb-logo-collapsed">DS</div>
     </div>
     <button class="sb-toggle sb-collapsed-hide" onclick="toggleSidebar()">◂ riduci</button>
@@ -820,15 +822,29 @@
   <!-- LEFT PANEL -->
   <div class="wl-left">
     <div class="wl-logo-wrap">
-      <div class="wl-brand-name">D.ESIGN<br>STUDIOS</div>
+      <!-- Studio name — protagonista -->
+      <div style="font-family:var(--font-display);font-size:28px;font-weight:900;color:#fff;letter-spacing:1px;margin-bottom:8px;line-height:1">D.ESIGN STUDIOS</div>
+      <!-- presenta — piccolo, nessun corsivo -->
+      <div style="font-size:11px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:3px;text-transform:lowercase;margin-bottom:22px">presenta</div>
+      <!-- D.Metric PRO -->
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="wl-brand-name" style="font-size:52px;line-height:1">D.Metric</div>
+        <div style="
+          background:#fff;color:var(--red);
+          font-family:var(--font-display);font-size:20px;font-weight:900;
+          padding:6px 14px;border-radius:10px;
+          letter-spacing:1px;align-self:flex-end;margin-bottom:6px;
+          box-shadow:0 4px 16px rgba(0,0,0,.2);
+        ">PRO</div>
+      </div>
     </div>
     <div class="wl-left-bottom">
-      <div class="wl-presents">presenta</div>
+      <div class="wl-tagline">Il calcolatore professionale per preventivi materiali edili. Veloce, preciso, mobile.</div>
     </div>
   </div>
   <!-- RIGHT PANEL -->
   <div class="wl-right">
-    <div class="wl-right-title">Calcolatore Materiali</div>
+    <div class="wl-right-title">D.Metric PRO</div>
     <div class="wl-right-heading">Il tuo preventivo,<br>in tre passaggi.</div>
     <div class="wl-steps">
       <div class="wl-step">
@@ -858,7 +874,7 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </button>
     <div class="wl-credit" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center">
-      <span>D.ESIGN STUDIOS · Napoli</span>
+      <span>D.Metric PRO · D.ESIGN STUDIOS · Napoli</span>
       <a href="https://www.instagram.com/d.esignstudios?igsh=MWJieXo2aDNxOTlvNQ%3D%3D&utm_source=qr" target="_blank"
         style="display:inline-flex;align-items:center;gap:4px;color:inherit;text-decoration:none;opacity:.7;transition:opacity .15s"
         onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.7">
@@ -943,7 +959,7 @@
 
 <div id="toast"></div>
 <div id="footer-copy" style="position:fixed;bottom:0;left:0;right:0;background:var(--black);color:rgba(255,255,255,.25);font-size:10px;text-align:center;padding:5px 16px;z-index:10;letter-spacing:.5px;border-top:1px solid rgba(255,255,255,.05)">
-  D.ESIGN STUDIOS — Calcolatore Materiali
+  D.Metric PRO by D.ESIGN STUDIOS
 </div>
 
 <button id="fab-salva" onclick="salvaProgetto()" title="Salva progetto">
@@ -2145,7 +2161,7 @@ function lavToggle(id) {
     _lavBtn(id, true, true);
     updateTopbar();
     toast("✅ Aggiunto alla stima!");
-    setTimeout(lavGoHome, 420);
+    lavGoHome();
   }
 }
 
@@ -2182,7 +2198,7 @@ function lavEdit(id) {
       <label style="font-size:10px;font-weight:700;color:#AAA;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px">Quantità (${voce.um})</label>
       <div class="lav-qty-wrap active" style="max-width:100%;margin-bottom:10px">
         <input id="lav-edit-qty" type="number" inputmode="decimal" min="0" step="0.5" value="${q0}"
-          style="flex:1;padding:12px 14px;border:none;font-size:22px;font-weight:700;font-family:inherit;outline:none;background:transparent;color:#1A1A1A;width:0;min-width:0">
+          style="flex:1;padding:12px 14px;border:none;font-size:22px;font-weight:700;font-family:inherit;outline:none;background:transparent;color:#1A1A1A;min-width:80px;width:100%">
         <span class="lav-qty-um">${voce.um}</span>
       </div>
       <div id="lav-edit-preview" style="font-size:12px;color:#3A3A3A;font-weight:600;min-height:18px;margin-bottom:20px;padding:8px 12px;background:#F0EDE9;border-radius:7px;display:none"></div>
@@ -2343,7 +2359,7 @@ function renderLavCat(catName) {
             placeholder="0"
             value="${q||""}"
             oninput="lavSetQty('${v.id}',this.value)"
-            style="flex:1;padding:9px 10px;border:none;font-size:18px;font-weight:700;font-family:inherit;outline:none;background:transparent;color:#1A1A1A;width:0;min-width:0">
+            style="flex:1;padding:9px 10px;border:none;font-size:18px;font-weight:700;font-family:inherit;outline:none;background:transparent;color:#1A1A1A;min-width:60px;width:100%">
           <span class="lav-qty-um">${v.um}</span>
         </div>
       </div>
@@ -3441,7 +3457,7 @@ function exportLavPDF() {
 </style>
 </head><body>
 <div class="pdf-header">
-  <div class="pdf-header-brand">D.ESIGN STUDIOS</div>
+  <div class="pdf-header-brand">D.Metric <span style="background:#fff;color:#8B1A1A;font-size:11px;font-weight:900;padding:2px 8px;border-radius:5px;vertical-align:middle">PRO</span> <span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.5);letter-spacing:.5px">by D.ESIGN STUDIOS</span></div>
   <div class="pdf-header-links">redstudiodesign.it &nbsp;·&nbsp; @d.esignstudios</div>
 </div>
 <div class="pdf-doc-header">
@@ -3458,7 +3474,7 @@ function exportLavPDF() {
 <div class="pdf-content">
   ${gruppi}
   <div class="total-bar"><span>TOTALE STIMATO LAVORAZIONI</span><span>${eur(tot)}</span></div>
-  <div class="disclaimer">⚠️ I prezzi sono stime orientative medie nazionali 2024/2025 — non vincolanti né imponibili alle imprese esecutrici. Ogni intervento ha caratteristiche, accessibilità e complessità proprie che possono far variare il costo reale in modo significativo. Richiedere sempre preventivi a professionisti qualificati. &nbsp;·&nbsp; D.ESIGN STUDIOS · redstudiodesign.it</div>
+  <div class="disclaimer">⚠️ I prezzi sono stime orientative medie nazionali 2024/2025 — non vincolanti né imponibili alle imprese esecutrici. Ogni intervento ha caratteristiche, accessibilità e complessità proprie che possono far variare il costo reale in modo significativo. Richiedere sempre preventivi a professionisti qualificati. &nbsp;·&nbsp; D.Metric PRO · D.ESIGN STUDIOS · redstudiodesign.it</div>
 </div>
 <script>window.onload=()=>window.print()<\/script>
 </body></html>`;
@@ -3609,12 +3625,12 @@ function exportPDF(template = "dettagliato") {
   .total-bar span:first-child{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4)}
   .total-bar span:last-child{font-size:20px;font-weight:900;color:#E8A0A0;letter-spacing:-1px}
   .disclaimer{font-size:9px;color:#bbb;margin-top:14px;padding-top:12px;border-top:1px solid #eee;line-height:1.5}
-  body::after{content:"D.ESIGN STUDIOS";position:fixed;bottom:46%;left:50%;transform:translateX(-50%) rotate(-35deg);font-size:28px;font-weight:900;color:rgba(139,26,26,0.035);white-space:nowrap;pointer-events:none;z-index:0;letter-spacing:3px}
+  body::after{content:"D.Metric PRO";position:fixed;bottom:46%;left:50%;transform:translateX(-50%) rotate(-35deg);font-size:28px;font-weight:900;color:rgba(139,26,26,0.035);white-space:nowrap;pointer-events:none;z-index:0;letter-spacing:3px}
   @media print{@page{margin:12mm 10mm}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head><body>
 <div class="pdf-header">
-  <div class="pdf-header-brand">D.ESIGN STUDIOS</div>
+  <div class="pdf-header-brand">D.Metric <span style="background:#fff;color:#8B1A1A;font-size:11px;font-weight:900;padding:2px 8px;border-radius:5px;vertical-align:middle">PRO</span> <span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.5);letter-spacing:.5px">by D.ESIGN STUDIOS</span></div>
   <div class="pdf-header-links">redstudiodesign.it &nbsp;·&nbsp; @d.esignstudios</div>
 </div>
 <div class="pdf-doc-header">
@@ -3633,7 +3649,7 @@ function exportPDF(template = "dettagliato") {
   ${template === 'essenziale' ? gruppiEssenziale : gruppi}
   ${gruppiLav}
   <div class="total-bar"><span>TOTALE PREVENTIVO${lavTot>0?' (materiali + lavorazioni)':''}</span><span>${eur(totFinale)}</span></div>
-  <div class="disclaimer">I prezzi dei materiali sono indicativi e soggetti a variazione. Le stime delle lavorazioni sono orientative — non vincolanti né imponibili alle imprese esecutrici. Verificare sempre con fornitori e professionisti qualificati. &nbsp;·&nbsp; D.ESIGN STUDIOS · redstudiodesign.it</div>
+  <div class="disclaimer">I prezzi dei materiali sono indicativi e soggetti a variazione. Le stime delle lavorazioni sono orientative — non vincolanti né imponibili alle imprese esecutrici. Verificare sempre con fornitori e professionisti qualificati. &nbsp;·&nbsp; D.Metric PRO · D.ESIGN STUDIOS · redstudiodesign.it</div>
 </div>
 <script>window.onload=()=>window.print()<\/script>
 </body></html>`;
@@ -3788,7 +3804,7 @@ document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.ad
     <!-- Link D.ESIGN STUDIOS — discreto, in fondo al drawer -->
     <div style="margin:12px 18px 4px;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px">
       <div style="font-size:11px;color:rgba(255,255,255,.35);line-height:1.5">
-        Calcolatore by <b style="color:rgba(255,255,255,.55)">D.ESIGN STUDIOS</b>
+        D.Metric <b style="color:rgba(255,255,255,.7)">PRO</b> by <b style="color:rgba(255,255,255,.55)">D.ESIGN STUDIOS</b>
       </div>
       <div style="display:flex;gap:6px;flex-shrink:0">
         <a href="https://www.instagram.com/d.esignstudios?igsh=MWJieXo2aDNxOTlvNQ%3D%3D&utm_source=qr" target="_blank"
