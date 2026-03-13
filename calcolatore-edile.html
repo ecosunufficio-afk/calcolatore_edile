@@ -26,11 +26,6 @@
     --sidebar:#1A1A1A;
     --sidebar-active:#2C2C2C;
     --font-display:'Helvetica Neue','Helvetica',Arial,sans-serif;
-  /* ── LAVORAZIONI ── */
-  --graphite:#3A3A3A;
-  --graphite2:#4A4A4A;
-  --graphite-light:#3A3A3A18;
-  --graphite-faint:#F5F5F5;
     --font-body:'Helvetica Neue','Helvetica',Arial,sans-serif;
   }
 
@@ -610,77 +605,36 @@
   .btn-custom-add:hover{opacity:.85}
 
 
-  /* ── Scheda Lavorazioni nella home ── */
-  .lav-banner{
-    margin-top:28px; padding:20px 22px; background:#fff;
-    border:1.5px solid #D0CDCA; border-radius:14px;
-    display:flex; align-items:center; justify-content:space-between; gap:18px;
-    cursor:pointer; transition:all .2s;
-  }
-  .lav-banner:hover{ box-shadow:0 4px 20px rgba(0,0,0,.1); transform:translateY(-1px); border-color:#999; }
-  .lav-banner-left{ display:flex; align-items:center; gap:14px; }
-  .lav-banner-icon{
-    width:44px; height:44px; background:#3A3A3A; border-radius:10px;
-    display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:20px; color:#fff;
-  }
-  .lav-banner-title{ font-size:11px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:#3A3A3A; margin-bottom:3px; }
-  .lav-banner-sub{ font-size:11px; color:var(--muted); }
-  .lav-banner-badge{
-    background:#3A3A3A; color:#fff; font-size:9px; font-weight:700;
-    padding:3px 10px; border-radius:4px; letter-spacing:.5px; flex-shrink:0;
-  }
-  .lav-banner-arrow{ font-size:18px; color:#999; flex-shrink:0; }
-
-  /* ── Vista lavorazioni ── */
-  .lav-cat-section{ margin-bottom:24px; }
-  .lav-cat-header{
-    display:flex; align-items:center; gap:10px;
-    padding:10px 14px; background:#3A3A3A; border-radius:8px 8px 0 0;
-    justify-content:space-between;
-  }
-  .lav-cat-name{ font-size:11px; font-weight:700; letter-spacing:1px; color:#fff; text-transform:uppercase; }
-  .lav-cat-sub{ font-size:10px; color:rgba(255,255,255,.45); }
-  .lav-voce-card{
-    background:#fff; border:1px solid var(--border); border-top:none;
-    padding:14px 16px; display:flex; align-items:center; gap:12px;
-    transition:background .15s;
-  }
-  .lav-voce-card:last-child{ border-radius:0 0 8px 8px; }
-  .lav-voce-card:hover{ background:#FAFAFA; }
-  .lav-voce-info{ flex:1; }
-  .lav-voce-nome{ font-size:13px; font-weight:600; color:var(--black); margin-bottom:3px; }
-  .lav-voce-um{ font-size:10px; color:var(--muted); letter-spacing:.5px; text-transform:uppercase; }
-  .lav-voce-input{
-    display:flex; align-items:center; gap:8px; flex-shrink:0;
-  }
-  .lav-voce-input input{
-    width:72px; padding:7px 10px; border:1.5px solid var(--border);
-    border-radius:8px; font-size:13px; font-family:var(--font-body);
-    text-align:right; outline:none; transition:border .15s;
-  }
-  .lav-voce-input input:focus{ border-color:#3A3A3A; }
-  .lav-voce-result{
-    min-width:100px; text-align:right; flex-shrink:0;
-  }
-  .lav-voce-range{ font-size:10px; color:var(--muted); }
-  .lav-voce-medio{ font-size:15px; font-weight:800; color:#3A3A3A; }
-  .lav-total-bar{
-    background:#3A3A3A; color:#fff; padding:14px 20px; border-radius:10px;
-    display:flex; justify-content:space-between; align-items:center; margin-top:10px;
-  }
-  .lav-total-bar span:first-child{ font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.4); }
-  .lav-total-bar span:last-child{ font-size:22px; font-weight:900; color:#D4D0CB; letter-spacing:-1px; }
-  .lav-disclaimer-note{
-    margin-top:14px; padding:12px 16px;
-    background:#F5F5F5; border:1px solid #DDD; border-radius:8px;
-    font-size:10.5px; color:#777; line-height:1.6;
-  }
-  /* bottom nav lavorazioni */
-  .bn-btn.lav{
-    color:rgba(255,255,255,.35);
-    border-top-color:transparent;
-  }
-  .bn-btn.lav.active{ color:#C8C4BE; border-top-color:#3A3A3A; }
+  /* ── LAVORAZIONI ── */
+  .lav-banner{margin-top:28px;padding:18px 20px;background:#fff;border:1.5px solid #D0CDCA;border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:18px;cursor:pointer;transition:all .2s;width:100%;font-family:var(--font-body);text-align:left}
+  .lav-banner:hover{box-shadow:0 4px 20px rgba(0,0,0,.1);transform:translateY(-1px);border-color:#999}
+  .lav-banner-left{display:flex;align-items:center;gap:14px}
+  .lav-banner-icon{width:44px;height:44px;background:#3A3A3A;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff}
+  .lav-banner-title{font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#3A3A3A;margin-bottom:3px}
+  .lav-banner-sub{font-size:11px;color:var(--muted)}
+  .lav-banner-badge{background:#3A3A3A;color:#fff;font-size:9px;font-weight:700;padding:3px 10px;border-radius:4px;letter-spacing:.5px;flex-shrink:0}
+  .lav-banner-arrow{font-size:18px;color:#999;flex-shrink:0}
+  .lav-cat-section{margin-bottom:20px}
+  .lav-cat-header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#3A3A3A;border-radius:8px 8px 0 0;justify-content:space-between}
+  .lav-cat-name{font-size:11px;font-weight:700;letter-spacing:1px;color:#fff;text-transform:uppercase}
+  .lav-cat-sub{font-size:10px;color:rgba(255,255,255,.4)}
+  .lav-voce-card{background:#fff;border:1px solid var(--border);border-top:none;padding:12px 16px;display:flex;align-items:center;gap:12px;transition:background .15s}
+  .lav-voce-card:last-child{border-radius:0 0 8px 8px}
+  .lav-voce-card:hover{background:#FAFAFA}
+  .lav-voce-info{flex:1}
+  .lav-voce-nome{font-size:13px;font-weight:600;color:var(--black);margin-bottom:2px}
+  .lav-voce-um{font-size:10px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}
+  .lav-voce-input{display:flex;align-items:center;gap:6px;flex-shrink:0}
+  .lav-voce-input input{width:68px;padding:7px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--font-body);text-align:right;outline:none;transition:border .15s}
+  .lav-voce-input input:focus{border-color:#3A3A3A}
+  .lav-voce-result{min-width:110px;text-align:right;flex-shrink:0}
+  .lav-voce-range{font-size:10px;color:var(--muted)}
+  .lav-voce-medio{font-size:15px;font-weight:800;color:#3A3A3A}
+  .lav-total-bar{background:#3A3A3A;color:#fff;padding:14px 20px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+  .lav-total-bar span:first-child{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  .lav-total-bar span:last-child{font-size:22px;font-weight:900;color:#D4D0CB;letter-spacing:-1px}
+  .lav-disclaimer-note{margin-top:14px;padding:12px 16px;background:#F5F5F5;border:1px solid #DDD;border-radius:8px;font-size:10.5px;color:#777;line-height:1.6}
+  .bn-btn.lav.active{color:#C8C4BE;border-top-color:#3A3A3A}
 
   /* ── PDF TEMPLATE SELECTOR ── */
   .pdf-modal-overlay{position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px}
@@ -738,8 +692,8 @@
 
     <div class="sb-divider"></div>
     <div class="sb-label sb-collapsed-hide" style="color:rgba(255,255,255,.15)">Strumenti</div>
-    <button class="sb-btn" data-view="lavorazioni" onclick="openLavorazioni()" style="border-left:2px solid transparent">
-      <span class="sb-btn-icon" style="font-size:14px">🔧</span>
+    <button class="sb-btn" onclick="openLavorazioni()" style="border-left:2px solid transparent">
+      <span class="sb-btn-icon" style="color:rgba(255,255,255,.55)"><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg></span>
       <span class="sb-btn-label sb-collapsed-hide" style="color:rgba(255,255,255,.55)">Stima Lavorazioni</span>
     </button>
 
@@ -1574,101 +1528,121 @@ const MACRO_KEYS = Object.keys(DB);
 // DATABASE LAVORAZIONI
 // ═══════════════════════════════════════════════════════════════════════════
 const DB_LAV = {
-  "Demolizioni": {
-    icon: "🔨",
-    voci: [
-      {id:"dem1", nome:"Tramezzo forato (8–12 cm)", um:"m²", min:35, max:50, medio:42},
-      {id:"dem2", nome:"Tramezzo mattoni pieni (12 cm)", um:"m²", min:45, max:60, medio:52},
-      {id:"dem3", nome:"Parete in cartongesso", um:"m²", min:20, max:35, medio:27},
-      {id:"dem4", nome:"Rimozione pavimento ceramico (senza massetto)", um:"m²", min:20, max:30, medio:25},
-      {id:"dem5", nome:"Rimozione pavimento ceramico (con massetto 5cm)", um:"m²", min:35, max:50, medio:42},
-      {id:"dem6", nome:"Scrostamento intonaco interno", um:"m²", min:18, max:30, medio:24},
-      {id:"dem7", nome:"Rimozione rivestimento ceramico parete", um:"m²", min:20, max:35, medio:27},
-      {id:"dem8", nome:"Rimozione controffitto cartongesso", um:"m²", min:20, max:35, medio:27},
-      {id:"dem9", nome:"Rimozione porta interna (c/smaltimento)", um:"cad", min:35, max:50, medio:42},
-      {id:"dem10", nome:"Rimozione serramento esterno (c/smaltimento)", um:"cad", min:50, max:80, medio:65},
-      {id:"dem11", nome:"Rimozione sanitario (c/smaltimento)", um:"cad", min:35, max:55, medio:45},
-      {id:"dem12", nome:"Rimozione termosifone (c/smaltimento)", um:"cad", min:40, max:60, medio:50},
-    ]
-  },
-  "Muratura e Costruzioni": {
-    icon: "🧱",
-    voci: [
-      {id:"mur1", nome:"Tramezzo forato 8 cm", um:"m²", min:40, max:55, medio:47},
-      {id:"mur2", nome:"Tramezzo forato 12 cm", um:"m²", min:50, max:65, medio:57},
-      {id:"mur3", nome:"Parete cartongesso singola lastra", um:"m²", min:35, max:55, medio:45},
-      {id:"mur4", nome:"Parete cartongesso doppia lastra", um:"m²", min:50, max:70, medio:60},
-      {id:"mur5", nome:"Massetto sabbia-cemento (5 cm)", um:"m²", min:28, max:45, medio:36},
-      {id:"mur6", nome:"Apertura/chiusura traccia per impianti", um:"ml", min:20, max:40, medio:30},
-    ]
-  },
-  "Pavimenti e Rivestimenti": {
-    icon: "🏠",
-    voci: [
-      {id:"pav1", nome:"Posa piastrelle pavimento 30×30 / 60×60", um:"m²", min:25, max:45, medio:35},
-      {id:"pav2", nome:"Posa piastrelle piccolo formato / mosaico", um:"m²", min:45, max:70, medio:57},
-      {id:"pav3", nome:"Posa parquet flottante ad incastro", um:"m²", min:30, max:50, medio:40},
-      {id:"pav4", nome:"Posa parquet incollato/inchiodato", um:"m²", min:45, max:70, medio:57},
-      {id:"pav5", nome:"Posa rivestimento ceramico parete", um:"m²", min:30, max:50, medio:40},
-      {id:"pav6", nome:"Levigatura e lucidatura pavimento esistente", um:"m²", min:15, max:30, medio:22},
-    ]
-  },
-  "Intonaci e Rasature": {
-    icon: "🖌️",
-    voci: [
-      {id:"int1", nome:"Intonaco tradizionale interno (3 strati)", um:"m²", min:18, max:28, medio:23},
-      {id:"int2", nome:"Intonaco esterno facciata", um:"m²", min:20, max:35, medio:27},
-      {id:"int3", nome:"Rasatura/stabilitura (2 mani)", um:"m²", min:6, max:12, medio:9},
-      {id:"int4", nome:"Tinteggiatura interna (2 mani)", um:"m²", min:5, max:12, medio:8},
-      {id:"int5", nome:"Tinteggiatura esterna/facciata", um:"m²", min:10, max:20, medio:15},
-    ]
-  },
-  "Impermeabilizzazioni": {
-    icon: "💧",
-    voci: [
-      {id:"imp1", nome:"Guaina bituminosa", um:"m²", min:20, max:35, medio:27},
-      {id:"imp2", nome:"Impermeabilizzazione liquida acrilica/poliuretanica", um:"m²", min:25, max:45, medio:35},
-      {id:"imp3", nome:"Impermeabilizzazione parete/pavimento bagno", um:"m²", min:15, max:30, medio:22},
-    ]
-  },
-  "Impianti": {
-    icon: "⚡",
-    voci: [
-      {id:"imp_e1", nome:"Rifacimento impianto elettrico completo", um:"m² app.", min:45, max:85, medio:65},
-      {id:"imp_e2", nome:"Punto luce / presa (fornitura e posa)", um:"cad", min:35, max:60, medio:47},
-      {id:"imp_e3", nome:"Quadro elettrico (fornitura e posa)", um:"cad", min:400, max:700, medio:550},
-      {id:"imp_i1", nome:"Rifacimento impianto idraulico completo", um:"m² app.", min:35, max:65, medio:50},
-      {id:"imp_i2", nome:"Punto acqua (fornitura e posa)", um:"cad", min:75, max:150, medio:110},
-      {id:"imp_i3", nome:"Rifacimento bagno completo (4–6 mq, no sanitari)", um:"corpo", min:3000, max:6000, medio:4500},
-    ]
-  },
-  "Serramenti e Infissi": {
-    icon: "🚪",
-    voci: [
-      {id:"ser1", nome:"Porta interna (fornitura e posa, standard)", um:"cad", min:300, max:600, medio:450},
-      {id:"ser2", nome:"Finestra PVC doppio vetro (fornitura e posa)", um:"cad", min:350, max:700, medio:525},
-      {id:"ser3", nome:"Finestra alluminio (fornitura e posa)", um:"cad", min:450, max:900, medio:675},
-      {id:"ser4", nome:"Porta blindata (fornitura e posa)", um:"cad", min:800, max:1800, medio:1300},
-      {id:"ser5", nome:"Posa controtelaio", um:"cad", min:60, max:100, medio:80},
-    ]
-  }
+  "Demolizioni": { icon: `<svg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <rect x='4' y='22' width='28' height='5' rx='2' fill='#3A3A3A' opacity='.15'/>
+    <rect x='10' y='8' width='16' height='14' rx='1.5' fill='none' stroke='#3A3A3A' stroke-width='1.8'/>
+    <line x1='10' y1='13' x2='26' y2='13' stroke='#3A3A3A' stroke-width='1.5'/>
+    <line x1='10' y1='17' x2='26' y2='17' stroke='#3A3A3A' stroke-width='1.5'/>
+    <path d='M16 22 L13 27 M20 22 L23 27' stroke='#3A3A3A' stroke-width='2' stroke-linecap='round'/>
+    <path d='M26 6 L30 10 L28 12 L24 8 Z' fill='#3A3A3A' opacity='.7'/>
+    <line x1='28' y1='12' x2='22' y2='18' stroke='#3A3A3A' stroke-width='2.5' stroke-linecap='round'/>
+  </svg>`, voci: [
+    {id:"dem1",nome:"Tramezzo forato (8–12 cm)",um:"m²",min:35,max:50,medio:42},
+    {id:"dem2",nome:"Tramezzo mattoni pieni (12 cm)",um:"m²",min:45,max:60,medio:52},
+    {id:"dem3",nome:"Parete in cartongesso",um:"m²",min:20,max:35,medio:27},
+    {id:"dem4",nome:"Rimozione pavimento ceramico (senza massetto)",um:"m²",min:20,max:30,medio:25},
+    {id:"dem5",nome:"Rimozione pavimento ceramico (con massetto 5cm)",um:"m²",min:35,max:50,medio:42},
+    {id:"dem6",nome:"Scrostamento intonaco interno",um:"m²",min:18,max:30,medio:24},
+    {id:"dem7",nome:"Rimozione rivestimento ceramico parete",um:"m²",min:20,max:35,medio:27},
+    {id:"dem8",nome:"Rimozione controffitto cartongesso",um:"m²",min:20,max:35,medio:27},
+    {id:"dem9",nome:"Rimozione porta interna (c/smaltimento)",um:"cad",min:35,max:50,medio:42},
+    {id:"dem10",nome:"Rimozione serramento esterno (c/smaltimento)",um:"cad",min:50,max:80,medio:65},
+    {id:"dem11",nome:"Rimozione sanitario (c/smaltimento)",um:"cad",min:35,max:55,medio:45},
+    {id:"dem12",nome:"Rimozione termosifone (c/smaltimento)",um:"cad",min:40,max:60,medio:50},
+  ]},
+  "Muratura e Costruzioni": { icon: `<svg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <rect x='4' y='24' width='12' height='6' rx='1' fill='#3A3A3A' opacity='.6'/>
+    <rect x='18' y='24' width='14' height='6' rx='1' fill='#3A3A3A' opacity='.6'/>
+    <rect x='10' y='17' width='14' height='6' rx='1' fill='#3A3A3A' opacity='.75'/>
+    <rect x='4' y='17' width='4' height='6' rx='1' fill='#3A3A3A' opacity='.4'/>
+    <rect x='26' y='17' width='6' height='6' rx='1' fill='#3A3A3A' opacity='.4'/>
+    <rect x='4' y='10' width='12' height='6' rx='1' fill='#3A3A3A' opacity='.5'/>
+    <rect x='18' y='10' width='14' height='6' rx='1' fill='#3A3A3A' opacity='.5'/>
+  </svg>`, voci: [
+    {id:"mur1",nome:"Tramezzo forato 8 cm",um:"m²",min:40,max:55,medio:47},
+    {id:"mur2",nome:"Tramezzo forato 12 cm",um:"m²",min:50,max:65,medio:57},
+    {id:"mur3",nome:"Parete cartongesso singola lastra",um:"m²",min:35,max:55,medio:45},
+    {id:"mur4",nome:"Parete cartongesso doppia lastra",um:"m²",min:50,max:70,medio:60},
+    {id:"mur5",nome:"Massetto sabbia-cemento (5 cm)",um:"m²",min:28,max:45,medio:36},
+    {id:"mur6",nome:"Apertura/chiusura traccia per impianti",um:"ml",min:20,max:40,medio:30},
+  ]},
+  "Pavimenti e Rivestimenti": { icon: `<svg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <rect x='4' y='4' width='13' height='13' rx='1.5' fill='none' stroke='#3A3A3A' stroke-width='1.8'/>
+    <rect x='19' y='4' width='13' height='13' rx='1.5' fill='#3A3A3A' opacity='.12' stroke='#3A3A3A' stroke-width='1.8'/>
+    <rect x='4' y='19' width='13' height='13' rx='1.5' fill='#3A3A3A' opacity='.12' stroke='#3A3A3A' stroke-width='1.8'/>
+    <rect x='19' y='19' width='13' height='13' rx='1.5' fill='none' stroke='#3A3A3A' stroke-width='1.8'/>
+    <line x1='7' y1='7' x2='14' y2='14' stroke='#3A3A3A' stroke-width='1' opacity='.3'/>
+    <line x1='22' y1='22' x2='29' y2='29' stroke='#3A3A3A' stroke-width='1' opacity='.3'/>
+  </svg>`, voci: [
+    {id:"pav1",nome:"Posa piastrelle pavimento 30×30 / 60×60",um:"m²",min:25,max:45,medio:35},
+    {id:"pav2",nome:"Posa piastrelle piccolo formato / mosaico",um:"m²",min:45,max:70,medio:57},
+    {id:"pav3",nome:"Posa parquet flottante ad incastro",um:"m²",min:30,max:50,medio:40},
+    {id:"pav4",nome:"Posa parquet incollato/inchiodato",um:"m²",min:45,max:70,medio:57},
+    {id:"pav5",nome:"Posa rivestimento ceramico parete",um:"m²",min:30,max:50,medio:40},
+    {id:"pav6",nome:"Levigatura e lucidatura pavimento esistente",um:"m²",min:15,max:30,medio:22},
+  ]},
+  "Intonaci e Rasature": { icon: `<svg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <rect x='4' y='6' width='22' height='24' rx='2' fill='none' stroke='#3A3A3A' stroke-width='1.8' opacity='.4'/>
+    <rect x='7' y='9' width='16' height='3' rx='1' fill='#3A3A3A' opacity='.5'/>
+    <rect x='7' y='14' width='16' height='3' rx='1' fill='#3A3A3A' opacity='.35'/>
+    <rect x='7' y='19' width='10' height='3' rx='1' fill='#3A3A3A' opacity='.2'/>
+    <path d='M28 18 L32 14 L34 16 L30 20 Z' fill='#3A3A3A' opacity='.7'/>
+    <path d='M26 20 L28 18 L30 20 L28 22 Z' fill='#3A3A3A' opacity='.5'/>
+  </svg>`, voci: [
+    {id:"int1",nome:"Intonaco tradizionale interno (3 strati)",um:"m²",min:18,max:28,medio:23},
+    {id:"int2",nome:"Intonaco esterno facciata",um:"m²",min:20,max:35,medio:27},
+    {id:"int3",nome:"Rasatura/stabilitura (2 mani)",um:"m²",min:6,max:12,medio:9},
+    {id:"int4",nome:"Tinteggiatura interna (2 mani)",um:"m²",min:5,max:12,medio:8},
+    {id:"int5",nome:"Tinteggiatura esterna/facciata",um:"m²",min:10,max:20,medio:15},
+  ]},
+  "Impermeabilizzazioni": { icon: `<svg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <path d='M6 28 Q10 20 14 24 Q18 28 22 18 Q26 8 30 14' stroke='#3A3A3A' stroke-width='2' fill='none' stroke-linecap='round' opacity='.5'/>
+    <path d='M4 30 L32 30' stroke='#3A3A3A' stroke-width='2' stroke-linecap='round' opacity='.3'/>
+    <path d='M18 6 L22 14 Q22 18 18 18 Q14 18 14 14 Z' fill='#3A3A3A' opacity='.6'/>
+    <circle cx='18' cy='15' r='2' fill='white' opacity='.7'/>
+  </svg>`, voci: [
+    {id:"imp1",nome:"Guaina bituminosa",um:"m²",min:20,max:35,medio:27},
+    {id:"imp2",nome:"Impermeabilizzazione liquida acrilica/poliuretanica",um:"m²",min:25,max:45,medio:35},
+    {id:"imp3",nome:"Impermeabilizzazione parete/pavimento bagno",um:"m²",min:15,max:30,medio:22},
+  ]},
+  "Impianti": { icon: `<svg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <circle cx='18' cy='18' r='5' fill='none' stroke='#3A3A3A' stroke-width='2'/>
+    <line x1='18' y1='4' x2='18' y2='10' stroke='#3A3A3A' stroke-width='2' stroke-linecap='round'/>
+    <line x1='18' y1='26' x2='18' y2='32' stroke='#3A3A3A' stroke-width='2' stroke-linecap='round'/>
+    <line x1='4' y1='18' x2='10' y2='18' stroke='#3A3A3A' stroke-width='2' stroke-linecap='round'/>
+    <line x1='26' y1='18' x2='32' y2='18' stroke='#3A3A3A' stroke-width='2' stroke-linecap='round'/>
+    <line x1='8' y1='8' x2='13' y2='13' stroke='#3A3A3A' stroke-width='1.5' stroke-linecap='round' opacity='.5'/>
+    <line x1='23' y1='23' x2='28' y2='28' stroke='#3A3A3A' stroke-width='1.5' stroke-linecap='round' opacity='.5'/>
+    <circle cx='18' cy='18' r='2' fill='#3A3A3A'/>
+  </svg>`, voci: [
+    {id:"imp_e1",nome:"Rifacimento impianto elettrico completo",um:"m² app.",min:45,max:85,medio:65},
+    {id:"imp_e2",nome:"Punto luce / presa (fornitura e posa)",um:"cad",min:35,max:60,medio:47},
+    {id:"imp_e3",nome:"Quadro elettrico (fornitura e posa)",um:"cad",min:400,max:700,medio:550},
+    {id:"imp_i1",nome:"Rifacimento impianto idraulico completo",um:"m² app.",min:35,max:65,medio:50},
+    {id:"imp_i2",nome:"Punto acqua (fornitura e posa)",um:"cad",min:75,max:150,medio:110},
+    {id:"imp_i3",nome:"Rifacimento bagno completo (4–6 mq, no sanitari)",um:"corpo",min:3000,max:6000,medio:4500},
+  ]},
+  "Serramenti e Infissi": { icon: `<svg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <rect x='6' y='4' width='24' height='28' rx='2' fill='none' stroke='#3A3A3A' stroke-width='2'/>
+    <line x1='18' y1='4' x2='18' y2='32' stroke='#3A3A3A' stroke-width='1.5'/>
+    <line x1='6' y1='18' x2='30' y2='18' stroke='#3A3A3A' stroke-width='1.5'/>
+    <rect x='9' y='7' width='6' height='8' rx='1' fill='#3A3A3A' opacity='.1'/>
+    <rect x='21' y='7' width='6' height='8' rx='1' fill='#3A3A3A' opacity='.1'/>
+    <circle cx='17' cy='18' r='1.5' fill='#3A3A3A' opacity='.7'/>
+    <circle cx='19' cy='18' r='1.5' fill='#3A3A3A' opacity='.7'/>
+  </svg>`, voci: [
+    {id:"ser1",nome:"Porta interna (fornitura e posa, standard)",um:"cad",min:300,max:600,medio:450},
+    {id:"ser2",nome:"Finestra PVC doppio vetro (fornitura e posa)",um:"cad",min:350,max:700,medio:525},
+    {id:"ser3",nome:"Finestra alluminio (fornitura e posa)",um:"cad",min:450,max:900,medio:675},
+    {id:"ser4",nome:"Porta blindata (fornitura e posa)",um:"cad",min:800,max:1800,medio:1300},
+    {id:"ser5",nome:"Posa controtelaio",um:"cad",min:60,max:100,medio:80},
+  ]}
 };
 const LAV_KEYS = Object.keys(DB_LAV);
 let lavQty = {};
-
-function lavTotale() {
-  let tot = 0;
-  LAV_KEYS.forEach(cat => {
-    DB_LAV[cat].voci.forEach(v => {
-      const q = parseFloat(lavQty[v.id] || 0);
-      if(q > 0) tot += q * v.medio;
-    });
-  });
-  return tot;
-}
-function lavCount() {
-  return Object.values(lavQty).filter(q => parseFloat(q) > 0).length;
-}
+let lavPreventivoVoci = new Set(); // ids delle voci lavorazioni aggiunte al preventivo
+function lavTotale(){let t=0;LAV_KEYS.forEach(k=>DB_LAV[k].voci.forEach(v=>{if(!lavPreventivoVoci.has(v.id))return;const q=parseFloat(lavQty[v.id]||0);if(q>0)t+=q*v.medio;}));return t;}
+function lavCount(){return lavPreventivoVoci.size;}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // STATO APP
@@ -1954,6 +1928,7 @@ function renderContent() {
   const v = stato.vista;
   if(v==="home") el.innerHTML = renderHome();
   else if(v==="lavorazioni") el.innerHTML = renderLavorazioni();
+  else if(v.startsWith("lav-cat:")) el.innerHTML = renderLavCat(v.slice(8));
   else if(v==="riepilogo") el.innerHTML = renderRiepilogo();
   else if(v==="storico") el.innerHTML = renderStorico();
   else if(v.startsWith("macro:")) el.innerHTML = renderMacro(v.slice(6));
@@ -1972,44 +1947,43 @@ function renderHome() {
     </button>`;
   }).join("");
   const lavN = lavCount();
-  const lavBadge = lavN > 0 ? `<span class="lav-banner-badge">${lavN} voc${lavN===1?'e':'i'}</span>` : `<span class="lav-banner-arrow">→</span>`;
+  const lavBadge = lavN>0 ? `<span class="lav-banner-badge">${lavN} voc${lavN===1?'e':'i'}</span>` : `<span class="lav-banner-arrow">→</span>`;
   return `<div class="page-title">Preventivo materiali</div>
     <div class="page-sub">seleziona una categoria</div>
     <div class="macro-grid">${cards}</div>
     <button class="lav-banner" onclick="openLavorazioni()">
       <div class="lav-banner-left">
-        <div class="lav-banner-icon">🔧</div>
+        <div class="lav-banner-icon"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg></div>
         <div>
           <div class="lav-banner-title">Stima Lavorazioni</div>
-          <div class="lav-banner-sub">Demolizioni, costruzioni, impianti e altro — prezzi medi nazionali</div>
+          <div class="lav-banner-sub">Demolizioni, costruzioni, impianti — prezzi medi nazionali</div>
         </div>
       </div>
       ${lavBadge}
     </button>`;
 }
 
-// ── LAVORAZIONI ───────────────────────────────────────────────────────────
+// ── LAVORAZIONI ─────────────────────────────────────────────────────────────
 function openLavorazioni() {
-  // Show disclaimer first if first time
-  if(!localStorage.getItem("lav_disclaimer_ok")) {
-    document.getElementById("lav-disclaimer-modal").style.display = "flex";
-  } else {
-    setVista("lavorazioni", null);
-  }
+  document.getElementById("lav-disclaimer-modal").style.display = "flex";
 }
 function closeLavDisclaimer(proceed) {
   document.getElementById("lav-disclaimer-modal").style.display = "none";
-  if(proceed) {
-    localStorage.setItem("lav_disclaimer_ok", "1");
-    setVista("lavorazioni", null);
-  }
+  if(proceed) setVista("lavorazioni", null);
 }
+
+// Navigate into a lavorazioni category (mirrors setVista for macro)
+function setLavCat(cat) {
+  stato.vista = "lav-cat:" + cat;
+  renderContent();
+}
+
 function lavUpdateQty(id, val) {
-  lavQty[id] = val;
-  // update row result live
+  lavQty[id] = parseFloat(val) || 0;
   const v = LAV_KEYS.flatMap(k => DB_LAV[k].voci).find(x => x.id === id);
   if(!v) return;
-  const q = parseFloat(val || 0);
+  const q = lavQty[id];
+  // update stima row
   const el = document.getElementById("lav-result-" + id);
   if(el) {
     if(q > 0) {
@@ -2018,59 +1992,177 @@ function lavUpdateQty(id, val) {
       el.innerHTML = `<div class="lav-voce-range">${eur(v.min)}–${eur(v.max)} / ${v.um}</div><div class="lav-voce-medio" style="color:#ccc">—</div>`;
     }
   }
-  // update total
+  // if qty drops to 0, remove from preventivo
+  if(q <= 0 && lavPreventivoVoci.has(id)) {
+    lavPreventivoVoci.delete(id);
+    refreshLavAddBtn(id, false, false);
+  }
+  // refresh add button active state
+  if(q > 0) refreshLavAddBtn(id, true, lavPreventivoVoci.has(id));
+  // refresh totale
   const totEl = document.getElementById("lav-grand-total");
   if(totEl) totEl.textContent = eur(lavTotale());
-  // update count in topbar/bnav badge
+  // refresh nav badge
   const cnEl = document.getElementById("bn-lav-count");
   if(cnEl) { const n=lavCount(); cnEl.style.display=n>0?"inline":"none"; cnEl.textContent=n; }
 }
-function renderLavorazioni() {
-  let html = `<div class="page-title">Stima Lavorazioni</div>
-    <div class="page-sub">prezzi medi nazionali 2025 — solo orientativi</div>`;
 
-  LAV_KEYS.forEach(cat => {
-    const catData = DB_LAV[cat];
-    html += `<div class="lav-cat-section">
-      <div class="lav-cat-header">
-        <span class="lav-cat-name">${catData.icon} ${cat}</span>
-        <span class="lav-cat-sub">inserisci le quantità</span>
-      </div>`;
-    catData.voci.forEach(v => {
-      const q = lavQty[v.id] || "";
-      const hasQ = parseFloat(q) > 0;
-      const resultHtml = hasQ
-        ? `<div class="lav-voce-range">${eur(parseFloat(q)*v.min)} – ${eur(parseFloat(q)*v.max)}</div><div class="lav-voce-medio">${eur(parseFloat(q)*v.medio)}</div>`
-        : `<div class="lav-voce-range">${eur(v.min)}–${eur(v.max)} / ${v.um}</div><div class="lav-voce-medio" style="color:#ccc">—</div>`;
-      html += `<div class="lav-voce-card">
-        <div class="lav-voce-info">
-          <div class="lav-voce-nome">${v.nome}</div>
-          <div class="lav-voce-um">unità: ${v.um}</div>
-        </div>
-        <div class="lav-voce-input">
-          <input type="number" min="0" step="0.5" placeholder="0"
-            value="${q}"
-            oninput="lavUpdateQty('${v.id}',this.value)"
-            style="border-color:${hasQ?'#3A3A3A':''}">
-          <span style="font-size:11px;color:var(--muted);white-space:nowrap">${v.um}</span>
-        </div>
-        <div class="lav-voce-result" id="lav-result-${v.id}">${resultHtml}</div>
-      </div>`;
-    });
-    html += `</div>`;
-  });
+function refreshLavAddBtn(id, hasQty, added) {
+  const btn = document.getElementById("lav-add-btn-" + id);
+  if(!btn) return;
+  if(!hasQty) {
+    btn.textContent = "＋ Aggiungi a stima";
+    btn.disabled = true;
+    btn.style.opacity = "0.35";
+    btn.style.cursor = "not-allowed";
+    btn.style.background = "transparent";
+    btn.style.color = "#3A3A3A";
+    btn.style.border = "1.5px solid #3A3A3A";
+  } else if(added) {
+    btn.textContent = "✓ Nella stima";
+    btn.disabled = false;
+    btn.style.opacity = "1";
+    btn.style.cursor = "pointer";
+    btn.style.background = "#3A3A3A";
+    btn.style.color = "#fff";
+    btn.style.border = "none";
+  } else {
+    btn.textContent = "＋ Aggiungi a stima";
+    btn.disabled = false;
+    btn.style.opacity = "1";
+    btn.style.cursor = "pointer";
+    btn.style.background = "transparent";
+    btn.style.color = "#3A3A3A";
+    btn.style.border = "1.5px solid #3A3A3A";
+  }
+}
+
+
+function aggiungiStimaaRiepilogo() {
+  // lavPreventivoVoci already contains the selected voci ids
+  // lavTotale() already sums them — they are included in renderRiepilogo
+  // Just navigate to riepilogo
+  setVista("riepilogo", null);
+  toast("✅ Stima lavorazioni inclusa nel riepilogo");
+}
+function toggleLavVocePreventivo(id) {
+  const q = lavQty[id] || 0;
+  if(q <= 0) { toast("⚠️ Inserisci prima la quantità"); return; }
+  if(lavPreventivoVoci.has(id)) {
+    lavPreventivoVoci.delete(id);
+    refreshLavAddBtn(id, true, false);
+    toast("Voce rimossa dal preventivo");
+  } else {
+    lavPreventivoVoci.add(id);
+    refreshLavAddBtn(id, true, true);
+    toast("✅ Aggiunto al preventivo!");
+  }
+  const totEl = document.getElementById("lav-grand-total");
+  if(totEl) totEl.textContent = eur(lavTotale());
+  const cnEl = document.getElementById("bn-lav-count");
+  if(cnEl) { const n=lavCount(); cnEl.style.display=n>0?"inline":"none"; cnEl.textContent=n; }
+  updateTopbar();
+}
+
+// HOME lavorazioni — griglia card categoria, identica a renderHome materiali
+function renderLavorazioni() {
+  const cards = LAV_KEYS.map(cat => {
+    const d = DB_LAV[cat];
+    const cnt = lavPreventivoVoci.size > 0
+      ? d.voci.filter(v => lavPreventivoVoci.has(v.id)).length : 0;
+    const badge = cnt > 0
+      ? `<span class="macro-card-badge" style="background:#3A3A3A">${cnt} voc${cnt===1?'e':'i'}</span>` : "";
+    return `<button class="macro-card" style="border-color:#D0CDCA" onclick="setLavCat('${cat}')"
+        onmouseover="this.style.borderColor='#3A3A3A';this.style.boxShadow='0 6px 24px rgba(58,58,58,.12)'"
+        onmouseout="this.style.borderColor='#D0CDCA';this.style.boxShadow=''">
+      <div class="macro-card-icon" style="color:#3A3A3A;background:#F0EDE9">${d.icon}</div>
+      <div class="macro-card-title" style="color:#3A3A3A">${cat}</div>
+      <div class="macro-card-sub">${d.voci.length} lavorazioni</div>
+      ${badge}
+    </button>`;
+  }).join("");
 
   const tot = lavTotale();
-  html += `<div class="lav-total-bar">
-    <span>STIMA TOTALE LAVORAZIONI</span>
-    <span id="lav-grand-total">${eur(tot)}</span>
-  </div>
-  <div class="lav-disclaimer-note">
-    ⚠️ <strong>Attenzione:</strong> questi prezzi sono puramente indicativi, elaborati su medie nazionali 2025.
-    Non sono vincolanti né imponibili alle imprese esecutrici. Ogni intervento ha caratteristiche, accessibilità
-    e complessità proprie che possono variare significativamente il costo reale. Richiedi sempre più preventivi
-    a professionisti del settore.
+  const totBar = lavPreventivoVoci.size > 0
+    ? `<div class="lav-total-bar" style="margin-top:24px;border-radius:10px 10px 0 0">
+        <span>STIMA PREVENTIVO LAVORAZIONI</span>
+        <span id="lav-grand-total">${eur(tot)}</span>
+      </div>
+      <button onclick="aggiungiStimaaRiepilogo()"
+        style="width:100%;padding:13px;background:#3A3A3A;border:none;border-top:none;border-radius:0 0 10px 10px;font-family:inherit;font-size:13px;font-weight:700;color:#fff;cursor:pointer;letter-spacing:.2px;transition:opacity .15s"
+        onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        ＋ Aggiungi al preventivo e vai al Riepilogo →
+      </button>` : "";
+
+  return `<div class="page-title">Stima Lavorazioni</div>
+    <div class="page-sub">seleziona una categoria</div>
+    <div class="macro-grid">${cards}</div>
+    ${totBar}
+    <div class="lav-disclaimer-note" style="margin-top:20px">⚠️ <strong>Solo orientativo.</strong> Prezzi medi nazionali 2025 — non vincolanti né imponibili alle imprese esecutrici. Ogni intervento ha caratteristiche proprie che possono variare significativamente il costo reale.</div>`;
+}
+
+// CATEGORY view — lista voci con input + stima + pulsante
+function renderLavCat(cat) {
+  const d = DB_LAV[cat];
+  const vociInPrev = d.voci.filter(v => lavPreventivoVoci.has(v.id)).length;
+
+  let html = `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="width:40px;height:40px;background:#F0EDE9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px">${d.icon}</div>
+      <div>
+        <div class="page-title" style="margin:0;color:#3A3A3A">${cat}</div>
+        <div style="font-size:12px;color:var(--muted)">${d.voci.length} lavorazioni${vociInPrev>0?' · <b style="color:#3A3A3A">'+vociInPrev+' nel preventivo</b>':''}</div>
+      </div>
+    </div>
+    <button onclick="setVista('lavorazioni',null)" style="background:#F0EDE9;border:none;border-radius:9px;padding:9px 16px;font-family:inherit;font-size:12px;font-weight:700;color:#3A3A3A;cursor:pointer">← Categorie</button>
   </div>`;
+
+  d.voci.forEach(v => {
+    const q = lavQty[v.id] || 0;
+    const hasQ = q > 0;
+    const added = lavPreventivoVoci.has(v.id);
+
+    const stimaHtml = hasQ
+      ? `<div class="lav-voce-range">${eur(q*v.min)} – ${eur(q*v.max)}</div><div class="lav-voce-medio">${eur(q*v.medio)}</div>`
+      : `<div class="lav-voce-range">${eur(v.min)} – ${eur(v.max)} per ${v.um}</div><div class="lav-voce-medio" style="color:#ccc">—</div>`;
+
+    const addStyle = added
+      ? "width:100%;margin-top:10px;padding:10px;background:#3A3A3A;border:none;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;color:#fff;cursor:pointer"
+      : hasQ
+        ? "width:100%;margin-top:10px;padding:10px;background:transparent;border:1.5px solid #3A3A3A;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;color:#3A3A3A;cursor:pointer"
+        : "width:100%;margin-top:10px;padding:10px;background:transparent;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;color:#CCC;cursor:not-allowed";
+    const addLabel = added ? "✓ Nella stima — rimuovi" : "＋ Aggiungi a stima";
+
+    html += `<div class="voce-card" style="flex-direction:column;gap:12px;border-left:4px solid #3A3A3A">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;width:100%">
+        <div style="flex:1">
+          <div class="voce-cat" style="color:#3A3A3A">${cat}</div>
+          <div class="voce-nome">${v.nome}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">Unità di misura: <b>${v.um}</b></div>
+        </div>
+        <div class="lav-voce-result" id="lav-result-${v.id}" style="text-align:right;flex-shrink:0">${stimaHtml}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;width:100%">
+        <label style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;white-space:nowrap">Quantità (${v.um})</label>
+        <input type="number" min="0" step="0.5" placeholder="es. 10" value="${q||''}"
+          oninput="lavUpdateQty('${v.id}',this.value)"
+          style="flex:1;padding:9px 12px;border:1.5px solid ${hasQ?'#3A3A3A':'var(--border)'};border-radius:8px;font-size:14px;font-family:inherit;outline:none;max-width:160px">
+      </div>
+      <button id="lav-add-btn-${v.id}" onclick="toggleLavVocePreventivo('${v.id}')"
+        ${hasQ?'':'disabled'} style="${addStyle}">${addLabel}</button>
+    </div>`;
+  });
+
+  const catTot = d.voci.reduce((s,v) => {
+    if(!lavPreventivoVoci.has(v.id)) return s;
+    return s + (lavQty[v.id]||0)*v.medio;
+  }, 0);
+  if(catTot > 0) {
+    html += `<div class="lav-total-bar" style="margin-top:8px">
+      <span>SUBTOTALE ${cat.toUpperCase()}</span>
+      <span>${eur(catTot)}</span>
+    </div>`;
+  }
   return html;
 }
 
@@ -2132,6 +2224,64 @@ function rimuoviVoce(idx) {
   stato.voci.splice(idx,1); renderContent();
 }
 
+
+function rimuoviLavVoce(id) {
+  const v = LAV_KEYS.flatMap(k => DB_LAV[k].voci).find(x => x.id === id);
+  if(!v) return;
+  if(!confirm('Rimuovere "' + v.nome + '" dalla stima?')) return;
+  lavPreventivoVoci.delete(id);
+  lavQty[id] = 0;
+  renderContent();
+  toast('🗑 Voce rimossa dalla stima');
+}
+
+function openEditLavVoce(id, cat) {
+  const v = LAV_KEYS.flatMap(k => DB_LAV[k].voci).find(x => x.id === id);
+  if(!v) return;
+  const currentQ = lavQty[id] || 0;
+  // Reuse modal structure: build a simple inline modal
+  const existing = document.getElementById('lav-edit-modal');
+  if(existing) existing.remove();
+  const modal = document.createElement('div');
+  modal.id = 'lav-edit-modal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML = `
+    <div style="background:#fff;border-radius:16px;padding:28px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.2)">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#3A3A3A;margin-bottom:4px">${cat}</div>
+      <div style="font-size:15px;font-weight:800;color:#1a1a1a;margin-bottom:20px;line-height:1.3">${v.nome}</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Quantità (${v.um})</div>
+      <input id="lav-edit-qty" type="number" min="0" step="0.5" value="${currentQ}"
+        style="width:100%;padding:11px 14px;border:1.5px solid #3A3A3A;border-radius:9px;font-size:16px;font-family:inherit;outline:none;box-sizing:border-box;margin-bottom:8px">
+      <div id="lav-edit-preview" style="font-size:12px;color:#777;margin-bottom:20px;min-height:18px"></div>
+      <div style="display:flex;gap:10px">
+        <button onclick="document.getElementById('lav-edit-modal').remove()"
+          style="flex:1;padding:12px;background:#F0EDE9;border:none;border-radius:9px;font-family:inherit;font-size:13px;font-weight:600;color:#888;cursor:pointer">Annulla</button>
+        <button onclick="confirmEditLavVoce('${id}')"
+          style="flex:2;padding:12px;background:#3A3A3A;border:none;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;color:#fff;cursor:pointer">✓ Salva</button>
+      </div>
+    </div>`;
+  // live preview
+  const inp = modal.querySelector('#lav-edit-qty');
+  const prev = modal.querySelector('#lav-edit-preview');
+  inp.addEventListener('input', () => {
+    const q = parseFloat(inp.value) || 0;
+    prev.textContent = q > 0 ? 'Stima: ' + eur(q*v.min) + ' – ' + eur(q*v.max) + ' · media ' + eur(q*v.medio) : '';
+  });
+  // trigger once
+  inp.dispatchEvent(new Event('input'));
+  document.body.appendChild(modal);
+}
+
+function confirmEditLavVoce(id) {
+  const inp = document.getElementById('lav-edit-qty');
+  if(!inp) return;
+  const q = parseFloat(inp.value) || 0;
+  lavQty[id] = q;
+  if(q <= 0) lavPreventivoVoci.delete(id);
+  document.getElementById('lav-edit-modal').remove();
+  renderContent();
+  toast('✅ Quantità aggiornata');
+}
 // ── RIEPILOGO ─────────────────────────────────────────────────────────────
 function renderRiepilogo() {
   const tot = stato.voci.reduce((s,v)=>s+v.ris.costo,0);
@@ -2151,12 +2301,12 @@ function renderRiepilogo() {
     </div>
   </div>`;
 
-  if(nVoci === 0) {
+  if(nVoci === 0 && lavPreventivoVoci.size === 0) {
     return html + `
     <div style="text-align:center;padding:70px 20px;border:1.5px dashed var(--border);border-radius:14px;color:var(--muted)">
       <div style="font-size:48px;margin-bottom:14px">📋</div>
-      <div style="font-size:16px;font-weight:700;color:var(--black);margin-bottom:6px">Nessun materiale ancora</div>
-      <div style="font-size:13px">Aggiungi materiali dalla schermata <b>Preventivo</b></div>
+      <div style="font-size:16px;font-weight:700;color:var(--black);margin-bottom:6px">Nessun preventivo ancora</div>
+      <div style="font-size:13px">Aggiungi materiali o lavorazioni</div>
     </div>`;
   }
 
@@ -2222,13 +2372,62 @@ function renderRiepilogo() {
     html += `</div>`; // chiudi rp-macro-block
   });
 
+  // ── Sezione lavorazioni nel riepilogo ──
+  if(lavPreventivoVoci.size > 0) {
+    const lavTot = lavTotale();
+    html += `<div class="rp-macro-block" style="margin-top:8px">
+      <div class="rp-macro-title" style="background:#3A3A3A12;border-color:#3A3A3A">
+        <span class="rp-macro-label" style="color:#3A3A3A">
+          <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' style='display:inline-block;vertical-align:middle;margin-right:4px'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>
+          Lavorazioni
+          <span style="font-size:10px;background:#3A3A3A;color:#fff;border-radius:20px;padding:1px 8px;font-weight:700">${lavCount()}</span>
+        </span>
+        <span class="rp-macro-sub" style="color:#3A3A3A">${eur(lavTot)}</span>
+      </div>`;
+
+    LAV_KEYS.forEach(cat => {
+      DB_LAV[cat].voci.forEach(v => {
+        if(!lavPreventivoVoci.has(v.id)) return;
+        const q = parseFloat(lavQty[v.id] || 0);
+        if(q <= 0) return;
+        html += `
+        <div class="rp-card">
+          <div class="rp-card-accent" style="background:#3A3A3A"></div>
+          <div class="rp-card-body">
+            <div class="rp-card-nome">${v.nome}</div>
+            <div style="margin-top:4px">
+              <span class="rp-card-chip" style="background:#3A3A3A14;color:#3A3A3A">${cat}</span>
+              <span class="rp-card-chip">📐 ${q} ${v.um}</span>
+              <span class="rp-card-chip" style="color:#777;font-size:10px">stima: ${eur(q*v.min)}–${eur(q*v.max)}</span>
+            </div>
+          </div>
+          <div class="rp-card-right">
+            <div class="rp-card-cost" style="color:#3A3A3A">${eur(q*v.medio)}</div>
+            <div class="rp-card-actions">
+              <button class="rp-btn-edit" onclick="openEditLavVoce('${v.id}','${cat}')" title="Modifica quantità">✏️ Modifica</button>
+              <button class="rp-btn-del" onclick="rimuoviLavVoce('${v.id}')" title="Rimuovi">🗑</button>
+            </div>
+          </div>
+        </div>`;
+      });
+    });
+
+    html += `<div class="rp-subtotale" style="background:#3A3A3A0A;border:1px solid #3A3A3A25">
+      <span style="font-size:11px;font-weight:700;color:#3A3A3A;letter-spacing:.5px;text-transform:uppercase">Subtotale Lavorazioni</span>
+      <span style="font-weight:800;font-size:15px;color:#3A3A3A">${eur(lavTot)}</span>
+    </div>
+    <div style="font-size:10px;color:#aaa;padding:8px 4px;line-height:1.5">⚠️ Prezzi indicativi — non vincolanti né imponibili alle imprese esecutrici.</div>
+    </div>`;
+  }
+
   // ── Totale finale ──
+  const totConLav = tot + lavTotale();
   html += `<div class="totale-box" style="margin-top:16px">
     <div>
       <div style="color:rgba(255,255,255,.4);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">TOTALE PREVENTIVO</div>
-      <div style="color:rgba(255,255,255,.3);font-size:11px">${nVoci} ${nVoci===1?"voce":"voci"} · ${MACRO_KEYS.filter(mk=>stato.voci.some(v=>v.macro===mk)).length} categorie</div>
+      <div style="color:rgba(255,255,255,.3);font-size:11px">${nVoci} ${nVoci===1?"voce":"voci"} · ${MACRO_KEYS.filter(mk=>stato.voci.some(v=>v.macro===mk)).length} categorie${lavPreventivoVoci.size>0?" · lavorazioni incluse":""}</div>
     </div>
-    <span style="color:#E8A0A0;font-weight:800;font-size:30px;letter-spacing:-1px">${eur(tot)}</span>
+    <span style="color:#E8A0A0;font-weight:800;font-size:30px;letter-spacing:-1px">${eur(totConLav)}</span>
   </div>`;
 
   return html;
@@ -3094,192 +3293,48 @@ function exportPDF(template = "dettagliato") {
 <html><head><meta charset="UTF-8"><title>Preventivo — ${stato.nomeProg}</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:Arial,Helvetica,sans-serif;color:#1A1A1A;background:#fff}
-
-  /* ── COPERTINA ── */
-  .cover{
-    width:100%; height:100vh; min-height:297mm;
-    display:flex; flex-direction:column;
-    page-break-after:always;
-    position:relative; overflow:hidden;
-  }
-  .cover-top{
-    background:#8B1A1A;
-    flex:0 0 52%;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    position:relative; gap:12px;
-  }
-  .cover-top::after{
-    content:"";
-    position:absolute; bottom:-2px; left:0; right:0; height:48px;
-    background:#fff;
-    clip-path:ellipse(55% 100% at 50% 100%);
-  }
-  .cover-brand-name{
-    font-size:52px; font-weight:900; color:#fff;
-    letter-spacing:-1px; line-height:1;
-    position:relative; z-index:1;
-  }
-  .cover-brand-links{
-    display:flex; gap:24px; align-items:center;
-    position:relative; z-index:1;
-  }
-  .cover-brand-link{
-    font-size:12px; color:rgba(255,255,255,0.65);
-    letter-spacing:.5px; text-decoration:none;
-  }
-  .cover-bottom{
-    flex:1;
-    display:flex; flex-direction:column; justify-content:center;
-    padding:48px 64px;
-  }
-  .cover-label{
-    font-size:10px; font-weight:700; letter-spacing:3px;
-    text-transform:uppercase; color:#8B1A1A; margin-bottom:14px;
-  }
-  .cover-title{
-    font-size:32px; font-weight:900; color:#1A1A1A;
-    letter-spacing:-0.5px; line-height:1.15; margin-bottom:8px;
-    text-transform:uppercase;
-  }
-  .cover-sub{
-    font-size:14px; color:#888; margin-bottom:48px;
-  }
-  .cover-meta{
-    display:flex; gap:40px; flex-wrap:wrap;
-  }
-  .cover-meta-item{
-    display:flex; flex-direction:column; gap:3px;
-  }
-  .cover-meta-key{
-    font-size:9px; font-weight:700; letter-spacing:2px;
-    text-transform:uppercase; color:#aaa;
-  }
-  .cover-meta-val{
-    font-size:15px; font-weight:800; color:#1A1A1A;
-  }
-  .cover-meta-val.green{ color:#2E7D4F; font-size:22px; }
-  .cover-footer{
-    position:absolute; bottom:32px; left:64px; right:64px;
-    display:flex; justify-content:space-between; align-items:center;
-    border-top:1px solid #e8e8e8; padding-top:14px;
-  }
-  .cover-footer-brand{
-    font-size:10px; color:#bbb; letter-spacing:1px; text-transform:uppercase;
-  }
-  .cover-footer-web{
-    font-size:10px; color:#bbb; letter-spacing:.5px;
-  }
-
-  /* ── CONTENUTO ── */
-  .content{ padding:32px 36px; }
-  .content-header{
-    display:flex; justify-content:space-between; align-items:center;
-    border-bottom:2px solid #1A1A1A; padding-bottom:10px; margin-bottom:24px;
-  }
-  .content-header-brand{ font-size:18px; font-weight:900; color:#8B1A1A; letter-spacing:-0.5px; }
-  .content-header-info{ text-align:right; font-size:11px; color:#888; line-height:1.6; }
-  .content-header-info b{ color:#1A1A1A; }
-
-  /* Filigrana */
-  body::after{
-    content:"D.ESIGN STUDIOS";
-    position:fixed; bottom:46%; left:50%;
-    transform:translateX(-50%) rotate(-35deg);
-    font-size:32px; font-weight:900;
-    color:rgba(139,26,26,0.04);
-    white-space:nowrap; pointer-events:none; z-index:0; letter-spacing:3px;
-  }
-
-  /* Totale finale */
-  .total-bar{
-    background:#1A1A1A; color:#fff;
-    padding:16px 20px; border-radius:10px;
-    display:flex; justify-content:space-between; align-items:center;
-    margin-top:8px;
-  }
-  .total-bar span:first-child{ font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.45); }
-  .total-bar span:last-child{ font-size:24px; font-weight:900; color:#E8A0A0; letter-spacing:-1px; }
-
-  .disclaimer{ font-size:9.5px; color:#aaa; margin-top:18px; text-align:center; line-height:1.5; }
-
-  @media print{
-    .cover{ page-break-after:always; }
-    @page{ margin:0; }
-    body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  }
+  body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#1A1A1A;background:#fff;font-size:12px}
+  .pdf-header{background:#8B1A1A;display:flex;align-items:center;justify-content:space-between;padding:12px 32px}
+  .pdf-header-brand{font-size:15px;font-weight:900;color:#fff;letter-spacing:.3px}
+  .pdf-header-links{font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:.3px}
+  .pdf-doc-header{padding:20px 32px 16px;border-bottom:2px solid #1A1A1A;display:flex;align-items:flex-end;justify-content:space-between;gap:32px}
+  .pdf-doc-title-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#8B1A1A;margin-bottom:4px}
+  .pdf-doc-title{font-size:22px;font-weight:900;color:#1A1A1A;letter-spacing:-0.5px;line-height:1.1;text-transform:uppercase}
+  .pdf-doc-meta{display:flex;gap:24px;align-items:flex-end;flex-shrink:0}
+  .pdf-doc-meta-item{display:flex;flex-direction:column;gap:1px;text-align:right}
+  .pdf-doc-meta-key{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#bbb}
+  .pdf-doc-meta-val{font-size:13px;font-weight:800;color:#1A1A1A}
+  .pdf-doc-meta-val.green{color:#2E7D4F;font-size:17px}
+  .pdf-content{padding:20px 32px 32px}
+  .total-bar{background:#1A1A1A;color:#fff;padding:12px 18px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+  .total-bar span:first-child{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  .total-bar span:last-child{font-size:20px;font-weight:900;color:#E8A0A0;letter-spacing:-1px}
+  .disclaimer{font-size:9px;color:#bbb;margin-top:14px;padding-top:12px;border-top:1px solid #eee;line-height:1.5}
+  body::after{content:"D.ESIGN STUDIOS";position:fixed;bottom:46%;left:50%;transform:translateX(-50%) rotate(-35deg);font-size:28px;font-weight:900;color:rgba(139,26,26,0.035);white-space:nowrap;pointer-events:none;z-index:0;letter-spacing:3px}
+  @media print{@page{margin:12mm 10mm}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head><body>
-
-<!-- ══════════════ COPERTINA ══════════════ -->
-<div class="cover">
-  <div class="cover-top">
-    <div class="cover-brand-name">D.ESIGN STUDIOS</div>
-    <div style="font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:3px;text-transform:uppercase;font-weight:500;position:relative;z-index:1;font-style:italic">D.ESIGN SU MISURA, CON STILE E CURA</div>
-    <div class="cover-brand-links" style="margin-top:4px">
-      <span class="cover-brand-link">redstudiodesign.it</span>
-      <span style="color:rgba(255,255,255,0.3);font-size:12px">·</span>
-      <span class="cover-brand-link">@d.esignstudios</span>
-    </div>
+<div class="pdf-header">
+  <div class="pdf-header-brand">D.ESIGN STUDIOS</div>
+  <div class="pdf-header-links">redstudiodesign.it &nbsp;·&nbsp; @d.esignstudios</div>
+</div>
+<div class="pdf-doc-header">
+  <div>
+    <div class="pdf-doc-title-label">Preventivo materiali edili</div>
+    <div class="pdf-doc-title">${stato.nomeProg}</div>
   </div>
-  <div class="cover-bottom">
-    <div class="cover-label">Preventivo materiali edili</div>
-    <div class="cover-title">${stato.nomeProg}</div>
-    <div class="cover-sub">Riepilogo materiali e costi stimati</div>
-    <div class="cover-meta">
-      <div class="cover-meta-item">
-        <span class="cover-meta-key">Data</span>
-        <span class="cover-meta-val">${data}</span>
-      </div>
-      <div class="cover-meta-item">
-        <span class="cover-meta-key">Voci</span>
-        <span class="cover-meta-val">${nVoci}</span>
-      </div>
-      <div class="cover-meta-item">
-        <span class="cover-meta-key">Categorie</span>
-        <span class="cover-meta-val">${nCat}</span>
-      </div>
-      <div class="cover-meta-item">
-        <span class="cover-meta-key">Totale stimato</span>
-        <span class="cover-meta-val green">${eur(tot)}</span>
-      </div>
-    </div>
-  </div>
-  <div class="cover-footer">
-    <span class="cover-footer-brand">D.ESIGN STUDIOS · Napoli</span>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=56x56&data=https%3A%2F%2Fwww.redstudiodesign.it&bgcolor=ffffff&color=1A1A1A&margin=2" width="56" height="56" style="border-radius:4px" alt="QR redstudiodesign.it">
-    </div>
-    <span class="cover-footer-web">redstudiodesign.it</span>
+  <div class="pdf-doc-meta">
+    <div class="pdf-doc-meta-item"><span class="pdf-doc-meta-key">Data</span><span class="pdf-doc-meta-val">${data}</span></div>
+    <div class="pdf-doc-meta-item"><span class="pdf-doc-meta-key">Voci</span><span class="pdf-doc-meta-val">${nVoci}</span></div>
+    <div class="pdf-doc-meta-item"><span class="pdf-doc-meta-key">Categorie</span><span class="pdf-doc-meta-val">${nCat}</span></div>
+    <div class="pdf-doc-meta-item"><span class="pdf-doc-meta-key">Totale stimato</span><span class="pdf-doc-meta-val green">${eur(tot)}</span></div>
   </div>
 </div>
-
-<!-- ══════════════ CONTENUTO ══════════════ -->
-<div class="content">
-  <div class="content-header">
-    <div class="content-header-brand">D.ESIGN STUDIOS</div>
-    <div class="content-header-info">
-      <b>${stato.nomeProg}</b><br>
-      Data: ${data} · ${nVoci} voci · ${nCat} categorie<br>
-      redstudiodesign.it
-    </div>
-  </div>
-
+<div class="pdf-content">
   ${template === 'essenziale' ? gruppiEssenziale : gruppi}
-
-  <div class="total-bar">
-    <span>TOTALE PREVENTIVO</span>
-    <span>${eur(tot)}</span>
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid #eee">
-    <div class="disclaimer" style="text-align:left;margin-top:0">I prezzi sono indicativi. Verificare sempre le schede tecniche dei prodotti e i prezzi aggiornati del fornitore.<br>Preventivo generato con il Calcolatore Materiali D.ESIGN STUDIOS · redstudiodesign.it</div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;margin-left:24px">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=64x64&data=https%3A%2F%2Fwww.redstudiodesign.it&bgcolor=ffffff&color=1A1A1A&margin=2" width="64" height="64" style="border-radius:5px;border:1px solid #e0e0e0" alt="QR">
-      <div style="font-size:8px;color:#bbb">redstudiodesign.it</div>
-    </div>
-  </div>
+  <div class="total-bar"><span>TOTALE PREVENTIVO</span><span>${eur(tot)}</span></div>
+  <div class="disclaimer">I prezzi sono indicativi e soggetti a variazione. Verificare le schede tecniche e i prezzi aggiornati del fornitore. &nbsp;·&nbsp; D.ESIGN STUDIOS · redstudiodesign.it</div>
 </div>
-
 <script>window.onload=()=>window.print()<\/script>
 </body></html>`;
 
@@ -3305,17 +3360,17 @@ function closeDisclaimer() {
 }
 
 // ── BOTTOM NAV MOBILE ──────────────────────────────────────────────────
+function bnClickLav(el) {
+  document.querySelectorAll(".bn-btn").forEach(b=>b.classList.remove("active"));
+  el.classList.add("active");
+  closeMacroDrawer();
+  openLavorazioni();
+}
 function bnClick(v, el) {
   document.querySelectorAll(".bn-btn").forEach(b => b.classList.remove("active"));
   el.classList.add("active");
   setVista(v, null);
   closeMacroDrawer();
-}
-function bnClickLav(el) {
-  document.querySelectorAll(".bn-btn").forEach(b => b.classList.remove("active"));
-  el.classList.add("active");
-  closeMacroDrawer();
-  openLavorazioni();
 }
 function bnShowMacro() {
   const list = document.getElementById("macro-drawer-list");
@@ -3390,14 +3445,14 @@ document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.ad
 <div id="lav-disclaimer-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.65);backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:20px">
   <div style="background:#fff;border-radius:18px;max-width:440px;width:100%;padding:32px 28px;box-shadow:0 24px 64px rgba(0,0,0,.3)">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
-      <div style="width:44px;height:44px;background:#3A3A3A;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🔧</div>
+      <div style="width:44px;height:44px;background:#3A3A3A;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg></div>
       <div>
         <div style="font-size:16px;font-weight:800;color:#1A1A1A;letter-spacing:-.3px">Stima Lavorazioni</div>
         <div style="font-size:11px;color:#888;margin-top:1px">Tool di stima orientativa</div>
       </div>
     </div>
     <div style="background:#F5F5F5;border-radius:10px;padding:16px;margin-bottom:20px;border-left:3px solid #3A3A3A">
-      <div style="font-size:12px;font-weight:700;color:#3A3A3A;margin-bottom:6px;letter-spacing:.3px">⚠️ IMPORTANTE — LEGGI PRIMA DI PROSEGUIRE</div>
+      <div style="font-size:12px;font-weight:700;color:#3A3A3A;margin-bottom:6px;letter-spacing:.3px">IMPORTANTE — LEGGI PRIMA DI PROSEGUIRE</div>
       <div style="font-size:12px;color:#555;line-height:1.7">
         I prezzi mostrati sono <strong>stime medie nazionali</strong> elaborate su banche dati e prezzari regionali 2024/2025.<br><br>
         Non sono <strong>vincolanti né imponibili</strong> alle imprese esecutrici. Ogni intervento ha caratteristiche, accessibilità e complessità proprie che possono far variare il costo reale in modo significativo.<br><br>
@@ -3422,7 +3477,8 @@ document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.ad
     </button>
   </div>
   <button class="bn-btn lav" id="bn-lav" onclick="bnClickLav(this)" style="position:relative">
-    <span>🔧</span>Lavoraz.
+    <span style="display:flex;align-items:center;justify-content:center"><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg></span>
+    Lavoraz.
     <span id="bn-lav-count" style="display:none;position:absolute;top:4px;right:6px;background:#3A3A3A;color:#fff;font-size:8px;font-weight:800;border-radius:8px;padding:1px 5px;line-height:1.4"></span>
   </button>
   <button class="bn-btn" id="bn-riepilogo" onclick="bnClick('riepilogo',this)">
