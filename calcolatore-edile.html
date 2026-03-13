@@ -2810,190 +2810,123 @@ function exportPDF(template = "dettagliato") {
 <html><head><meta charset="UTF-8"><title>Preventivo — ${stato.nomeProg}</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:Arial,Helvetica,sans-serif;color:#1A1A1A;background:#fff}
+  body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#1A1A1A;background:#fff;font-size:12px}
 
-  /* ── COPERTINA ── */
-  .cover{
-    width:100%; height:100vh; min-height:297mm;
-    display:flex; flex-direction:column;
-    page-break-after:always;
-    position:relative; overflow:hidden;
-  }
-  .cover-top{
+  /* ── HEADER ── */
+  .pdf-header{
     background:#8B1A1A;
-    flex:0 0 52%;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    position:relative; gap:12px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 32px;
   }
-  .cover-top::after{
-    content:"";
-    position:absolute; bottom:-2px; left:0; right:0; height:48px;
-    background:#fff;
-    clip-path:ellipse(55% 100% at 50% 100%);
+  .pdf-header-brand{
+    font-size:15px; font-weight:900; color:#fff; letter-spacing:.3px;
   }
-  .cover-brand-name{
-    font-size:52px; font-weight:900; color:#fff;
-    letter-spacing:-1px; line-height:1;
-    position:relative; z-index:1;
-  }
-  .cover-brand-links{
-    display:flex; gap:24px; align-items:center;
-    position:relative; z-index:1;
-  }
-  .cover-brand-link{
-    font-size:12px; color:rgba(255,255,255,0.65);
-    letter-spacing:.5px; text-decoration:none;
-  }
-  .cover-bottom{
-    flex:1;
-    display:flex; flex-direction:column; justify-content:center;
-    padding:48px 64px;
-  }
-  .cover-label{
-    font-size:10px; font-weight:700; letter-spacing:3px;
-    text-transform:uppercase; color:#8B1A1A; margin-bottom:14px;
-  }
-  .cover-title{
-    font-size:32px; font-weight:900; color:#1A1A1A;
-    letter-spacing:-0.5px; line-height:1.15; margin-bottom:8px;
-    text-transform:uppercase;
-  }
-  .cover-sub{
-    font-size:14px; color:#888; margin-bottom:48px;
-  }
-  .cover-meta{
-    display:flex; gap:40px; flex-wrap:wrap;
-  }
-  .cover-meta-item{
-    display:flex; flex-direction:column; gap:3px;
-  }
-  .cover-meta-key{
-    font-size:9px; font-weight:700; letter-spacing:2px;
-    text-transform:uppercase; color:#aaa;
-  }
-  .cover-meta-val{
-    font-size:15px; font-weight:800; color:#1A1A1A;
-  }
-  .cover-meta-val.green{ color:#2E7D4F; font-size:22px; }
-  .cover-footer{
-    position:absolute; bottom:32px; left:64px; right:64px;
-    display:flex; justify-content:space-between; align-items:center;
-    border-top:1px solid #e8e8e8; padding-top:14px;
-  }
-  .cover-footer-brand{
-    font-size:10px; color:#bbb; letter-spacing:1px; text-transform:uppercase;
-  }
-  .cover-footer-web{
-    font-size:10px; color:#bbb; letter-spacing:.5px;
+  .pdf-header-links{
+    font-size:10px; color:rgba(255,255,255,0.45); letter-spacing:.3px;
   }
 
-  /* ── CONTENUTO ── */
-  .content{ padding:32px 36px; }
-  .content-header{
-    display:flex; justify-content:space-between; align-items:center;
-    border-bottom:2px solid #1A1A1A; padding-bottom:10px; margin-bottom:24px;
+  /* ── INTESTAZIONE DOC ── */
+  .pdf-doc-header{
+    padding:20px 32px 16px;
+    border-bottom:2px solid #1A1A1A;
+    display:flex; align-items:flex-end; justify-content:space-between; gap:32px;
   }
-  .content-header-brand{ font-size:18px; font-weight:900; color:#8B1A1A; letter-spacing:-0.5px; }
-  .content-header-info{ text-align:right; font-size:11px; color:#888; line-height:1.6; }
-  .content-header-info b{ color:#1A1A1A; }
+  .pdf-doc-title-label{
+    font-size:9px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color:#8B1A1A; margin-bottom:4px;
+  }
+  .pdf-doc-title{
+    font-size:22px; font-weight:900; color:#1A1A1A;
+    letter-spacing:-0.5px; line-height:1.1; text-transform:uppercase;
+  }
+  .pdf-doc-meta{
+    display:flex; gap:24px; align-items:flex-end; flex-shrink:0;
+  }
+  .pdf-doc-meta-item{
+    display:flex; flex-direction:column; gap:1px; text-align:right;
+  }
+  .pdf-doc-meta-key{
+    font-size:8px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; color:#bbb;
+  }
+  .pdf-doc-meta-val{
+    font-size:13px; font-weight:800; color:#1A1A1A;
+  }
+  .pdf-doc-meta-val.green{ color:#2E7D4F; font-size:17px; }
+
+  /* ── MATERIALI ── */
+  .pdf-content{ padding:20px 32px 32px; }
+
+  /* Totale finale */
+  .total-bar{
+    background:#1A1A1A; color:#fff;
+    padding:12px 18px; border-radius:8px;
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:10px;
+  }
+  .total-bar span:first-child{ font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.4); }
+  .total-bar span:last-child{ font-size:20px; font-weight:900; color:#E8A0A0; letter-spacing:-1px; }
+
+  .disclaimer{ font-size:9px; color:#bbb; margin-top:14px; padding-top:12px; border-top:1px solid #eee; line-height:1.5; }
 
   /* Filigrana */
   body::after{
     content:"D.ESIGN STUDIOS";
     position:fixed; bottom:46%; left:50%;
     transform:translateX(-50%) rotate(-35deg);
-    font-size:32px; font-weight:900;
-    color:rgba(139,26,26,0.04);
+    font-size:28px; font-weight:900;
+    color:rgba(139,26,26,0.035);
     white-space:nowrap; pointer-events:none; z-index:0; letter-spacing:3px;
   }
 
-  /* Totale finale */
-  .total-bar{
-    background:#1A1A1A; color:#fff;
-    padding:16px 20px; border-radius:10px;
-    display:flex; justify-content:space-between; align-items:center;
-    margin-top:8px;
-  }
-  .total-bar span:first-child{ font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.45); }
-  .total-bar span:last-child{ font-size:24px; font-weight:900; color:#E8A0A0; letter-spacing:-1px; }
-
-  .disclaimer{ font-size:9.5px; color:#aaa; margin-top:18px; text-align:center; line-height:1.5; }
-
   @media print{
-    .cover{ page-break-after:always; }
-    @page{ margin:0; }
+    @page{ margin:12mm 10mm; }
     body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   }
 </style>
 </head><body>
 
-<!-- ══════════════ COPERTINA ══════════════ -->
-<div class="cover">
-  <div class="cover-top">
-    <div class="cover-brand-name">D.ESIGN STUDIOS</div>
-    <div style="font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:3px;text-transform:uppercase;font-weight:500;position:relative;z-index:1;font-style:italic">D.ESIGN SU MISURA, CON STILE E CURA</div>
-    <div class="cover-brand-links" style="margin-top:4px">
-      <span class="cover-brand-link">redstudiodesign.it</span>
-      <span style="color:rgba(255,255,255,0.3);font-size:12px">·</span>
-      <span class="cover-brand-link">@d.esignstudios</span>
-    </div>
+<!-- HEADER -->
+<div class="pdf-header">
+  <div class="pdf-header-brand">D.ESIGN STUDIOS</div>
+  <div class="pdf-header-links">redstudiodesign.it &nbsp;·&nbsp; @d.esignstudios</div>
+</div>
+
+<!-- INTESTAZIONE DOCUMENTO -->
+<div class="pdf-doc-header">
+  <div>
+    <div class="pdf-doc-title-label">Preventivo materiali edili</div>
+    <div class="pdf-doc-title">${stato.nomeProg}</div>
   </div>
-  <div class="cover-bottom">
-    <div class="cover-label">Preventivo materiali edili</div>
-    <div class="cover-title">${stato.nomeProg}</div>
-    <div class="cover-sub">Riepilogo materiali e costi stimati</div>
-    <div class="cover-meta">
-      <div class="cover-meta-item">
-        <span class="cover-meta-key">Data</span>
-        <span class="cover-meta-val">${data}</span>
-      </div>
-      <div class="cover-meta-item">
-        <span class="cover-meta-key">Voci</span>
-        <span class="cover-meta-val">${nVoci}</span>
-      </div>
-      <div class="cover-meta-item">
-        <span class="cover-meta-key">Categorie</span>
-        <span class="cover-meta-val">${nCat}</span>
-      </div>
-      <div class="cover-meta-item">
-        <span class="cover-meta-key">Totale stimato</span>
-        <span class="cover-meta-val green">${eur(tot)}</span>
-      </div>
+  <div class="pdf-doc-meta">
+    <div class="pdf-doc-meta-item">
+      <span class="pdf-doc-meta-key">Data</span>
+      <span class="pdf-doc-meta-val">${data}</span>
     </div>
-  </div>
-  <div class="cover-footer">
-    <span class="cover-footer-brand">D.ESIGN STUDIOS · Napoli</span>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=56x56&data=https%3A%2F%2Fwww.redstudiodesign.it&bgcolor=ffffff&color=1A1A1A&margin=2" width="56" height="56" style="border-radius:4px" alt="QR redstudiodesign.it">
+    <div class="pdf-doc-meta-item">
+      <span class="pdf-doc-meta-key">Voci</span>
+      <span class="pdf-doc-meta-val">${nVoci}</span>
     </div>
-    <span class="cover-footer-web">redstudiodesign.it</span>
+    <div class="pdf-doc-meta-item">
+      <span class="pdf-doc-meta-key">Categorie</span>
+      <span class="pdf-doc-meta-val">${nCat}</span>
+    </div>
+    <div class="pdf-doc-meta-item">
+      <span class="pdf-doc-meta-key">Totale stimato</span>
+      <span class="pdf-doc-meta-val green">${eur(tot)}</span>
+    </div>
   </div>
 </div>
 
-<!-- ══════════════ CONTENUTO ══════════════ -->
-<div class="content">
-  <div class="content-header">
-    <div class="content-header-brand">D.ESIGN STUDIOS</div>
-    <div class="content-header-info">
-      <b>${stato.nomeProg}</b><br>
-      Data: ${data} · ${nVoci} voci · ${nCat} categorie<br>
-      redstudiodesign.it
-    </div>
-  </div>
-
+<!-- MATERIALI -->
+<div class="pdf-content">
   ${template === 'essenziale' ? gruppiEssenziale : gruppi}
 
   <div class="total-bar">
     <span>TOTALE PREVENTIVO</span>
     <span>${eur(tot)}</span>
   </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid #eee">
-    <div class="disclaimer" style="text-align:left;margin-top:0">I prezzi sono indicativi. Verificare sempre le schede tecniche dei prodotti e i prezzi aggiornati del fornitore.<br>Preventivo generato con il Calcolatore Materiali D.ESIGN STUDIOS · redstudiodesign.it</div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;margin-left:24px">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=64x64&data=https%3A%2F%2Fwww.redstudiodesign.it&bgcolor=ffffff&color=1A1A1A&margin=2" width="64" height="64" style="border-radius:5px;border:1px solid #e0e0e0" alt="QR">
-      <div style="font-size:8px;color:#bbb">redstudiodesign.it</div>
-    </div>
-  </div>
+  <div class="disclaimer">I prezzi sono indicativi e soggetti a variazione. Verificare sempre le schede tecniche dei prodotti e i prezzi aggiornati del fornitore. &nbsp;·&nbsp; Preventivo generato con il Calcolatore Materiali D.ESIGN STUDIOS · redstudiodesign.it</div>
 </div>
 
 <script>window.onload=()=>window.print()<\/script>
