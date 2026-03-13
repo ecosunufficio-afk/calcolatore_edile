@@ -318,7 +318,7 @@
   .price-row-input{border:1.5px solid var(--border);border-radius:7px;padding:6px 10px;font-size:13px;font-weight:600;color:var(--black);font-family:var(--font-body);outline:none;background:#fff;width:80px;text-align:right;transition:border-color .15s}
   .price-row-input:focus{border-color:var(--red)}
   .price-row-euro{font-size:12px;color:var(--muted);font-weight:600}
-  .btn-price-edit{background:var(--gray2);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:6px 10px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-body);flex-shrink:0;transition:all .15s}
+  .btn-price-edit{background:var(--gray2);border:1.5px solid var(--border);color:var(--muted);border-radius:9px;padding:0 10px;height:36px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-body);flex-shrink:0;transition:all .15s;display:flex;align-items:center;gap:4px}
   .btn-price-edit:hover{border-color:var(--red);color:var(--red)}
   .btn-price-save{background:var(--black);border:none;color:#fff;border-radius:7px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-body);margin-top:4px;transition:background .15s}
   .btn-price-save:hover{background:#333}
@@ -562,7 +562,64 @@
     #toast{bottom:72px;right:10px;left:10px;text-align:center;font-size:12px;padding:10px 16px}
     #fab-salva{bottom:72px;right:12px;padding:10px 16px;font-size:13px}
     .select-item-wrap{margin-bottom:4px}
+    .btn-fav{width:36px!important;min-width:36px;font-size:18px;padding:12px 10px!important}
+    .btn-custom-mat{font-size:12px!important;padding:12px 14px!important}
   }
+
+  /* ── PREFERITI ── */
+  .btn-fav{
+    background:transparent;border:1.5px solid var(--border);color:#bbb;
+    border-radius:9px;padding:0;width:36px;height:36px;
+    font-size:15px;cursor:pointer;transition:all .15s;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .btn-fav.active{color:#F5A623;border-color:#F5A62360;background:#FFF9F0}
+  .btn-fav:hover{border-color:#aaa;color:#888}
+  .btn-fav.active:hover{opacity:.8}
+  .fav-badge{
+    display:inline-block;background:#F5A623;color:#fff;
+    font-size:9px;font-weight:700;letter-spacing:.5px;
+    padding:2px 6px;border-radius:10px;margin-left:6px;
+    text-transform:uppercase;vertical-align:middle;
+  }
+
+  /* ── PRODOTTO CUSTOM ── */
+  .btn-custom-mat{
+    background:var(--black);border:none;color:#fff;
+    border-radius:9px;padding:12px 18px;
+    font-family:var(--font-body);font-size:13px;font-weight:600;
+    cursor:pointer;width:100%;text-align:center;
+    margin-top:10px;letter-spacing:.2px;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    transition:background .15s;
+  }
+  .btn-custom-mat:hover{background:#333}
+  .custom-form{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px;margin-top:10px}
+  .custom-form-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .custom-field{margin-bottom:12px}
+  .custom-field label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.8px}
+  .custom-field input,.custom-field select{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--font-body);outline:none;transition:border .15s;background:#fff;color:var(--black)}
+  .custom-field input:focus,.custom-field select:focus{border-color:var(--red)}
+  .custom-fields-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .btn-custom-add{background:var(--red);border:none;color:#fff;border-radius:9px;padding:11px 18px;font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;width:100%;margin-top:4px;transition:opacity .15s}
+  .btn-custom-add:hover{opacity:.85}
+
+  /* ── PDF TEMPLATE SELECTOR ── */
+  .pdf-modal-overlay{position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px}
+  .pdf-modal{background:#fff;border-radius:16px;padding:28px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+  .pdf-modal-title{font-family:var(--font-display);font-size:18px;font-weight:800;color:var(--black);margin-bottom:6px}
+  .pdf-modal-sub{font-size:12px;color:var(--muted);margin-bottom:20px}
+  .pdf-template-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+  .pdf-template-card{border:2px solid var(--border);border-radius:12px;padding:16px 14px;cursor:pointer;transition:all .15s;text-align:center}
+  .pdf-template-card:hover{border-color:#ccc}
+  .pdf-template-card.selected{border-color:var(--red);background:#FFF5F5}
+  .pdf-template-icon{font-size:28px;margin-bottom:8px}
+  .pdf-template-name{font-weight:700;font-size:13px;color:var(--black);margin-bottom:4px}
+  .pdf-template-desc{font-size:11px;color:var(--muted);line-height:1.4}
+  .pdf-modal-actions{display:flex;gap:10px}
+  .pdf-modal-cancel{flex:1;background:var(--bg);border:1.5px solid var(--border);color:var(--muted);border-radius:9px;padding:12px;font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer}
+  .pdf-modal-go{flex:2;background:var(--red);border:none;color:#fff;border-radius:9px;padding:12px;font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .pdf-modal-go:hover{opacity:.88}
 </style>
 </head>
 <body>
@@ -1439,6 +1496,62 @@ let stato = {
   progetti: [],
 };
 
+// ── Preferiti ──────────────────────────────────────────────────────────────
+let favoriti = new Set();
+function loadFavoriti() {
+  try { favoriti = new Set(JSON.parse(localStorage.getItem("dstudios_fav")||"[]")); } catch(e){}
+}
+function saveFavoriti() {
+  try { localStorage.setItem("dstudios_fav", JSON.stringify([...favoriti])); } catch(e){}
+}
+function toggleFav(matId, btn) {
+  if(favoriti.has(matId)) { favoriti.delete(matId); if(btn){btn.classList.remove("active");btn.title="Aggiungi ai preferiti";} }
+  else { favoriti.add(matId); if(btn){btn.classList.add("active");btn.title="Rimuovi dai preferiti";} toast("⭐ Aggiunto ai preferiti!"); }
+  saveFavoriti();
+}
+function isFav(id){ return favoriti.has(id); }
+
+// ── Prodotti custom ────────────────────────────────────────────────────────
+let prodottiCustom = [];
+function loadCustom() {
+  try { prodottiCustom = JSON.parse(localStorage.getItem("dstudios_custom")||"[]"); } catch(e){}
+}
+function saveCustom() {
+  try { localStorage.setItem("dstudios_custom", JSON.stringify(prodottiCustom)); } catch(e){}
+}
+function addProdottoCustom(macro, sotto) {
+  const nome = document.getElementById("cx-nome").value.trim();
+  const resa = parseFloat(document.getElementById("cx-resa").value)||1;
+  const unita = document.getElementById("cx-unita").value||"m²";
+  const unitaResa = document.getElementById("cx-unitaresa").value||"kg/m²";
+  const confLabel = document.getElementById("cx-conflabel").value.trim()||"Confezione";
+  const confKg = parseFloat(document.getElementById("cx-confkg").value)||1;
+  const confPrezzo = parseFloat(document.getElementById("cx-prezzo").value)||0;
+  const note = document.getElementById("cx-note").value.trim();
+  if(!nome) { alert("Inserisci il nome del materiale."); return; }
+  const id = "custom_" + Date.now();
+  const mat = {id,nome,resa,unitaResa,unita,note,custom:true,confezioni:[{label:confLabel,kg:confKg,prezzo:confPrezzo}]};
+  // aggiungi al DB sotto la categoria corrente
+  if(!DB[macro].sottocategorie["⭐ Prodotti custom"]) DB[macro].sottocategorie["⭐ Prodotti custom"] = [];
+  DB[macro].sottocategorie["⭐ Prodotti custom"].push(mat);
+  prodottiCustom.push({macro, mat});
+  saveCustom();
+  // vai direttamente al passo 3
+  mState.sotto = "⭐ Prodotti custom";
+  mState.mat = mat;
+  mState.passo = 3;
+  renderModal();
+  toast("✅ Prodotto custom aggiunto!");
+}
+function restoreCustom() {
+  prodottiCustom.forEach(({macro, mat}) => {
+    if(!DB[macro]) return;
+    if(!DB[macro].sottocategorie["⭐ Prodotti custom"]) DB[macro].sottocategorie["⭐ Prodotti custom"] = [];
+    if(!DB[macro].sottocategorie["⭐ Prodotti custom"].find(m=>m.id===mat.id))
+      DB[macro].sottocategorie["⭐ Prodotti custom"].push(mat);
+  });
+}
+
 // ── Calcolo ────────────────────────────────────────────────────────────────
 function calcola(sup, resa, margine, conf) {
   if (!sup || !resa || !conf) return null;
@@ -1748,7 +1861,7 @@ function renderRiepilogo() {
       <div style="font-size:12px;color:var(--muted)">${stato.nomeProg} · ${new Date().toLocaleDateString("it-IT")} · <b style="color:var(--black)">${nVoci} ${nVoci===1?"voce":"voci"}</b></div>
     </div>
     <div class="export-row" style="margin:0">
-      <button class="btn-export btn-pdf" onclick="exportPDF()">🖨️ PDF</button>
+      <button class="btn-export btn-pdf" onclick="openPDFModal()">🖨️ PDF</button>
       <button class="btn-export btn-xlsx" onclick="exportXLSX()">📊 Excel</button>
       <button class="btn-export btn-csv" onclick="exportCSV()">📄 CSV</button>
     </div>
@@ -2069,18 +2182,71 @@ function renderModal() {
 }
 
 function renderModalP1(cat) {
-  return `<div style="font-size:13px;color:var(--muted);margin-bottom:10px">Di cosa hai bisogno?</div>
-    <div class="select-list">${Object.keys(cat.sottocategorie).map(k=>`
-      <button class="select-item" onclick="pickSotto('${k}')">
+  // costruisci lista sottocategorie
+  const sottoKeys = Object.keys(cat.sottocategorie);
+  // materiali preferiti della categoria corrente
+  const favItems = sottoKeys.flatMap(k => cat.sottocategorie[k].filter(m => isFav(m.id)));
+  const favSection = favItems.length ? `
+    <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:#F5A623;text-transform:uppercase;margin-bottom:8px">⭐ Preferiti</div>
+    <div class="select-list" style="margin-bottom:14px">${favItems.map(m=>`
+      <button class="select-item" onclick="pickSottoMat('${sottoKeys.find(k=>cat.sottocategorie[k].find(x=>x.id===m.id))}','${m.id}')">
         <div style="text-align:left">
-          <div class="select-item-main">${k}</div>
-          <div class="select-item-sub">${cat.sottocategorie[k].length} prodotti disponibili</div>
+          <div class="select-item-main">${m.nome}</div>
+          <div class="select-item-sub">${sottoKeys.find(k=>cat.sottocategorie[k].find(x=>x.id===m.id))}</div>
         </div>
         <span class="select-arrow" style="color:${cat.colore}">›</span>
       </button>`).join("")}
-    </div>`;
+    </div>
+    <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Tutte le categorie</div>` : '';
+  return favSection + `<div style="font-size:13px;color:var(--muted);margin-bottom:10px">${favItems.length?'':'Di cosa hai bisogno?'}</div>
+    <div class="select-list">${sottoKeys.map(k=>`
+      <button class="select-item" onclick="pickSotto('${k}')">
+        <div style="text-align:left">
+          <div class="select-item-main">${k}</div>
+          <div class="select-item-sub">${cat.sottocategorie[k].length} prodotti${cat.sottocategorie[k].filter(m=>isFav(m.id)).length?' · <span style="color:#F5A623">'+cat.sottocategorie[k].filter(m=>isFav(m.id)).length+' ⭐</span>':''}</div>
+        </div>
+        <span class="select-arrow" style="color:${cat.colore}">›</span>
+      </button>`).join("")}
+    </div>
+    <button class="btn-custom-mat" onclick="showCustomForm('${mState.macro}')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      Aggiungi prodotto personalizzato
+    </button>
+    <div id="custom-form-wrap" style="display:none"></div>`;
 }
 function pickSotto(k) { mState.sotto=k; mState.passo=2; renderModal(); }
+function pickSottoMat(sotto, matId) {
+  mState.sotto = sotto;
+  const cat = DB[mState.macro];
+  const m = cat.sottocategorie[sotto].find(x=>x.id===matId);
+  if(m) { mState.mat=m; mState.passo=3; renderModal(); }
+}
+function showCustomForm(macro) {
+  const wrap = document.getElementById("custom-form-wrap");
+  if(!wrap) return;
+  wrap.style.display = "block";
+  wrap.innerHTML = `<div class="custom-form">
+    <div class="custom-form-title">✏️ Prodotto personalizzato</div>
+    <div class="custom-field"><label>Nome materiale *</label><input id="cx-nome" type="text" placeholder="es. Pannello isolante speciale"></div>
+    <div class="custom-fields-row">
+      <div class="custom-field"><label>Resa</label><input id="cx-resa" type="number" step="any" min="0" value="1"></div>
+      <div class="custom-field"><label>Unità resa</label><input id="cx-unitaresa" type="text" value="kg/m²"></div>
+    </div>
+    <div class="custom-fields-row">
+      <div class="custom-field"><label>Unità misura</label>
+        <select id="cx-unita"><option>m²</option><option>ml</option><option>m³</option><option>pz</option></select>
+      </div>
+      <div class="custom-field"><label>Confezione</label><input id="cx-conflabel" type="text" placeholder="es. Sacco 25 kg" value="Confezione"></div>
+    </div>
+    <div class="custom-fields-row">
+      <div class="custom-field"><label>Kg per confezione</label><input id="cx-confkg" type="number" step="any" min="0.01" value="1"></div>
+      <div class="custom-field"><label>Prezzo (€)</label><input id="cx-prezzo" type="number" step="0.01" min="0" value="0"></div>
+    </div>
+    <div class="custom-field"><label>Note (opzionale)</label><input id="cx-note" type="text" placeholder="Descrizione o note tecniche"></div>
+    <button class="btn-custom-add" onclick="addProdottoCustom('${macro}','⭐ Prodotti custom')">✓ Usa questo materiale</button>
+  </div>`;
+  wrap.scrollIntoView({behavior:"smooth", block:"nearest"});
+}
 
 function renderModalP2(cat) {
   const items = cat.sottocategorie[mState.sotto].map(m => {
@@ -2102,13 +2268,15 @@ function renderModalP2(cat) {
       <div style="display:flex;align-items:center;gap:8px">
         <button class="select-item" style="flex:1" onclick="pickMat('${m.id}')">
           <div style="text-align:left;width:100%">
-            <div class="select-item-main">${m.nome}</div>
+            <div class="select-item-main">${m.nome}${isFav(m.id)?'<span class="fav-badge">★ preferito</span>':''}</div>
             <div class="select-item-sub" style="margin-bottom:7px">${m.note}</div>
             <div style="margin-bottom:6px">${resaBadgeHTML(m, cat.colore)}${tipoLabel?` <span style="display:inline-block;font-size:10px;background:#f5f5f5;color:#888;border-radius:20px;padding:2px 7px;vertical-align:middle">${tipoLabel}</span>`:""}</div>
             <div class="select-item-price" id="pp-${m.id}" data-color="${cat.colore}">${prezziPills}</div>
           </div>
           <span class="select-arrow" style="color:${cat.colore}">›</span>
         </button>
+        <button class="btn-fav ${isFav(m.id)?'active':''}" title="${isFav(m.id)?'Rimuovi dai preferiti':'Aggiungi ai preferiti'}"
+          onclick="event.stopPropagation();toggleFav('${m.id}',this)">⭐</button>
         <button class="btn-price-edit" onclick="event.stopPropagation();togglePriceEditor('${m.id}')">✏️ Prezzo</button>
       </div>
       <div class="price-editor" id="${editorId}">
@@ -2509,62 +2677,330 @@ function exportCSV() {
   toast("✅ CSV esportato!");
 }
 
-function exportPDF() {
-  const tot=stato.voci.reduce((s,v)=>s+v.ris.costo,0);
-  let gruppi="";
-  MACRO_KEYS.forEach(mk=>{
-    const vm=stato.voci.filter(v=>v.macro===mk); if(!vm.length) return;
-    const sub=vm.reduce((s,v)=>s+v.ris.costo,0); const col=DB[mk].colore;
-    gruppi+=`<div style="margin-bottom:18px">
-      <div style="background:${col};color:#fff;padding:6px 12px;border-radius:6px;display:flex;justify-content:space-between;margin-bottom:6px">
-        <b>${mk}</b><b>${eur(sub)}</b>
+// ═══════════════════════════════════════════════════════════════════════════
+// PDF MODAL — scelta template
+// ═══════════════════════════════════════════════════════════════════════════
+let _pdfTemplate = "dettagliato";
+
+function openPDFModal() {
+  if(stato.voci.length === 0) { toast("⚠️ Nessun materiale nel preventivo"); return; }
+  const overlay = document.createElement("div");
+  overlay.className = "pdf-modal-overlay";
+  overlay.id = "pdf-modal-overlay";
+  overlay.innerHTML = `
+    <div class="pdf-modal">
+      <div class="pdf-modal-title">Genera PDF</div>
+      <div class="pdf-modal-sub">Scegli il formato del documento</div>
+      <div class="pdf-template-row">
+        <div class="pdf-template-card ${_pdfTemplate==='dettagliato'?'selected':''}" onclick="selectPDFTemplate('dettagliato',this)">
+          <div class="pdf-template-icon">📋</div>
+          <div class="pdf-template-name">Dettagliato</div>
+          <div class="pdf-template-desc">Tabelle complete con resa, quantità, margine e costo per ogni voce</div>
+        </div>
+        <div class="pdf-template-card ${_pdfTemplate==='essenziale'?'selected':''}" onclick="selectPDFTemplate('essenziale',this)">
+          <div class="pdf-template-icon">📄</div>
+          <div class="pdf-template-name">Essenziale</div>
+          <div class="pdf-template-desc">Solo materiale, quantità e costo — ideale per il cliente</div>
+        </div>
       </div>
-      <table width="100%" style="border-collapse:collapse;font-size:12px">
-        <tr style="background:#f0f0f0"><th style="padding:5px 8px;text-align:left">Materiale</th><th>Qnt</th><th>Resa</th><th>Confezione</th><th>N°</th><th>Margine</th><th style="text-align:right">Costo</th></tr>
-        ${vm.map(v=>`<tr style="border-bottom:1px solid #eee">
-          <td style="padding:5px 8px">${v.mat.nome}</td>
-          <td style="text-align:center">${v.sup} ${v.mat.unita}</td>
-          <td style="text-align:center">${v.mat.resa} ${v.mat.unitaResa}</td>
-          <td style="text-align:center">${v.conf.label}</td>
-          <td style="text-align:center">${v.ris.sacchi}</td>
-          <td style="text-align:center">+${v.margine}%</td>
-          <td style="text-align:right;font-weight:700">${eur(v.ris.costo)}</td>
+      <div class="pdf-modal-actions">
+        <button class="pdf-modal-cancel" onclick="closePDFModal()">Annulla</button>
+        <button class="pdf-modal-go" onclick="closePDFModal();exportPDF(_pdfTemplate)">🖨️ Genera PDF</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+}
+function selectPDFTemplate(tpl, el) {
+  _pdfTemplate = tpl;
+  document.querySelectorAll(".pdf-template-card").forEach(c=>c.classList.remove("selected"));
+  el.classList.add("selected");
+}
+function closePDFModal() {
+  const o = document.getElementById("pdf-modal-overlay");
+  if(o) o.remove();
+}
+
+// ── QR code SVG inline (path-based, no lib esterna) ────────────────────────
+function buildQRSVG(url) {
+  // Usiamo un QR redirect tramite API Google Charts (carica online) 
+  // oppure generiamo un semplice QR encoded come data URL via qr-lite CDN.
+  // Siccome siamo offline-first, usiamo un approccio con placeholder visivo
+  // che rimanda al sito — il QR reale viene generato via canvas con qrcode-generator.
+  return `<div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(url)}&bgcolor=ffffff&color=1A1A1A&margin=2" width="80" height="80" style="border-radius:6px;border:1px solid #e0e0e0" alt="QR">
+    <div style="font-size:9px;color:#999;letter-spacing:.3px">${url.replace('https://www.','')}</div>
+  </div>`;
+}
+
+function exportPDF(template = "dettagliato") {
+  const tot  = stato.voci.reduce((s,v)=>s+v.ris.costo, 0);
+  const data = new Date().toLocaleDateString("it-IT");
+  const nVoci = stato.voci.length;
+  const nCat  = MACRO_KEYS.filter(mk=>stato.voci.some(v=>v.macro===mk)).length;
+
+  /* ── Righe tabella per categoria ── */
+  let gruppi = "";
+  MACRO_KEYS.forEach(mk => {
+    const vm  = stato.voci.filter(v=>v.macro===mk); if(!vm.length) return;
+    const sub = vm.reduce((s,v)=>s+v.ris.costo, 0);
+    const col = DB[mk].colore;
+    gruppi += `<div style="margin-bottom:22px;page-break-inside:avoid">
+      <div style="background:${col};color:#fff;padding:7px 14px;border-radius:6px 6px 0 0;display:flex;justify-content:space-between;align-items:center">
+        <b style="font-size:12px;letter-spacing:.5px">${mk}</b>
+        <b style="font-size:13px">${eur(sub)}</b>
+      </div>
+      <table width="100%" style="border-collapse:collapse;font-size:11.5px;border:1px solid #e0e0e0;border-top:none">
+        <tr style="background:#f7f7f7">
+          <th style="padding:6px 10px;text-align:left;font-weight:700;border-bottom:1px solid #ddd">Materiale</th>
+          <th style="padding:6px 8px;text-align:center;font-weight:700;border-bottom:1px solid #ddd">Superficie</th>
+          <th style="padding:6px 8px;text-align:center;font-weight:700;border-bottom:1px solid #ddd">Resa</th>
+          <th style="padding:6px 8px;text-align:center;font-weight:700;border-bottom:1px solid #ddd">Confezione</th>
+          <th style="padding:6px 8px;text-align:center;font-weight:700;border-bottom:1px solid #ddd">N°</th>
+          <th style="padding:6px 8px;text-align:center;font-weight:700;border-bottom:1px solid #ddd">Margine</th>
+          <th style="padding:6px 10px;text-align:right;font-weight:700;border-bottom:1px solid #ddd">Costo</th>
+        </tr>
+        ${vm.map((v,i)=>`<tr style="background:${i%2===0?'#fff':'#fafafa'};border-bottom:1px solid #eee">
+          <td style="padding:6px 10px;font-weight:600">${v.mat.nome}</td>
+          <td style="padding:6px 8px;text-align:center;color:#555">${v.sup} ${v.mat.unita}</td>
+          <td style="padding:6px 8px;text-align:center;color:#555">${v.mat.resa} ${v.mat.unitaResa}</td>
+          <td style="padding:6px 8px;text-align:center;color:#555">${v.conf.label}</td>
+          <td style="padding:6px 8px;text-align:center;font-weight:700">${v.ris.sacchi}</td>
+          <td style="padding:6px 8px;text-align:center;color:#B06020">+${v.margine}%</td>
+          <td style="padding:6px 10px;text-align:right;font-weight:800;color:#2E7D4F">${eur(v.ris.costo)}</td>
         </tr>`).join("")}
+        <tr style="background:${col}18;border-top:2px solid ${col}">
+          <td colspan="6" style="padding:7px 10px;font-weight:700;color:${col};font-size:12px">Subtotale ${mk.slice(3)}</td>
+          <td style="padding:7px 10px;text-align:right;font-weight:800;color:${col};font-size:13px">${eur(sub)}</td>
+        </tr>
       </table>
     </div>`;
   });
-  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Preventivo</title>
-    <style>
-      body{font-family:Arial,sans-serif;padding:30px;color:#1A1A1A}
-      @media print{body{padding:10px}}
-      /* Filigrana su ogni pagina */
-      body::after{
-        content:"Calcolatore Edile · D.ESIGN STUDIOS";
-        position:fixed;
-        bottom:48%;left:50%;
-        transform:translateX(-50%) rotate(-35deg);
-        font-size:28px;font-weight:900;
-        color:rgba(13,27,62,0.045);
-        white-space:nowrap;
-        pointer-events:none;
-        z-index:0;
-        letter-spacing:2px;
-      }
-    </style>
-    </head><body>
-    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #1A1A1A;padding-bottom:12px;margin-bottom:20px">
-      <div><h1 style="margin:0;font-size:22px">PREVENTIVO — D.ESIGN STUDIOS</h1><div style="font-size:13px;color:#888">${stato.nomeProg} · ${new Date().toLocaleDateString("it-IT")}</div></div>
-      <div style="text-align:right"><div style="font-size:12px;color:#888">TOTALE PREVENTIVO</div><div style="font-size:26px;font-weight:900;color:#2E7D4F">${eur(tot)}</div></div>
+
+  /* ── Template essenziale ── */
+  let gruppiEssenziale = "";
+  MACRO_KEYS.forEach(mk => {
+    const vm = stato.voci.filter(v=>v.macro===mk); if(!vm.length) return;
+    const sub = vm.reduce((s,v)=>s+v.ris.costo, 0);
+    const col = DB[mk].colore;
+    gruppiEssenziale += `<div style="margin-bottom:18px;page-break-inside:avoid">
+      <div style="background:${col};color:#fff;padding:7px 14px;border-radius:6px 6px 0 0;display:flex;justify-content:space-between;align-items:center">
+        <b style="font-size:12px;letter-spacing:.5px">${mk}</b>
+        <b style="font-size:13px">${eur(sub)}</b>
+      </div>
+      <table width="100%" style="border-collapse:collapse;font-size:12px;border:1px solid #e0e0e0;border-top:none">
+        <tr style="background:#f7f7f7">
+          <th style="padding:7px 12px;text-align:left;font-weight:700;border-bottom:1px solid #ddd">Materiale</th>
+          <th style="padding:7px 10px;text-align:center;font-weight:700;border-bottom:1px solid #ddd">Qtà</th>
+          <th style="padding:7px 10px;text-align:right;font-weight:700;border-bottom:1px solid #ddd">Costo</th>
+        </tr>
+        ${vm.map((v,i)=>`<tr style="background:${i%2===0?'#fff':'#fafafa'};border-bottom:1px solid #eee">
+          <td style="padding:7px 12px;font-weight:600">${v.mat.nome}</td>
+          <td style="padding:7px 10px;text-align:center;color:#555">${v.ris.sacchi}× ${v.conf.label}</td>
+          <td style="padding:7px 10px;text-align:right;font-weight:800;color:#2E7D4F">${eur(v.ris.costo)}</td>
+        </tr>`).join("")}
+        <tr style="background:${col}18;border-top:2px solid ${col}">
+          <td colspan="2" style="padding:7px 12px;font-weight:700;color:${col};font-size:12px">Subtotale ${mk.slice(3)}</td>
+          <td style="padding:7px 10px;text-align:right;font-weight:800;color:${col};font-size:13px">${eur(sub)}</td>
+        </tr>
+      </table>
+    </div>`;
+  });
+
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Preventivo — ${stato.nomeProg}</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Arial,Helvetica,sans-serif;color:#1A1A1A;background:#fff}
+
+  /* ── COPERTINA ── */
+  .cover{
+    width:100%; height:100vh; min-height:297mm;
+    display:flex; flex-direction:column;
+    page-break-after:always;
+    position:relative; overflow:hidden;
+  }
+  .cover-top{
+    background:#8B1A1A;
+    flex:0 0 52%;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative; gap:12px;
+  }
+  .cover-top::after{
+    content:"";
+    position:absolute; bottom:-2px; left:0; right:0; height:48px;
+    background:#fff;
+    clip-path:ellipse(55% 100% at 50% 100%);
+  }
+  .cover-brand-name{
+    font-size:52px; font-weight:900; color:#fff;
+    letter-spacing:-1px; line-height:1;
+    position:relative; z-index:1;
+  }
+  .cover-brand-links{
+    display:flex; gap:24px; align-items:center;
+    position:relative; z-index:1;
+  }
+  .cover-brand-link{
+    font-size:12px; color:rgba(255,255,255,0.65);
+    letter-spacing:.5px; text-decoration:none;
+  }
+  .cover-bottom{
+    flex:1;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:48px 64px;
+  }
+  .cover-label{
+    font-size:10px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color:#8B1A1A; margin-bottom:14px;
+  }
+  .cover-title{
+    font-size:32px; font-weight:900; color:#1A1A1A;
+    letter-spacing:-0.5px; line-height:1.15; margin-bottom:8px;
+    text-transform:uppercase;
+  }
+  .cover-sub{
+    font-size:14px; color:#888; margin-bottom:48px;
+  }
+  .cover-meta{
+    display:flex; gap:40px; flex-wrap:wrap;
+  }
+  .cover-meta-item{
+    display:flex; flex-direction:column; gap:3px;
+  }
+  .cover-meta-key{
+    font-size:9px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; color:#aaa;
+  }
+  .cover-meta-val{
+    font-size:15px; font-weight:800; color:#1A1A1A;
+  }
+  .cover-meta-val.green{ color:#2E7D4F; font-size:22px; }
+  .cover-footer{
+    position:absolute; bottom:32px; left:64px; right:64px;
+    display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid #e8e8e8; padding-top:14px;
+  }
+  .cover-footer-brand{
+    font-size:10px; color:#bbb; letter-spacing:1px; text-transform:uppercase;
+  }
+  .cover-footer-web{
+    font-size:10px; color:#bbb; letter-spacing:.5px;
+  }
+
+  /* ── CONTENUTO ── */
+  .content{ padding:32px 36px; }
+  .content-header{
+    display:flex; justify-content:space-between; align-items:center;
+    border-bottom:2px solid #1A1A1A; padding-bottom:10px; margin-bottom:24px;
+  }
+  .content-header-brand{ font-size:18px; font-weight:900; color:#8B1A1A; letter-spacing:-0.5px; }
+  .content-header-info{ text-align:right; font-size:11px; color:#888; line-height:1.6; }
+  .content-header-info b{ color:#1A1A1A; }
+
+  /* Filigrana */
+  body::after{
+    content:"D.ESIGN STUDIOS";
+    position:fixed; bottom:46%; left:50%;
+    transform:translateX(-50%) rotate(-35deg);
+    font-size:32px; font-weight:900;
+    color:rgba(139,26,26,0.04);
+    white-space:nowrap; pointer-events:none; z-index:0; letter-spacing:3px;
+  }
+
+  /* Totale finale */
+  .total-bar{
+    background:#1A1A1A; color:#fff;
+    padding:16px 20px; border-radius:10px;
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:8px;
+  }
+  .total-bar span:first-child{ font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.45); }
+  .total-bar span:last-child{ font-size:24px; font-weight:900; color:#E8A0A0; letter-spacing:-1px; }
+
+  .disclaimer{ font-size:9.5px; color:#aaa; margin-top:18px; text-align:center; line-height:1.5; }
+
+  @media print{
+    .cover{ page-break-after:always; }
+    @page{ margin:0; }
+    body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head><body>
+
+<!-- ══════════════ COPERTINA ══════════════ -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="cover-brand-name">D.ESIGN STUDIOS</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:3px;text-transform:uppercase;font-weight:500;position:relative;z-index:1;font-style:italic">D.ESIGN SU MISURA, CON STILE E CURA</div>
+    <div class="cover-brand-links" style="margin-top:4px">
+      <span class="cover-brand-link">redstudiodesign.it</span>
+      <span style="color:rgba(255,255,255,0.3);font-size:12px">·</span>
+      <span class="cover-brand-link">@d.esignstudios</span>
     </div>
-    ${gruppi}
-    <div style="background:var(--black, #1A1A1A);color:#fff;padding:14px 18px;border-radius:10px;display:flex;justify-content:space-between;margin-top:12px">
-      <b>TOTALE PREVENTIVO</b><b style="font-size:20px;color:#E8A0A0">${eur(tot)}</b>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-label">Preventivo materiali edili</div>
+    <div class="cover-title">${stato.nomeProg}</div>
+    <div class="cover-sub">Riepilogo materiali e costi stimati</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="cover-meta-key">Data</span>
+        <span class="cover-meta-val">${data}</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-key">Voci</span>
+        <span class="cover-meta-val">${nVoci}</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-key">Categorie</span>
+        <span class="cover-meta-val">${nCat}</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-key">Totale stimato</span>
+        <span class="cover-meta-val green">${eur(tot)}</span>
+      </div>
     </div>
-    <div style="font-size:10px;color:#999;margin-top:20px;text-align:center">I prezzi sono indicativi. Verificare sempre le schede tecniche dei prodotti e i prezzi aggiornati del fornitore.</div>
-    <script>window.onload=()=>window.print()<\/script>
-`;
-  const w=window.open("","_blank","width=900,height=700");
-  if(w){w.document.write(html);w.document.close();}
+  </div>
+  <div class="cover-footer">
+    <span class="cover-footer-brand">D.ESIGN STUDIOS · Napoli</span>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=56x56&data=https%3A%2F%2Fwww.redstudiodesign.it&bgcolor=ffffff&color=1A1A1A&margin=2" width="56" height="56" style="border-radius:4px" alt="QR redstudiodesign.it">
+    </div>
+    <span class="cover-footer-web">redstudiodesign.it</span>
+  </div>
+</div>
+
+<!-- ══════════════ CONTENUTO ══════════════ -->
+<div class="content">
+  <div class="content-header">
+    <div class="content-header-brand">D.ESIGN STUDIOS</div>
+    <div class="content-header-info">
+      <b>${stato.nomeProg}</b><br>
+      Data: ${data} · ${nVoci} voci · ${nCat} categorie<br>
+      redstudiodesign.it
+    </div>
+  </div>
+
+  ${template === 'essenziale' ? gruppiEssenziale : gruppi}
+
+  <div class="total-bar">
+    <span>TOTALE PREVENTIVO</span>
+    <span>${eur(tot)}</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid #eee">
+    <div class="disclaimer" style="text-align:left;margin-top:0">I prezzi sono indicativi. Verificare sempre le schede tecniche dei prodotti e i prezzi aggiornati del fornitore.<br>Preventivo generato con il Calcolatore Materiali D.ESIGN STUDIOS · redstudiodesign.it</div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;margin-left:24px">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=64x64&data=https%3A%2F%2Fwww.redstudiodesign.it&bgcolor=ffffff&color=1A1A1A&margin=2" width="64" height="64" style="border-radius:5px;border:1px solid #e0e0e0" alt="QR">
+      <div style="font-size:8px;color:#bbb">redstudiodesign.it</div>
+    </div>
+  </div>
+</div>
+
+<script>window.onload=()=>window.print()<\/script>
+</body></html>`;
+
+  const w = window.open("","_blank","width=960,height=800");
+  if(w){ w.document.write(html); w.document.close(); }
   else toast("❌ Abilita i popup per la stampa PDF");
 }
 
@@ -2649,6 +3085,9 @@ try {
     }
   });
 } catch(e) {}
+loadFavoriti();
+loadCustom();
+restoreCustom();
 buildSidebar();
 renderContent();
 document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.add("active"));
@@ -2692,14 +3131,12 @@ document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.ad
       </div>
       <div style="display:flex;gap:6px;flex-shrink:0">
         <a href="https://www.instagram.com/d.esignstudios?igsh=MWJieXo2aDNxOTlvNQ%3D%3D&utm_source=qr" target="_blank"
-          style="display:inline-flex;align-items:center;gap:5px;background:rgba(139,26,26,.5);border:1px solid rgba(139,26,26,.6);color:#E8A0A0;border-radius:7px;padding:5px 10px;font-size:11px;font-weight:700;text-decoration:none;white-space:nowrap">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          @d.esign_studios
+          style="display:inline-flex;align-items:center;justify-content:center;background:rgba(139,26,26,.5);border:1px solid rgba(139,26,26,.6);color:#E8A0A0;border-radius:7px;padding:7px;text-decoration:none">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </a>
         <a href="https://www.redstudiodesign.it" target="_blank"
-          style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);border-radius:7px;padding:5px 10px;font-size:11px;font-weight:700;text-decoration:none;white-space:nowrap">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          sito
+          style="display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);border-radius:7px;padding:7px;text-decoration:none">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         </a>
       </div>
     </div>
