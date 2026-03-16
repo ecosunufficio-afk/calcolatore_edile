@@ -770,24 +770,9 @@
 <div id="app">
 <!-- FLOATING TOTAL BADGE (mobile only) -->
 <div id="total-badge">
-  <div style="display:flex;flex-direction:column;gap:5px">
-    <div class="tb-total">
-      <div class="tb-total-label">Totale stima</div>
-      <div class="tb-total-val" id="tb-total-val">€ 0,00</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:8px">
-      <span style="font-size:9px;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:.5px;text-transform:uppercase">D.ESIGN STUDIOS</span>
-      <a href="https://www.instagram.com/d.esignstudios?igsh=MWJieXo2aDNxOTlvNQ%3D%3D&utm_source=qr" target="_blank"
-        style="display:inline-flex;align-items:center;justify-content:center;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s;-webkit-tap-highlight-color:transparent"
-        onmouseenter="this.style.color='rgba(255,255,255,.7)'" onmouseleave="this.style.color='rgba(255,255,255,.35)'">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      </a>
-      <a href="https://www.redstudiodesign.it" target="_blank"
-        style="display:inline-flex;align-items:center;justify-content:center;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s;-webkit-tap-highlight-color:transparent"
-        onmouseenter="this.style.color='rgba(255,255,255,.7)'" onmouseleave="this.style.color='rgba(255,255,255,.35)'">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      </a>
-    </div>
+  <div class="tb-total">
+    <div class="tb-total-label">Totale stima</div>
+    <div class="tb-total-val" id="tb-total-val">€ 0,00</div>
   </div>
   <div class="tb-shortcuts">
     <button class="tb-sc" onclick="setVista('home',null);syncBottomNav('home')" title="Stima">
@@ -2530,7 +2515,8 @@ function renderLavorazioni() {
     ${vociHtml}
     <div class="lav-disclaimer-note" style="margin-top:16px">
       ⚠️ <strong>Solo orientativo.</strong> Prezzi medi nazionali 2025 — non vincolanti né imponibili alle imprese esecutrici.
-    </div>`;
+    </div>
+    ${_mobileLinksHTML()}`;
 }
 
 // ── MACRO ─────────────────────────────────────────────────────────────────
@@ -2560,6 +2546,7 @@ function renderMacro(mk) {
       <span>Subtotale ${mk.slice(3)}</span><span>${eur(tot)}</span>
     </div>`;
   }
+  html += _mobileLinksHTML();
   return html;
 }
 
@@ -3042,10 +3029,9 @@ function renderStorico() {
     </button>
   </div>`;
 
+  html += _mobileLinksHTML();
   return html;
 }
-
-// Rinomina inline dalla pagina Progetti
 function rinominaProgetto(id) {
   const inp = document.getElementById("rename-"+id);
   if(!inp) return;
@@ -4272,6 +4258,7 @@ function renderSearch(q) {
         style="flex-shrink:0;background:${colore};border:none;color:#fff;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;margin-top:2px">＋ Aggiungi</button>
     </div>`;
   });
+  html += _mobileLinksHTML();
   return html;
 }
 
