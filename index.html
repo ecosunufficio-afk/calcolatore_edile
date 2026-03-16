@@ -767,11 +767,11 @@
 <!-- FLOATING TOTAL BADGE (mobile only) -->
 <div id="total-badge">
   <div class="tb-total">
-    <div class="tb-total-label">Totale preventivo</div>
+    <div class="tb-total-label">Totale stima</div>
     <div class="tb-total-val" id="tb-total-val">€ 0,00</div>
   </div>
   <div class="tb-shortcuts">
-    <button class="tb-sc" onclick="setVista('home',null);syncBottomNav('home')" title="Preventivo">
+    <button class="tb-sc" onclick="setVista('home',null);syncBottomNav('home')" title="Stima">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
     </button>
     <button class="tb-sc dark" onclick="bnClickLav(document.getElementById('bn-lav'))" title="Lavorazioni">
@@ -812,7 +812,7 @@
     <div class="sb-label sb-collapsed-hide">Navigazione</div>
     <button class="sb-btn" data-view="home" onclick="setVista('home',this)">
       <span class="sb-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
-      <span class="sb-btn-label sb-collapsed-hide">Preventivo</span>
+      <span class="sb-btn-label sb-collapsed-hide">Stima costi</span>
     </button>
     <button class="sb-btn" data-view="riepilogo" onclick="setVista('riepilogo',this)">
       <span class="sb-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></span>
@@ -942,7 +942,7 @@
   <!-- RIGHT PANEL -->
   <div class="wl-right">
     <div class="wl-right-title">D.Metric PRO</div>
-    <div class="wl-right-heading">Il tuo preventivo,<br>in tre passaggi.</div>
+    <div class="wl-right-heading">Stima i costi,<br>in tre passaggi.</div>
     <div class="wl-steps">
       <div class="wl-step">
         <div class="wl-step-num">1</div>
@@ -961,7 +961,7 @@
       <div class="wl-step">
         <div class="wl-step-num">3</div>
         <div class="wl-step-content">
-          <div class="wl-step-title">Esporta il preventivo</div>
+          <div class="wl-step-title">Esporta la stima</div>
           <div class="wl-step-text">Genera il riepilogo in PDF, Excel o CSV con un solo tap.</div>
         </div>
       </div>
@@ -2105,7 +2105,7 @@ function saveNome() {
   updateTopbar();
 }
 function svuota() {
-  if(!confirm("Svuotare tutte le voci del preventivo?")) return;
+  if(!confirm("Svuotare tutte le voci dalla stima?")) return;
   stato.voci=[]; updateTopbar(); renderContent(); buildSidebar();
 }
 function nuovoProgetto() {
@@ -2183,7 +2183,7 @@ function renderHome() {
   }).join("");
   const lavN = lavCount();
   const lavBadge = lavN>0 ? `<span class="lav-banner-badge">${lavN} voc${lavN===1?'e':'i'}</span>` : `<span class="lav-banner-arrow">→</span>`;
-  return `<div class="page-title">Preventivo materiali</div>
+  return `<div class="page-title">Simulatore costi</div>
     <div class="page-sub">seleziona una categoria</div>
     <div class="macro-grid">${cards}</div>
     <button class="lav-banner" onclick="openLavorazioni()">
@@ -2506,7 +2506,7 @@ function renderMacro(mk) {
       <div style="width:40px;height:40px;color:${cat.colore};display:flex;align-items:center;justify-content:center">${cat.icon}</div>
       <div>
         <div class="page-title" style="margin:0">${mk.slice(3)}</div>
-        <div style="font-size:13px;color:var(--muted)">${Object.keys(cat.sottocategorie).length} sotto-categorie · ${vm.length} voci nel preventivo</div>
+        <div style="font-size:13px;color:var(--muted)">${Object.keys(cat.sottocategorie).length} sotto-categorie · ${vm.length} voci nella stima</div>
       </div>
     </div>
     <button class="btn-primary" style="background:${cat.colore}" onclick="openModal('${mk}',null)">➕ Aggiungi materiale</button>
@@ -2624,7 +2624,7 @@ function renderRiepilogo() {
   let html = `
   <div class="rp-header">
     <div>
-      <div class="page-title" style="margin-bottom:2px">Riepilogo preventivo</div>
+      <div class="page-title" style="margin-bottom:2px">Riepilogo stima costi</div>
       <div style="font-size:12px;color:var(--muted)">${stato.nomeProg} · ${new Date().toLocaleDateString("it-IT")} · <b style="color:var(--black)">${nVoci} ${nVoci===1?"voce":"voci"}</b></div>
     </div>
     <div class="export-row" style="margin:0">
@@ -2638,7 +2638,7 @@ function renderRiepilogo() {
     return html + `
     <div style="text-align:center;padding:70px 20px;border:1.5px dashed var(--border);border-radius:14px;color:var(--muted)">
       <div style="font-size:48px;margin-bottom:14px">📋</div>
-      <div style="font-size:16px;font-weight:700;color:var(--black);margin-bottom:6px">Nessun preventivo ancora</div>
+      <div style="font-size:16px;font-weight:700;color:var(--black);margin-bottom:6px">Nessuna stima ancora</div>
       <div style="font-size:13px">Aggiungi materiali o lavorazioni</div>
     </div>`;
   }
@@ -2861,7 +2861,7 @@ function renderRiepilogo() {
     </div>`:""}
     <div class="totale-box">
       <div>
-        <div style="color:rgba(255,255,255,.4);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">TOTALE PREVENTIVO${stato.sconto>0?" SCONTATO":""}</div>
+        <div style="color:rgba(255,255,255,.4);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">TOTALE STIMA${stato.sconto>0?" SCONTATO":""}</div>
         <div style="color:rgba(255,255,255,.3);font-size:11px">${nVoci} ${nVoci===1?"voce":"voci"} · ${MACRO_KEYS.filter(mk=>stato.voci.some(v=>v.macro===mk)).length} categorie${lavPreventivoVoci.size>0?" · lavorazioni incluse":""}${stato.sconto>0?" · sconto "+stato.sconto+"%":""}</div>
       </div>
       <span style="color:#E8A0A0;font-weight:800;font-size:30px;letter-spacing:-1px">${eur(totFinale)}</span>
@@ -2874,7 +2874,7 @@ function renderRiepilogo() {
 function rimuoviVoceRiepilogo(idx) {
   const v = stato.voci[idx];
   if(!v) return;
-  if(!confirm(`Rimuovere "${v.mat.nome}" dal preventivo?`)) return;
+  if(!confirm(`Rimuovere "${v.mat.nome}" dalla stima?`)) return;
   stato.voci.splice(idx, 1);
   renderContent();
 }
@@ -2895,8 +2895,8 @@ function renderStorico() {
   <div class="proj-new-card" onclick="nuovoProgetto()">
     <div class="proj-new-icon">＋</div>
     <div>
-      <div style="font-weight:700;font-size:14px;color:var(--black)">Nuovo preventivo</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:2px">Crea un preventivo vuoto e inizia ad aggiungere materiali</div>
+      <div style="font-weight:700;font-size:14px;color:var(--black)">Nuova stima</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:2px">Crea una stima vuota e inizia ad aggiungere materiali</div>
     </div>
   </div>`;
 
@@ -2904,8 +2904,8 @@ function renderStorico() {
     html += `
     <div class="proj-empty" style="padding:48px 20px">
       <div class="proj-empty-icon">📁</div>
-      <div class="proj-empty-title">Nessun preventivo salvato</div>
-      <div style="font-size:13px;color:var(--muted);margin-top:4px">Usa il pulsante <b>Salva progetto</b> in basso a sinistra per archiviare il preventivo corrente.</div>
+      <div class="proj-empty-title">Nessuna stima salvata</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">Usa il pulsante <b>Salva progetto</b> in basso a sinistra per archiviare la stima corrente.</div>
     </div>`;
   } else {
     stato.progetti.slice().reverse().forEach(p => {
@@ -2959,10 +2959,10 @@ function renderStorico() {
           <!-- Anteprima materiali -->
           ${p.voci.length ? `
           <div class="proj-preview-title">Materiali inclusi</div>
-          ${preview}${more}` : `<div style="color:var(--muted);font-size:13px;padding:6px 0 10px">Preventivo vuoto.</div>`}
+          ${preview}${more}` : `<div style="color:var(--muted);font-size:13px;padding:6px 0 10px">Stima vuota.</div>`}
 
           <!-- Export singolo preventivo -->
-          <div class="proj-preview-title" style="margin-top:10px">Esporta questo preventivo</div>
+          <div class="proj-preview-title" style="margin-top:10px">Esporta questa stima</div>
           <div class="proj-export-row">
             <button class="proj-export-btn" onclick="exportPDFProgetto(${p.id})">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
@@ -2983,7 +2983,7 @@ function renderStorico() {
             <button class="btn-carica" onclick="caricaProgetto(${p.id})">
               ${isCur
                 ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> Ricarica`
-                : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Apri preventivo`}
+                : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Apri stima`}
             </button>
             <button class="btn-del-confirm" onclick="eliminaProgetto(${p.id})">🗑 Elimina</button>
           </div>
@@ -3094,7 +3094,7 @@ function renderModal() {
   const addBtn = document.getElementById("modal-add");
   addBtn.style.display = mState.passo===3?"":"none";
   addBtn.style.background = cat.colore;
-  addBtn.textContent = mState.editIdx!==null?"✓ Salva modifiche":"✓ Aggiungi al preventivo";
+  addBtn.textContent = mState.editIdx!==null?"✓ Salva modifiche":"✓ Aggiungi alla stima";
   // body
   const body = document.getElementById("modal-body");
   if(mState.passo===1) body.innerHTML = renderModalP1(cat);
@@ -3785,7 +3785,7 @@ function exportPDF(template = "dettagliato") {
     <div style="background:#FFF7ED;border:1px solid #F5D9A8;border-radius:6px;padding:9px 14px;margin-bottom:7px;display:flex;justify-content:space-between;font-size:12px">
       <span style="color:#B06020">Sconto ${stato.sconto}%</span><span style="font-weight:700;color:#B06020">− ${eur(scontoAmt)}</span>
     </div>`:""}
-    <div class="total-bar"><span>TOTALE PREVENTIVO${stato.sconto>0?" SCONTATO":""}</span><span>${eur(totFinale)}</span></div>`;
+    <div class="total-bar"><span>TOTALE STIMA${stato.sconto>0?" SCONTATO":""}</span><span>${eur(totFinale)}</span></div>`;
 
 
   /* ── Righe tabella per categoria ── */
@@ -4303,7 +4303,7 @@ document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.ad
 <!-- BOTTOM NAV MOBILE -->
 <div id="bottom-nav">
   <button class="bn-btn active" id="bn-home" onclick="bnClick('home',this)">
-    <span>⊞</span>Preventivo
+    <span>⊞</span>Stima
   </button>
   <div style="position:relative;flex:1;display:flex">
     <button class="bn-btn" id="bn-macro" onclick="bnShowMacro()" style="width:100%">
