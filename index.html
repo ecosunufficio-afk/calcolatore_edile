@@ -170,11 +170,30 @@
   .hidden{display:none!important}
   .amb-tag{display:inline-flex;align-items:center;gap:4px;background:#EEF4FF;border:1px solid #C8DEFF;color:#1A4A8A;border-radius:20px;font-size:10px;font-weight:700;padding:2px 8px;letter-spacing:.3px;cursor:pointer}
   .amb-tag:hover{background:#D8EAFF}
-  /* mobile search bar — solo visibile su mobile */
-  #mobile-search-bar{display:none;margin-bottom:14px}
-  #mobile-search-bar .msb-inner{display:flex;align-items:center;background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:9px 13px;gap:8px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-  #mobile-search-bar input{flex:1;border:none;background:transparent;font-size:14px;font-family:inherit;outline:none;color:var(--black)}
-  #mobile-search-bar .msb-clear{background:var(--gray2);border:none;color:var(--muted);border-radius:6px;width:26px;height:26px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  /* search overlay mobile */
+  #search-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.6);backdrop-filter:blur(8px)}
+  #search-overlay.open{display:flex;flex-direction:column}
+  .so-header{background:var(--black);padding:14px 16px 12px;display:flex;align-items:center;gap:12px}
+  .so-input-wrap{flex:1;display:flex;align-items:center;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.15);border-radius:12px;padding:11px 14px;gap:0}
+  .so-input-wrap:focus-within{border-color:rgba(255,255,255,.4)}
+  .so-input-wrap input{flex:1;border:none;background:transparent;font-size:16px;font-family:inherit;outline:none;color:#fff;caret-color:var(--red)}
+  .so-input-wrap input::placeholder{color:rgba(255,255,255,.35)}
+  .so-clear{background:rgba(255,255,255,.15);border:none;color:rgba(255,255,255,.7);font-size:13px;font-weight:700;cursor:pointer;width:22px;height:22px;border-radius:50%;display:none;align-items:center;justify-content:center;flex-shrink:0;line-height:1}
+  .so-cancel{background:none;border:none;color:rgba(255,255,255,.6);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;padding:4px 2px;flex-shrink:0}
+  .so-results{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--gray)}
+  .so-empty{padding:56px 28px;text-align:center}
+  .so-empty-icon{font-size:44px;margin-bottom:14px;opacity:.5}
+  .so-empty-title{font-size:17px;font-weight:800;color:var(--black);margin-bottom:6px;letter-spacing:-.3px}
+  .so-empty-sub{font-size:13px;color:var(--muted);line-height:1.5}
+  .so-result-item{display:flex;align-items:center;gap:13px;padding:13px 16px;background:#fff;border-bottom:1px solid var(--gray2);cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .so-result-item:active{background:var(--gray2)}
+  .so-result-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+  .so-result-body{flex:1;min-width:0}
+  .so-result-nome{font-weight:700;font-size:14px;color:var(--black);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .so-result-meta{font-size:11.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .so-result-prezzo{font-size:13px;font-weight:800;color:var(--success);flex-shrink:0}
+  .so-section-label{padding:10px 16px 5px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);background:var(--gray2);border-bottom:1px solid var(--border)}
+  .so-hint{padding:14px 16px;text-align:center;font-size:12px;color:var(--muted);background:var(--gray2)}
   .subtotal-bar{border-radius:10px;padding:13px 20px;display:flex;justify-content:space-between;margin-top:4px;color:#fff}
   .subtotal-bar span:first-child{opacity:.75;font-weight:600;font-size:12.5px}
   .subtotal-bar span:last-child{font-weight:800;font-size:17px;font-family:var(--font-body);letter-spacing:-.3px}
@@ -580,8 +599,6 @@
     /* lav total bar su mobile */
     .lav-total-bar{border-radius:10px}
     .lav-total-bar span:last-child{font-size:18px}
-    /* search mobile — barra visibile in content */
-    #mobile-search-bar{display:block!important}
   }
 
   /* ── MOBILE EXTRA FIXES ── */
@@ -877,14 +894,23 @@
   </div>
 </div>
 
-<!-- MOBILE SEARCH BAR — iniettata via JS in cima al content su mobile -->
-<div id="mobile-search-bar">
-  <div class="msb-inner">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#AAA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input id="mobile-search-input" type="search" placeholder="Cerca materiale…" autocomplete="off"
-      oninput="doSearch(this.value);document.getElementById('search-input')&&(document.getElementById('search-input').value=this.value)"
-      onkeydown="if(event.key==='Escape'){this.value='';doSearch('')}">
-    <button class="msb-clear" id="msb-clear-btn" style="display:none" onclick="clearMobileSearch()">✕</button>
+<!-- SEARCH OVERLAY MOBILE -->
+<div id="search-overlay" onclick="if(event.target===this)closeSearchOverlay()">
+  <div class="so-header">
+    <div class="so-input-wrap">
+      <input id="so-input" type="text" placeholder="Cerca materiale…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        oninput="soSearch(this.value)"
+        onkeydown="if(event.key==='Escape')closeSearchOverlay()">
+      <button class="so-clear" id="so-clear" onclick="document.getElementById('so-input').value='';soSearch('');document.getElementById('so-input').focus()">✕</button>
+    </div>
+    <button class="so-cancel" onclick="closeSearchOverlay()">Annulla</button>
+  </div>
+  <div class="so-results" id="so-results">
+    <div class="so-empty">
+      <div class="so-empty-icon">🧱</div>
+      <div class="so-empty-title">Cerca tra i materiali</div>
+      <div class="so-empty-sub">Digita il nome di un prodotto<br>per trovarlo subito</div>
+    </div>
   </div>
 </div>
 
@@ -3964,43 +3990,142 @@ function bnClick(v, el) {
 
 let _mobileSearchOpen = false;
 function bnToggleSearch(el) {
-  _mobileSearchOpen = !_mobileSearchOpen;
+  openSearchOverlay();
+}
+function openSearchOverlay() {
+  _mobileSearchOpen = true;
   document.querySelectorAll(".bn-btn").forEach(b=>b.classList.remove("active"));
-  if(_mobileSearchOpen) {
-    el.classList.add("active");
-    showMobileSearch();
-  } else {
-    hideMobileSearch();
-    // ripristina active sul pulsante della vista corrente
-    syncBottomNav(stato.vista);
-  }
+  const btn = document.getElementById("bn-search");
+  if(btn) btn.classList.add("active");
+  const ov = document.getElementById("search-overlay");
+  ov.classList.add("open");
+  document.body.style.overflow = "hidden";
+  setTimeout(()=>{ const inp=document.getElementById("so-input"); if(inp){ inp.value=""; inp.focus(); } soSearch(""); }, 80);
 }
-function showMobileSearch() {
-  const bar = document.getElementById("mobile-search-bar");
-  if(!bar) return;
-  // sposta la barra in cima al content
-  const content = document.getElementById("content");
-  if(content && content.parentNode) {
-    content.parentNode.insertBefore(bar, content);
-  }
-  bar.style.display = "block";
-  setTimeout(()=>{ const inp=document.getElementById("mobile-search-input"); if(inp) inp.focus(); }, 80);
-}
-function hideMobileSearch() {
+function closeSearchOverlay() {
   _mobileSearchOpen = false;
-  const bar = document.getElementById("mobile-search-bar");
-  if(bar) bar.style.display = "none";
-  const inp = document.getElementById("mobile-search-input");
-  if(inp) { inp.value = ""; }
-  const si = document.getElementById("search-input");
-  if(si) si.value = "";
-  if(stato.vista.startsWith("search:")) { stato.vista = "home"; renderContent(); }
+  const ov = document.getElementById("search-overlay");
+  ov.classList.remove("open");
+  document.body.style.overflow = "";
+  document.querySelectorAll(".bn-btn").forEach(b=>b.classList.remove("active"));
+  syncBottomNav(stato.vista);
 }
-function clearMobileSearch() {
-  const inp = document.getElementById("mobile-search-input");
-  if(inp) { inp.value = ""; inp.focus(); }
-  doSearch("");
-  document.getElementById("msb-clear-btn").style.display = "none";
+function showMobileSearch() { openSearchOverlay(); }
+function hideMobileSearch() { closeSearchOverlay(); }
+function clearMobileSearch() { closeSearchOverlay(); }
+
+let _soTimer = null;
+function soSearch(q) {
+  clearTimeout(_soTimer);
+  const clr = document.getElementById("so-clear");
+  if(clr) clr.style.display = q ? "flex" : "none";
+  _soTimer = setTimeout(()=>_soRender(q.trim()), 80);
+}
+
+function _soRender(q) {
+  const el = document.getElementById("so-results"); if(!el) return;
+  if(!q) {
+    // mostra suggerimenti caldi: i preferiti + ultimi aggiunti
+    const favIds = [...favoriti].slice(0,8);
+    let favMat = [];
+    for(const mk of MACRO_KEYS){
+      const cat = DB[mk];
+      for(const sk of Object.keys(cat.sottocategorie)){
+        for(const m of cat.sottocategorie[sk]){
+          if(favIds.includes(m.id)) favMat.push({mk,sk,m,colore:cat.colore});
+        }
+      }
+    }
+    if(favMat.length) {
+      el.innerHTML = `<div class="so-section-label">⭐ Preferiti</div>` +
+        favMat.map(r=>_soItem(r)).join("") +
+        `<div class="so-hint">Digita per cercare in tutti i materiali</div>`;
+    } else {
+      el.innerHTML = `<div class="so-empty">
+        <div class="so-empty-icon">🔍</div>
+        <div class="so-empty-title">Cerca tra i materiali</div>
+        <div class="so-empty-sub">Intonaci, pitture, pavimentazioni…</div>
+      </div>`;
+    }
+    return;
+  }
+  const ql = q.toLowerCase();
+  const risultati = [];
+  for(const mk of MACRO_KEYS){
+    const cat = DB[mk];
+    for(const sk of Object.keys(cat.sottocategorie)){
+      for(const m of cat.sottocategorie[sk]){
+        const score = _soScore(m, sk, mk, ql);
+        if(score > 0) risultati.push({mk,sk,m,colore:cat.colore,score});
+      }
+    }
+  }
+  risultati.sort((a,b)=>b.score-a.score);
+  if(!risultati.length){
+    el.innerHTML = `<div class="so-empty">
+      <div class="so-empty-icon">🤷</div>
+      <div class="so-empty-title">Nessun risultato per "${q}"</div>
+      <div class="so-empty-sub">Prova con un termine diverso</div>
+    </div>`;
+    return;
+  }
+  // raggruppa per macro (max 20 risultati totali)
+  const grouped = {};
+  risultati.slice(0,20).forEach(r=>{
+    if(!grouped[r.mk]) grouped[r.mk]=[];
+    grouped[r.mk].push(r);
+  });
+  let html = "";
+  Object.keys(grouped).forEach(mk=>{
+    html += `<div class="so-section-label">${DB[mk].icon} ${mk.slice(3)}</div>`;
+    html += grouped[mk].map(r=>_soItem(r,q)).join("");
+  });
+  html += `<div class="so-hint">${risultati.length > 20 ? `${risultati.length} risultati — affina la ricerca` : `${risultati.length} materiale${risultati.length===1?"":"i"}`}</div>`;
+  el.innerHTML = html;
+}
+
+function _soScore(m, sk, mk, ql) {
+  const nome = m.nome.toLowerCase();
+  const note = (m.note||"").toLowerCase();
+  if(nome.startsWith(ql)) return 100;
+  if(nome.includes(ql)) return 60;
+  const words = ql.split(/\s+/);
+  if(words.length>1 && words.every(w=>nome.includes(w)||note.includes(w))) return 40;
+  if(note.includes(ql)) return 20;
+  if(sk.toLowerCase().includes(ql)) return 10;
+  return 0;
+}
+
+function _soItem(r, q) {
+  const prezzoMin = r.m.confezioni[0].prezzo;
+  const metaStr   = `${r.mk.slice(3)} › ${r.sk}`;
+  const nomeHl    = q ? _soHighlight(r.m.nome, q) : r.m.nome;
+  return `<div class="so-result-item" onclick="soAddMat('${r.mk}','${r.sk}','${r.m.id}')">
+    <div class="so-result-dot" style="background:${r.colore}"></div>
+    <div class="so-result-body">
+      <div class="so-result-nome">${nomeHl}</div>
+      <div class="so-result-meta">${metaStr} · ${r.m.resa} ${r.m.unitaResa}</div>
+    </div>
+    <div class="so-result-prezzo">da ${eur(prezzoMin)}</div>
+  </div>`;
+}
+
+function _soHighlight(text, q) {
+  if(!q) return text;
+  const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+  return text.replace(re, '<mark style="background:#FFF3AA;border-radius:2px;padding:0 1px">$1</mark>');
+}
+
+function soAddMat(mk, sk, matId) {
+  closeSearchOverlay();
+  const cat = DB[mk]; if(!cat) return;
+  const m = cat.sottocategorie[sk]?.find(x=>x.id===matId); if(!m) return;
+  mState = {macro:mk,passo:3,sotto:sk,mat:m,sup:"",margine:10,ci:0,editIdx:null};
+  document.getElementById("modal-header").style.background = cat.colore;
+  document.getElementById("modal-icon").innerHTML = cat.icon;
+  document.getElementById("modal-title").textContent = mk.slice(3);
+  document.getElementById("modal-overlay").style.display = "flex";
+  renderModal();
 }
 function bnShowMacro() {
   const list = document.getElementById("macro-drawer-list");
@@ -4063,14 +4188,6 @@ let _searchTimer = null;
 function doSearch(q) {
   clearTimeout(_searchTimer);
   q = q.trim();
-  // sync both inputs
-  const si = document.getElementById("search-input");
-  const msi = document.getElementById("mobile-search-input");
-  if(si && document.activeElement !== si) si.value = q;
-  if(msi && document.activeElement !== msi) msi.value = q;
-  // show/hide clear btn
-  const clr = document.getElementById("msb-clear-btn");
-  if(clr) clr.style.display = q ? "flex" : "none";
   if(!q) { if(stato.vista.startsWith("search:")) setVista("home",null); return; }
   _searchTimer = setTimeout(()=>{ stato.vista="search:"+q; renderContent(); syncBottomNav("home"); }, 200);
 }
