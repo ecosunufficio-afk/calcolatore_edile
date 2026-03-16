@@ -116,24 +116,30 @@
   #main{flex:1;display:flex;flex-direction:column;min-width:0}
   #topbar{
     background:#fff;border-bottom:1px solid var(--border);
-    padding:0 0 0 28px;
-    display:flex;align-items:stretch;justify-content:space-between;
-    gap:0;min-height:58px;
+    padding:0 20px 0 0;
+    display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;gap:16px;min-height:58px;
   }
-  /* ── TOPBAR ── */
-  .topbar-left{display:flex;align-items:center;flex:1;min-width:0;gap:0}
-  .topbar-proj-wrap{display:flex;flex-direction:column;justify-content:center;gap:1px;flex:1;min-width:0}
-  .topbar-proj-label{font-size:9px;color:var(--muted);font-weight:600;letter-spacing:1.8px;text-transform:uppercase}
-  #proj-name{font-size:15px;font-weight:700;color:var(--black);cursor:pointer;background:none;border:none;font-family:var(--font-body);padding:0;transition:color .15s;display:flex;align-items:center;gap:6px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .topbar-left{display:flex;align-items:center;gap:10px;padding-left:0;min-width:0}
+  .topbar-brand{width:32px;height:32px;background:var(--black);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:800;letter-spacing:-.3px;flex-shrink:0;cursor:default}
+  .topbar-name-wrap{display:flex;flex-direction:column;gap:1px;min-width:0}
+  #proj-name{font-size:13.5px;font-weight:700;color:var(--black);cursor:pointer;background:none;border:none;font-family:var(--font-body);padding:0;transition:color .15s;display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;letter-spacing:.1px}
   #proj-name:hover{color:var(--red)}
-  #proj-name .edit-pen{font-size:11px;color:var(--muted);opacity:.5;flex-shrink:0}
-  #proj-name-input{font-size:15px;font-weight:700;color:var(--black);border:none;border-bottom:2px solid var(--red);outline:none;font-family:var(--font-body);background:transparent;min-width:0;width:100%;max-width:260px}
-  .topbar-right{display:flex;align-items:stretch;flex-shrink:0}
-  .topbar-stat{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;padding:0 18px;border-left:1px solid var(--border);min-height:100%}
-  .topbar-stat-label{font-size:9px;color:var(--muted);font-weight:600;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:1px}
-  .topbar-count{font-size:18px;font-weight:700;color:var(--black)}
+  #proj-name .edit-pen{font-size:10px;color:var(--muted);opacity:.4;flex-shrink:0}
+  #proj-name-input{font-size:13.5px;font-weight:700;color:var(--black);border:none;border-bottom:2px solid var(--red);outline:none;font-family:var(--font-body);background:transparent;min-width:0;width:100%;max-width:220px}
+  .topbar-voci-pill{background:var(--gray2);border:1px solid var(--border);color:var(--muted);border-radius:20px;font-size:10px;font-weight:700;padding:2px 8px;white-space:nowrap;letter-spacing:.2px}
+  /* center search */
+  .topbar-center{display:flex;align-items:center;justify-content:center}
+  .topbar-search{display:flex;align-items:center;background:var(--gray2);border:1.5px solid var(--border);border-radius:9px;padding:7px 13px;gap:8px;width:240px;transition:border-color .15s,width .2s}
+  .topbar-search:focus-within{border-color:var(--red);width:280px}
+  .topbar-search input{flex:1;border:none;background:transparent;font-size:13px;font-family:inherit;outline:none;color:var(--black)}
+  /* right */
+  .topbar-right{display:flex;align-items:center;justify-content:flex-end;gap:12px}
+  .topbar-total-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:0}
+  .topbar-total-label{font-size:8px;color:var(--muted);font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
   .topbar-total{font-size:22px;font-weight:800;color:var(--success);letter-spacing:-.5px;line-height:1}
-  .topbar-actions{display:flex;align-items:center;gap:6px;padding:0 16px;border-left:1px solid var(--border)}
+  .topbar-save-btn{background:var(--red);border:none;color:#fff;border-radius:8px;padding:9px 16px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:var(--font-body);display:flex;align-items:center;gap:6px;transition:opacity .15s;white-space:nowrap;flex-shrink:0}
+  .topbar-save-btn:hover{opacity:.88}
   .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:6px 12px;font-size:11px;cursor:pointer;font-family:var(--font-body);font-weight:600;transition:all .15s;letter-spacing:.3px;white-space:nowrap}
   .btn-ghost:hover{background:var(--gray2);color:var(--black);border-color:var(--black)}
 
@@ -537,10 +543,9 @@
     #sidebar{display:none!important}
     #bottom-nav{display:flex!important}
     #total-badge{display:flex!important}
-    #app{flex-direction:column;padding-bottom:62px;padding-top:56px}
+    #app{flex-direction:column;padding-bottom:62px;padding-top:52px}
     #main{min-width:0;width:100%;overflow-x:hidden}
     #footer-copy{display:none}
-    /* topbar nascosta su mobile — sostituita dal badge */
     #topbar{display:none!important}
     /* content */
     #content{padding:14px 12px 20px}
@@ -717,28 +722,22 @@
   /* ── FLOATING TOTAL BADGE (mobile) ── */
   #total-badge{
     display:none;position:fixed;top:0;left:0;right:0;z-index:199;
-    background:var(--black);color:#fff;
-    padding:10px 14px 10px;
-    padding-top:calc(10px + env(safe-area-inset-top,0px));
-    display:none;align-items:center;justify-content:space-between;gap:10px;
-    box-shadow:0 2px 12px rgba(0,0,0,.25);
-    border-bottom:1px solid rgba(255,255,255,.06);
+    background:var(--black);
+    padding:0 16px;
+    padding-top:env(safe-area-inset-top,0px);
+    min-height:52px;
+    align-items:center;justify-content:space-between;gap:12px;
+    border-bottom:1px solid rgba(255,255,255,.07);
   }
   #total-badge.visible{display:flex}
-  .tb-total{display:flex;flex-direction:column;gap:0}
-  .tb-total-label{font-size:8px;color:rgba(255,255,255,.35);font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+  /* nome stima mobile */
+  .tb-name{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+  .tb-name-label{font-size:8px;color:rgba(255,255,255,.3);font-weight:700;letter-spacing:1.8px;text-transform:uppercase}
+  .tb-name-val{font-size:13px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  /* totale mobile */
+  .tb-total-right{display:flex;flex-direction:column;align-items:flex-end;gap:1px;flex-shrink:0}
+  .tb-total-label{font-size:8px;color:rgba(255,255,255,.3);font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
   .tb-total-val{font-size:20px;font-weight:900;color:#E8A0A0;letter-spacing:-.5px;line-height:1}
-  .tb-shortcuts{display:flex;gap:6px;align-items:center}
-  .tb-sc{
-    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
-    color:rgba(255,255,255,.7);border-radius:8px;padding:6px 10px;
-    font-size:11px;font-weight:700;cursor:pointer;font-family:var(--font-body);
-    white-space:nowrap;display:flex;align-items:center;gap:5px;
-    transition:background .15s;-webkit-tap-highlight-color:transparent;
-  }
-  .tb-sc:active{background:rgba(255,255,255,.15)}
-  .tb-sc.red{background:rgba(139,26,26,.5);border-color:rgba(139,26,26,.6);color:#FFB8B8}
-  .tb-sc.dark{background:rgba(58,58,58,.7);border-color:rgba(58,58,58,.8);color:#C8C4BE}
 
   /* ── PDF LAVORAZIONI ── */
   .lav-pdf-btn{
@@ -768,29 +767,15 @@
 </head>
 <body>
 <div id="app">
-<!-- FLOATING TOTAL BADGE (mobile only) -->
+<!-- MOBILE TOPBAR -->
 <div id="total-badge">
-  <div class="tb-total">
-    <div class="tb-total-label">Totale stima</div>
-    <div class="tb-total-val" id="tb-total-val">€ 0,00</div>
+  <div class="tb-name">
+    <div class="tb-name-label">D.Metric PRO</div>
+    <div class="tb-name-val" id="tb-proj-name">Stima senza nome</div>
   </div>
-  <div class="tb-shortcuts">
-    <button class="tb-sc" onclick="setVista('home',null);syncBottomNav('home')" title="Stima">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-    </button>
-    <button class="tb-sc dark" onclick="bnClickLav(document.getElementById('bn-lav'))" title="Lavorazioni">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-    </button>
-    <button class="tb-sc red" onclick="setVista('riepilogo',null);syncBottomNav('riepilogo')" title="Riepilogo">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-      Riepilogo
-    </button>
-    <button class="tb-sc" onclick="setVista('storico',null);syncBottomNav('storico')" title="Progetti">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-    </button>
-    <button class="tb-sc" onclick="salvaProgetto()" title="Salva">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-    </button>
+  <div class="tb-total-right">
+    <div class="tb-total-label">Totale</div>
+    <div class="tb-total-val" id="tb-total-val">€ 0,00</div>
   </div>
 </div>
   <div id="sidebar">
@@ -824,7 +809,7 @@
     </button>
     <button class="sb-btn" data-view="storico" onclick="setVista('storico',this)">
       <span class="sb-btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
-      <span class="sb-btn-label sb-collapsed-hide">Progetti</span>
+      <span class="sb-btn-label sb-collapsed-hide">Le mie stime</span>
     </button>
 
     <div class="sb-divider"></div>
@@ -857,41 +842,37 @@
 
   <div id="main">
     <div id="topbar">
-      <div class="topbar-left">
-        <div class="topbar-proj-wrap">
-          <div class="topbar-proj-label">Progetto</div>
+      <!-- LEFT: brand + nome stima -->
+      <div class="topbar-left" style="padding-left:20px">
+        <div class="topbar-brand">DS</div>
+        <div class="topbar-name-wrap">
           <button id="proj-name" onclick="editNome()">
-            <span id="proj-name-text">Nuovo Progetto</span>
+            <span id="proj-name-text">Stima senza nome</span>
             <span class="edit-pen">✎</span>
           </button>
           <input id="proj-name-input" style="display:none" onblur="saveNome()" onkeydown="if(event.key==='Enter')saveNome()">
         </div>
-        <!-- RICERCA GLOBALE -->
-        <div style="margin-left:20px;flex-shrink:0">
-          <div style="display:flex;align-items:center;background:var(--gray2);border:1.5px solid var(--border);border-radius:8px;padding:6px 11px;gap:7px">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#AAA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input id="search-input" type="text" placeholder="Cerca materiale…"
-              style="border:none;background:transparent;font-size:12.5px;font-family:inherit;outline:none;color:var(--black);width:150px"
-              oninput="doSearch(this.value)"
-              onkeydown="if(event.key==='Escape'){this.value='';doSearch('')}">
-          </div>
+        <span class="topbar-voci-pill" id="topbar-count-pill">0 voci</span>
+      </div>
+      <!-- CENTER: ricerca -->
+      <div class="topbar-center">
+        <div class="topbar-search">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#AAA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="search-input" type="text" placeholder="Cerca materiale…"
+            oninput="doSearch(this.value)"
+            onkeydown="if(event.key==='Escape'){this.value='';doSearch('')}">
         </div>
       </div>
+      <!-- RIGHT: totale + salva -->
       <div class="topbar-right">
-        <div class="topbar-stat" id="topbar-stat-voci">
-          <div class="topbar-stat-label">Voci</div>
-          <span class="topbar-count" id="topbar-count">0</span>
-        </div>
-        <div class="topbar-stat">
-          <div class="topbar-stat-label">Totale</div>
+        <div class="topbar-total-wrap">
+          <span class="topbar-total-label">Totale</span>
           <span class="topbar-total" id="topbar-total">€ 0,00</span>
         </div>
-        <div class="topbar-actions">
-          <button class="btn-ghost" onclick="setVista('storico',null)" title="Gestisci preventivi" style="display:flex;align-items:center;gap:6px">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-            Progetti
-          </button>
-        </div>
+        <button class="topbar-save-btn" onclick="salvaProgetto()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Salva
+        </button>
       </div>
     </div>
     <div id="content"></div>
@@ -2000,6 +1981,16 @@ function resaBadgeHTML(m, colore) {
 // ═══════════════════════════════════════════════════════════════════════════
 // DATABASE JSON (localStorage come simulazione file locale)
 // ═══════════════════════════════════════════════════════════════════════════
+let _toastTimer = null;
+function toast(msg) {
+  const el = document.getElementById("toast");
+  if(!el) return;
+  el.textContent = msg;
+  el.style.display = "block";
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => { el.style.display = "none"; }, 2800);
+}
+
 function dbLoad() {
   try { const d = localStorage.getItem("ce_db"); if(d) stato.progetti = JSON.parse(d).preventivi||[]; }
   catch(e){}
@@ -2062,8 +2053,7 @@ function syncBottomNav(v) {
   document.querySelectorAll(".bn-btn").forEach(b=>b.classList.remove("active"));
   if(v==="home") { const el=document.getElementById("bn-home"); if(el) el.classList.add("active"); }
   else if(v==="riepilogo") { const el=document.getElementById("bn-riepilogo"); if(el) el.classList.add("active"); }
-  else if(v==="storico") { const el=document.getElementById("bn-storico"); if(el) el.classList.add("active"); }
-  else if(v==="lavorazioni"||v.startsWith("lav-cat:")) { const el=document.getElementById("bn-lav"); if(el) el.classList.add("active"); }
+  else if(v==="lavorazioni") { const el=document.getElementById("bn-lav"); if(el) el.classList.add("active"); }
   else if(v.startsWith("macro:")) { const el=document.getElementById("bn-macro"); if(el) el.classList.add("active"); }
 }
 function setLavCat(cat) {
@@ -2088,38 +2078,52 @@ function updateTopbar() {
   const lavTot = lavTotale();
   const totConLav = tot + lavTot;
   const n = stato.voci.length;
-  // Topbar
-  document.getElementById("topbar-count").textContent = n;
-  document.getElementById("topbar-total").textContent = eur(totConLav);
+  const displayNome = stato.nomeProg || "Stima senza nome";
+
+  // Desktop topbar
   const pnt = document.getElementById("proj-name-text");
-  if(pnt) pnt.textContent = stato.nomeProg;
+  if(pnt) pnt.textContent = displayNome;
+  const totEl = document.getElementById("topbar-total");
+  if(totEl) totEl.textContent = eur(totConLav);
+  const pill = document.getElementById("topbar-count-pill");
+  if(pill) pill.textContent = n + (n===1?" voce":" voci");
+
   // Sidebar project box
   const sbn = document.getElementById("sb-proj-name-text");
-  if(sbn) sbn.textContent = stato.nomeProg;
+  if(sbn) sbn.textContent = displayNome;
   const sbc = document.getElementById("sb-proj-count");
   if(sbc) sbc.textContent = n + (n===1?" voce":" voci");
   const sbt = document.getElementById("sb-proj-total");
   if(sbt) sbt.textContent = eur(totConLav);
+
   // FAB salva: visibile se ci sono voci
   const fab = document.getElementById("fab-salva");
   if(fab) fab.classList.toggle("visible", n > 0);
-  // Floating total badge (mobile)
+
+  // Mobile topbar — sempre visibile su mobile
   const tbVal = document.getElementById("tb-total-val");
   if(tbVal) tbVal.textContent = eur(totConLav);
+  const tbName = document.getElementById("tb-proj-name");
+  if(tbName) tbName.textContent = displayNome;
   const badge = document.getElementById("total-badge");
-  if(badge) badge.classList.toggle("visible", n > 0 || lavPreventivoVoci.size > 0);
+  if(badge) badge.classList.add("visible");
+
   // Bottom nav lav count
   const cnEl = document.getElementById("bn-lav-count");
   if(cnEl) { const lc=lavCount(); cnEl.style.display=lc>0?"inline":"none"; cnEl.textContent=lc; }
 }
 function editNome() {
-  const btn = document.getElementById("proj-name");
-  const inp = document.getElementById("proj-name-input");
-  btn.style.display="none"; inp.style.display=""; inp.value=stato.nomeProg; inp.focus();
+  // Se il progetto è già salvato → modale per rinominare
+  if(stato.progId) {
+    _openNomeModal();
+    return;
+  }
+  // Non ancora salvato → niente da rinominare, invita a salvare
+  toast("💡 Salva prima la stima per darle un nome");
 }
 function saveNome() {
   const inp = document.getElementById("proj-name-input");
-  stato.nomeProg = inp.value.trim() || "Nuovo Progetto";
+  stato.nomeProg = inp.value.trim() || stato.nomeProg;
   inp.style.display="none";
   document.getElementById("proj-name").style.display="";
   updateTopbar();
@@ -2129,8 +2133,9 @@ function svuota() {
   stato.voci=[]; updateTopbar(); renderContent(); buildSidebar();
 }
 function nuovoProgetto() {
-  if(stato.voci.length>0 && !confirm("Creare un nuovo preventivo? Le voci non salvate andranno perse.")) return;
-  stato.voci=[]; stato.nomeProg="Nuovo Progetto"; stato.progId=null;
+  if(stato.voci.length>0 && !confirm("Creare una nuova stima? Le voci correnti andranno perse.")) return;
+  stato.voci=[]; stato.nomeProg=""; stato.progId=null;
+  stato.cliente={nome:"",indirizzo:"",tel:"",email:""}; stato.sconto=0; stato.ambienti=[];
   updateTopbar(); setVista("home",null);
   document.querySelectorAll(".sb-btn").forEach(b=>{b.classList.remove("active"); if(b.dataset.view==="home") b.classList.add("active");});
 }
@@ -2139,12 +2144,63 @@ function nuovoProgetto() {
 // PROGETTO SALVA/CARICA
 // ═══════════════════════════════════════════════════════════════════════════
 function salvaProgetto() {
+  if(stato.voci.length === 0) { toast("⚠️ Aggiungi almeno un materiale prima di salvare"); return; }
+  // Se il progetto ha già un nome/id → aggiorna silenziosamente
+  if(stato.progId && stato.nomeProg) {
+    _doSave(); return;
+  }
+  // Prima volta → modale per il nome
+  _openNomeModal();
+}
+
+function _openNomeModal() {
+  const existing = document.getElementById("nome-modal-overlay");
+  if(existing) existing.remove();
+  const ov = document.createElement("div");
+  ov.id = "nome-modal-overlay";
+  ov.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)";
+  ov.onclick = e => { if(e.target===ov) ov.remove(); };
+  ov.innerHTML = `
+    <div style="background:#fff;border-radius:18px;max-width:420px;width:100%;padding:32px 28px;box-shadow:0 24px 64px rgba(0,0,0,.25)">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Salva stima</div>
+      <div style="font-size:20px;font-weight:800;color:var(--black);margin-bottom:4px;letter-spacing:-.3px">Dai un nome a questa stima</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.5">Potrai ritrovarla e modificarla in qualsiasi momento dalla sezione Progetti.</div>
+      <label style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px">Nome progetto</label>
+      <input id="nome-modal-input" type="text" placeholder="es. Ristrutturazione bagno 2025"
+        style="width:100%;border:2px solid var(--border);border-radius:10px;padding:13px 16px;font-size:16px;font-family:inherit;outline:none;color:var(--black);background:var(--gray);transition:border-color .15s;box-sizing:border-box"
+        onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'"
+        onkeydown="if(event.key==='Enter')_confirmNome()">
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button onclick="document.getElementById('nome-modal-overlay').remove()"
+          style="flex:1;padding:13px;background:var(--gray2);border:none;border-radius:10px;font-family:inherit;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer">Annulla</button>
+        <button onclick="_confirmNome()"
+          style="flex:2;padding:13px;background:var(--red);border:none;border-radius:10px;font-family:inherit;font-size:14px;font-weight:700;color:#fff;cursor:pointer;transition:opacity .15s">
+          💾 Salva stima
+        </button>
+      </div>
+    </div>`;
+  document.body.appendChild(ov);
+  setTimeout(() => { const inp = document.getElementById("nome-modal-input"); if(inp){ inp.value = stato.nomeProg||""; inp.focus(); inp.select(); } }, 60);
+}
+
+function _confirmNome() {
+  const inp = document.getElementById("nome-modal-input");
+  const nome = inp ? inp.value.trim() : "";
+  if(!nome) { if(inp){ inp.style.borderColor="var(--red)"; inp.focus(); } return; }
+  stato.nomeProg = nome;
+  document.getElementById("nome-modal-overlay")?.remove();
+  _doSave();
+}
+
+function _doSave() {
   const p = { id:stato.progId||Date.now(), nome:stato.nomeProg, voci:stato.voci, data:new Date().toLocaleDateString("it-IT"),
-    cliente:stato.cliente, sconto:stato.sconto, ambienti:stato.ambienti };
+    cliente:stato.cliente, sconto:stato.sconto, ambienti:stato.ambienti,
+    lavQty: {...lavQty}, lavPreventivoVoci: [...lavPreventivoVoci] };
   if(stato.progId) { stato.progetti = stato.progetti.map(x=>x.id===stato.progId?p:x); }
   else { stato.progetti.push(p); stato.progId = p.id; }
   dbSave();
-  toast("✅ Progetto salvato!");
+  updateTopbar();
+  toast("✅ Stima salvata — \"" + stato.nomeProg + "\"");
 }
 function caricaProgetto(id) {
   id = Number(id);
@@ -2154,6 +2210,8 @@ function caricaProgetto(id) {
   stato.cliente  = p.cliente  ? JSON.parse(JSON.stringify(p.cliente))  : { nome:"", indirizzo:"", tel:"", email:"" };
   stato.sconto   = p.sconto   || 0;
   stato.ambienti = p.ambienti ? [...p.ambienti] : [];
+  lavQty = p.lavQty ? {...p.lavQty} : {};
+  lavPreventivoVoci = new Set(p.lavPreventivoVoci || []);
   updateTopbar(); setVista("home",null);
   document.querySelectorAll(".sb-btn").forEach(b=>{b.classList.remove("active"); if(b.dataset.view==="home") b.classList.add("active");});
 }
@@ -2182,11 +2240,11 @@ function renderContent() {
   const v = stato.vista;
   if(v==="home") el.innerHTML = renderHome();
   else if(v==="lavorazioni") el.innerHTML = renderLavorazioni();
-  else if(v.startsWith("lav-cat:")) el.innerHTML = renderLavCat(v.slice(8));
   else if(v==="riepilogo") el.innerHTML = renderRiepilogo();
   else if(v==="storico") el.innerHTML = renderStorico();
   else if(v.startsWith("macro:")) el.innerHTML = renderMacro(v.slice(6));
   else if(v.startsWith("search:")) el.innerHTML = renderSearch(v.slice(7));
+  else if(v.startsWith("lav-cat:")) { stato.vista="lavorazioni"; el.innerHTML = renderLavorazioni(); }
   updateTopbar(); buildSidebar();
 }
 
@@ -2644,16 +2702,32 @@ function renderRiepilogo() {
   const tot = stato.voci.reduce((s,v)=>s+v.ris.costo,0);
   const nVoci = stato.voci.length;
   const imponibile = tot + lavTotale();
+  const nomeDisplay = stato.nomeProg || "Stima senza nome";
+  const isSaved = !!stato.progId;
   let html = `
   <div class="rp-header">
     <div>
       <div class="page-title" style="margin-bottom:2px">Riepilogo stima costi</div>
-      <div style="font-size:12px;color:var(--muted)">${stato.nomeProg} · ${new Date().toLocaleDateString("it-IT")} · <b style="color:var(--black)">${nVoci} ${nVoci===1?"voce":"voci"}</b></div>
+      <div style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <span>${nomeDisplay} · ${new Date().toLocaleDateString("it-IT")} · <b style="color:var(--black)">${nVoci} ${nVoci===1?"voce":"voci"}</b></span>
+        ${isSaved?`<span style="background:#E8F5ED;color:#2E7D4F;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;letter-spacing:.3px">✓ salvata</span>`:`<span style="background:#FEF9EC;color:#A07020;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;letter-spacing:.3px">non salvata</span>`}
+      </div>
     </div>
-    <div class="export-row" style="margin:0">
-      <button class="btn-export btn-pdf" onclick="openPDFModal()">🖨️ PDF</button>
-      <button class="btn-export btn-xlsx" onclick="exportXLSX()">📊 Excel</button>
-      <button class="btn-export btn-csv" onclick="exportCSV()">📄 CSV</button>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="export-row" style="margin:0">
+        <button class="btn-export btn-pdf" onclick="openPDFModal()">🖨️ PDF</button>
+        <button class="btn-export btn-xlsx" onclick="exportXLSX()">📊 Excel</button>
+        <button class="btn-export btn-csv" onclick="exportCSV()">📄 CSV</button>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button onclick="salvaProgetto()" style="background:var(--red);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:5px">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          ${isSaved?"Aggiorna stima":"Salva stima"}
+        </button>
+        <button onclick="setVista('storico',null)" style="background:var(--gray2);border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">
+          Le mie stime
+        </button>
+      </div>
     </div>
   </div>`;
 
@@ -2770,7 +2844,13 @@ function renderRiepilogo() {
       <span style="font-size:11px;font-weight:700;color:#3A3A3A;letter-spacing:.5px;text-transform:uppercase">Subtotale Lavorazioni</span>
       <span style="font-weight:800;font-size:15px;color:#3A3A3A">${eur(lavTot)}</span>
     </div>
-    <div style="font-size:10px;color:#aaa;padding:8px 4px;line-height:1.5">⚠️ Prezzi indicativi — non vincolanti né imponibili alle imprese esecutrici.</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 4px">
+      <div style="font-size:10px;color:#aaa;line-height:1.5">⚠️ Prezzi indicativi — non vincolanti né imponibili.</div>
+      <button onclick="exportLavPDF()" style="background:#3A3A3A;border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;flex-shrink:0;white-space:nowrap">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Stampa lavorazioni
+      </button>
+    </div>
     </div>`;
   }
 
@@ -2910,26 +2990,21 @@ function renderStorico() {
   let html = `
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:22px">
     <div>
-      <div class="page-title" style="margin-bottom:2px">Progetti</div>
-      <div style="font-size:12px;color:var(--muted)">${n} preventiv${n===1?"o":"i"} salvat${n===1?"o":"i"}</div>
+      <div class="page-title" style="margin-bottom:2px">Le mie stime</div>
+      <div style="font-size:12px;color:var(--muted)">${n} stima${n===1?"":"e"} salvata${n===1?"":"e"}</div>
     </div>
-  </div>
-
-  <!-- Card: Nuovo preventivo -->
-  <div class="proj-new-card" onclick="nuovoProgetto()">
-    <div class="proj-new-icon">＋</div>
-    <div>
-      <div style="font-weight:700;font-size:14px;color:var(--black)">Nuova stima</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:2px">Crea una stima vuota e inizia ad aggiungere materiali</div>
-    </div>
+    <button onclick="nuovoProgetto()" style="background:var(--red);border:none;color:#fff;border-radius:9px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Nuova stima
+    </button>
   </div>`;
 
   if(n === 0) {
     html += `
-    <div class="proj-empty" style="padding:48px 20px">
+    <div class="proj-empty" style="padding:60px 20px">
       <div class="proj-empty-icon">📁</div>
       <div class="proj-empty-title">Nessuna stima salvata</div>
-      <div style="font-size:13px;color:var(--muted);margin-top:4px">Usa il pulsante <b>Salva progetto</b> in basso a sinistra per archiviare la stima corrente.</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6">Aggiungi materiali alla stima, poi premi <b>Salva stima</b> nel Riepilogo per archiviarla qui.</div>
     </div>`;
   } else {
     stato.progetti.slice().reverse().forEach(p => {
