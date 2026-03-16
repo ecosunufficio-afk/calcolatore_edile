@@ -770,9 +770,24 @@
 <div id="app">
 <!-- FLOATING TOTAL BADGE (mobile only) -->
 <div id="total-badge">
-  <div class="tb-total">
-    <div class="tb-total-label">Totale stima</div>
-    <div class="tb-total-val" id="tb-total-val">€ 0,00</div>
+  <div style="display:flex;flex-direction:column;gap:5px">
+    <div class="tb-total">
+      <div class="tb-total-label">Totale stima</div>
+      <div class="tb-total-val" id="tb-total-val">€ 0,00</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="font-size:9px;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:.5px;text-transform:uppercase">D.ESIGN STUDIOS</span>
+      <a href="https://www.instagram.com/d.esignstudios?igsh=MWJieXo2aDNxOTlvNQ%3D%3D&utm_source=qr" target="_blank"
+        style="display:inline-flex;align-items:center;justify-content:center;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s;-webkit-tap-highlight-color:transparent"
+        onmouseenter="this.style.color='rgba(255,255,255,.7)'" onmouseleave="this.style.color='rgba(255,255,255,.35)'">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.redstudiodesign.it" target="_blank"
+        style="display:inline-flex;align-items:center;justify-content:center;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s;-webkit-tap-highlight-color:transparent"
+        onmouseenter="this.style.color='rgba(255,255,255,.7)'" onmouseleave="this.style.color='rgba(255,255,255,.35)'">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </a>
+    </div>
   </div>
   <div class="tb-shortcuts">
     <button class="tb-sc" onclick="setVista('home',null);syncBottomNav('home')" title="Stima">
@@ -1929,6 +1944,22 @@ function calcola(sup, resa, margine, conf) {
   return { fabbisogno:fab, sacchi, totKg:sacchi*conf.kg, costo:sacchi*conf.prezzo };
 }
 const eur = n => new Intl.NumberFormat("it-IT",{style:"currency",currency:"EUR"}).format(n||0);
+
+function _mobileLinksHTML() {
+  return `<div style="display:flex;align-items:center;justify-content:center;gap:16px;padding:18px 0 4px;border-top:1px solid var(--border)">
+    <a href="https://www.instagram.com/d.esignstudios?igsh=MWJieXo2aDNxOTlvNQ%3D%3D&utm_source=qr" target="_blank"
+      style="display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:11px;font-weight:600;font-family:inherit;-webkit-tap-highlight-color:transparent">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      @d.esignstudios
+    </a>
+    <span style="color:var(--border)">·</span>
+    <a href="https://www.redstudiodesign.it" target="_blank"
+      style="display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:11px;font-weight:600;font-family:inherit;-webkit-tap-highlight-color:transparent">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      redstudiodesign.it
+    </a>
+  </div>`;
+}
 const toN = v => parseFloat(v)||0;
 
 // ── Resa leggibile: traduce i valori tecnici in frasi per neofiti ──────────
@@ -2199,7 +2230,8 @@ function renderHome() {
         </div>
       </div>
       ${lavBadge}
-    </button>`;
+    </button>
+    ${_mobileLinksHTML()}`;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -2870,7 +2902,8 @@ function renderRiepilogo() {
       </div>
       <span style="color:#E8A0A0;font-weight:800;font-size:30px;letter-spacing:-1px">${eur(totFinale)}</span>
     </div>
-  </div>`;
+  </div>
+  ${_mobileLinksHTML()}`;
 
   return html;
 }
@@ -4309,7 +4342,7 @@ document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.ad
 <!-- BOTTOM NAV MOBILE -->
 <div id="bottom-nav">
   <button class="bn-btn active" id="bn-home" onclick="bnClick('home',this)">
-    <span>⊞</span>Stima
+    <span>⊞</span>Materiali
   </button>
   <button class="bn-btn" id="bn-search" onclick="bnToggleSearch(this)">
     <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
