@@ -164,6 +164,17 @@
   .btn-edit:hover{background:var(--border)}
   .btn-del{background:#FEF2F2;border:1px solid rgba(139,26,26,.15);color:var(--red);border-radius:6px;padding:4px 11px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all .15s}
   .btn-del:hover{background:#fde8e8}
+  .drag-handle{cursor:grab;color:#C0B8B0;font-size:16px;padding:2px 4px 2px 0;letter-spacing:1px;flex-shrink:0;margin-top:2px;user-select:none;-webkit-user-select:none}
+  .drag-handle:active{cursor:grabbing}
+  .voce-card.drag-over{border-top:2.5px dashed var(--red)!important;background:#FDF5F5}
+  .hidden{display:none!important}
+  .amb-tag{display:inline-flex;align-items:center;gap:4px;background:#EEF4FF;border:1px solid #C8DEFF;color:#1A4A8A;border-radius:20px;font-size:10px;font-weight:700;padding:2px 8px;letter-spacing:.3px;cursor:pointer}
+  .amb-tag:hover{background:#D8EAFF}
+  /* mobile search bar — solo visibile su mobile */
+  #mobile-search-bar{display:none;margin-bottom:14px}
+  #mobile-search-bar .msb-inner{display:flex;align-items:center;background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:9px 13px;gap:8px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+  #mobile-search-bar input{flex:1;border:none;background:transparent;font-size:14px;font-family:inherit;outline:none;color:var(--black)}
+  #mobile-search-bar .msb-clear{background:var(--gray2);border:none;color:var(--muted);border-radius:6px;width:26px;height:26px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   .subtotal-bar{border-radius:10px;padding:13px 20px;display:flex;justify-content:space-between;margin-top:4px;color:#fff}
   .subtotal-bar span:first-child{opacity:.75;font-weight:600;font-size:12.5px}
   .subtotal-bar span:last-child{font-weight:800;font-size:17px;font-family:var(--font-body);letter-spacing:-.3px}
@@ -506,7 +517,7 @@
     #app{flex-direction:column;padding-bottom:62px;padding-top:56px}
     #main{min-width:0;width:100%;overflow-x:hidden}
     #footer-copy{display:none}
-    /* topbar mobile — hidden, replaced by badge */
+    /* topbar nascosta su mobile — sostituita dal badge */
     #topbar{display:none!important}
     /* content */
     #content{padding:14px 12px 20px}
@@ -518,10 +529,15 @@
     .macro-card-icon{width:36px;height:36px;margin-bottom:8px}
     .macro-card-title{font-size:10px;letter-spacing:1.2px}
     .macro-card-sub{font-size:10px}
-    /* voce cards */
+    /* voce cards — azioni su mobile */
     .voce-card{flex-direction:column;gap:6px;padding:12px 14px}
     .voce-costo{font-size:18px}
     .voce-meta{gap:8px;font-size:11px}
+    .voce-actions{flex-wrap:wrap;gap:5px}
+    .voce-actions .btn-edit,
+    .voce-actions .btn-del{font-size:11px;padding:5px 10px}
+    /* drag handle — nascosto su mobile (touch drag non supportato) */
+    .drag-handle{display:none}
     /* modal — bottom sheet */
     .overlay{padding:0;align-items:flex-end;background:rgba(0,0,0,.6)}
     .modal{border-radius:20px 20px 0 0;max-width:100%;width:100%;max-height:88vh}
@@ -543,6 +559,10 @@
     .rp-macro-title{flex-wrap:wrap;gap:4px}
     .export-row{gap:6px}
     .btn-export{padding:9px 10px;font-size:11px;flex:1;justify-content:center}
+    /* riepilogo — griglia cliente a 1 colonna */
+    #cliente-fields{grid-template-columns:1fr!important}
+    /* riepilogo — sconto row */
+    #sconto-row{flex-direction:column;gap:10px}
     /* storico */
     .proj-card-head{padding:13px 14px;gap:10px}
     .proj-card-icon{width:36px;height:36px;font-size:16px}
@@ -557,12 +577,39 @@
     .select-item-wrap{margin-bottom:4px}
     .btn-fav{width:36px!important;min-width:36px;font-size:18px;padding:12px 10px!important}
     .btn-custom-mat{font-size:12px!important;padding:12px 14px!important}
-    /* lav total bar on mobile */
+    /* lav total bar su mobile */
     .lav-total-bar{border-radius:10px}
     .lav-total-bar span:last-child{font-size:18px}
+    /* search mobile — barra visibile in content */
+    #mobile-search-bar{display:block!important}
   }
 
-  /* ── PREFERITI ── */
+  /* ── MOBILE EXTRA FIXES ── */
+  @media(max-width:480px){
+    /* voce-card costo in linea con il nome */
+    .voce-card{padding:11px 12px}
+    /* rp-card azioni — stack verticale su schermi piccoli */
+    .rp-card-actions{flex-wrap:wrap;gap:4px}
+    .rp-btn-edit,.rp-btn-del{font-size:10px;padding:4px 8px}
+    /* riepilogo header — esporta sotto */
+    .rp-header{flex-direction:column;align-items:flex-start;gap:12px}
+    .rp-header .export-row{width:100%}
+    /* totale box */
+    .totale-box{flex-direction:column;align-items:flex-start;gap:6px;padding:16px}
+    .totale-box span:last-child{font-size:24px!important}
+    /* lav-vcard */
+    .lav-vcard-top{flex-direction:column;gap:8px}
+    .lav-vcard-result{text-align:left!important;min-width:auto!important}
+    /* search risultati */
+    .page-title{letter-spacing:1px}
+    /* storico export row */
+    .proj-export-row{flex-wrap:wrap}
+    .proj-export-btn{flex:1;justify-content:center}
+    /* sconto input */
+    #sconto-row input[type=number]{width:70px!important}
+    /* distribuzione barra */
+    .distrib-bar{height:8px!important}
+  }
   .btn-fav{
     background:transparent;border:1.5px solid var(--border);color:#bbb;
     border-radius:9px;padding:0;width:36px;height:36px;
@@ -717,6 +764,9 @@
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
       Riepilogo
     </button>
+    <button class="tb-sc" onclick="setVista('storico',null);syncBottomNav('storico')" title="Progetti">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+    </button>
     <button class="tb-sc" onclick="salvaProgetto()" title="Salva">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
     </button>
@@ -795,6 +845,16 @@
           </button>
           <input id="proj-name-input" style="display:none" onblur="saveNome()" onkeydown="if(event.key==='Enter')saveNome()">
         </div>
+        <!-- RICERCA GLOBALE -->
+        <div style="margin-left:20px;flex-shrink:0">
+          <div style="display:flex;align-items:center;background:var(--gray2);border:1.5px solid var(--border);border-radius:8px;padding:6px 11px;gap:7px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#AAA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="search-input" type="text" placeholder="Cerca materiale…"
+              style="border:none;background:transparent;font-size:12.5px;font-family:inherit;outline:none;color:var(--black);width:150px"
+              oninput="doSearch(this.value)"
+              onkeydown="if(event.key==='Escape'){this.value='';doSearch('')}">
+          </div>
+        </div>
       </div>
       <div class="topbar-right">
         <div class="topbar-stat" id="topbar-stat-voci">
@@ -814,6 +874,17 @@
       </div>
     </div>
     <div id="content"></div>
+  </div>
+</div>
+
+<!-- MOBILE SEARCH BAR — iniettata via JS in cima al content su mobile -->
+<div id="mobile-search-bar">
+  <div class="msb-inner">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#AAA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="mobile-search-input" type="search" placeholder="Cerca materiale…" autocomplete="off"
+      oninput="doSearch(this.value);document.getElementById('search-input')&&(document.getElementById('search-input').value=this.value)"
+      onkeydown="if(event.key==='Escape'){this.value='';doSearch('')}">
+    <button class="msb-clear" id="msb-clear-btn" style="display:none" onclick="clearMobileSearch()">✕</button>
   </div>
 </div>
 
@@ -1759,6 +1830,9 @@ let stato = {
   progId: null,
   vista: "home",
   progetti: [],
+  cliente: { nome:"", indirizzo:"", tel:"", email:"" },
+  sconto: 0,
+  ambienti: [],  // ["Bagno","Cucina",…] lista ambienti creati
 };
 
 // ── Preferiti ──────────────────────────────────────────────────────────────
@@ -2019,7 +2093,8 @@ function nuovoProgetto() {
 // PROGETTO SALVA/CARICA
 // ═══════════════════════════════════════════════════════════════════════════
 function salvaProgetto() {
-  const p = { id:stato.progId||Date.now(), nome:stato.nomeProg, voci:stato.voci, data:new Date().toLocaleDateString("it-IT") };
+  const p = { id:stato.progId||Date.now(), nome:stato.nomeProg, voci:stato.voci, data:new Date().toLocaleDateString("it-IT"),
+    cliente:stato.cliente, sconto:stato.sconto, ambienti:stato.ambienti };
   if(stato.progId) { stato.progetti = stato.progetti.map(x=>x.id===stato.progId?p:x); }
   else { stato.progetti.push(p); stato.progId = p.id; }
   dbSave();
@@ -2028,8 +2103,11 @@ function salvaProgetto() {
 function caricaProgetto(id) {
   id = Number(id);
   const p = stato.progetti.find(x=>x.id===id); if(!p) return;
-  stato.voci=JSON.parse(JSON.stringify(p.voci));
-  stato.nomeProg=p.nome; stato.progId=p.id;
+  stato.voci = JSON.parse(JSON.stringify(p.voci));
+  stato.nomeProg = p.nome; stato.progId = p.id;
+  stato.cliente  = p.cliente  ? JSON.parse(JSON.stringify(p.cliente))  : { nome:"", indirizzo:"", tel:"", email:"" };
+  stato.sconto   = p.sconto   || 0;
+  stato.ambienti = p.ambienti ? [...p.ambienti] : [];
   updateTopbar(); setVista("home",null);
   document.querySelectorAll(".sb-btn").forEach(b=>{b.classList.remove("active"); if(b.dataset.view==="home") b.classList.add("active");});
 }
@@ -2058,9 +2136,11 @@ function renderContent() {
   const v = stato.vista;
   if(v==="home") el.innerHTML = renderHome();
   else if(v==="lavorazioni") el.innerHTML = renderLavorazioni();
+  else if(v.startsWith("lav-cat:")) el.innerHTML = renderLavCat(v.slice(8));
   else if(v==="riepilogo") el.innerHTML = renderRiepilogo();
   else if(v==="storico") el.innerHTML = renderStorico();
   else if(v.startsWith("macro:")) el.innerHTML = renderMacro(v.slice(6));
+  else if(v.startsWith("search:")) el.innerHTML = renderSearch(v.slice(7));
   updateTopbar(); buildSidebar();
 }
 
@@ -2098,12 +2178,11 @@ function renderHome() {
 
 /* Apre la sezione lavorazioni */
 function openLavorazioni() {
-  if(localStorage.getItem("lav_ok")) { setVista("lavorazioni",null); return; }
   document.getElementById("lav-disclaimer-modal").style.display = "flex";
 }
 function closeLavDisclaimer(proceed) {
   document.getElementById("lav-disclaimer-modal").style.display = "none";
-  if(proceed) { localStorage.setItem("lav_ok","1"); setVista("lavorazioni",null); }
+  if(proceed) { setVista("lavorazioni",null); }
 }
 function lavGoHome() {
   stato.vista = "lavorazioni";
@@ -2424,23 +2503,31 @@ function renderMacro(mk) {
 
 function renderVoceCard(v, _, idx) {
   const colore = DB[v.macro].colore;
-  const resaFrase = resaLeggibile(v.mat);
-  return `<div class="voce-card" style="border-left:4px solid ${colore};margin-bottom:10px">
-    <div style="flex:1">
-      <div class="voce-cat" style="color:${colore}">${v.macro.slice(3)} › ${v.sotto}</div>
-      <div class="voce-nome">${v.mat.nome}</div>
-      <div style="margin:5px 0 4px">${resaBadgeHTML(v.mat, colore)}</div>
-      <div class="voce-meta">
-        <span>📐 ${v.sup} ${v.mat.unita}</span>
-        <span>📦 ${v.ris.sacchi}× ${v.conf.label}</span>
-        <span style="color:#B06020">+${v.margine}% margine</span>
-      </div>
-      <div class="voce-actions">
-        <button class="btn-edit" onclick="openEdit(${idx})">✏️ Modifica</button>
-        <button class="btn-del" onclick="rimuoviVoce(${idx})">🗑 Rimuovi</button>
+  const notaHtml = v.nota ? `<div style="margin-top:6px;padding:5px 9px;background:#FFFBF0;border:1px solid #F5E6B0;border-radius:6px;font-size:11px;color:#7A6020;display:flex;align-items:flex-start;gap:5px"><span style="flex-shrink:0">📌</span><span>${v.nota}</span></div>` : "";
+  const ambTag  = v.ambiente ? `<span class="amb-tag" onclick="event.stopPropagation();setAmbienteVoce(${idx})">🏠 ${v.ambiente}</span> ` : "";
+  return `<div class="voce-card" style="border-left:4px solid ${colore};margin-bottom:10px" draggable="true"
+    ondragstart="dragStart(event,${idx})" ondragover="dragOver(event)" ondrop="dragDrop(event,${idx})" ondragend="dragEnd(event)" data-idx="${idx}">
+    <div style="display:flex;align-items:flex-start;gap:8px;flex:1">
+      <div class="drag-handle" title="Trascina per riordinare">⠿</div>
+      <div style="flex:1">
+        <div class="voce-cat" style="color:${colore}">${ambTag}${v.macro.slice(3)} › ${v.sotto}</div>
+        <div class="voce-nome">${v.mat.nome}</div>
+        <div style="margin:5px 0 4px">${resaBadgeHTML(v.mat, colore)}</div>
+        <div class="voce-meta">
+          <span>📐 ${v.sup} ${v.mat.unita}</span>
+          <span>📦 ${v.ris.sacchi}× ${v.conf.label}</span>
+          <span style="color:#B06020">+${v.margine}% margine</span>
+        </div>
+        ${notaHtml}
+        <div class="voce-actions">
+          <button class="btn-edit" onclick="openEdit(${idx})">✏️ Modifica</button>
+          <button class="btn-edit" style="background:#F0F7FF;border-color:#C8DEFF;color:#1A4A8A" onclick="duplicaVoce(${idx})">📋 Duplica</button>
+          <button class="btn-edit" style="background:#F0FFF4;border-color:#B2DFCC;color:#1A5C35" onclick="setAmbienteVoce(${idx})" title="Assegna ambiente">🏠</button>
+          <button class="btn-del" onclick="rimuoviVoce(${idx})">🗑 Rimuovi</button>
+        </div>
       </div>
     </div>
-    <div style="text-align:right">
+    <div style="text-align:right;flex-shrink:0">
       <div class="voce-costo">${eur(v.ris.costo)}</div>
     </div>
   </div>`;
@@ -2448,6 +2535,54 @@ function renderVoceCard(v, _, idx) {
 
 function rimuoviVoce(idx) {
   stato.voci.splice(idx,1); renderContent();
+}
+
+function duplicaVoce(idx) {
+  const v = stato.voci[idx]; if(!v) return;
+  const clone = JSON.parse(JSON.stringify(v));
+  clone.id = Date.now();
+  stato.voci.splice(idx+1, 0, clone);
+  renderContent();
+  toast("📋 Voce duplicata!");
+}
+
+function setAmbienteVoce(idx) {
+  const v = stato.voci[idx]; if(!v) return;
+  const opts = stato.ambienti.length
+    ? stato.ambienti.map(a=>`<option value="${a}" ${v.ambiente===a?"selected":""}>${a}</option>`).join("")
+    : "";
+  const modal = document.createElement("div");
+  modal.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)";
+  modal.onclick = e => { if(e.target===modal) modal.remove(); };
+  modal.innerHTML = `
+    <div style="background:#fff;border-radius:16px;padding:26px 22px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+      <div style="font-size:14px;font-weight:800;color:#1A1A1A;margin-bottom:4px">Assegna ambiente</div>
+      <div style="font-size:12px;color:#888;margin-bottom:18px">${v.mat.nome}</div>
+      <label style="font-size:10px;font-weight:700;color:#888;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px">Ambiente</label>
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <input id="amb-input" placeholder="es. Bagno, Cucina, Soggiorno…" value="${v.ambiente||""}"
+          style="flex:1;border:1.5px solid #E0DDD9;border-radius:8px;padding:9px 12px;font-size:14px;font-family:inherit;outline:none"
+          list="amb-datalist">
+        <datalist id="amb-datalist">${opts}</datalist>
+      </div>
+      ${stato.ambienti.length ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">${stato.ambienti.map(a=>`<button onclick="document.getElementById('amb-input').value='${a}'" style="background:#EEF4FF;border:1px solid #C8DEFF;color:#1A4A8A;border-radius:20px;font-size:11px;font-weight:600;padding:4px 10px;cursor:pointer;font-family:inherit">${a}</button>`).join("")}</div>` : ""}
+      <div style="display:flex;gap:8px">
+        <button onclick="this.closest('[style*=fixed]').remove()"
+          style="flex:1;padding:11px;background:#F0EDE9;border:none;border-radius:9px;font-family:inherit;font-size:13px;font-weight:600;color:#666;cursor:pointer">Annulla</button>
+        <button onclick="_saveAmbiente(${idx},document.getElementById('amb-input').value);this.closest('[style*=fixed]').remove()"
+          style="flex:2;padding:11px;background:#1A1A1A;border:none;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;color:#fff;cursor:pointer">✓ Assegna</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  setTimeout(()=>modal.querySelector("#amb-input").focus(), 60);
+}
+
+function _saveAmbiente(idx, val) {
+  val = val.trim();
+  stato.voci[idx].ambiente = val;
+  if(val && !stato.ambienti.includes(val)) stato.ambienti.push(val);
+  renderContent();
+  if(val) toast(`🏠 Assegnato a "${val}"`);
 }
 
 
@@ -2459,8 +2594,7 @@ function openEditLavVoce(id) { lavEdit(id); }
 function renderRiepilogo() {
   const tot = stato.voci.reduce((s,v)=>s+v.ris.costo,0);
   const nVoci = stato.voci.length;
-
-  // ── Header con stats e export ──
+  const imponibile = tot + lavTotale();
   let html = `
   <div class="rp-header">
     <div>
@@ -2514,23 +2648,21 @@ function renderRiepilogo() {
       <div class="rp-card">
         <div class="rp-card-accent" style="background:${col}"></div>
         <div class="rp-card-body">
-          <div class="rp-card-nome" title="${v.mat.nome}">${v.mat.nome}</div>
+          <div class="rp-card-nome" title="${v.mat.nome}">${v.ambiente?`<span class="amb-tag" style="margin-right:5px">🏠 ${v.ambiente}</span>`:""}${v.mat.nome}</div>
           <div class="rp-card-resa">${resaBadgeHTML(v.mat, col)}</div>
           <div class="rp-card-detail">
             <span class="rp-card-chip">📐 ${v.sup} ${v.mat.unita}</span>
             <span class="rp-card-chip">📦 ${qtDesc}</span>
             <span class="rp-card-chip" style="color:#B06020;background:#FFF7ED">+${v.margine}% margine</span>
           </div>
+          ${v.nota?`<div style="margin-top:6px;padding:5px 9px;background:#FFFBF0;border:1px solid #F5E6B0;border-radius:6px;font-size:11px;color:#7A6020;display:flex;align-items:flex-start;gap:5px"><span>📌</span><span>${v.nota}</span></div>`:""}
         </div>
         <div class="rp-card-right">
           <div class="rp-card-cost">${eur(v.ris.costo)}</div>
           <div class="rp-card-actions">
-            <button class="rp-btn-edit" onclick="openEditQuantita(${idx})" title="Modifica quantità e margine">
-              ✏️ Modifica
-            </button>
-            <button class="rp-btn-del" onclick="rimuoviVoceRiepilogo(${idx})" title="Rimuovi voce">
-              🗑
-            </button>
+            <button class="rp-btn-edit" onclick="openEditQuantita(${idx})" title="Modifica">✏️ Modifica</button>
+            <button class="rp-btn-edit" style="background:#F0F7FF;border-color:#C8DEFF;color:#1A4A8A" onclick="duplicaVoce(${idx})" title="Duplica">📋</button>
+            <button class="rp-btn-del" onclick="rimuoviVoceRiepilogo(${idx})" title="Rimuovi">🗑</button>
           </div>
         </div>
       </div>`;
@@ -2593,14 +2725,121 @@ function renderRiepilogo() {
     </div>`;
   }
 
-  // ── Totale finale ──
-  const totConLav = tot + lavTotale();
-  html += `<div class="totale-box" style="margin-top:16px">
-    <div>
-      <div style="color:rgba(255,255,255,.4);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">TOTALE PREVENTIVO</div>
-      <div style="color:rgba(255,255,255,.3);font-size:11px">${nVoci} ${nVoci===1?"voce":"voci"} · ${MACRO_KEYS.filter(mk=>stato.voci.some(v=>v.macro===mk)).length} categorie${lavPreventivoVoci.size>0?" · lavorazioni incluse":""}</div>
+  // ── Suddivisione per ambiente ──
+  const ambientiUsati = [...new Set(stato.voci.filter(v=>v.ambiente).map(v=>v.ambiente))].sort();
+  if(ambientiUsati.length) {
+    html += `<div style="margin-top:28px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:8px">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Riepilogo per ambiente
+      </div>`;
+    ambientiUsati.forEach(amb => {
+      const vAmb = stato.voci.filter(v=>v.ambiente===amb);
+      const subAmb = vAmb.reduce((s,v)=>s+v.ris.costo,0);
+      html += `<div style="background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden">
+        <div style="background:#EEF4FF;border-bottom:1px solid #C8DEFF;padding:9px 14px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:700;color:#1A4A8A">🏠 ${amb}</span>
+          <span style="font-size:14px;font-weight:800;color:#1A4A8A">${eur(subAmb)}</span>
+        </div>
+        ${vAmb.map(v=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid var(--gray2);font-size:12px">
+          <span style="color:var(--black)">${v.mat.nome}</span>
+          <span style="font-weight:700;color:var(--success)">${eur(v.ris.costo)}</span>
+        </div>`).join("")}
+      </div>`;
+    });
+    const nonAssegnate = stato.voci.filter(v=>!v.ambiente);
+    if(nonAssegnate.length) {
+      const subNa = nonAssegnate.reduce((s,v)=>s+v.ris.costo,0);
+      html += `<div style="font-size:11px;color:var(--muted);padding:6px 4px">⚠️ ${nonAssegnate.length} voce${nonAssegnate.length===1?"":"i"} senza ambiente assegnato — subtotale ${eur(subNa)}</div>`;
+    }
+    html += `</div>`;
+  }
+
+  // ── Totale materiali vs lavorazioni ──
+  const totLav = lavTotale();
+  if(tot > 0 && totLav > 0) {
+    const pctMat = Math.round(tot/(tot+totLav)*100);
+    const pctLav = 100-pctMat;
+    html += `<div style="margin-top:20px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Distribuzione costi</div>
+      <div style="display:flex;gap:0;height:10px;border-radius:20px;overflow:hidden;margin-bottom:12px">
+        <div style="width:${pctMat}%;background:var(--red);transition:width .4s"></div>
+        <div style="width:${pctLav}%;background:#3A3A3A;transition:width .4s"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px">
+        <div style="display:flex;align-items:center;gap:7px"><span style="width:10px;height:10px;background:var(--red);border-radius:3px;flex-shrink:0"></span><span style="color:var(--muted)">Materiali</span><b style="color:var(--black)">${eur(tot)}</b><span style="color:var(--muted);font-size:10px">${pctMat}%</span></div>
+        <div style="display:flex;align-items:center;gap:7px"><span style="width:10px;height:10px;background:#3A3A3A;border-radius:3px;flex-shrink:0"></span><span style="color:var(--muted)">Lavorazioni</span><b style="color:var(--black)">${eur(totLav)}</b><span style="color:var(--muted);font-size:10px">${pctLav}%</span></div>
+      </div>
+    </div>`;
+  }
+
+  // ── Dati cliente ──
+  const c = stato.cliente;
+  html += `
+  <div style="margin-top:20px;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden">
+    <div style="padding:12px 18px;background:var(--gray2);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none" onclick="this.nextElementSibling.classList.toggle('hidden')">
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Dati cliente
+      </div>
+      <span style="font-size:11px;color:var(--muted)">${c.nome?`<b style="color:var(--black)">${c.nome}</b>`:"non compilato"}</span>
     </div>
-    <span style="color:#E8A0A0;font-weight:800;font-size:30px;letter-spacing:-1px">${eur(totConLav)}</span>
+    <div class="${c.nome||c.indirizzo||c.tel||c.email?"":"hidden"}" id="cliente-fields" style="padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;display:block;margin-bottom:4px">Nome / Ragione sociale</label>
+        <input value="${c.nome}" placeholder="Mario Rossi" oninput="stato.cliente.nome=this.value"
+          style="width:100%;border:1.5px solid var(--border);border-radius:7px;padding:8px 11px;font-size:13px;font-family:inherit;outline:none;background:var(--gray)">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;display:block;margin-bottom:4px">Telefono</label>
+        <input value="${c.tel}" placeholder="+39 333 0000000" oninput="stato.cliente.tel=this.value"
+          style="width:100%;border:1.5px solid var(--border);border-radius:7px;padding:8px 11px;font-size:13px;font-family:inherit;outline:none;background:var(--gray)">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;display:block;margin-bottom:4px">Indirizzo cantiere</label>
+        <input value="${c.indirizzo}" placeholder="Via Roma 1, Milano" oninput="stato.cliente.indirizzo=this.value"
+          style="width:100%;border:1.5px solid var(--border);border-radius:7px;padding:8px 11px;font-size:13px;font-family:inherit;outline:none;background:var(--gray)">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;display:block;margin-bottom:4px">Email</label>
+        <input value="${c.email}" placeholder="mario@email.com" oninput="stato.cliente.email=this.value"
+          style="width:100%;border:1.5px solid var(--border);border-radius:7px;padding:8px 11px;font-size:13px;font-family:inherit;outline:none;background:var(--gray)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Sconto -->
+  <div style="margin-top:10px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:16px">
+    <div style="flex:1">
+      <label style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:6px">Sconto globale</label>
+      <div style="display:flex;align-items:center;gap:8px">
+        <input type="number" min="0" max="100" step="0.5" value="${stato.sconto}" placeholder="0"
+          oninput="stato.sconto=Math.min(100,Math.max(0,parseFloat(this.value)||0));renderContent()"
+          style="width:90px;border:1.5px solid var(--border);border-radius:7px;padding:8px 11px;font-size:18px;font-weight:700;font-family:inherit;outline:none;background:var(--gray)">
+        <span style="font-size:14px;font-weight:600;color:var(--muted)">%</span>
+        ${stato.sconto>0?`<span style="font-size:13px;color:#B06020;font-weight:700;margin-left:4px">− ${eur(imponibile*stato.sconto/100)}</span>`:""}
+      </div>
+    </div>
+  </div>`;
+
+  // ── Totale finale ──
+  const scontoAmt = stato.sconto > 0 ? imponibile * stato.sconto / 100 : 0;
+  const totFinale = imponibile - scontoAmt;
+  html += `
+  <div style="margin-top:10px">
+    ${stato.sconto>0?`<div style="background:var(--gray2);border:1px solid var(--border);border-radius:10px;padding:10px 16px;margin-bottom:8px;display:flex;justify-content:space-between;font-size:13px">
+      <span style="color:var(--muted)">Imponibile</span><span style="font-weight:600;color:var(--black)">${eur(imponibile)}</span>
+    </div>
+    <div style="background:#FFF7ED;border:1px solid #F5D9A8;border-radius:10px;padding:10px 16px;margin-bottom:8px;display:flex;justify-content:space-between;font-size:13px">
+      <span style="color:#B06020">Sconto ${stato.sconto}%</span><span style="font-weight:700;color:#B06020">− ${eur(scontoAmt)}</span>
+    </div>`:""}
+    <div class="totale-box">
+      <div>
+        <div style="color:rgba(255,255,255,.4);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">TOTALE PREVENTIVO${stato.sconto>0?" SCONTATO":""}</div>
+        <div style="color:rgba(255,255,255,.3);font-size:11px">${nVoci} ${nVoci===1?"voce":"voci"} · ${MACRO_KEYS.filter(mk=>stato.voci.some(v=>v.macro===mk)).length} categorie${lavPreventivoVoci.size>0?" · lavorazioni incluse":""}${stato.sconto>0?" · sconto "+stato.sconto+"%":""}</div>
+      </div>
+      <span style="color:#E8A0A0;font-weight:800;font-size:30px;letter-spacing:-1px">${eur(totFinale)}</span>
+    </div>
   </div>`;
 
   return html;
@@ -3150,7 +3389,7 @@ function modalAdd() {
   const m=mState.mat; const conf=m.confezioni[mState.ci];
   const ris=mState._lastRis || calcola(toN(mState.sup),m.resa,mState.margine,conf);
   if(!ris||!mState.sup) return;
-  const voce={id:Date.now(),macro:mState.macro,sotto:mState.sotto,mat:m,sup:toN(mState.sup),margine:mState.margine,ci:mState.ci,conf,ris};
+  const voce={id:Date.now(),macro:mState.macro,sotto:mState.sotto,mat:m,sup:toN(mState.sup),margine:mState.margine,ci:mState.ci,conf,ris,nota:"",ambiente:""};
   if(mState.editIdx!==null) stato.voci[mState.editIdx]=voce;
   else stato.voci.push(voce);
   closeModal(); renderContent();
@@ -3181,6 +3420,9 @@ function openEdit(idx) {
     <div class="edit-section-title">Confezioni (modifica o aggiungi righe)</div>
     <div id="e-conf-list">${renderEditConf()}</div>
     <button onclick="addEditConf()" style="background:var(--gray);border:1.5px dashed var(--border);color:var(--muted);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;width:100%;margin-bottom:14px">+ Aggiungi confezione</button>
+    <div class="edit-section-title">Note</div>
+    <div class="edit-field"><label>NOTA INTERNA (opzionale)</label>
+    <textarea id="e-nota" rows="2" placeholder="es. verificare con fornitore, colore da confermare…" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:inherit;resize:vertical;outline:none;background:var(--gray);color:var(--black)" oninput="editState.voce.nota=this.value">${v.nota||""}</textarea></div>
     <div class="edit-section-title">Confezione attiva</div>
     <select id="e-ci" onchange="editState.voce.ci=+this.value;editRicalcola()" style="border:2px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;color:var(--black);background:var(--gray);width:100%;font-family:Arial,sans-serif;outline:none">
       ${v.mat.confezioni.map((c,i)=>`<option value="${i}" ${i===v.ci?"selected":""}>${c.label} — ${eur(c.prezzo)}</option>`).join("")}
@@ -3281,7 +3523,11 @@ function openEditQuantita(idx) {
         oninput="editState.voce.margine=+this.value;document.getElementById('eq-margine-val').textContent=editState.voce.margine+'%';eqRicalcola()">
       <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:2px"><span>0% esatto</span><span>30% abbondante</span></div>
     </div>
-    <div id="eq-result" style="margin-top:16px"></div>`;
+    <div id="eq-result" style="margin-top:16px"></div>
+    <div style="margin-top:14px">
+      <label style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;display:block;margin-bottom:6px">NOTA INTERNA (opzionale)</label>
+      <textarea id="eq-nota" rows="2" placeholder="es. verificare con fornitore, colore da confermare…" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:inherit;resize:vertical;outline:none;background:var(--gray);color:var(--black)" oninput="editState.voce.nota=this.value">${v.nota||""}</textarea>
+    </div>`;
   document.getElementById("edit-overlay").style.display = "flex";
   // Cambio titolo modal
   document.querySelector("#edit-modal .modal-header div div").textContent = "Modifica quantità";
@@ -3488,12 +3734,33 @@ function exportLavPDF() {
 }
 
 function exportPDF(template = "dettagliato") {
-  const tot  = stato.voci.reduce((s,v)=>s+v.ris.costo, 0);
-  const lavTot = lavTotale();
-  const totFinale = tot + lavTot;
-  const data = new Date().toLocaleDateString("it-IT");
-  const nVoci = stato.voci.length;
-  const nCat  = MACRO_KEYS.filter(mk=>stato.voci.some(v=>v.macro===mk)).length;
+  const tot     = stato.voci.reduce((s,v)=>s+v.ris.costo, 0);
+  const lavTot  = lavTotale();
+  const imponibile = tot + lavTot;
+  const scontoAmt  = stato.sconto > 0 ? imponibile * stato.sconto / 100 : 0;
+  const totFinale  = imponibile - scontoAmt;
+  const data   = new Date().toLocaleDateString("it-IT");
+  const nVoci  = stato.voci.length;
+  const nCat   = MACRO_KEYS.filter(mk=>stato.voci.some(v=>v.macro===mk)).length;
+  const c      = stato.cliente;
+
+  const clienteHTML = (c.nome||c.indirizzo||c.tel||c.email) ? `
+  <div style="padding:12px 32px;border-bottom:1px solid #eee;display:flex;gap:36px;flex-wrap:wrap;background:#fafafa">
+    ${c.nome?`<div><div style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#bbb;margin-bottom:2px">CLIENTE</div><div style="font-size:13px;font-weight:700">${c.nome}</div></div>`:""}
+    ${c.indirizzo?`<div><div style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#bbb;margin-bottom:2px">CANTIERE</div><div style="font-size:12px">${c.indirizzo}</div></div>`:""}
+    ${c.tel?`<div><div style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#bbb;margin-bottom:2px">TELEFONO</div><div style="font-size:12px">${c.tel}</div></div>`:""}
+    ${c.email?`<div><div style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#bbb;margin-bottom:2px">EMAIL</div><div style="font-size:12px">${c.email}</div></div>`:""}
+  </div>` : "";
+
+  const totaleHTML = `
+    ${stato.sconto>0?`<div style="background:#f7f7f7;border:1px solid #e0e0e0;border-radius:6px;padding:9px 14px;margin-bottom:7px;display:flex;justify-content:space-between;font-size:12px">
+      <span style="color:#888">Imponibile</span><span style="font-weight:600">${eur(imponibile)}</span>
+    </div>
+    <div style="background:#FFF7ED;border:1px solid #F5D9A8;border-radius:6px;padding:9px 14px;margin-bottom:7px;display:flex;justify-content:space-between;font-size:12px">
+      <span style="color:#B06020">Sconto ${stato.sconto}%</span><span style="font-weight:700;color:#B06020">− ${eur(scontoAmt)}</span>
+    </div>`:""}
+    <div class="total-bar"><span>TOTALE PREVENTIVO${stato.sconto>0?" SCONTATO":""}</span><span>${eur(totFinale)}</span></div>`;
+
 
   /* ── Righe tabella per categoria ── */
   let gruppi = "";
@@ -3645,13 +3912,14 @@ function exportPDF(template = "dettagliato") {
     <div class="pdf-doc-meta-item"><span class="pdf-doc-meta-key">Data</span><span class="pdf-doc-meta-val">${data}</span></div>
     <div class="pdf-doc-meta-item"><span class="pdf-doc-meta-key">Voci</span><span class="pdf-doc-meta-val">${nVoci}</span></div>
     <div class="pdf-doc-meta-item"><span class="pdf-doc-meta-key">Categorie</span><span class="pdf-doc-meta-val">${nCat}</span></div>
-    <div class="pdf-doc-meta-item"><span class="pdf-doc-meta-key">Totale stimato</span><span class="pdf-doc-meta-val green">${eur(totFinale)}</span></div>
+    <div class="pdf-doc-meta-item"><span class="pdf-doc-meta-key">Totale</span><span class="pdf-doc-meta-val green">${eur(totFinale)}</span></div>
   </div>
 </div>
+${clienteHTML}
 <div class="pdf-content">
   ${template === 'essenziale' ? gruppiEssenziale : gruppi}
   ${gruppiLav}
-  <div class="total-bar"><span>TOTALE PREVENTIVO${lavTot>0?' (materiali + lavorazioni)':''}</span><span>${eur(totFinale)}</span></div>
+  ${totaleHTML}
   <div class="disclaimer">I prezzi dei materiali sono indicativi e soggetti a variazione. Le stime delle lavorazioni sono orientative — non vincolanti né imponibili alle imprese esecutrici. Verificare sempre con fornitori e professionisti qualificati. &nbsp;·&nbsp; D.Metric PRO · D.ESIGN STUDIOS · redstudiodesign.it</div>
 </div>
 <script>window.onload=()=>window.print()<\/script>
@@ -3683,13 +3951,56 @@ function bnClickLav(el) {
   document.querySelectorAll(".bn-btn").forEach(b=>b.classList.remove("active"));
   el.classList.add("active");
   closeMacroDrawer();
+  hideMobileSearch();
   openLavorazioni();
 }
 function bnClick(v, el) {
   document.querySelectorAll(".bn-btn").forEach(b => b.classList.remove("active"));
   el.classList.add("active");
+  hideMobileSearch();
   setVista(v, null);
   closeMacroDrawer();
+}
+
+let _mobileSearchOpen = false;
+function bnToggleSearch(el) {
+  _mobileSearchOpen = !_mobileSearchOpen;
+  document.querySelectorAll(".bn-btn").forEach(b=>b.classList.remove("active"));
+  if(_mobileSearchOpen) {
+    el.classList.add("active");
+    showMobileSearch();
+  } else {
+    hideMobileSearch();
+    // ripristina active sul pulsante della vista corrente
+    syncBottomNav(stato.vista);
+  }
+}
+function showMobileSearch() {
+  const bar = document.getElementById("mobile-search-bar");
+  if(!bar) return;
+  // sposta la barra in cima al content
+  const content = document.getElementById("content");
+  if(content && content.parentNode) {
+    content.parentNode.insertBefore(bar, content);
+  }
+  bar.style.display = "block";
+  setTimeout(()=>{ const inp=document.getElementById("mobile-search-input"); if(inp) inp.focus(); }, 80);
+}
+function hideMobileSearch() {
+  _mobileSearchOpen = false;
+  const bar = document.getElementById("mobile-search-bar");
+  if(bar) bar.style.display = "none";
+  const inp = document.getElementById("mobile-search-input");
+  if(inp) { inp.value = ""; }
+  const si = document.getElementById("search-input");
+  if(si) si.value = "";
+  if(stato.vista.startsWith("search:")) { stato.vista = "home"; renderContent(); }
+}
+function clearMobileSearch() {
+  const inp = document.getElementById("mobile-search-input");
+  if(inp) { inp.value = ""; inp.focus(); }
+  doSearch("");
+  document.getElementById("msb-clear-btn").style.display = "none";
 }
 function bnShowMacro() {
   const list = document.getElementById("macro-drawer-list");
@@ -3718,6 +4029,106 @@ function closeMacroDrawer() {
 }
 // Bottom nav also synced by lav-cat: view
 
+// ═══════════════════════════════════════════════════════════════════════════
+// DRAG & DROP — riordino voci
+// ═══════════════════════════════════════════════════════════════════════════
+let _dragIdx = null;
+function dragStart(e, idx) {
+  _dragIdx = idx;
+  e.dataTransfer.effectAllowed = "move";
+  setTimeout(()=>{ const el=e.currentTarget; if(el) el.style.opacity="0.4"; },0);
+}
+function dragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = "move";
+  document.querySelectorAll(".voce-card").forEach(c=>c.classList.remove("drag-over"));
+  e.currentTarget.classList.add("drag-over");
+}
+function dragDrop(e, toIdx) {
+  e.preventDefault();
+  if(_dragIdx===null || _dragIdx===toIdx) return;
+  const moved = stato.voci.splice(_dragIdx,1)[0];
+  stato.voci.splice(toIdx,0,moved);
+  _dragIdx=null; renderContent();
+}
+function dragEnd(e) {
+  _dragIdx=null;
+  document.querySelectorAll(".voce-card").forEach(c=>{ c.style.opacity=""; c.classList.remove("drag-over"); });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// RICERCA GLOBALE
+// ═══════════════════════════════════════════════════════════════════════════
+let _searchTimer = null;
+function doSearch(q) {
+  clearTimeout(_searchTimer);
+  q = q.trim();
+  // sync both inputs
+  const si = document.getElementById("search-input");
+  const msi = document.getElementById("mobile-search-input");
+  if(si && document.activeElement !== si) si.value = q;
+  if(msi && document.activeElement !== msi) msi.value = q;
+  // show/hide clear btn
+  const clr = document.getElementById("msb-clear-btn");
+  if(clr) clr.style.display = q ? "flex" : "none";
+  if(!q) { if(stato.vista.startsWith("search:")) setVista("home",null); return; }
+  _searchTimer = setTimeout(()=>{ stato.vista="search:"+q; renderContent(); syncBottomNav("home"); }, 200);
+}
+
+function renderSearch(q) {
+  if(!q || q.length < 2) return `
+    <div class="page-title">Ricerca materiali</div>
+    <div class="page-sub">digita almeno 2 caratteri</div>
+    <div style="text-align:center;padding:60px 20px;color:var(--muted)">
+      <div style="font-size:48px;margin-bottom:12px">🔍</div>
+      <div style="font-size:14px;font-weight:600;color:var(--black)">Cerca in tutto il database</div>
+    </div>`;
+  const ql = q.toLowerCase();
+  const risultati = [];
+  for(const mk of MACRO_KEYS) {
+    const cat = DB[mk];
+    for(const sk of Object.keys(cat.sottocategorie)) {
+      for(const m of cat.sottocategorie[sk]) {
+        if(m.nome.toLowerCase().includes(ql)||(m.note||"").toLowerCase().includes(ql))
+          risultati.push({mk,sk,m,colore:cat.colore,icon:cat.icon});
+      }
+    }
+  }
+  if(!risultati.length) return `
+    <div class="page-title">Ricerca: "${q}"</div>
+    <div class="page-sub">nessun risultato</div>
+    <div style="text-align:center;padding:60px 20px;color:var(--muted)">
+      <div style="font-size:40px;margin-bottom:10px">🤷</div>
+      <div style="font-size:14px;font-weight:600;color:var(--black)">Nessun materiale trovato</div>
+    </div>`;
+  let html = `<div class="page-title">Ricerca: "${q}"</div>
+    <div class="page-sub">${risultati.length} materiale${risultati.length===1?"":"i"} trovato${risultati.length===1?"":"i"}</div>`;
+  risultati.forEach(({mk,sk,m,colore})=>{
+    html += `<div style="background:#fff;border:1px solid var(--border);border-left:4px solid ${colore};border-radius:10px;padding:13px 16px;margin-bottom:8px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:10px;font-weight:700;color:${colore};letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px">${mk.slice(3)} › ${sk}</div>
+        <div style="font-weight:700;font-size:13px;color:var(--black);margin-bottom:4px">${m.nome}</div>
+        <div style="margin-bottom:5px">${resaBadgeHTML(m,colore)}</div>
+        <div style="font-size:11.5px;color:var(--muted)">${m.note||""}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">${m.confezioni.map(c=>`${c.label} — ${eur(c.prezzo)}`).join(" · ")}</div>
+      </div>
+      <button onclick="searchAddMat('${mk}','${sk}','${m.id}')"
+        style="flex-shrink:0;background:${colore};border:none;color:#fff;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;margin-top:2px">＋ Aggiungi</button>
+    </div>`;
+  });
+  return html;
+}
+
+function searchAddMat(mk,sk,matId) {
+  const cat = DB[mk]; if(!cat) return;
+  const m = cat.sottocategorie[sk]?.find(x=>x.id===matId); if(!m) return;
+  mState = {macro:mk,passo:3,sotto:sk,mat:m,sup:"",margine:10,ci:0,editIdx:null};
+  document.getElementById("modal-header").style.background = cat.colore;
+  document.getElementById("modal-icon").innerHTML = cat.icon;
+  document.getElementById("modal-title").textContent = mk.slice(3);
+  document.getElementById("modal-overlay").style.display = "flex";
+  renderModal();
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // INIT
@@ -3782,6 +4193,10 @@ document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.ad
       <span>⬡</span>Categorie
     </button>
   </div>
+  <button class="bn-btn" id="bn-search" onclick="bnToggleSearch(this)">
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+    Cerca
+  </button>
   <button class="bn-btn lav" id="bn-lav" onclick="bnClickLav(this)" style="position:relative">
     <span style="display:flex;align-items:center;justify-content:center"><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg></span>
     Lavoraz.
@@ -3789,9 +4204,6 @@ document.querySelectorAll(".sb-btn[data-view='home']").forEach(b=>b.classList.ad
   </button>
   <button class="bn-btn" id="bn-riepilogo" onclick="bnClick('riepilogo',this)">
     <span>≡</span>Riepilogo
-  </button>
-  <button class="bn-btn" id="bn-storico" onclick="bnClick('storico',this)">
-    <span>⊟</span>Progetti
   </button>
 </div>
 
